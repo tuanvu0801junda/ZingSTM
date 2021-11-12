@@ -18,3 +18,5 @@ logs
 .vscode/
 *.sw*
 
+# Ignore the .json file
+*.json
