@@ -38,8 +38,8 @@
 
 ##### 5. Then rename the ".env.example" file into ".env" | or add a new file ".env" with the same content in ".env.example". Then, try "php artisan serve" 
 ```
- .../ZingSTM/laravelPHP $ php artisan key:generate
  .../ZingSTM/laravelPHP $ (sudo) mv .env.example .env
+ .../ZingSTM/laravelPHP $ php artisan serve
 ```
 
 
