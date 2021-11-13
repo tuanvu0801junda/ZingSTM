@@ -13,9 +13,3 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-
-*.json
-*.lock
-.env.example
-.editorconfig
-.styleci.yml
