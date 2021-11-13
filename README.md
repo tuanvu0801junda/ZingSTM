@@ -31,14 +31,14 @@
  .../ZingSTM/laravelPHP $ composer install
 ```
 
-##### 4. After installing the neccessary packages, create a APP_KEY with command 
-```
- .../ZingSTM/laravelPHP $ php artisan key:generate
-```
-
-##### 5. Then rename the ".env.example" file into ".env" | or add a new file ".env" with the same content in ".env.example". Then, try "php artisan serve" 
+##### 4. After installing the neccessary packages, rename the ".env.example" file into ".env" | or add a new file ".env" with the same content in ".env.example"
 ```
  .../ZingSTM/laravelPHP $ (sudo) mv .env.example .env
+```
+
+##### 5. Then create a APP_KEY. Finally, try "php artisan serve" 
+```
+ .../ZingSTM/laravelPHP $ php artisan key:generate
  .../ZingSTM/laravelPHP $ php artisan serve
 ```
 
