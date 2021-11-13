@@ -1,20 +1,44 @@
-# ZingSTM
-A website stimulating ZingMp3, used to listening to music
+## ZingSTM Project 
 
-# After cloning this project from github, you should install the widget modules
- $ cd ZingSTM/reactjs
-.$ npm i
+### Table of contents
+* General Description
+* Technologies 
+* Set up Instruction
 
-# The "npm i" command will read .json package and automatically install.
-# After installing, try "npm start"
+### General Description: A website stimulating ZingMp3, used to listening to music
 
- $ cd ../laravelPHP
-.$ composer install
+### Technologies 
+* ReactJS 
+* Laravel (PHP)
+* PHPMyadmin (MySQL) (Require Xampp installed)
 
-# After installing the neccessary packages, create a APP_KEY with command 
-.$ php artisan key:generate
+### Set up Instruction  
 
-# Then rename the ".env.example" file into ".env" with command
-.$ (sudo) mv .env.example .env
+##### 1. After cloning this project from github, you should install the widget modules for "reactjs" folder 
+```
+ ... Download $ cd ZingSTM/reactjs
+ .../ZingSTM/reactjs $ npm i
+```
 
-# Finally, try "php artisan serve" to make sure the result
+##### 2. The "npm i" command will read .json package and automatically install. After installing, try "npm start"
+```
+ .../ZingSTM/reactjs $ npm start 
+```
+
+##### 3. Installing the neccessary packages for "laravelPHP" folder
+```
+ .../ZingSTM/reactjs $ cd ../laravelPHP
+ .../ZingSTM/laravelPHP $ composer install
+```
+
+##### 4. After installing the neccessary packages, create a APP_KEY with command 
+```
+ .../ZingSTM/laravelPHP $ php artisan key:generate
+```
+
+# Then rename the ".env.example" file into ".env" with command. Then, try "php artisan serve" 
+```
+ .../ZingSTM/laravelPHP $ php artisan key:generate
+ .../ZingSTM/laravelPHP $ (sudo) mv .env.example .env
+```
+
