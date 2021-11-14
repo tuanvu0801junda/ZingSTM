@@ -14,10 +14,10 @@ class CreateSongcommentTable extends Migration
     public function up()
     {
         Schema::create('SongComment', function (Blueprint $table) {
-            $table->bigInteger('userId');
-            $table->bigInteger('songId');
-            $table->foreign('userId')->references('userId')->on('User')->onDelete('cascade');
-            $table->foreign('songId')->references('songId')->on('Song')->onDelete('cascade');
+            $table->bigInteger('userId')->unsigned();
+            $table->bigInteger('songId')->unsigned();
+            $table->foreign('userId')->references('userId')->on('User')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('songId')->references('songId')->on('Song')->onDelete('cascade')->onUpdate('cascade');
             $table->string('userComment');
             $table->timestamp('createdDate');
             $table->timestamps();

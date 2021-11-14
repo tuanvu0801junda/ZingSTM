@@ -14,10 +14,10 @@ class CreateSongGenreRelationTable extends Migration
     public function up()
     {
         Schema::create('SongGenreRelation', function (Blueprint $table) {
-            $table->bigInteger('songId');
-            $table->bigInteger('genreId');
-            $table->foreign('songId')->references('songId')->on('Song')->onDelete('cascade');
-            $table->foreign('genreId')->references('genreId')->on('Genre')->onDelete('cascade');
+            $table->bigInteger('songId')->unsigned();
+            $table->bigInteger('genreId')->unsigned();
+            $table->foreign('songId')->references('songId')->on('Song')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('genreId')->references('genreId')->on('Genre')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -12,10 +12,10 @@ class CreateSongArtistRelationTable extends Migration{
      */
     public function up(){
         Schema::create('SongArtistRelation', function (Blueprint $table) {
-            $table->bigInteger('songId');
-            $table->bigInteger('artistId');
-            $table->foreign('songId')->references('songId')->on('Song')->onDelete('cascade');
-            $table->foreign('artistId')->references('artistId')->on('Artist')->onDelete('cascade');
+            $table->bigInteger('songId')->unsigned();
+            $table->bigInteger('artistId')->unsigned();
+            $table->foreign('songId')->references('songId')->on('Song')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('artistId')->references('artistId')->on('Artist')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
