@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class PlaylistComment extends Migration
+class CreatePlaylistComment extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,10 @@ class PlaylistComment extends Migration
     public function up()
     {
         Schema::create('PlaylistComment', function (Blueprint $table) {
-            $table->bigInteger('userId');
-            $table->foreign('userId')->references('userId')->on('User')->onDelete('cascade');
-            $table->bigInteger('playlistId');
-            $table->foreign('playlistId')->references('playlistId')->on('Playlist')->onDelete('cascade');
+            $table->bigInteger('userId')->unsigned();
+            $table->foreign('userId')->references('userId')->on('User')->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger('playlistId')->unsigned();
+            $table->foreign('playlistId')->references('playlistId')->on('Playlist')->onDelete('cascade')->onUpdate('cascade');
             $table->string('userComment');
             $table->timestamp('createdDate');
             $table->timestamps();

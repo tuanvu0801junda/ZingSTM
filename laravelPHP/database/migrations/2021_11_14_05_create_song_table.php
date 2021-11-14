@@ -12,14 +12,15 @@ class CreateSongTable extends Migration{
      */
     public function up(){
         Schema::create('Song', function (Blueprint $table) {
-            $table->bigIncrements('songId')->primary();
-            $table->bigInteger('albumId');
+            $table->bigIncrements('songId');
+            $table->bigInteger('albumId')->unsigned()->nullable();
             $table->string('imagePath');
             $table->string('songPath');
             $table->bigInteger('playTimes')->default(0);
             $table->string('title');
             $table->string('duration');
-            $table->foreign('albumId')->references('albumId')->on('Album');
+            $table->foreign('albumId')->references('albumId')->on('Album')->onDelete('cascade')->onUpdate('cascade');
+            //Note this one
             $table->timestamps();
         });
     }

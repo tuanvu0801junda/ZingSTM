@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Playlist extends Migration
+class CreatePlaylist extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,12 @@ class Playlist extends Migration
     public function up()
     {
         Schema::create('Playlist', function (Blueprint $table) {
-            $table->bigIncrements('playlistId')->primary();
+            $table->bigIncrements('playlistId');
             $table->timestamp('dateCreated');
             $table->string('playlistName');
-            $table->bigInteger('userId');
-            $table->foreign('userId')->references('userId')->on('User')->onDelete('cascade');
+            $table->bigInteger('userId')->unsigned();
+            $table->foreign('userId')->references('userId')->on('User')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('verifyCode')->nullable();
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class PlaylistSongRelation extends Migration
+class CreatePlaylistSongRelation extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,10 @@ class PlaylistSongRelation extends Migration
     public function up()
     {
         Schema::create('PlaylistSongRelation', function (Blueprint $table) {
-            $table->bigInteger('playlistId');
-            $table->foreign('playlistId')->references('playlistId')->on('Playlist')->onDelete('cascade');
-            $table->bigInteger('songId');
-            $table->foreign('songId')->references('songId')->on('Song')->onDelete('cascade');
+            $table->bigInteger('playlistId')->unsigned();
+            $table->foreign('playlistId')->references('playlistId')->on('Playlist')->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger('songId')->unsigned();
+            $table->foreign('songId')->references('songId')->on('Song')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('playlistOrder');
             $table->timestamps();
         });
