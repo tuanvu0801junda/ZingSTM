@@ -9,6 +9,7 @@ logs
 
 # Ignore the build directory
 /dist
+build/
 
 # The file containing environment variables 
 .env
@@ -19,4 +20,3 @@ logs
 *.sw*
 
 # Ignore the .json file
-*.json
