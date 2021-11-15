@@ -19,12 +19,12 @@ import {
 
 var dashRoutes = [
   {
-    path: "/dashboard",
-    name: "Dashboard",
+    path: "/home",
+    name: "Home",
     rtlName: "لوحة القيادة",
     icon: <HomeIcon color="inherit" />,
     component: Dashboard,
-    layout: "/admin",
+    layout: "/zingstm",
   },
   {
     path: "/tables",
@@ -32,7 +32,7 @@ var dashRoutes = [
     rtlName: "لوحة القيادة",
     icon: <StatsIcon color="inherit" />,
     component: Tables,
-    layout: "/admin",
+    layout: "/zingstm",
   },
   {
     path: "/billing",
@@ -40,7 +40,7 @@ var dashRoutes = [
     rtlName: "لوحة القيادة",
     icon: <CreditIcon color="inherit" />,
     component: Billing,
-    layout: "/admin",
+    layout: "/zingstm",
   },
   {
     path: "/rtl-support-page",
@@ -63,7 +63,7 @@ var dashRoutes = [
         icon: <PersonIcon color="inherit" />,
         secondaryNavbar: true,
         component: Profile,
-        layout: "/admin",
+        layout: "/zingstm",
       },
       {
         path: "/signin",

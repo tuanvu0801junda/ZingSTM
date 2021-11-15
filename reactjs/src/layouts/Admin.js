@@ -24,7 +24,7 @@ export default function Dashboard(props) {
   const mainPanel = React.createRef();
   // functions for changing the states from components
   const getRoute = () => {
-    return window.location.pathname !== "/admin/full-screen-maps";
+    return window.location.pathname !== "/zingstm/full-screen-maps";
   };
   const getActiveRoute = (routes) => {
     let activeRoute = "Default Brand Text";
@@ -78,7 +78,7 @@ export default function Dashboard(props) {
       if (prop.category === "account") {
         return getRoutes(prop.views);
       }
-      if (prop.layout === "/admin") {
+      if (prop.layout === "/zingstm") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -98,7 +98,7 @@ export default function Dashboard(props) {
     <ChakraProvider theme={theme} resetCss={false}>
       <Sidebar
         routes={routes}
-        logoText={"PURITY UI DASHBOARD"}
+        logoText={"Zing STM"}
         display="none"
         sidebarVariant={sidebarVariant}
         {...rest}
@@ -113,7 +113,7 @@ export default function Dashboard(props) {
         <Portal>
           <AdminNavbar
             onOpen={onOpen}
-            logoText={"PURITY UI DASHBOARD"}
+            logoText={"Zing STM"}
             brandText={getActiveRoute(routes)}
             secondary={getActiveNavbar(routes)}
             fixed={fixed}
@@ -125,7 +125,7 @@ export default function Dashboard(props) {
             <PanelContainer>
               <Switch>
                 {getRoutes(routes)}
-                <Redirect from="/admin" to="/admin/dashboard" />
+                <Redirect from="/zingstm" to="/zingstm/home" />
               </Switch>
             </PanelContainer>
           </PanelContent>

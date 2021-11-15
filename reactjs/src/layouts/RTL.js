@@ -24,7 +24,7 @@ export default function Dashboard(props) {
   // ref for main panel div
   const mainPanel = React.createRef();
   const getRoute = () => {
-    return window.location.pathname !== "/admin/full-screen-maps";
+    return window.location.pathname !== "/zingstm/full-screen-maps";
   };
   const getActiveRoute = (routes) => {
     let activeRoute = "Default Brand Text";
@@ -78,7 +78,7 @@ export default function Dashboard(props) {
       if (prop.category === "account") {
         return getRoutes(prop.views);
       }
-      if (prop.layout === "/rtl" || prop.layout === "/admin") {
+      if (prop.layout === "/rtl" || prop.layout === "/zingstm") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -99,7 +99,7 @@ export default function Dashboard(props) {
       <RtlProvider>
         <Sidebar
           routes={routes}
-          logoText={"PURITY UI DASHBOARD"}
+          logoText={"Zing STM"}
           display="none"
           sidebarVariant={sidebarVariant}
           {...rest}
@@ -115,7 +115,7 @@ export default function Dashboard(props) {
           <Portal>
             <AdminNavbar
               onOpen={onOpen}
-              logoText={"PURITY UI DASHBOARD"}
+              logoText={"Zing STM"}
               brandText={getActiveRoute(routes)}
               secondary={getActiveNavbar(routes)}
               fixed={fixed}

@@ -232,7 +232,7 @@ export default function Dashboard() {
                 width={{ lg: "45%" }}
               >
                 <Text fontSize="sm" color="gray.400" fontWeight="bold">
-                  Built by developers
+                  Project by group 8
                 </Text>
                 <Text
                   fontSize="lg"
@@ -240,7 +240,7 @@ export default function Dashboard() {
                   fontWeight="bold"
                   pb=".5rem"
                 >
-                  Purity UI Dashboard
+                  Zing STM
                 </Text>
                 <Text fontSize="sm" color="gray.400" fontWeight="normal">
                   From colors, cards, typography to complex elements, you will

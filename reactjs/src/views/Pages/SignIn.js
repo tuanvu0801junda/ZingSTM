@@ -1,5 +1,4 @@
 import React from "react";
-import {useHistory} from 'react-router-dom';
 // Chakra imports
 import {
   Box,
@@ -14,12 +13,14 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+
 import {useState} from 'react'
 import axios from 'axios'
+import swal from "sweetalert";
+import {useHistory} from 'react-router-dom';
 
 // Assets
 import signInImage from "assets/img/signInImage.png";
-import swal from "sweetalert";
 
 function SignIn() {
   // Chakra color mode
@@ -47,7 +48,7 @@ function SignIn() {
 
     if (res.data.status === 200) {
       try {
-        swal(res.data.message, "Welcome back, " + res.data.user[0].fullname + "!", "success").then(() => history.push("/admin"));
+        swal(res.data.message, "Welcome back, " + res.data.user.fullname + "!", "success").then(() => history.push("/zingstm"));
       }
       catch(err) {
         swal("Error", err.message, "error");
@@ -58,6 +59,7 @@ function SignIn() {
 			});
 		} else if (res.data.status === 404) {
       swal(res.data.message, "Invalid username or password!", "error");
+      console.log(res.data);
 			setState({
 				username: '',
 				password: '',

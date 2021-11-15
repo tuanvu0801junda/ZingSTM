@@ -29,9 +29,9 @@ ReactDOM.render(
   <HashRouter>
     <Switch>
       <Route path={`/auth`} component={AuthLayout} />
-      <Route path={`/admin`} component={AdminLayout} />
+      <Route path={`/zingstm`} component={AdminLayout} />
       <Route path={`/rtl`} component={RTLLayout} />
-      <Redirect from={`/`} to="/admin/dashboard" />
+      <Redirect from={`/`} to="/zingstm/home" />
     </Switch>
   </HashRouter>,
   document.getElementById("root")

@@ -115,14 +115,14 @@ function Profile() {
                   fontWeight="bold"
                   ms={{ sm: "8px", md: "0px" }}
                 >
-                  Esthera Jackson
+                  Vũ Tuấn Đạt :))
                 </Text>
                 <Text
                   fontSize={{ sm: "sm", md: "md" }}
                   color={emailColor}
                   fontWeight="semibold"
                 >
-                  esthera@simmmple.com
+                  dat.vt_hentaiii@sis.rhust.edu.vn
                 </Text>
               </Flex>
             </Flex>
