@@ -1,70 +1,165 @@
-# Getting Started with Create React App
+## Quick Start
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- Clone the repo
+- `npm install`
+- `npm start`
 
-## Available Scripts
+## File Structure
 
-In the project directory, you can run:
+```
+reactjs/
+├── .gitattributes
+├── .gitigonore
+├── CHANGELOG.md
+├── commit.sh
+├── gulpfile.js
+├── ISSUE_TEMPLATE.md
+├── jsconfig.json
+├── package-lock.json
+├── package.json
+├── README.md
+├── documentation
+├── node_modules
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   └── manifest.json
+└── src
+    ├── assets
+    │   ├── img
+    │   └── svg
+    ├── components
+    │   ├── Card
+    │   │   ├── Card.js
+    │   │   ├── CardBody.js
+    │   │   └── CardHeader.js
+    │   ├── Charts
+    │   │   ├── BarChart.js
+    │   │   └── LineChart.js
+    │   ├── Configurator
+    │   │   └── Configurator.js
+    │   ├── FixedPlugin
+    │   │   └── FixedPlugin.js
+    │   ├── Footer
+    │   │   └── Footer.js
+    │   ├── Icons
+    │   │   ├── IconBox.js
+    │   │   └── Icons.js
+    │   ├── Layout
+    │   │   ├── MainPanel.js
+    │   │   ├── PanelContainer.js
+    │   │   └── PanelContent.js
+    │   ├── Menu
+    │   │   └── ItemContent.js
+    │   ├── Navbars
+    │   │   ├── Searchbar
+    │   │   │   └── SearchBar.js
+    │   │   ├── AdminNavbar.js
+    │   │   ├── AdminNavbarLinks.js
+    │   │   └── AuthNavbar.js
+    │   ├── Other
+    │   │   ├── BillingRow.js
+    │   │   ├── InvoicesRow.js
+    │   │   └── TransactionRow.js
+    │   ├── Separator
+    │   │   └── Separator.js
+    │   ├── Sidebar
+    │   │   ├── Sidebar.js
+    │   │   └── SidebarHelp.js
+    │   └── Tables
+    │       ├── BillingRow.js
+    │       ├── DashboardTableRow.js
+    │       ├── InvoicesRow.js
+    │       ├── TablesProjectRow.js
+    │       ├── TablesTableRow.js
+    │       ├── TimelineRow.js
+    │       └── TransactionRow.js
+    ├── layouts
+    │   ├── Admin.js
+    │   ├── Auth.js
+    │   └── RTL.js
+    ├── theme
+    │   ├── additions
+    │   │   ├── card
+    │   │   │   ├── Card.js
+    │   │   │   ├── CardBody.js
+    │   │   │   └── CardHeader.js
+    │   │   ├── layout
+    │   │   │   ├── MainPanel.js
+    │   │   │   ├── PanelContainer.js
+    │   │   │   └── PanelContent.js
+    │   ├── components
+    │   │   ├── button.js
+    │   │   ├── link.js
+    │   │   └── drawer.js
+    │   ├── foundations
+    │   │   ├── breakpoints.js
+    │   │   ├── fonts.js
+    │   │   └── text.js
+    │   ├── styles.js
+    │   └── theme.js
+    ├── variables
+    │   ├── charts.js
+    │   └── general.js
+    ├── views
+    │   ├── Dashboard
+    │   │   ├── Billing.js
+    │   │   ├── Dashboard.js
+    │   │   ├── Profile.js
+    │   │   └── Tables.js
+    │   ├── Pages
+    │       ├── SignIn.js
+    │       └── SignUp.js
+    │   └── RTL
+    │       └── RTLPage.js
+    ├── index.js
+    └── routes.js
 
-### `npm start`
+```
+## Resources
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Demo: <https://demos.creative-tim.com/purity-ui-dashboard/#/admin/dashboard?ref=readme-pud>
+- Download Page: <https://www.creative-tim.com/product/purity-ui-dashboard?ref=readme-pud>
+- License Agreement: <https://www.creative-tim.com/license?ref=readme-pud>
+- Support: <https://www.creative-tim.com/contact-us?ref=readme-pud>
+- Issues: [Github Issues Page](https://github.com/creativetimofficial/purity-ui-dashboard/issues)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Licensing
 
-### `npm test`
+- Copyright 2021 Creative Tim (https://www.creative-tim.com/?ref=readme-pud)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Creative Tim License (https://www.creative-tim.com/license)
 
-### `npm run build`
+## Useful Links
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [Tutorials](https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w)
+- [Affiliate Program](https://www.creative-tim.com/affiliates/new?ref=readme-pud) (earn money)
+- [Blog Creative Tim](http://creative-tim.com/blog?ref=readme-pud)
+- [Free Products](https://www.creative-tim.com/bootstrap-themes/free?ref=readme-pud) from Creative Tim
+- [Premium Products](https://www.creative-tim.com/bootstrap-themes/premium?ref=readme-pud) from Creative Tim
+- [React Products](https://www.creative-tim.com/bootstrap-themes/react-themes?ref=readme-pud) from Creative Tim
+- [Angular Products](https://www.creative-tim.com/bootstrap-themes/angular-themes?ref=readme-pud) from Creative Tim
+- [VueJS Products](https://www.creative-tim.com/bootstrap-themes/vuejs-themes?ref=readme-pud) from Creative Tim
+- [More products](https://www.creative-tim.com/bootstrap-themes?ref=readme-pud) from Creative Tim
+- [More products](https://simmmple.gumroad.com?ref=readme-pud) from Simmmple
+- Check our Bundles [here](https://www.creative-tim.com/bundles?ref=readme-pud)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Social Media - Creative Tim
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Twitter: <https://twitter.com/CreativeTim>
 
-### `npm run eject`
+Facebook: <https://www.facebook.com/CreativeTim>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Dribbble: <https://dribbble.com/creativetim>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Instagram: <https://www.instagram.com/CreativeTimOfficial>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Social Media - Simmmple
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Twitter: <https://twitter.com/simmmple_web>
 
-## Learn More
+Facebook: <https://www.facebook.com/simmmple.web>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Dribbble: <https://dribbble.com/simmmple>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Instagram: <https://www.instagram.com/simmmple.web>
