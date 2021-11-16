@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 // Chakra imports
 import {
   Avatar,
@@ -39,6 +40,9 @@ import {
 import { IoDocumentsSharp } from "react-icons/io5";
 
 function Profile() {
+  const userInfo = useSelector((state) => state.reducerLogin);
+  console.log(userInfo);
+
   // Chakra color mode
   const textColor = useColorModeValue("gray.700", "white");
   const bgProfile = useColorModeValue(
@@ -115,14 +119,14 @@ function Profile() {
                   fontWeight="bold"
                   ms={{ sm: "8px", md: "0px" }}
                 >
-                  Vũ Tuấn Đạt :))
+                  {userInfo.fullname}
                 </Text>
                 <Text
                   fontSize={{ sm: "sm", md: "md" }}
                   color={emailColor}
                   fontWeight="semibold"
                 >
-                  dat.vt_hentaiii@sis.rhust.edu.vn
+                  {userInfo.email}
                 </Text>
               </Flex>
             </Flex>

@@ -113,7 +113,7 @@ function SignUp() {
           mb="26px"
           w={{ base: "90%", sm: "60%", lg: "40%", xl: "30%" }}
         >
-          Welcome to Zing STM website, let have goods time with musics !
+          Welcome to Zing STM website, lets have goods time with musics !
         </Text>
       </Flex>
       <Flex alignItems="center" justifyContent="center" mb="60px" mt="20px">

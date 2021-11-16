@@ -22,7 +22,12 @@ import {useHistory} from 'react-router-dom';
 // Assets
 import signInImage from "assets/img/signInImage.png";
 
+//Redux
+import { useDispatch } from "react-redux";
+import actionLogin from "redux/actions/actionLogin"
+
 function SignIn() {
+  const dispatch = useDispatch();
   // Chakra color mode
   const titleColor = useColorModeValue("teal.300", "teal.200");
   const textColor = useColorModeValue("gray.400", "white");
@@ -48,7 +53,9 @@ function SignIn() {
 
     if (res.data.status === 200) {
       try {
-        swal(res.data.message, "Welcome back, " + res.data.user.fullname + "!", "success").then(() => history.push("/zingstm"));
+          console.log(res.data.user);
+          dispatch(actionLogin(res.data.user));
+          history.push("/zingstm");
       }
       catch(err) {
         swal("Error", err.message, "error");

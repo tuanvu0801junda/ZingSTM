@@ -20,5 +20,4 @@ build/
 *.sw*
 
 # Ignore the .json file
-*.json
 package-lock.json
