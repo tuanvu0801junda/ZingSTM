@@ -41,7 +41,6 @@ import { IoDocumentsSharp } from "react-icons/io5";
 
 function Profile() {
   const userInfo = useSelector((state) => state.reducerLogin);
-  console.log(userInfo);
 
   // Chakra color mode
   const textColor = useColorModeValue("gray.700", "white");
@@ -107,7 +106,7 @@ function Profile() {
             >
               <Avatar
                 me={{ md: "22px" }}
-                src={avatar4}
+                src="https://64.media.tumblr.com/4d65324a0b045185e7f1783d9b8221a4/1530035f518b63d0-7a/s400x600/252f916b53f71798c6e15e120bde2a8dfe13dc38.jpg"
                 w="80px"
                 h="80px"
                 borderRadius="15px"
