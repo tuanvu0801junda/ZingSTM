@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import { useSelector } from "react-redux";
 // Chakra imports
 import {
@@ -38,9 +38,46 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 import { IoDocumentsSharp } from "react-icons/io5";
+import uploadAvatar from 'firebase/uploadFile';
+import swal from "sweetalert";
+import axios from 'axios'
+
 
 function Profile() {
   const userInfo = useSelector((state) => state.reducerLogin);
+  const imageRef = useRef('');
+
+  const showChooseFileDialog = () => {
+    imageRef.current.click();
+  }
+
+  const handleChange = (event) => {
+    const fileObject = event.target.files[0];
+    console.log(userInfo);
+    const avatarURL = uploadAvatar(fileObject);
+    updateAvatar(avatarURL);
+  };
+
+  const updateAvatar = async (avatarURL) => {
+    console.log(avatarURL);
+		const data = {
+      userId: userInfo.userId,
+			profilePic: avatarURL,
+		}
+
+    const res = await axios.post('/api/updateAvatar', data);
+
+    console.log(res.data);
+
+    if (res.data.status === 200) {
+      try {
+          history.push("/zingstm/profile");
+      }
+      catch(err) {
+        swal("Error", err.message, "error");
+      }
+		}
+	}
 
   // Chakra color mode
   const textColor = useColorModeValue("gray.700", "white");
@@ -106,7 +143,7 @@ function Profile() {
             >
               <Avatar
                 me={{ md: "22px" }}
-                src="https://64.media.tumblr.com/4d65324a0b045185e7f1783d9b8221a4/1530035f518b63d0-7a/s400x600/252f916b53f71798c6e15e120bde2a8dfe13dc38.jpg"
+                src={userInfo.profilePic}
                 w="80px"
                 h="80px"
                 borderRadius="15px"
@@ -151,7 +188,8 @@ function Profile() {
                   </Text>
                 </Flex>
               </Button>
-              <Button p="0px" bg="transparent" _hover={{ bg: "none" }}>
+
+              <Button onClick={showChooseFileDialog} p="0px" bg="transparent" _hover={{ bg: "none" }}>
                 <Flex
                   align="center"
                   w={{ lg: "135px" }}
@@ -163,10 +201,18 @@ function Profile() {
                 >
                   <Icon as={IoDocumentsSharp} me="6px" />
                   <Text fontSize="xs" color={textColor} fontWeight="bold">
-                    TEAMS
+                    CHANGE AVATAR
                   </Text>
+                  <input
+                    ref={imageRef}
+                    type="file"
+                    style={{ display: "none" }}
+                    accept="image/*"
+                    onChange={handleChange}
+                  />
                 </Flex>
               </Button>
+
               <Button p="0px" bg="transparent" _hover={{ bg: "none" }}>
                 <Flex
                   align="center"

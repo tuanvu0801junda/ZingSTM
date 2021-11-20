@@ -50,4 +50,18 @@ class UserController extends Controller{
             'message' => 'Create Account Successfully',
         ]);
     }
+
+    public function updateAvatar(Request $request) {
+        $userId = $request->input('userId');
+        $user = User::where('userId', $userId)->first();
+        // $user = DB::table('User')
+        //         ->where('userId',$userId)->first();
+        $user->profilePic = $request->input('profilePic');
+        $user->update();
+
+        return response()->json([
+            'status' => 200,
+            'user' => $user,
+        ]);
+    }
 }
