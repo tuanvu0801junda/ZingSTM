@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/sign-up', [UserController::class, 'signup']);
+Route::post('/updateAvatar', [UserController::class, 'updateAvatar']);
