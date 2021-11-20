@@ -16,4 +16,5 @@ class Playlist extends Model
         'playlistName',
         'userId',
     ];
+    protected $primaryKey = 'playlistId';
 }

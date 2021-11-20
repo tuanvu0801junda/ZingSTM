@@ -11,4 +11,5 @@ class Genre extends Model
     protected $table = 'Genre';
     protected $fillable = ['genreId', 'genreImage', 'genreName'];
     public $timestamps = false;
+    protected $primaryKey = 'genreId';
 }

@@ -51,15 +51,15 @@ function Profile() {
     imageRef.current.click();
   }
 
-  const handleChange = (event) => {
+  const handleChange = async (event) => {
     const fileObject = event.target.files[0];
     console.log(userInfo);
-    const avatarURL = uploadAvatar(fileObject);
-    updateAvatar(avatarURL);
+    const avatarURL = await uploadAvatar(fileObject);
+    console.log("avatarURL",avatarURL);
+    await updateAvatar(avatarURL);
   };
 
   const updateAvatar = async (avatarURL) => {
-    console.log(avatarURL);
 		const data = {
       userId: userInfo.userId,
 			profilePic: avatarURL,
@@ -144,6 +144,7 @@ function Profile() {
               <Avatar
                 me={{ md: "22px" }}
                 src={userInfo.profilePic}
+                //src='https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FAvatarImages%2Fprome1.jpg?alt=media&token=fba6b3e0-6bab-4768-8b62-550a60ce24b4'
                 w="80px"
                 h="80px"
                 borderRadius="15px"

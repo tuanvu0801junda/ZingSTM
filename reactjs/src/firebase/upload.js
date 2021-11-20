@@ -3,7 +3,7 @@ import {useState} from 'react';
 import {storage} from "./config";
 import firebase from "firebase/app";
 
-function SendImageAndMp3() {
+function SendImageAndMp3(){
   const [image , setImage] = useState('');
   const [mp3, setMp3] = useState('');
   const upload = () => {
