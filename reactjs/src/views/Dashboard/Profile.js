@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import { useSelector } from "react-redux";
 // Chakra imports
 import {
@@ -39,8 +39,20 @@ import {
 } from "react-icons/fa";
 import { IoDocumentsSharp } from "react-icons/io5";
 
+
 function Profile() {
   const userInfo = useSelector((state) => state.reducerLogin);
+  const imageRef = useRef('');
+
+  const showChooseFileDialog = () => {
+    imageRef.current.click();
+  }
+
+  const handleChange = (event) => {
+    const fileObject = event.target.files[0];
+    if (!fileObject) return;
+    renderImage(fileObject);
+  };
 
   // Chakra color mode
   const textColor = useColorModeValue("gray.700", "white");
@@ -151,7 +163,8 @@ function Profile() {
                   </Text>
                 </Flex>
               </Button>
-              <Button p="0px" bg="transparent" _hover={{ bg: "none" }}>
+
+              <Button onClick={showChooseFileDialog} p="0px" bg="transparent" _hover={{ bg: "none" }}>
                 <Flex
                   align="center"
                   w={{ lg: "135px" }}
@@ -163,10 +176,18 @@ function Profile() {
                 >
                   <Icon as={IoDocumentsSharp} me="6px" />
                   <Text fontSize="xs" color={textColor} fontWeight="bold">
-                    TEAMS
+                    CHANGE AVATAR
                   </Text>
+                  <input
+                    ref={imageRef}
+                    type="file"
+                    style={{ display: "none" }}
+                    accept="image/*"
+                    onChange={handleChange}
+                  />
                 </Flex>
               </Button>
+
               <Button p="0px" bg="transparent" _hover={{ bg: "none" }}>
                 <Flex
                   align="center"
