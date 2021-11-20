@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, { useRef } from "react";
 import { useSelector } from "react-redux";
 // Chakra imports
 import {
@@ -53,17 +53,15 @@ function Profile() {
 
   const handleChange = async (event) => {
     const fileObject = event.target.files[0];
-    console.log(userInfo);
     const avatarURL = await uploadAvatar(fileObject);
-    console.log("avatarURL",avatarURL);
-    await updateAvatar(avatarURL);
+    updateAvatar(avatarURL);
   };
 
   const updateAvatar = async (avatarURL) => {
-		const data = {
+    const data = {
       userId: userInfo.userId,
-			profilePic: avatarURL,
-		}
+      profilePic: avatarURL,
+    }
 
     const res = await axios.post('/api/updateAvatar', data);
 
@@ -71,13 +69,13 @@ function Profile() {
 
     if (res.data.status === 200) {
       try {
-          history.push("/zingstm/profile");
+        history.push("/zingstm/profile");
       }
-      catch(err) {
+      catch (err) {
         swal("Error", err.message, "error");
       }
-		}
-	}
+    }
+  }
 
   // Chakra color mode
   const textColor = useColorModeValue("gray.700", "white");
