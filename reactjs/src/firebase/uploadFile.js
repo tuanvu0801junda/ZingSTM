@@ -1,5 +1,6 @@
 import {storage} from "./config";
 import firebase from "firebase/app";
+import {useState} from "react";
 
 function uploadAvatar(image) {
     var avatarURL;
@@ -39,13 +40,15 @@ function uploadAvatar(image) {
             // For instance, get the download URL: https://firebasestorage.googleapis.com/...
             uploadTask.snapshot.ref.getDownloadURL().then((url) => {
                 avatarURL = url;
-                console.log(url);
-                console.log(avatarURL);
+                //console.log(url);
+                //console.log(avatarURL);
+                const newURL = new URL(url);
+                avatarURL = newURL.toString();
+                console.log("here avatarURL",avatarURL);
+                return avatarURL;
               });
         }
     );
-
-    return avatarURL;
 }
 
 export default uploadAvatar;

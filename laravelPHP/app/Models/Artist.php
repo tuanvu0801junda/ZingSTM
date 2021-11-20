@@ -11,4 +11,6 @@ class Artist extends Model{
     protected $table = 'Artist';
 
     protected $fillable = ['artistId','artistName'];
+
+    protected $primaryKey = 'artistId';
 }

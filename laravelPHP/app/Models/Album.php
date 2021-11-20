@@ -10,4 +10,5 @@ class Album extends Model
     use HasFactory;
     protected $table = 'Album';
     protected $fillable = ['artworkPath', 'title'];
+    protected $primaryKey = 'albumId';
 }

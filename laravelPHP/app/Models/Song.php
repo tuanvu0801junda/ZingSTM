@@ -11,4 +11,6 @@ class Song extends Model{
     protected $table = 'Song';
 
     protected $fillable = ['albumId','imagePath','songPath','playTimes','title','duration'];
+
+    protected $primaryKey = 'songId';
 }
