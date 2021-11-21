@@ -34,19 +34,10 @@ export default function Footer(props) {
         <Link
           // color={linkTeal}
           color="teal.400"
-          href="https://www.creative-tim.com"
+          href="https://github.com/tuanvu0801junda/ZingSTM"
           target="_blank"
         >
-          {"Creative Tim "}
-        </Link>
-        &
-        <Link
-          // color={linkTeal}
-          color="teal.400"
-          href="https://www.simmmple.com"
-          target="_blank"
-        >
-          {" Simple"}
+          {"Creative Team 8 "}
         </Link>
         {" for a better web"}
       </Text>
@@ -57,8 +48,8 @@ export default function Footer(props) {
             md: "44px",
           }}
         >
-          <Link color="gray.400" href="https://www.creative-tim.com">
-            {"Creative Tim"}
+          <Link color="gray.400" href="https://github.com/tuanvu0801junda/ZingSTM.git">
+            {"Repo"}
           </Link>
         </ListItem>
         <ListItem
@@ -67,33 +58,11 @@ export default function Footer(props) {
             md: "44px",
           }}
         >
-          <Link color="gray.400" href="https://www.simmmple.com">
-            {"Simple"}
+          <Link color="gray.400" href="https://www.npmjs.com/package/react-jinke-music-player?activeTab=readme">
+            {"Reference"}
           </Link>
         </ListItem>
-        <ListItem
-          me={{
-            base: "20px",
-            md: "44px",
-          }}
-        >
-          <Link
-            color="gray.400"
-            href="#blog"
-            href="https://creative-tim.com/blog"
-          >
-            {"Blog"}
-          </Link>
-        </ListItem>
-        <ListItem>
-          <Link
-            color="gray.400"
-            href="#license"
-            href="https://www.creative-tim.com/license"
-          >
-            {"License"}
-          </Link>
-        </ListItem>
+
       </List>
     </Flex>
   );
