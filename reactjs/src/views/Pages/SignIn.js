@@ -14,8 +14,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import {useState} from 'react'
-import axios from 'axios'
+import {useState} from 'react';
+import axios from 'axios';
 import swal from "sweetalert";
 import {useHistory} from 'react-router-dom';
 
