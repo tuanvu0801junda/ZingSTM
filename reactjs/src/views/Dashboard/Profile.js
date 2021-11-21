@@ -1,5 +1,8 @@
 import React, { useRef } from "react";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import actionLogin from "redux/actions/actionLogin"
+import {useState} from 'react';
 // Chakra imports
 import {
   Avatar,
@@ -44,7 +47,12 @@ import axios from 'axios'
 
 
 function Profile() {
+  const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.reducerLogin);
+
+  const [state, setState] = useState(userInfo);
+
+
   const imageRef = useRef('');
 
   const showChooseFileDialog = () => {
@@ -69,7 +77,11 @@ function Profile() {
 
     if (res.data.status === 200) {
       try {
-        history.push("/zingstm/profile");
+        var input = {
+          userId: userInfo.userId,
+        }
+        const res = await axios.post('/api/getUserInfo', input);
+        dispatch(actionLogin(res.data.user));
       }
       catch (err) {
         swal("Error", err.message, "error");

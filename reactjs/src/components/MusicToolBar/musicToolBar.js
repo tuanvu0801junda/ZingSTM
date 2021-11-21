@@ -10,7 +10,7 @@ function MusicToolBar() {
             cover:
                 'https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FSongImages%2FLemon-Kenshi-00.png?alt=media&token=f1d10f6d-2622-4616-86de-db5cdf945da5',
             musicSrc:
-                'https://firebasestoage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Songs%2FLemon-Kenshi-00.mp3?alt=media&token=82e098a3-d697-4cf8-a994-12b9e4c005de',
+                'https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Songs%2FLemon-Kenshi-00.mp3?alt=media&token=82e098a3-d697-4cf8-a994-12b9e4c005de',
             // support async fetch music src. eg.
             // musicSrc: async () => {
             //   return await fetch('/api')
@@ -54,7 +54,7 @@ function MusicToolBar() {
         showMediaSession: true,
         showProgressLoadBar: true,
         showPlay: true,
-        showReload: true,
+        showReload: false,
         showDownload: true,
         showPlayMode: true,
         showThemeSwitch: true,

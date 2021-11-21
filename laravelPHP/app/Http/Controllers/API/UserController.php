@@ -64,4 +64,23 @@ class UserController extends Controller{
             'user' => $user,
         ]);
     }
+
+    public function getUserInfo(Request $request){
+        $userId = $request->input('userId');
+        $user = DB::table('User')
+                ->where('userId',$userId)->first();
+
+        if ($user != NULL){
+            return response()->json([
+                'status' => 200,
+                'user' => $user,
+                'message' => 'abc',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Account not found!',
+            ]);
+        }
+    }
 }

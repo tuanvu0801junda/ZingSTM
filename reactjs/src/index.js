@@ -25,6 +25,7 @@ import allReducers from "redux/reducers/index";
 import AuthLayout from "layouts/Auth.js";
 import AdminLayout from "layouts/Admin.js";
 import RTLLayout from "layouts/RTL.js";
+import MusicToolBar from 'components/MusicToolBar/MusicToolBar'
 import axios from 'axios';
 axios.defaults.baseURL = "http://localhost:8000/";
 
@@ -39,6 +40,7 @@ ReactDOM.render(
         <Route path={`/rtl`} component={RTLLayout} />
         <Redirect from={`/`} to="/zingstm/home" />
       </Switch>
+      <MusicToolBar />
     </Provider>
   </HashRouter>,
   document.getElementById("root")
