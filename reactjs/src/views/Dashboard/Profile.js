@@ -49,10 +49,16 @@ import axios from 'axios'
 
 function Profile() {
   const dispatch = useDispatch();
-  var userInfo;
-  if ((useSelector((state) => state.reducerLogin)).status == "LOGIN") {
+  var userInfo = {
+    email: "Undefined",
+    profilePic: "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FAvatarImages%2Fistockphoto-1223671392-612x612.jpg?alt=media&token=c746eb6a-3d27-478f-8309-d1fef46c8930",
+    role: 0,
+  };
+
+  var loginStatus = (useSelector((state) => state.reducerLogin)).status
+  if (loginStatus == "LOGIN") {
     userInfo = (useSelector((state) => state.reducerLogin)).userInfo;
-  } else {
+  } else if (loginStatus == "LOGOUT"){
     userInfo = (useSelector((state) => state.reducerLogin)).userInfo;
   }
 
@@ -79,9 +85,6 @@ function Profile() {
 
     dispatch(actionUpdatePlaylist(audioList))
   }
-
-  const testAudioList = useSelector((state) => state.reducerMusicToolBar);
-  console.log(testAudioList);
 
   const imageRef = useRef('');
 
