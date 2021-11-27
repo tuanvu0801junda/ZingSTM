@@ -5,6 +5,9 @@ function reducerLogin(state = 0, action) {
         case "LOGIN":
             state = action.data;
             return state;
+        case "LOGOUT":
+            state = action.data;
+            return state;
         default:
             return state;
     }

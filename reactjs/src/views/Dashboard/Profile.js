@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import actionLogin from "redux/actions/actionLogin"
-import {useState} from 'react';
+import actionLogin from "redux/actions/actionLogin";
+import actionLogout from 'redux/actions/actionLogout';
 // Chakra imports
 import {
   Avatar,
@@ -48,10 +48,13 @@ import axios from 'axios'
 
 function Profile() {
   const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.reducerLogin);
-
-  const [state, setState] = useState(userInfo);
-
+  var userInfo;
+  if ((useSelector((state) => state.reducerLogin)).status == "LOGIN") {
+    userInfo = (useSelector((state) => state.reducerLogin)).userInfo;
+  } else {
+    userInfo = (useSelector((state) => state.reducerLogin)).userInfo;
+  }
+  console.log(userInfo);
 
   const imageRef = useRef('');
 
@@ -87,6 +90,10 @@ function Profile() {
         swal("Error", err.message, "error");
       }
     }
+  }
+
+  const logout = () => {
+    dispatch(actionLogout());
   }
 
   // Chakra color mode
@@ -154,7 +161,6 @@ function Profile() {
               <Avatar
                 me={{ md: "22px" }}
                 src={userInfo.profilePic}
-                //src='https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FAvatarImages%2Fprome1.jpg?alt=media&token=fba6b3e0-6bab-4768-8b62-550a60ce24b4'
                 w="80px"
                 h="80px"
                 borderRadius="15px"
@@ -224,7 +230,7 @@ function Profile() {
                 </Flex>
               </Button>
 
-              <Button p="0px" bg="transparent" _hover={{ bg: "none" }}>
+              <Button onClick={logout} p="0px" bg="transparent" _hover={{ bg: "none" }}>
                 <Flex
                   align="center"
                   w={{ lg: "135px" }}
@@ -235,7 +241,7 @@ function Profile() {
                 >
                   <Icon as={FaPenFancy} me="6px" />
                   <Text fontSize="xs" color={textColor} fontWeight="bold">
-                    PROJECTS
+                    LOGOUT
                   </Text>
                 </Flex>
               </Button>

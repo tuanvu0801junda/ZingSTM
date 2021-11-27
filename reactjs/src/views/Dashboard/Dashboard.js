@@ -49,6 +49,8 @@ import React, { useState } from "react";
 import { BsArrowRight } from "react-icons/bs";
 import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 import { dashboardTableData, timelineData } from "variables/general";
+import SlickCarousel from 'components/Carousel/SlickCarousel';
+import TopSong from 'components/Song/TopSong';
 
 export default function Dashboard() {
   const value = "$100.000";
@@ -73,6 +75,58 @@ export default function Dashboard() {
 
   return (
     <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }}>
+      <SlickCarousel />
+      <Grid //TODO
+        templateColumns={{ sm: "1fr", lg: "1.3fr 1.7fr" }}
+        templateRows={{ sm: "repeat(2, 1fr)", lg: "1fr" }}
+        gap="24px"
+        mb={{ lg: "26px" }}
+      >
+        <Card p="16px">
+          <CardBody>
+            <Flex direction="column" w="100%">
+              <Text fontSize="2xl" color="green.400" fontWeight="bold" as="i" mb="6px">
+                Top songs
+              </Text>
+              <Grid
+                templateRows="repeat(3, 1fr)"
+                gap={2}
+              >
+                <TopSong top={1} title="Lemon Kenshi"
+                  imgURL="https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FSongImages%2FLemon-Kenshi-00.png?alt=media&token=f1d10f6d-2622-4616-86de-db5cdf945da5"
+                  views={12476}
+                />
+                <TopSong top={2} title="Sold out"
+                  imgURL="https://c.saavncdn.com/458/Sold-out-Russian-2019-20190118231455-500x500.jpg"
+                  views={11662}
+                />
+                <TopSong top={3} title="The Stellar Moments"
+                  imgURL="https://i.scdn.co/image/ab67616d0000b273b13ed44d038bb1a413b6b2de"
+                  views={9362}
+                />
+              </Grid>
+            </Flex>
+          </CardBody>
+        </Card>
+        <Card p="28px 10px 16px 0px" mb={{ sm: "26px", lg: "0px" }}>
+          <CardHeader mb="20px" pl="22px">
+            <Flex direction="column" alignSelf="flex-start">
+              <Text fontSize="lg" color={textColor} fontWeight="bold" mb="6px">
+                Zing STM Realtime
+              </Text>
+              <Text fontSize="md" fontWeight="medium" color="gray.400">
+                <Text as="span" color="green.400" fontWeight="bold">
+                  Views
+                </Text>{" "}
+                in 2021
+              </Text>
+            </Flex>
+          </CardHeader>
+          <Box w="100%" h={{ sm: "300px" }} ps="8px">
+            <LineChart />
+          </Box>
+        </Card>
+      </Grid>
       <SimpleGrid columns={{ sm: 1, md: 2, xl: 4 }} spacing="24px">
         <Card minH="83px">
           <CardBody>
@@ -363,185 +417,7 @@ export default function Dashboard() {
           </CardBody>
         </Card>
       </Grid>
-      <Grid
-        templateColumns={{ sm: "1fr", lg: "1.3fr 1.7fr" }}
-        templateRows={{ sm: "repeat(2, 1fr)", lg: "1fr" }}
-        gap="24px"
-        mb={{ lg: "26px" }}
-      >
-        <Card p="16px">
-          <CardBody>
-            <Flex direction="column" w="100%">
-              <BarChart />
-              <Flex
-                direction="column"
-                mt="24px"
-                mb="36px"
-                alignSelf="flex-start"
-              >
-                <Text
-                  fontSize="lg"
-                  color={textColor}
-                  fontWeight="bold"
-                  mb="6px"
-                >
-                  Active Users
-                </Text>
-                <Text fontSize="md" fontWeight="medium" color="gray.400">
-                  <Text as="span" color="green.400" fontWeight="bold">
-                    (+23%)
-                  </Text>{" "}
-                  than last week
-                </Text>
-              </Flex>
-              <SimpleGrid gap={{ sm: "12px" }} columns={4}>
-                <Flex direction="column">
-                  <Flex alignItems="center">
-                    <IconBox
-                      as="box"
-                      h={"30px"}
-                      w={"30px"}
-                      bg={iconTeal}
-                      me="6px"
-                    >
-                      <WalletIcon h={"15px"} w={"15px"} color={iconBoxInside} />
-                    </IconBox>
-                    <Text fontSize="sm" color="gray.400" fontWeight="semibold">
-                      Users
-                    </Text>
-                  </Flex>
-                  <Text
-                    fontSize="lg"
-                    color={textColor}
-                    fontWeight="bold"
-                    mb="6px"
-                    my="6px"
-                  >
-                    32,984
-                  </Text>
-                  <Progress
-                    colorScheme="teal"
-                    borderRadius="12px"
-                    h="5px"
-                    value={20}
-                  />
-                </Flex>
-                <Flex direction="column">
-                  <Flex alignItems="center">
-                    <IconBox
-                      as="box"
-                      h={"30px"}
-                      w={"30px"}
-                      bg={iconTeal}
-                      me="6px"
-                    >
-                      <RocketIcon h={"15px"} w={"15px"} color={iconBoxInside} />
-                    </IconBox>
-                    <Text fontSize="sm" color="gray.400" fontWeight="semibold">
-                      Clicks
-                    </Text>
-                  </Flex>
-                  <Text
-                    fontSize="lg"
-                    color={textColor}
-                    fontWeight="bold"
-                    mb="6px"
-                    my="6px"
-                  >
-                    2.42m
-                  </Text>
-                  <Progress
-                    colorScheme="teal"
-                    borderRadius="12px"
-                    h="5px"
-                    value={90}
-                  />
-                </Flex>
-                <Flex direction="column">
-                  <Flex alignItems="center">
-                    <IconBox
-                      as="box"
-                      h={"30px"}
-                      w={"30px"}
-                      bg={iconTeal}
-                      me="6px"
-                    >
-                      <CartIcon h={"15px"} w={"15px"} color={iconBoxInside} />
-                    </IconBox>
-                    <Text fontSize="sm" color="gray.400" fontWeight="semibold">
-                      Sales
-                    </Text>
-                  </Flex>
-                  <Text
-                    fontSize="lg"
-                    color={textColor}
-                    fontWeight="bold"
-                    mb="6px"
-                    my="6px"
-                  >
-                    2,400$
-                  </Text>
-                  <Progress
-                    colorScheme="teal"
-                    borderRadius="12px"
-                    h="5px"
-                    value={30}
-                  />
-                </Flex>
-                <Flex direction="column">
-                  <Flex alignItems="center">
-                    <IconBox
-                      as="box"
-                      h={"30px"}
-                      w={"30px"}
-                      bg={iconTeal}
-                      me="6px"
-                    >
-                      <StatsIcon h={"15px"} w={"15px"} color={iconBoxInside} />
-                    </IconBox>
-                    <Text fontSize="sm" color="gray.400" fontWeight="semibold">
-                      Items
-                    </Text>
-                  </Flex>
-                  <Text
-                    fontSize="lg"
-                    color={textColor}
-                    fontWeight="bold"
-                    mb="6px"
-                    my="6px"
-                  >
-                    320
-                  </Text>
-                  <Progress
-                    colorScheme="teal"
-                    borderRadius="12px"
-                    h="5px"
-                    value={50}
-                  />
-                </Flex>
-              </SimpleGrid>
-            </Flex>
-          </CardBody>
-        </Card>
-        <Card p="28px 10px 16px 0px" mb={{ sm: "26px", lg: "0px" }}>
-          <CardHeader mb="20px" pl="22px">
-            <Flex direction="column" alignSelf="flex-start">
-              <Text fontSize="lg" color={textColor} fontWeight="bold" mb="6px">
-                Sales Overview
-              </Text>
-              <Text fontSize="md" fontWeight="medium" color="gray.400">
-                <Text as="span" color="green.400" fontWeight="bold">
-                  (+5%) more
-                </Text>{" "}
-                in 2021
-              </Text>
-            </Flex>
-          </CardHeader>
-          <Box w="100%" h={{ sm: "300px" }} ps="8px">
-            <LineChart />
-          </Box>
-        </Card>
-      </Grid>
+      
       <Grid
         templateColumns={{ sm: "1fr", md: "1fr 1fr", lg: "2fr 1fr" }}
         templateRows={{ sm: "1fr auto", md: "1fr", lg: "1fr" }}
