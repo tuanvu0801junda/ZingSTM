@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import actionLogin from "redux/actions/actionLogin"
-import {useState} from 'react';
+import actionLogin from "redux/actions/actionLogin";
+import actionLogout from 'redux/actions/actionLogout';
+import actionUpdatePlaylist from "redux/actions/actionUpdatePlaylist";
 // Chakra imports
 import {
   Avatar,
@@ -48,10 +49,42 @@ import axios from 'axios'
 
 function Profile() {
   const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.reducerLogin);
+  var userInfo = {
+    email: "Undefined",
+    profilePic: "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FAvatarImages%2Fistockphoto-1223671392-612x612.jpg?alt=media&token=c746eb6a-3d27-478f-8309-d1fef46c8930",
+    role: 0,
+  };
 
-  const [state, setState] = useState(userInfo);
+  var loginStatus = (useSelector((state) => state.reducerLogin)).status
+  if (loginStatus == "LOGIN") {
+    userInfo = (useSelector((state) => state.reducerLogin)).userInfo;
+  } else if (loginStatus == "LOGOUT"){
+    userInfo = (useSelector((state) => state.reducerLogin)).userInfo;
+  }
 
+  const updatePlaylist = () => {
+    console.log("updatePlaylist");
+    const audioList = [
+        {
+            name: 'Lemon Kenshi',
+            singer: 'Luis Fonsi',
+            cover:
+                'https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FSongImages%2FLemon-Kenshi-00.png?alt=media&token=f1d10f6d-2622-4616-86de-db5cdf945da5',
+            musicSrc:
+                'https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Songs%2FLemon-Kenshi-00.mp3?alt=media&token=82e098a3-d697-4cf8-a994-12b9e4c005de',
+        },
+        {
+            name: 'Dorost Nemisham',
+            singer: 'Sirvan Khosravi',
+            cover:
+                'https://res.cloudinary.com/ehsanahmadi/image/upload/v1573758778/Sirvan-Khosravi-Dorost-Nemisham_glicks.jpg',
+            musicSrc:
+                'https://res.cloudinary.com/ehsanahmadi/video/upload/v1573550770/Sirvan-Khosravi-Dorost-Nemisham-128_kb8urq.mp3',
+        },
+      ]
+
+    dispatch(actionUpdatePlaylist(audioList))
+  }
 
   const imageRef = useRef('');
 
@@ -87,6 +120,10 @@ function Profile() {
         swal("Error", err.message, "error");
       }
     }
+  }
+
+  const logout = () => {
+    dispatch(actionLogout());
   }
 
   // Chakra color mode
@@ -154,7 +191,6 @@ function Profile() {
               <Avatar
                 me={{ md: "22px" }}
                 src={userInfo.profilePic}
-                //src='https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FAvatarImages%2Fprome1.jpg?alt=media&token=fba6b3e0-6bab-4768-8b62-550a60ce24b4'
                 w="80px"
                 h="80px"
                 borderRadius="15px"
@@ -181,7 +217,7 @@ function Profile() {
               direction={{ sm: "column", lg: "row" }}
               w={{ sm: "100%", md: "50%", lg: "auto" }}
             >
-              <Button p="0px" bg="transparent" _hover={{ bg: "none" }}>
+              <Button onClick={updatePlaylist} p="0px" bg="transparent" _hover={{ bg: "none" }}>
                 <Flex
                   align="center"
                   w={{ sm: "100%", lg: "135px" }}
@@ -195,7 +231,7 @@ function Profile() {
                 >
                   <Icon as={FaCube} me="6px" />
                   <Text fontSize="xs" color={textColor} fontWeight="bold">
-                    OVERVIEW
+                    PLAY
                   </Text>
                 </Flex>
               </Button>
@@ -224,7 +260,7 @@ function Profile() {
                 </Flex>
               </Button>
 
-              <Button p="0px" bg="transparent" _hover={{ bg: "none" }}>
+              <Button onClick={logout} p="0px" bg="transparent" _hover={{ bg: "none" }}>
                 <Flex
                   align="center"
                   w={{ lg: "135px" }}
@@ -235,7 +271,7 @@ function Profile() {
                 >
                   <Icon as={FaPenFancy} me="6px" />
                   <Text fontSize="xs" color={textColor} fontWeight="bold">
-                    PROJECTS
+                    LOGOUT
                   </Text>
                 </Flex>
               </Button>

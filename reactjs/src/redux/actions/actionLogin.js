@@ -1,7 +1,11 @@
 function actionLogin(userInfo) {
+    const data = {
+        userInfo: userInfo,
+        status: "LOGIN",
+    }
     return {
         type: "LOGIN",
-        data: userInfo,
+        data: data,
     }
 }
 
