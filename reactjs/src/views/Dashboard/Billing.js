@@ -68,7 +68,7 @@ function Billing() {
               h={{ sm: "220px", xl: "100%" }}
               gridArea={{ md: "1 / 1 / 2 / 3", xl: "1 / 1 / 2 / 3" }}
             >
-              <CardBody  h="100%" w="100%">
+              <CardBody h="100%" w="100%">
                 <Flex
                   direction="column"
                   color="white"
@@ -81,10 +81,7 @@ function Billing() {
                       Purity UI
                     </Text>
                     <Icon
-                      as={RiMastercardFill}
-                      w="48px"
-                      h="auto"
-                      color="gray.400"
+
                     />
                   </Flex>
                   <Spacer />
@@ -340,7 +337,7 @@ function Billing() {
             </CardBody>
           </Flex>
         </Card>
-        <Card  my="24px" ms={{ lg: "24px" }}>
+        <Card my="24px" ms={{ lg: "24px" }}>
           <CardHeader mb="12px">
             <Flex direction="column" w="100%">
               <Flex
@@ -373,42 +370,42 @@ function Billing() {
           </CardHeader>
           <CardBody>
             <Flex direction="column" w="100%">
-                <Text
-                  color="gray.400"
-                  fontSize={{ sm: "sm", md: "md" }}
-                  fontWeight="semibold"
-                  my="12px"
-                >
-                  NEWEST
-                </Text>
-                {newestTransactions.map((row) => {
-                  return (
-                    <TransactionRow
-                      name={row.name}
-                      logo={row.logo}
-                      date={row.date}
-                      price={row.price}
-                    />
-                  );
-                })}
-                <Text
-                  color="gray.400"
-                  fontSize={{ sm: "sm", md: "md" }}
-                  fontWeight="semibold"
-                  my="12px"
-                >
-                  OLDER
-                </Text>
-                {olderTransactions.map((row) => {
-                  return (
-                    <TransactionRow
-                      name={row.name}
-                      logo={row.logo}
-                      date={row.date}
-                      price={row.price}
-                    />
-                  );
-                })}
+              <Text
+                color="gray.400"
+                fontSize={{ sm: "sm", md: "md" }}
+                fontWeight="semibold"
+                my="12px"
+              >
+                NEWEST
+              </Text>
+              {newestTransactions.map((row) => {
+                return (
+                  <TransactionRow
+                    name={row.name}
+                    logo={row.logo}
+                    date={row.date}
+                    price={row.price}
+                  />
+                );
+              })}
+              <Text
+                color="gray.400"
+                fontSize={{ sm: "sm", md: "md" }}
+                fontWeight="semibold"
+                my="12px"
+              >
+                OLDER
+              </Text>
+              {olderTransactions.map((row) => {
+                return (
+                  <TransactionRow
+                    name={row.name}
+                    logo={row.logo}
+                    date={row.date}
+                    price={row.price}
+                  />
+                );
+              })}
             </Flex>
           </CardBody>
         </Card>

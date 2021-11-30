@@ -8,7 +8,7 @@ import allReducers from "redux/reducers/index";
 import AuthLayout from "layouts/Auth.js";
 import AdminLayout from "layouts/Admin.js";
 import RTLLayout from "layouts/RTL.js";
-import MusicToolBar from 'components/MusicToolBar/MusicToolBar'
+import MusicToolBar from 'components/MusicToolBar/musicToolBar'
 import axios from 'axios';
 axios.defaults.baseURL = "http://localhost:8000/";
 
