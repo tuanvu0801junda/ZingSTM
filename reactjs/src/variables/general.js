@@ -251,6 +251,65 @@ export const tablesTableData = [
   },
 ];
 
+export const songData = [
+  {
+    logo: avatar1,
+    name: "Cielo - Huma-Huma",
+    singer: "Adele",
+    album: "30",
+    genres: "Pop/Rock",
+    time: "03:50",
+  },
+  {
+    logo: avatar2,
+    name: "Cielo - Huma-Huma",
+    singer: "Adele",
+    album: "30",
+    genres: "Pop/Rock",
+    time: "03:50",
+  },
+  {
+    logo: avatar3,
+    name: "Cielo - Huma-Huma",
+    singer: "Adele",
+    album: "30",
+    genres: "Pop/Rock",
+    time: "03:50",
+  },
+  {
+    logo: avatar4,
+    name: "Cielo - Huma-Huma",
+    singer: "Adele",
+    album: "30",
+    genres: "Pop/Rock",
+    time: "03:50",
+  },
+  {
+    logo: avatar5,
+    name: "Cielo - Huma-Huma",
+    singer: "Adele",
+    album: "30",
+    genres: "Pop/Rock",
+    time: "03:50",
+  },
+  {
+    logo: avatar9,
+    name: "Cielo - Huma-Huma",
+    singer: "Adele",
+    album: "30",
+    genres: "Pop/Rock",
+    time: "03:50",
+  },
+  {
+    logo: avatar7,
+    name: "Cielo - Huma-Huma",
+    singer: "Adele",
+    album: "30",
+    genres: "Pop/Rock",
+    time: "03:50",
+  }
+];
+
 export const tablesProjectData = [
   {
     logo: AdobexdLogo,

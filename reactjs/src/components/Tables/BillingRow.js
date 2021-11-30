@@ -13,7 +13,7 @@ function BillingRow(props) {
   const textColor = useColorModeValue("gray.700", "white");
   const bgColor = useColorModeValue("#F8F9FA", "gray.800");
   const nameColor = useColorModeValue("gray.500", "white");
-  const { name, company, email, number } = props;
+  const { name, company, singer, number } = props;
 
   return (
     <Box p="24px" bg={bgColor} my="22px" borderRadius="12px">
@@ -31,7 +31,7 @@ function BillingRow(props) {
           <Text color="gray.400" fontSize="sm" fontWeight="semibold">
             Email Address:{" "}
             <Text as="span" color="gray.500">
-              {email}
+              {singer}
             </Text>
           </Text>
           <Text color="gray.400" fontSize="sm" fontWeight="semibold">
