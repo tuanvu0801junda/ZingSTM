@@ -20,3 +20,4 @@ build/
 *.sw*
 
 # Ignore the .json file
+yarn.lock

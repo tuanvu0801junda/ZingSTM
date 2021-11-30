@@ -30,7 +30,7 @@ function UserComment() {
                 <div class="be-comment">
                     <div class="be-img-comment">
                         <a href="blog-detail-2.html">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="be-ava-comment" />
+                            <img src="https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FAvatarImages%2FRita1.png?alt=media&token=6787fe32-6524-42dc-977f-d063811dcf67" alt="" class="be-ava-comment" />
                         </a>
                     </div>
                     <div class="be-comment-content">
