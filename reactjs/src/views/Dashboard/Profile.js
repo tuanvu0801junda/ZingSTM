@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import actionLogin from "redux/actions/actionLogin";
 import actionLogout from 'redux/actions/actionLogout';
 import actionUpdatePlaylist from "redux/actions/actionUpdatePlaylist";
+import AddSongToPlay from 'functions/AddSongToPlay'
 // Chakra imports
 import {
   Avatar,
@@ -217,7 +218,7 @@ function Profile() {
               direction={{ sm: "column", lg: "row" }}
               w={{ sm: "100%", md: "50%", lg: "auto" }}
             >
-              <Button onClick={updatePlaylist} p="0px" bg="transparent" _hover={{ bg: "none" }}>
+              <Button onClick={AddSongToPlay} p="0px" bg="transparent" _hover={{ bg: "none" }}>
                 <Flex
                   align="center"
                   w={{ sm: "100%", lg: "135px" }}

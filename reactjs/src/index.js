@@ -14,6 +14,7 @@ import axios from 'axios';
 axios.defaults.baseURL = "http://localhost:8000/";
 
 const store = createStore(allReducers);
+export default store;
 
 ReactDOM.render(
   <HashRouter>

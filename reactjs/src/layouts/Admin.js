@@ -17,6 +17,8 @@ import PanelContainer from "../components/Layout/PanelContainer";
 import PanelContent from "../components/Layout/PanelContent";
 
 import Playlist from 'views/Pages/PlayList';
+import Album from "views/Pages/Album";
+import Genres from "views/Pages/Genres";
 
 export default function Dashboard(props) {
   const { ...rest } = props;
@@ -129,6 +131,8 @@ export default function Dashboard(props) {
               <Switch>
                 {getRoutes(routes)}
                 <Route path={`/zingstm/playlist`} component={Playlist} />
+                <Route path={`/zingstm/album`} component={Album} />
+                <Route path={`/zingstm/genres`} component={Genres} />
                 {/* Add route here */}
                 <Redirect from="/zingstm" to="/zingstm/home" />
               </Switch>

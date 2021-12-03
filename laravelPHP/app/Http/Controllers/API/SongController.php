@@ -9,21 +9,19 @@ use Illuminate\Http\Request;
 class SongController extends Controller
 {
     public function getSongOfGenre(Request $request){
-        $inputGenreId = $request->input('inputGenreId');
+        $inputGenreId = $request->input('genreId');
         $songOfGenre = DB::table('Song')
             ->select('songId', 'imagePath', 'songPath', 'duration','title','genreName')
             ->distinct()
             ->join('SongGenreRelation','SongGenreRelation.songId','=','Song.songId')
             ->join('Genre','Genre.genreId','=','SongGenreRelation.genreId')
-            ->where('Genre.genreId','=',$inputGenreId)
-            ->first();
+            ->where('Genre.genreId','=',$inputGenreId);
  
         if ($songOfGenre != NULL){
             //front end TODO
-            echo "$songOfGenre";
             return response()->json([
                 'status' => 200,
-                'songsOfArtist' => $songOfGenre,
+                'songs' => $songOfGenre,
             ]);
         } else {
             return response()->json([
@@ -34,7 +32,7 @@ class SongController extends Controller
     }
 
     public function getOneSongDetail(Request $request){
-        $inputSongId = $request->input('inputSongId');
+        $inputSongId = $request->input('songId');
         $song = DB::table('Song')->where('songId',$inputSongId)->first();
 
         if ($song != NULL){
