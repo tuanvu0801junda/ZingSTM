@@ -4,6 +4,7 @@ import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import allReducers from "redux/reducers/index";
+import PlayList from "views/Pages/PlayList"
 
 import AuthLayout from "layouts/Auth.js";
 import AdminLayout from "layouts/Admin.js";
@@ -21,6 +22,7 @@ ReactDOM.render(
         <Route path={`/auth`} component={AuthLayout} />
         <Route path={`/zingstm`} component={AdminLayout} />
         <Route path={`/rtl`} component={RTLLayout} />
+        <Route path={`/zingstm/playlist`} component={PlayList} />
         <Redirect from={`/`} to="/zingstm/home" />
       </Switch>
       <MusicToolBar />

@@ -51,6 +51,7 @@ import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 import { dashboardTableData, timelineData } from "variables/general";
 import SlickCarousel from 'components/Carousel/SlickCarousel';
 import TopSong from 'components/Song/TopSong';
+import TopAlbums from 'components/Albums/TopAlbums'
 
 export default function Dashboard() {
   const value = "$100.000";
@@ -72,6 +73,9 @@ export default function Dashboard() {
     },
   ]);
   const overlayRef = React.useRef();
+
+  // Onclick Album
+  
 
   return (
     <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }}>
@@ -127,149 +131,45 @@ export default function Dashboard() {
           </Box>
         </Card>
       </Grid>
-      <SimpleGrid columns={{ sm: 1, md: 2, xl: 4 }} spacing="24px">
-        <Card minH="83px">
+      <Card p="16px">
           <CardBody>
-            <Flex flexDirection="row" align="center" justify="center" w="100%">
-              <Stat me="auto">
-                <StatLabel
-                  fontSize="sm"
-                  color="gray.400"
-                  fontWeight="bold"
-                  pb=".1rem"
-                >
-                  Today's Money
-                </StatLabel>
-                <Flex>
-                  <StatNumber fontSize="lg" color={textColor}>
-                    $53,000
-                  </StatNumber>
-                  <StatHelpText
-                    alignSelf="flex-end"
-                    justifySelf="flex-end"
-                    m="0px"
-                    color="green.400"
-                    fontWeight="bold"
-                    ps="3px"
-                    fontSize="md"
-                  >
-                    +55%
-                  </StatHelpText>
-                </Flex>
-              </Stat>
-              <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
-                <WalletIcon h={"24px"} w={"24px"} color={iconBoxInside} />
-              </IconBox>
+            <Flex direction="column" w="100%">
+              <Text fontSize="2xl" color="green.400" fontWeight="bold" as="i" mb="6px">
+                Recommended albums:
+              </Text>
+              <Grid
+                templateColumns="repeat(5, 1fr)"
+                gap={5}
+              >
+                <TopAlbums title="Lemon Kenshi"
+                  imgURL="https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FSongImages%2FLemon-Kenshi-00.png?alt=media&token=f1d10f6d-2622-4616-86de-db5cdf945da5"
+                  views={12476}
+                  category="JapornZ"
+                />
+                <TopAlbums title="Sold out"
+                  imgURL="https://c.saavncdn.com/458/Sold-out-Russian-2019-20190118231455-500x500.jpg"
+                  views={11662}
+                  category="Bezt"
+                />
+                <TopAlbums title="The Stellar Moments"
+                  imgURL="https://i.scdn.co/image/ab67616d0000b273b13ed44d038bb1a413b6b2de"
+                  views={9362}
+                  category="Genshin"
+                />
+                <TopAlbums title="Lemon Kenshi"
+                  imgURL="https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FSongImages%2FLemon-Kenshi-00.png?alt=media&token=f1d10f6d-2622-4616-86de-db5cdf945da5"
+                  views={12476}
+                  category="JapornZ"
+                />
+                <TopAlbums title="Sold out"
+                  imgURL="https://c.saavncdn.com/458/Sold-out-Russian-2019-20190118231455-500x500.jpg"
+                  views={11662}
+                  category="Bezt"
+                />
+              </Grid>
             </Flex>
           </CardBody>
         </Card>
-        <Card minH="83px">
-          <CardBody>
-            <Flex flexDirection="row" align="center" justify="center" w="100%">
-              <Stat me="auto">
-                <StatLabel
-                  fontSize="sm"
-                  color="gray.400"
-                  fontWeight="bold"
-                  pb=".1rem"
-                >
-                  Today's Users
-                </StatLabel>
-                <Flex>
-                  <StatNumber fontSize="lg" color={textColor}>
-                    2,300
-                  </StatNumber>
-                  <StatHelpText
-                    alignSelf="flex-end"
-                    justifySelf="flex-end"
-                    m="0px"
-                    color="green.400"
-                    fontWeight="bold"
-                    ps="3px"
-                    fontSize="md"
-                  >
-                    +5%
-                  </StatHelpText>
-                </Flex>
-              </Stat>
-              <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
-                <GlobeIcon h={"24px"} w={"24px"} color={iconBoxInside} />
-              </IconBox>
-            </Flex>
-          </CardBody>
-        </Card>
-        <Card minH="83px">
-          <CardBody>
-            <Flex flexDirection="row" align="center" justify="center" w="100%">
-              <Stat>
-                <StatLabel
-                  fontSize="sm"
-                  color="gray.400"
-                  fontWeight="bold"
-                  pb=".1rem"
-                >
-                  New Clients
-                </StatLabel>
-                <Flex>
-                  <StatNumber fontSize="lg" color={textColor}>
-                    +3,020
-                  </StatNumber>
-                  <StatHelpText
-                    alignSelf="flex-end"
-                    justifySelf="flex-end"
-                    m="0px"
-                    color="red.500"
-                    fontWeight="bold"
-                    ps="3px"
-                    fontSize="md"
-                  >
-                    -14%
-                  </StatHelpText>
-                </Flex>
-              </Stat>
-              <Spacer />
-              <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
-                <DocumentIcon h={"24px"} w={"24px"} color={iconBoxInside} />
-              </IconBox>
-            </Flex>
-          </CardBody>
-        </Card>
-        <Card minH="83px">
-          <CardBody>
-            <Flex flexDirection="row" align="center" justify="center" w="100%">
-              <Stat me="auto">
-                <StatLabel
-                  fontSize="sm"
-                  color="gray.400"
-                  fontWeight="bold"
-                  pb=".1rem"
-                >
-                  Total Sales
-                </StatLabel>
-                <Flex>
-                  <StatNumber fontSize="lg" color={textColor} fontWeight="bold">
-                    $173,000
-                  </StatNumber>
-                  <StatHelpText
-                    alignSelf="flex-end"
-                    justifySelf="flex-end"
-                    m="0px"
-                    color="green.400"
-                    fontWeight="bold"
-                    ps="3px"
-                    fontSize="md"
-                  >
-                    +8%
-                  </StatHelpText>
-                </Flex>
-              </Stat>
-              <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
-                <CartIcon h={"24px"} w={"24px"} color={iconBoxInside} />
-              </IconBox>
-            </Flex>
-          </CardBody>
-        </Card>
-      </SimpleGrid>
       <Grid
         templateColumns={{ md: "1fr", lg: "1.8fr 1.2fr" }}
         templateRows={{ md: "1fr auto", lg: "1fr" }}

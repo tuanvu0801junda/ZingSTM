@@ -15,6 +15,9 @@ import FixedPlugin from "../components/FixedPlugin/FixedPlugin";
 import MainPanel from "../components/Layout/MainPanel";
 import PanelContainer from "../components/Layout/PanelContainer";
 import PanelContent from "../components/Layout/PanelContent";
+
+import Playlist from 'views/Pages/PlayList';
+
 export default function Dashboard(props) {
   const { ...rest } = props;
   // states and functions
@@ -27,7 +30,7 @@ export default function Dashboard(props) {
     return window.location.pathname !== "/zingstm/full-screen-maps";
   };
   const getActiveRoute = (routes) => {
-    let activeRoute = "Default Brand Text";
+    let activeRoute = "Zing STM";
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse) {
         let collapseActiveRoute = getActiveRoute(routes[i].views);
@@ -125,6 +128,8 @@ export default function Dashboard(props) {
             <PanelContainer>
               <Switch>
                 {getRoutes(routes)}
+                <Route path={`/zingstm/playlist`} component={Playlist} />
+                {/* Add route here */}
                 <Redirect from="/zingstm" to="/zingstm/home" />
               </Switch>
             </PanelContainer>
