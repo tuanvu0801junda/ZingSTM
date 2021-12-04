@@ -25,6 +25,7 @@ export default function TopSong(props) {
                     lineHeight="tight"
                     isTruncated
                     fontSize="xl"
+                    align="left"
                 >
                     {property.title}
                 </Box>

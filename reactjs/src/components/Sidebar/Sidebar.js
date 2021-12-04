@@ -89,6 +89,7 @@ function Sidebar(props) {
         <NavLink to={prop.layout + prop.path}>
           {activeRoute(prop.layout + prop.path) === "active" ? (
             <Button
+              display={prop.display}
               boxSize="initial"
               justifyContent="flex-start"
               alignItems="center"
@@ -142,6 +143,7 @@ function Sidebar(props) {
             </Button>
           ) : (
             <Button
+              display={prop.display}
               boxSize="initial"
               justifyContent="flex-start"
               alignItems="center"
@@ -318,6 +320,7 @@ export function SidebarResponsive(props) {
         <NavLink to={prop.layout + prop.path}>
           {activeRoute(prop.layout + prop.path) === "active" ? (
             <Button
+              display={prop.display}
               boxSize="initial"
               justifyContent="flex-start"
               alignItems="center"
@@ -368,6 +371,7 @@ export function SidebarResponsive(props) {
             </Button>
           ) : (
             <Button
+              display={prop.display}
               boxSize="initial"
               justifyContent="flex-start"
               alignItems="center"

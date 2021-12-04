@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\SongController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,5 @@ Route::post('/login', [UserController::class, 'login']);
 Route::post('/sign-up', [UserController::class, 'signup']);
 Route::post('/updateAvatar', [UserController::class, 'updateAvatar']);
 Route::post('/getUserInfo', [UserController::class, 'getUserInfo']);
+Route::post('/getGenresSong', [SongController::class, 'getSongOfGenre']);
+Route::post('/getSongInfo', [SongController::class, 'getOneSongDetail']);
