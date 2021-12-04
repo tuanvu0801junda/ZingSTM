@@ -8,12 +8,14 @@ use App\Models\User;
 function getSongOfGenre(){
     $inputGenreId = 1;
 
-    $song = DB::table('Song')
+    $songOfGenre = DB::table('Song')
         ->join('SongGenreRelation','SongGenreRelation.songId','=','Song.songId')
         ->join('Genre','SongGenreRelation.genreId','=','Genre.genreId')
-        ->where('Genre.genreId',$inputGenreId);
-        ->select('Song.songId','imagePath','songPath','duration','title','genreName','genreImage')->distinct()
-        ->get();
+        ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
+        ->join('Artist','Artist.artistId','=','SongArtistRelation.artistId')
+        ->where('Genre.genreId',$inputGenreId)
+        ->select('Song.songId','imagePath','songPath','duration','title','genreName','genreImage','artistName')
+        ->distinct()->get();
 
     $songResult = array();
     if ($songOfGenre->isEmpty() == false){
@@ -24,10 +26,10 @@ function getSongOfGenre(){
            echo "$song->title<br/>";
            echo "$song->genreName<br/>";
            echo "$song->genreImage<br/>";
+           echo "$song->artistName<br/>";
            echo "<br/><br/>";
            array_push($songResult, $song);
        }
-    }
             // return response()->json([
             //     'status' => 200,
             //     'songsOfArtist' => $songOfGenre,
@@ -41,6 +43,14 @@ function getSongOfGenre(){
     }
 }
 
+function getUserInfo1(){
+    $userId = 1;
+    $user = DB::table('User')->where('userId',$userId)->first();
+    return $user->username;
+}
+//echo "hi ";
+//$name = getUserInfo1();
+//echo $name;
 
 getSongOfGenre();
             
