@@ -13,8 +13,10 @@ class SongController extends Controller{
         $songOfGenre = DB::table('Song')
             ->join('SongGenreRelation','SongGenreRelation.songId','=','Song.songId')
             ->join('Genre','SongGenreRelation.genreId','=','Genre.genreId')
+            ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
+            ->join('Artist','Artist.artistId','=','SongArtistRelation.artistId')
             ->where('Genre.genreId',$inputGenreId)
-            ->select('Song.songId','imagePath','songPath','duration','title','genreName','genreImage')
+            ->select('Song.songId','imagePath','songPath','duration','title','genreName','genreImage','artistName')
             ->distinct()->get();
         
         if ($songOfGenre->isEmpty() == false){
@@ -65,7 +67,12 @@ class SongController extends Controller{
 
     public function getOneSongDetail(Request $request){
         $inputSongId = $request->input('songId');
-        $song = DB::table('Song')->where('songId',$inputSongId)->first();
+        $song = DB::table('Song')
+            ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
+            ->join('Artist','Artist.artistId','=','SongArtistRelation.artistId')
+            ->where('songId',$inputSongId)
+            ->select('imagePath', 'songPath', 'duration','title','artistName')
+            ->first();
 
         if ($song != NULL){
             return response()->json([
@@ -82,7 +89,30 @@ class SongController extends Controller{
 
     public function getSongOfAlbum(Request $request){
         $inputAlbumId = $request->input('inputAlbumId');
-        //TODO
+
+        $songOfAlbum = DB::table('Song')
+            ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
+            ->join('Artist','Artist.artistId','=','SongArtistRelation.artistId')
+            ->where('Song.albumId',$inputAlbumId)
+            ->select('Song.songId', 'imagePath', 'songPath', 'duration','title','artistName','artistImage')
+            ->distinct()->get();
+        
+        if ($songOfAlbum->isEmpty() == false){
+            // $songResult = array();
+            // foreach($songOfArtist as $song){ 
+            //     array_push($songResult, $song);
+            // }
+            return response()->json([
+                'status' => 200,
+                //'songs' => $songOfArtist,
+                'songs' => $songOfAlbum->all(),
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Songs of Album not found!',
+            ]);
+        }
     }
 
 
