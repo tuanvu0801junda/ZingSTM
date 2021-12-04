@@ -4,29 +4,6 @@ import { useSelector } from "react-redux";
 // import song from "../songs/1.mp3"
 
 function MusicToolBar() {
-    const audioList1 = [
-        {
-            name: 'Lemon Kenshi',
-            singer: 'Luis Fonsi',
-            cover:
-                'https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FSongImages%2FLemon-Kenshi-00.png?alt=media&token=f1d10f6d-2622-4616-86de-db5cdf945da5',
-            musicSrc:
-                'https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Songs%2FLemon-Kenshi-00.mp3?alt=media&token=82e098a3-d697-4cf8-a994-12b9e4c005de',
-            // support async fetch music src. eg.
-            // musicSrc: async () => {
-            //   return await fetch('/api')
-            // },
-        },
-        {
-            name: 'Dorost Nemisham',
-            singer: 'Sirvan Khosravi',
-            cover:
-                'https://res.cloudinary.com/ehsanahmadi/image/upload/v1573758778/Sirvan-Khosravi-Dorost-Nemisham_glicks.jpg',
-            musicSrc:
-                'https://res.cloudinary.com/ehsanahmadi/video/upload/v1573550770/Sirvan-Khosravi-Dorost-Nemisham-128_kb8urq.mp3',
-        },
-    ]
-
     const audioList = useSelector((state) => state.reducerMusicToolBar);
 
     const options = {

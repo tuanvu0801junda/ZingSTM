@@ -15,6 +15,7 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import GenresBanner from "components/Banner/GenresBanner";
+import SongGenres from "components/SongTable/SongGenres";
 import axios from 'axios';
 
 function Genres(props) {
@@ -24,7 +25,7 @@ function Genres(props) {
   //get songs
   useEffect(() => {
     if (!songs) {
-        getGenresSong();
+        getGenresSong(1);
     }
   }, []);
 
@@ -35,7 +36,7 @@ function Genres(props) {
 
     const res = await axios.post('/api/getGenresSong', data);
     console.log(res.data);
-    setSongs(res.data);
+    if (res.data.status === 200) setSongs(res.data.songs);
     console.log(songs);
   }
   // ('songId', 'imagePath', 'songPath', 'duration','title','genreName')
@@ -67,16 +68,18 @@ function Genres(props) {
               </Tr>
             </Thead>
             <Tbody>
+              Loading...
               {
                 !songs ? "Loading..." :
                 songs.map((row) => {
                   return (
-                    <SongPlayList
-                      name={row.title}
+                    <SongGenres
+                      title={row.title}
                       logo={row.imagePath}
                       songPath={row.songPath}
                       genreName={row.genreName}
                       duration={row.duration}
+                      status="Online"
                     />
                   );
                 })
