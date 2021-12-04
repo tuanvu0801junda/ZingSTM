@@ -309,7 +309,11 @@ export const songData = [
     time: "03:50",
   }
 ];
-
+export const commentData = [
+  { commentName: "Đạt tiên sinh", commentTime: "Nov 28, 2021 at 3:14am", commentText: "Pellentesque gravida tristique ultrices.Sed blandit varius mauris, vel volutpat urna hendrerit id.Curabitur rutrum dolor gravida turpis tristique efficitur." },
+  { commentName: "Đạt tiên sinh", commentTime: "Nov 28, 2021 at 3:14am", commentText: "Pellentesque gravida tristique ultrices.Sed blandit varius mauris, vel volutpat urna hendrerit id.Curabitur rutrum dolor gravida turpis tristique efficitur." },
+  { commentName: "Đạt tiên sinh", commentTime: "Nov 28, 2021 at 3:14am", commentText: "Pellentesque gravida tristique ultrices.Sed blandit varius mauris, vel volutpat urna hendrerit id.Curabitur rutrum dolor gravida turpis tristique efficitur." },
+];
 export const tablesProjectData = [
   {
     logo: AdobexdLogo,

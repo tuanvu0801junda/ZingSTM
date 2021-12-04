@@ -10,13 +10,14 @@ import {
     Tr,
     useColorModeValue,
 } from "@chakra-ui/react";
+import { useState } from "react";
 // Custom components
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import SongPlayList from "components/SongTable/SongPlayList";
 import SongCurrentPlay from "components/SongTable/SongCurrentPlay";
-import { tablesProjectData, songData } from "variables/general";
+import { commentData, songData } from "variables/general";
 import UserComment from "components/Comment/Comment";
 import SongBanner from "components/Banner/songBanner";
 
@@ -28,6 +29,15 @@ function PlayList() {
         { songName: "DEAF KEV - Invincible [NCS Release]-320k", singer: "adele", filePath: "./songs/3.mp3", coverPath: "./covers/3.jpg" },
         { songName: "Different Heaven & EH!DE - My Heart [NCS Release]", singer: "adele", filePath: "./songs/4.mp3", coverPath: "./covers/4.jpg" },
     ]
+    const [comment, setComment] = useState(commentData)
+    //Update comment
+    const commentUpdateHandle = (newCommentText) => {
+        console.log(newCommentText);
+        setComment((oldArray => {
+            return [...oldArray, { commentName: "Quân hentai", commentTime: new Date().toLocaleString(), commentText: newCommentText }
+            ]
+        }));
+    }
     return (
         <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
             <SongBanner />
@@ -93,7 +103,7 @@ function PlayList() {
                     </Table>
                 </CardBody>
             </Card>
-            <UserComment />
+            <UserComment commentData={comment} onSaveCommentData={commentUpdateHandle} />
         </Flex>
     );
 }
