@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 // Chakra imports
 import {
   Flex,
@@ -14,28 +14,30 @@ import {
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
-import SongPlayList from "components/SongTable/SongPlayList";
-import { songData } from "variables/general";
 import GenresBanner from "components/Banner/GenresBanner";
 import axios from 'axios';
 
-function Genres() {
+function Genres(props) {
+  const [songs, setSongs] = useState(null);
   const textColor = useColorModeValue("gray.700", "white");
 
-  var songs;
-
   //get songs
+  useEffect(() => {
+    if (!songs) {
+        getGenresSong();
+    }
+  }, []);
+
   const getGenresSong = async (genreId) => {
     const data = {
       genreId: genreId,
     }
 
     const res = await axios.post('/api/getGenresSong', data);
-    console.log(res);
-    songs = res;
+    console.log(res.data);
+    setSongs(res.data);
+    console.log(songs);
   }
-  getGenresSong(1);
-  console.log(songs);
   // ('songId', 'imagePath', 'songPath', 'duration','title','genreName')
 
   return (
@@ -65,6 +67,20 @@ function Genres() {
               </Tr>
             </Thead>
             <Tbody>
+              {
+                !songs ? "Loading..." :
+                songs.map((row) => {
+                  return (
+                    <SongPlayList
+                      name={row.title}
+                      logo={row.imagePath}
+                      songPath={row.songPath}
+                      genreName={row.genreName}
+                      duration={row.duration}
+                    />
+                  );
+                })
+              }
               {/* {songs.map((row) => {
                 return (
                   <SongPlayList
