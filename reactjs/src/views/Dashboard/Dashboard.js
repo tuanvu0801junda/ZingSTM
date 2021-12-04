@@ -75,7 +75,6 @@ export default function Dashboard() {
   const overlayRef = React.useRef();
 
   // Onclick Album
-  
 
   return (
     <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }}>

@@ -11,7 +11,7 @@ import {
 import React from "react";
 import SongButton from "./SongButton";
 
-function SongPlayList(props) {
+function SongGenres(props) {
     const textColor = useColorModeValue("gray.700", "white");
     const bgStatus = useColorModeValue("gray.400", "#1a202c");
     const colorStatus = useColorModeValue("white", "gray.400");
@@ -35,7 +35,7 @@ function SongPlayList(props) {
                             {props.title}
                         </Text>
                         <Text fontSize="sm" color="gray.400" fontWeight="normal">
-                            {props.title}
+                            Artist Name Loading...
                         </Text>
                     </Flex>
                 </Flex>
@@ -44,27 +44,24 @@ function SongPlayList(props) {
             <Td>
                 <Flex direction="column">
                     <Text fontSize="md" color={textColor} fontWeight="bold">
-                        Loading...
-                    </Text>
-                    <Text fontSize="sm" color="gray.400" fontWeight="normal">
-                        {props.genreName}
+                        AlbumName Loading...
                     </Text>
                 </Flex>
             </Td>
             <Td>
                 <Badge
-                    bg={status === "Online" ? "green.400" : bgStatus}
-                    color={status === "Online" ? "white" : colorStatus}
+                    bg={bgStatus}
+                    color={colorStatus}
                     fontSize="16px"
                     p="3px 10px"
                     borderRadius="8px"
                 >
-                    {status}
+                    {props.genreName}
                 </Badge>
             </Td>
             <Td>
                 <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-                    {date}
+                    {props.duration}
                 </Text>
             </Td>
             <Td>
@@ -74,4 +71,4 @@ function SongPlayList(props) {
     );
 }
 
-export default SongPlayList;
+export default SongGenres;
