@@ -24,5 +24,8 @@ Route::post('/login', [UserController::class, 'login']);
 Route::post('/sign-up', [UserController::class, 'signup']);
 Route::post('/updateAvatar', [UserController::class, 'updateAvatar']);
 Route::post('/getUserInfo', [UserController::class, 'getUserInfo']);
+
 Route::post('/getGenresSong', [SongController::class, 'getSongOfGenre']);
+Route::post('/getArtistsSong', [SongController::class, 'getSongOfArtist']);
 Route::post('/getSongInfo', [SongController::class, 'getOneSongDetail']);
+Route::post('/getSongOfAlbum', [SongController::class, 'getSongOfAlbum']);
