@@ -16,4 +16,5 @@ class PlaylistComment extends Model
         'userComment',
         'createdDate',
     ];
+    protected $primaryKey = 'playlistCommentId';
 }
