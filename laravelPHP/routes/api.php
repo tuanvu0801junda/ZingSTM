@@ -29,3 +29,8 @@ Route::post('/getGenresSong', [SongController::class, 'getSongOfGenre']);
 Route::post('/getArtistsSong', [SongController::class, 'getSongOfArtist']);
 Route::post('/getSongInfo', [SongController::class, 'getOneSongDetail']);
 Route::post('/getSongOfAlbum', [SongController::class, 'getSongOfAlbum']);
+
+Route::post('');
+Route::post('');
+Route::post('');
+Route::post('');
