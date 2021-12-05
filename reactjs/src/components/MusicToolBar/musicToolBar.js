@@ -1,7 +1,6 @@
 import ReactJkMusicPlayer from 'react-jinke-music-player'
 import 'react-jinke-music-player/assets/index.css'
 import { useSelector } from "react-redux";
-// import song from "../songs/1.mp3"
 
 function MusicToolBar() {
     const audioList = useSelector((state) => state.reducerMusicToolBar);
