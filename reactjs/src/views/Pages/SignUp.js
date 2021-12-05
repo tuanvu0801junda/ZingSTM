@@ -19,12 +19,17 @@ import axios from 'axios'
 import swal from "sweetalert";
 import {useHistory} from 'react-router-dom';
 
+//Redux
+import { useDispatch } from "react-redux";
+import actionLogin from "redux/actions/actionLogin"
+
 // Assets
 import BgSignUp from "assets/img/BgSignUp.png";
 import React from "react";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
 
 function SignUp() {
+  const dispatch = useDispatch();
   const titleColor = useColorModeValue("teal.300", "teal.200");
   const textColor = useColorModeValue("gray.700", "white");
   const bgColor = useColorModeValue("white", "gray.700");
@@ -57,6 +62,8 @@ function SignUp() {
     if (res.data.status === 200) {
       try {
         console.log(res.data);
+        dispatch(actionLogin(res.data.newUser));
+        console.log(res.data.newUser)
         swal(res.data.message, "Welcome to Zing STM, " + res.data.newUser.fullname + "!", "success").then(() => history.push("/zingstm"));
       }
       catch(err) {

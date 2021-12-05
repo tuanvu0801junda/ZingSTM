@@ -6,8 +6,8 @@ import PlayCurrentSong from "../Pages/PlayCurrentSong"
 
 function Tables() {
   return (
-    <PlayList />
-    //<PlayCurrentSong />
+    //<PlayList />
+    <PlayCurrentSong />
   );
 }
 
