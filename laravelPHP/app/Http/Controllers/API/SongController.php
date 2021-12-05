@@ -128,7 +128,7 @@ class SongController extends Controller{
         } else {
             return response()->json([
                 'status' => 404,
-                'message' => 'Songs of Album not found!',
+                'message' => 'Songs not found!',
             ]);
         }
     }
@@ -146,7 +146,7 @@ class SongController extends Controller{
         } else {
             return response()->json([
                 'status' => 404,
-                'message' => 'Songs of Album not found!',
+                'message' => 'Songs not found!',
             ]);
         }
     }
