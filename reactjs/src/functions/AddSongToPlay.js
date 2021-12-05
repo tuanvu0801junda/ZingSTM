@@ -22,7 +22,7 @@ function AddSongToPlay(songId) {
         store.dispatch(actionAddSongToPlay(song));
     }
 
-    getSongInfo(1);
+    getSongInfo(songId);
 }
 
 export default AddSongToPlay
