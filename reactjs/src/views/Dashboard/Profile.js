@@ -218,7 +218,7 @@ function Profile() {
               direction={{ sm: "column", lg: "row" }}
               w={{ sm: "100%", md: "50%", lg: "auto" }}
             >
-              <Button onClick={AddSongToPlay} p="0px" bg="transparent" _hover={{ bg: "none" }}>
+              <Button onClick={updatePlaylist} p="0px" bg="transparent" _hover={{ bg: "none" }}>
                 <Flex
                   align="center"
                   w={{ sm: "100%", lg: "135px" }}

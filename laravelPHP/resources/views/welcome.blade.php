@@ -3,7 +3,8 @@ namespace resources\views\welcome;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
-
+use App\Models\SongComment;
+use Carbon\Carbon;
 
 function getSongOfGenre(){
     $inputGenreId = 1;
@@ -48,11 +49,52 @@ function getUserInfo1(){
     $user = DB::table('User')->where('userId',$userId)->first();
     return $user->username;
 }
+
+function postSongComment(){
+    $songComment = new SongComment();
+    $songComment->userId = 2;
+    $songComment->userComment = "いいね!";
+    $songComment->songId = 1;
+    $songComment->createdDate = Carbon::now('Asia/Ho_Chi_Minh')->toDateTimeString();
+    // Be careful with this!
+
+    $songComment->save();
+    echo "Save successfully";
+    // return response()->json([
+    //     'status' => 200,
+    //     'message' => 'Create Song Comment Successfully',
+    // ]);
+}
+
+function getAllSongComment(){
+    $songId = 1;
+    $comments = DB::table('SongComment')->where('songId',$songId)->get();
+
+    if ($comments->isEmpty() == false){
+        foreach($comments as $comment){
+            echo "$comment->userId<br/>";
+            echo "$comment->songId<br/>";
+            echo "$comment->userComment<br/>";
+            echo "<br/><br/>";
+        }
+        // return response()->json([
+        //     'status' => 200,
+        //     'songs' => $comments->all(),
+        // ]); 
+    } else {
+        // return response()->json([
+        //     'status' => 404,
+        //     'message' => 'Comment(s) not found!',
+        // ]);
+        echo "Not found! <br/>";
+    }
+}
 //echo "hi ";
 //$name = getUserInfo1();
 //echo $name;
 
-getSongOfGenre();
-            
+//getSongOfGenre();
+postSongComment();  
+getAllSongComment();    
 ?>
 

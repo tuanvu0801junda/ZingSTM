@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\SongController;
+use App\Http\Controllers\API\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,8 @@ Route::post('/getGenresSong', [SongController::class, 'getSongOfGenre']);
 Route::post('/getArtistsSong', [SongController::class, 'getSongOfArtist']);
 Route::post('/getSongInfo', [SongController::class, 'getOneSongDetail']);
 Route::post('/getSongOfAlbum', [SongController::class, 'getSongOfAlbum']);
+
+Route::post('/postSongComment',[CommentController::class, 'postSongComment']);
+Route::post('/getAllSongComment',[CommentController::class, 'getAllSongComment']);
+Route::post('/postPlaylistComment',[CommentController::class,'postPlaylistComment']);
+Route::post('/getAllPlaylistComment',[CommentController::class,'getAllPlaylistComment']);
