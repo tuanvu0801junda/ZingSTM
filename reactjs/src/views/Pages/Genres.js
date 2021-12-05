@@ -61,14 +61,13 @@ function Genres(props) {
                 <Th pl="0px" color="gray.400">
                   Song
                 </Th>
-                <Th color="gray.400">Album</Th>
+                <Th color="gray.400"></Th>
                 <Th color="gray.400">Geres</Th>
-                <Th color="gray.400">Time</Th>
+                <Th color="gray.400">Duration</Th>
                 <Th></Th>
               </Tr>
             </Thead>
             <Tbody>
-              Loading...
               {
                 !songs ? "Loading..." :
                 songs.map((row) => {
@@ -78,8 +77,9 @@ function Genres(props) {
                       logo={row.imagePath}
                       songPath={row.songPath}
                       genreName={row.genreName}
+                      artistName={row.artistName}
                       duration={row.duration}
-                      status="Online"
+                      status="x"
                     />
                   );
                 })

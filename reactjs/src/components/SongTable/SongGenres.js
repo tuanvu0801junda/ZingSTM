@@ -31,11 +31,12 @@ function SongGenres(props) {
                             color={textColor}
                             fontWeight="bold"
                             minWidth="100%"
+                            align="left"
                         >
                             {props.title}
                         </Text>
-                        <Text fontSize="sm" color="gray.400" fontWeight="normal">
-                            Artist Name Loading...
+                        <Text fontSize="sm" color="gray.400" fontWeight="normal" align="left">
+                            {props.artistName}
                         </Text>
                     </Flex>
                 </Flex>
@@ -44,7 +45,7 @@ function SongGenres(props) {
             <Td>
                 <Flex direction="column">
                     <Text fontSize="md" color={textColor} fontWeight="bold">
-                        AlbumName Loading...
+                        
                     </Text>
                 </Flex>
             </Td>
