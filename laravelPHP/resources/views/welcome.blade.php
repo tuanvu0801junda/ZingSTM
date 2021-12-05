@@ -96,5 +96,49 @@ function getAllSongComment(){
 //getSongOfGenre();
 postSongComment();  
 getAllSongComment();    
+
+function updateViewSong(int $songId){
+    DB::table('Song')
+        ->where('songId',$songId)
+        ->increment('playTimes',1);
+    $song = DB::table('Song')
+        ->where('songId',$songId)
+        ->get();
+        $songResult = array();
+        foreach($song as $song1){ 
+
+            echo "$song1->title<br/>";
+            echo "$song1->playTimes<br/>";
+
+            echo "<br/><br/>";
+            array_push($songResult, $song);
+        }
+
+    
+}
+function getTopView(){
+    $song = DB::table('Song')
+        ->orderBy('playTimes', 'desc')
+        ->take(3)
+        ->get();
+        //$songResult = array();
+        foreach($song as $song1){ 
+
+            echo "$song1->title<br/>";
+            echo "$song1->playTimes<br/>";
+
+            echo "<br/><br/>";
+            //array_push($songResult, $song);
+        }
+        
+    
+    
+}
+
+
+updateViewSong(2);        
+
+getTopView();
+
 ?>
 

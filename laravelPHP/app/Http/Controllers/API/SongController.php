@@ -115,5 +115,39 @@ class SongController extends Controller{
         }
     }
 
-
+    public function updateViewSong(int $songId){
+        $song = DB::table('Song')
+            ->where('songId',$songId)
+            ->increment('playTimes',1);
+        
+        if ($song != NULL){
+            return response()->json([
+                'status' => 200,
+                'songs' => $song,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Songs not found!',
+            ]);
+        }
+    }
+    public function getTopView(){
+        $song = DB::table('Song')
+            ->orderBy('playTimes', 'desc')
+            ->take(5)
+            ->get();
+        
+        if ($song != NULL){
+            return response()->json([
+                'status' => 200,
+                'songs' => $song,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Songs not found!',
+            ]);
+        }
+    }
 }
