@@ -10,7 +10,21 @@ use Carbon\Carbon;
 use App\Models\PlaylistComment;
 
 class CommentController extends Controller{
-    
+    public function getUserInfo(Request $request){
+        $userId = $request->input('userId');
+        $userInfo = DB::table('User')->where('userId',$userId)->get();
+        if ($userInfo->isEmpty() == false){
+            return response()->json([
+                'status' => 200,
+                'userInfo' => $userInfo->all(),
+            ]); 
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'UserInfo not found!',
+            ]);
+        }
+    }
     public function postSongComment(Request $request){
         $songComment = new SongComment();
         $songComment->userId = $request->input('userId');
@@ -25,7 +39,6 @@ class CommentController extends Controller{
             'message' => 'Create Song Comment Successfully',
         ]);
     }
-
     public function getAllSongComment(Request $request){
         $songId = $request->input('songId');
         $comments = DB::table('SongComment')->where('songId',$songId)->get();
@@ -33,7 +46,7 @@ class CommentController extends Controller{
         if ($comments->isEmpty() == false){
             return response()->json([
                 'status' => 200,
-                'songs' => $comments->all(),
+                'comments' => $comments->all(),
             ]); 
         } else {
             return response()->json([

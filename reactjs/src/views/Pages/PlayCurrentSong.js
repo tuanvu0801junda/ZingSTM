@@ -1,4 +1,7 @@
 import React from "react";
+import swal from "sweetalert";
+import axios from 'axios';
+
 // Chakra imports
 import {
     Flex,
@@ -17,27 +20,44 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import SongPlayList from "components/SongTable/SongPlayList";
 import SongCurrentPlay from "components/SongTable/SongCurrentPlay";
-import { commentData, songData } from "variables/general";
+import { songs, songData } from "variables/general";
 import UserComment from "components/Comment/Comment";
 import SongBanner from "components/Banner/songBanner";
 
 function PlayList() {
+
     const textColor = useColorModeValue("gray.700", "white");
-    let songs = [
-        { songName: "Lỡ như anh yêu em", singer: "Chi dân", album: "30", genres: "VPop", filePath: "./songs/1.mp3", time: "04:13", coverPath: "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FSongImages%2F1.png?alt=media&token=6e85865e-73a6-44eb-bdba-d484113ed349" },
-        { songName: "Cielo - Huma-Huma", singer: "adele", filePath: "./songs/2.mp3", coverPath: "./covers/2.jpg" },
-        { songName: "DEAF KEV - Invincible [NCS Release]-320k", singer: "adele", filePath: "./songs/3.mp3", coverPath: "./covers/3.jpg" },
-        { songName: "Different Heaven & EH!DE - My Heart [NCS Release]", singer: "adele", filePath: "./songs/4.mp3", coverPath: "./covers/4.jpg" },
-    ]
-    const [comment, setComment] = useState(commentData)
+
+
+    //Lấy dữ liệu trong songComment
+    const SongCurrentComment = [];
+    async () => {
+        var input = {
+            songId: 1, //Xử lý sau
+        }
+        const res = await axios.post('/api/getAllSongComment', input);
+        console.log(res.data);
+
+
+        // if (res.data.status === 200) {
+        //     try {
+
+        //     }
+        //     catch (err) {
+        //         swal("Error", err.message, "error");
+        //     }
+        // }
+    }
+
+    const [comment, setComment] = useState(SongCurrentComment)
     //Update comment
     const commentUpdateHandle = (newCommentText) => {
         console.log(newCommentText);
         setComment((oldArray => {
-            return [...oldArray, { commentName: "Quân hentai", commentTime: new Date().toLocaleString(), commentText: newCommentText }
-            ]
+            return [...oldArray, newCommentText]
         }));
     }
+
     return (
         <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
             <SongBanner />

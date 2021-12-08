@@ -32,6 +32,7 @@ Route::post('/getSongInfo', [SongController::class, 'getOneSongDetail']);
 Route::post('/getSongOfAlbum', [SongController::class, 'getSongOfAlbum']);
 
 Route::post('/postSongComment',[CommentController::class, 'postSongComment']);
+Route::post('/getUserInfo',[CommentController::class, 'getUserInfo']);
 Route::post('/getAllSongComment',[CommentController::class, 'getAllSongComment']);
 Route::post('/postPlaylistComment',[CommentController::class,'postPlaylistComment']);
 Route::post('/getAllPlaylistComment',[CommentController::class,'getAllPlaylistComment']);

@@ -7,6 +7,22 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class SongController extends Controller{
+    // public function getCurrentSongInfo(Request $request){
+    //     $songId = $request->input('songId');
+    //     $songInfo = DB::table('Song')->where('songId',$songId)->first();
+    //     if ($songInfo->isEmpty() == false){
+    //         return response()->json([
+    //             'status' => 200,
+    //             'songInfo' => $songInfo,
+    //         ]); 
+    //     } else {
+    //         return response()->json([
+    //             'status' => 404,
+    //             'message' => 'UserInfo not found!',
+    //         ]);
+    //     }
+    // }
+
     public function getSongOfGenre(Request $request){
         $inputGenreId = $request->input('genreId');
 
