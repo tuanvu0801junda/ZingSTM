@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\SongController;
 use App\Http\Controllers\API\CommentController;
+use App\Http\Controllers\API\AlbumController;
+use App\Http\Controllers\API\GenreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,8 +32,14 @@ Route::post('/getGenresSong', [SongController::class, 'getSongOfGenre']);
 Route::post('/getArtistsSong', [SongController::class, 'getSongOfArtist']);
 Route::post('/getSongInfo', [SongController::class, 'getOneSongDetail']);
 Route::post('/getSongOfAlbum', [SongController::class, 'getSongOfAlbum']);
+Route::post('/updateViewSong', [SongController::class, 'updateViewSong']);
+Route::post('/getTopView', [SongController::class, 'getTopView']);
 
 Route::post('/postSongComment',[CommentController::class, 'postSongComment']);
 Route::post('/getAllSongComment',[CommentController::class, 'getAllSongComment']);
 Route::post('/postPlaylistComment',[CommentController::class,'postPlaylistComment']);
 Route::post('/getAllPlaylistComment',[CommentController::class,'getAllPlaylistComment']);
+
+Route::post('/getAllAlbumInfo',[AlbumController::class, 'getAllAlbumInfo']);
+
+Route::post('/getAllGenreInfo',[GenreController::class, 'getAllGenreInfo']);

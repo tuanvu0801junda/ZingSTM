@@ -94,8 +94,8 @@ function getAllSongComment(){
 //echo $name;
 
 //getSongOfGenre();
-postSongComment();  
-getAllSongComment();    
+//postSongComment();  
+//getAllSongComment();    
 
 function updateViewSong(int $songId){
     DB::table('Song')
@@ -136,9 +136,9 @@ function getTopView(){
 }
 
 
-updateViewSong(2);        
+// updateViewSong(2);        
 
-getTopView();
+// getTopView();
 
 ?>
 

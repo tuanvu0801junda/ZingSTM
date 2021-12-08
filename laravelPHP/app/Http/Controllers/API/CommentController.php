@@ -28,7 +28,11 @@ class CommentController extends Controller{
 
     public function getAllSongComment(Request $request){
         $songId = $request->input('songId');
-        $comments = DB::table('SongComment')->where('songId',$songId)->get();
+
+        $comments = DB::table('SongComment')
+            ->join('User','User.userId','=','SongComment.userId')
+            ->where('SongComment.songId',$songId)
+            ->select('songCommentId', 'fullname', 'profilePic', 'userComment','createdDate')->get();
 
         if ($comments->isEmpty() == false){
             return response()->json([
@@ -59,8 +63,12 @@ class CommentController extends Controller{
     }
 
     public function getAllPlaylistComment(Request $request){
-        $playlistId = $request->input('songId');
-        $comments = DB::table('PlaylistComment')->where('playlistId',$playlistId)->get();
+        $playlistId = $request->input('playlistId');
+
+        $comments = DB::table('PlaylistComment')
+            ->join('User','User.userId','=','PlaylistComment.userId')
+            ->where('PlaylistComment.playlistId',$playlistId)
+            ->select('playlistCommentId', 'fullname', 'profilePic', 'userComment','createdDate')->get();
 
         if ($comments->isEmpty() == false){
             return response()->json([

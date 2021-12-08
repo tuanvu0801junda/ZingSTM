@@ -88,7 +88,7 @@ class SongController extends Controller{
     }
 
     public function getSongOfAlbum(Request $request){
-        $inputAlbumId = $request->input('inputAlbumId');
+        $inputAlbumId = $request->input('albumId');
 
         $songOfAlbum = DB::table('Song')
             ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
@@ -115,7 +115,8 @@ class SongController extends Controller{
         }
     }
 
-    public function updateViewSong(int $songId){
+    public function updateViewSong(Request $request){
+        $songId = $request->input('songId');
         $song = DB::table('Song')
             ->where('songId',$songId)
             ->increment('playTimes',1);
@@ -123,25 +124,23 @@ class SongController extends Controller{
         if ($song != NULL){
             return response()->json([
                 'status' => 200,
-                'songs' => $song,
+                'message' => 'Update view song successfully!',
             ]);
         } else {
             return response()->json([
                 'status' => 404,
-                'message' => 'Songs not found!',
+                'message' => 'Cannot update view song!',
             ]);
         }
     }
     public function getTopView(){
         $song = DB::table('Song')
-            ->orderBy('playTimes', 'desc')
-            ->take(5)
-            ->get();
+            ->orderBy('playTimes', 'desc')->take(3)->get();
         
         if ($song != NULL){
             return response()->json([
                 'status' => 200,
-                'songs' => $song,
+                'songs' => $song->all(),
             ]);
         } else {
             return response()->json([
