@@ -34,9 +34,9 @@ function UserComment(props) {
     }
     const handleSubmit1 = async (event) => {
         const data = {
-            userId: userInfo.userId,
+            userId: 1, //userInfo.userId
             songId: 1, //Xử lý sau
-            userComment: event.target.value,
+            userComment: commentText,
         }
 
         const res = await axios.post('/api/postSongComment', data);
@@ -50,6 +50,7 @@ function UserComment(props) {
                 }
                 const res = await axios.post('/api/getAllSongComment', input);
                 // dispatch(actionLogin(res.data.user));
+                console.log(res.data);
             }
             catch (err) {
                 swal("Error", err.message, "error");
