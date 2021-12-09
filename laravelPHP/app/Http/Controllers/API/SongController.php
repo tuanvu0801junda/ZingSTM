@@ -70,7 +70,7 @@ class SongController extends Controller{
         $song = DB::table('Song')
             ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
             ->join('Artist','Artist.artistId','=','SongArtistRelation.artistId')
-            ->where('songId',$inputSongId)
+            ->where('Song.songId',$inputSongId)
             ->select('imagePath', 'songPath', 'duration','title','artistName')
             ->first();
 
@@ -83,6 +83,7 @@ class SongController extends Controller{
             return response()->json([
                 'status' => 404,
                 'message' => 'Song Detail not found!',
+                'songId' => $inputSongId,
             ]);
         }
     }
