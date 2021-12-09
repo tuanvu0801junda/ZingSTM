@@ -1,14 +1,15 @@
+import TopGenres from "components/Genres/TopGenres";
 import React from "react";
 import Slider from "react-slick";
 
 export default function GenresCarousel(props) {
     const settings = {
-        centerMode: true,
+        centerMode: false,
         centerPadding: "50px",
         dots: false,
-        infinite: false,
+        infinite: true,
         speed: 500,
-        slidesToShow: 5,
+        slidesToShow: 3,
         slidesToScroll: 1,
         autoplay: true,
         pauseOnHover: true,
@@ -21,8 +22,13 @@ export default function GenresCarousel(props) {
     return (
       <div>
         <Slider {...settings}>
-            {albums.map((row) => {
-                return ;
+            {genres.map((row) => {
+                return (
+                  <TopGenres
+                    imgURL={row.genreImage}
+                    title={row.genreName}
+                  />
+                );
             })}
         </Slider>
       </div>

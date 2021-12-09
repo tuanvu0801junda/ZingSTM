@@ -1,50 +1,34 @@
 // Chakra imports
 import {
   Box,
-  Button,
   Flex,
   Grid,
-  Icon,
-  Image,
-  Portal,
-  Spacer,
-  Table,
-  Tbody,
   Text,
-  Th,
-  Thead,
-  Tr,
-  useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
 // assets
-import peopleImage from "assets/img/people-image.png";
-import logoChakra from "assets/svg/logo-white.svg";
+
 // Custom components
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import LineChart from "components/Charts/LineChart";
 
-import DashboardTableRow from "components/Tables/DashboardTableRow";
-import TimelineRow from "components/Tables/TimelineRow";
+// React, Redux
 import React, { useState, useEffect } from "react";
+
 // react icons
-import { BsArrowRight } from "react-icons/bs";
-import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
-import { dashboardTableData, timelineData } from "variables/general";
 import SlickCarousel from 'components/Carousel/HomeCarousel';
 import TopSong from 'components/Song/TopSong';
-import TopAlbums from 'components/Albums/TopAlbums';
 import AlbumsCarousel from 'components/Carousel/AlbumsCarousel'
 
 // Axios
 import axios from 'axios';
+import GenresCarousel from "components/Carousel/GenresCarosel";
 
 export default function Dashboard() {
   // Chakra Color Mode
   const textColor = useColorModeValue("gray.700", "white");
-  const overlayRef = React.useRef();
 
   // Get top 3 songs
   const [topSong, setTopSong] = useState(null)
@@ -58,7 +42,6 @@ export default function Dashboard() {
   const getTopSongs = async () => {
     const data = {}
     const res = await axios.post('/api/getTopView', data);
-    console.log(res.data);
     setTopSong(res.data.songs)
   }
 
@@ -74,11 +57,25 @@ export default function Dashboard() {
   const getAlbums = async () => {
     const data = {}
     const res = await axios.post('/api/getAllAlbumInfo', data);
-    console.log(res.data);
     setAlbums(res.data.albums)
   }
 
-  // Onclick Album
+  // Get Genres
+  const [genres, setGenres] = useState(null)
+
+  useEffect(() => {
+    if (!genres) {
+      getGenres();
+    }
+  }, []);
+
+  const getGenres = async () => {
+    const data = {}
+    const res = await axios.post('/api/getAllGenreInfo', data);
+    setGenres(res.data.genres);
+  }
+
+  // Get Artists
 
   return (
     <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }}>
@@ -158,7 +155,14 @@ export default function Dashboard() {
       <Grid pt="16px" templateColumns="repeat(2, 1fr)" gap={3}>
         <Card>
           <CardBody>
-            Genres...
+            <Flex direction="column" w="100%">
+              <Text fontSize="2xl" color="green.400" fontWeight="bold" as="i" mb="6px">
+                Genres:
+              </Text>
+              {genres == null ? "Loading genres..." :
+                <GenresCarousel genres={genres}/>
+              }
+            </Flex>
           </CardBody>
         </Card>
         <Card pl="20px">

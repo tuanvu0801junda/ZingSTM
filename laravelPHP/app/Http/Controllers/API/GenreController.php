@@ -12,7 +12,7 @@ class GenreController extends Controller{
         $genres = DB::table('Genre')->get();
         return response()->json([
             'status' => 200,
-            'albums' => $genres->all(),
+            'genres' => $genres->all(),
         ]);
     }
 }

@@ -4,7 +4,7 @@ import TopAlbums from 'components/Albums/TopAlbums';
 
 export default function AlbumsCarousel(props) {
     const settings = {
-        centerMode: true,
+        centerMode: false,
         centerPadding: "50px",
         dots: false,
         infinite: false,
