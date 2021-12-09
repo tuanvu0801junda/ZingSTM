@@ -76,6 +76,19 @@ export default function Dashboard() {
   }
 
   // Get Artists
+  // const [artists, setArtists] = useState(null);
+
+  // useEffect(() => {
+  //   if (!artists) {
+  //     getGenres();
+  //   }
+  // }, []);
+
+  // const getArtists = async () => {
+  //   const data = {}
+  //   const res = await axios.post('/api/getAllGenreInfo', data);
+  //   setArtists(res.data.artists);
+  // }
 
   return (
     <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }}>

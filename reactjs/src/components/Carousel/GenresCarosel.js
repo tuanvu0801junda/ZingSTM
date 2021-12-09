@@ -27,6 +27,7 @@ export default function GenresCarousel(props) {
                   <TopGenres
                     imgURL={row.genreImage}
                     title={row.genreName}
+                    genreId={row.genreId}
                   />
                 );
             })}

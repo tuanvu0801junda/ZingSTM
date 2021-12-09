@@ -1,14 +1,21 @@
-import { Box, Badge, Image, Spacer, Flex } from "@chakra-ui/react"
+import { Box, Image, Spacer, Flex } from "@chakra-ui/react"
+import { useHistory } from 'react-router-dom'
 
 export default function TopGenres(props) {
+    const history = useHistory();
+
     const property = {
         imageUrl: props.imgURL,
         imageAlt: props.title,
         title: props.title,
     }
 
+    const goToGenresPage = () => {
+        history.push('/zingstm/genres/'+props.genreId);
+    }
+
     return (
-        <Flex as="Button" direction="column" maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+        <Flex as="Button" direction="column" maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden" onClick={goToGenresPage}>
             <Image src={property.imageUrl} alt={property.imageAlt} w="230px"/>
             <Spacer />
             <Box p="6" w="100%">
