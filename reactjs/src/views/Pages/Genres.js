@@ -84,17 +84,6 @@ function Genres(props) {
                   );
                 })
               }
-              {/* {songs.map((row) => {
-                return (
-                  <SongPlayList
-                    name={row.title}
-                    logo={row.imagePath}
-                    songPath={row.songPath}
-                    genreName={row.genreName}
-                    duration={row.duration}
-                  />
-                );
-              })} */}
             </Tbody>
           </Table>
         </CardBody>

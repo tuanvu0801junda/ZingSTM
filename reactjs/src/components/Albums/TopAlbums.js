@@ -10,7 +10,7 @@ export default function TopAlbums(props) {
 
     return (
         <Flex as="Button" direction="column" maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-            <Image src={property.imageUrl} alt={property.imageAlt} h="75%"/>
+            <Image src={property.imageUrl} alt={property.imageAlt} w="280px"/>
             <Spacer />
             <Box p="6" w="100%">
                 <Box d="flex" alignItems="baseline">
@@ -30,7 +30,8 @@ export default function TopAlbums(props) {
                     fontWeight="semibold"
                     as="h4"
                     lineHeight="tight"
-                    fontSize="xl"
+                    fontSize="sm"
+                    height="30px"
                 >
                     {property.title}
                 </Box>
