@@ -13,11 +13,12 @@ function AddSongToPlay(songId) {
         if (res.data.status === 200) {
             song = {
                 name: res.data.song.title,
-                singer: "Loading...",
+                singer: res.data.song.artistName,
                 cover: res.data.song.imagePath,
                 musicSrc: res.data.song.songPath,
             }
         }
+        console.log(res);
         console.log(song);
         store.dispatch(actionAddSongToPlay(song));
     }

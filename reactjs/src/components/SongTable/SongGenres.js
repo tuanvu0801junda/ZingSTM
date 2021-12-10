@@ -8,6 +8,7 @@ import {
     Tr,
     useColorModeValue,
 } from "@chakra-ui/react";
+import AddSongToPlay from "functions/AddSongToPlay";
 import React from "react";
 import SongButton from "./SongButton";
 
@@ -17,7 +18,8 @@ function SongGenres(props) {
     const colorStatus = useColorModeValue("white", "gray.400");
 
     const playSong = () => {
-        
+        console.log(props.songId);
+        AddSongToPlay(props.songId);
     }
 
     return (

@@ -47,7 +47,7 @@ class CommentController extends Controller{
         $comments = DB::table('SongComment')
             ->join('User','User.userId','=','SongComment.userId')
             ->where('SongComment.songId',$songId)
-            ->select('fullname', 'profilePic', 'userComment','createdDate')->get();
+            ->select('songCommentId', 'fullname', 'profilePic', 'userComment','createdDate')->get();
 
         if ($comments->isEmpty() == false){
             return response()->json([
