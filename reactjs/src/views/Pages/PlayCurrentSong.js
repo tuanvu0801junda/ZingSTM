@@ -11,6 +11,7 @@ import {
     useColorModeValue,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
+import swal from "sweetalert";
 import axios from 'axios';
 
 // Custom components
@@ -44,16 +45,26 @@ function PlayList() {
             songId: 1, //Xử lý sau
         }
         const res = await axios.post('/api/getAllSongComment', input);
-
-        for (let i = 0; i < res.data.songs.length; i++) {
-            const userName = res.data.songs[i].fullname;
-            const userPic = res.data.songs[i].profilePic;
-            const userComment = res.data.songs[i].userComment;
-            const createdDate = res.data.songs[i].createdDate;
-            SongCurrentComment.push({ userName: userName, userPic: userPic, createdDate: createdDate, userComment: userComment });
+        if (res.data.status === 200) {
+            try {
+                for (let i = 0; i < res.data.songs.length; i++) {
+                    const userName = res.data.songs[i].fullname;
+                    const userPic = res.data.songs[i].profilePic;
+                    const userComment = res.data.songs[i].userComment;
+                    const createdDate = res.data.songs[i].createdDate;
+                    SongCurrentComment.push({ userName: userName, userPic: userPic, createdDate: createdDate, userComment: userComment });
+                }
+                // console.log(SongCurrentComment);
+                setComment(SongCurrentComment);
+            }
+            catch (err) {
+                swal("Error", err.message, "error");
+            }
         }
-        // console.log(SongCurrentComment);
-        setComment(SongCurrentComment);
+        else if (res.data.status === 404) {
+            setComment(SongCurrentComment);
+        }
+
     }
     //getCommandBackend();
 
