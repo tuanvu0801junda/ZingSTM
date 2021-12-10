@@ -10,6 +10,21 @@ use Carbon\Carbon;
 use App\Models\PlaylistComment;
 
 class CommentController extends Controller{
+    public function getUserComment(Request $request){
+        $userId = $request->input('userId');
+        $userComment = DB::table('User')->where('userId',$userId)->get();
+        if ($userComment->isEmpty() == false){
+            return response()->json([
+                'status' => 200,
+                'userComment' => $userComment->all(),
+            ]); 
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'UserComment not found!',
+            ]);
+        }
+    }
     
     public function postSongComment(Request $request){
         $songComment = new SongComment();

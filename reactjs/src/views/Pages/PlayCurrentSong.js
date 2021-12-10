@@ -10,14 +10,16 @@ import {
     Tr,
     useColorModeValue,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from 'axios';
+
 // Custom components
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import SongPlayList from "components/SongTable/SongPlayList";
 import SongCurrentPlay from "components/SongTable/SongCurrentPlay";
-import { commentData, songData } from "variables/general";
+import { songData } from "variables/general";
 import UserComment from "components/Comment/Comment";
 import SongBanner from "components/Banner/songBanner";
 
@@ -29,15 +31,40 @@ function PlayList() {
         { songName: "DEAF KEV - Invincible [NCS Release]-320k", singer: "adele", filePath: "./songs/3.mp3", coverPath: "./covers/3.jpg" },
         { songName: "Different Heaven & EH!DE - My Heart [NCS Release]", singer: "adele", filePath: "./songs/4.mp3", coverPath: "./covers/4.jpg" },
     ]
-    const [comment, setComment] = useState(commentData)
+    //Lấy dữ liệu trong songComment
+    const SongCurrentComment = [];
+    const [comment, setComment] = useState([]);
+
+    useEffect(() => {
+        getCommandBackend();
+    }, [])
+
+    const getCommandBackend = async () => {
+        var input = {
+            songId: 1, //Xử lý sau
+        }
+        const res = await axios.post('/api/getAllSongComment', input);
+
+        for (let i = 0; i < res.data.songs.length; i++) {
+            const userName = res.data.songs[i].fullname;
+            const userPic = res.data.songs[i].profilePic;
+            const userComment = res.data.songs[i].userComment;
+            const createdDate = res.data.songs[i].createdDate;
+            SongCurrentComment.push({ userName: userName, userPic: userPic, createdDate: createdDate, userComment: userComment });
+        }
+        // console.log(SongCurrentComment);
+        setComment(SongCurrentComment);
+    }
+    //getCommandBackend();
+
     //Update comment
     const commentUpdateHandle = (newCommentText) => {
         console.log(newCommentText);
         setComment((oldArray => {
-            return [...oldArray, { commentName: "Quân hentai", commentTime: new Date().toLocaleString(), commentText: newCommentText }
-            ]
+            return [...oldArray, newCommentText]
         }));
     }
+
     return (
         <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
             <SongBanner />

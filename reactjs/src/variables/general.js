@@ -309,11 +309,18 @@ export const songData = [
     time: "03:50",
   }
 ];
-export const commentData = [
-  { commentName: "Đạt tiên sinh", commentTime: "Nov 28, 2021 at 3:14am", commentText: "Pellentesque gravida tristique ultrices.Sed blandit varius mauris, vel volutpat urna hendrerit id.Curabitur rutrum dolor gravida turpis tristique efficitur." },
-  { commentName: "Đạt tiên sinh", commentTime: "Nov 28, 2021 at 3:14am", commentText: "Pellentesque gravida tristique ultrices.Sed blandit varius mauris, vel volutpat urna hendrerit id.Curabitur rutrum dolor gravida turpis tristique efficitur." },
-  { commentName: "Đạt tiên sinh", commentTime: "Nov 28, 2021 at 3:14am", commentText: "Pellentesque gravida tristique ultrices.Sed blandit varius mauris, vel volutpat urna hendrerit id.Curabitur rutrum dolor gravida turpis tristique efficitur." },
+export const songs = [
+
+  { songName: "Lỡ như anh yêu em", singer: "Chi dân", album: "30", genres: "VPop", filePath: "./songs/1.mp3", time: "04:13", coverPath: "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FSongImages%2F1.png?alt=media&token=6e85865e-73a6-44eb-bdba-d484113ed349" },
+  { songName: "Cielo - Huma-Huma", singer: "adele", filePath: "./songs/2.mp3", coverPath: "./covers/2.jpg" },
+  { songName: "DEAF KEV - Invincible [NCS Release]-320k", singer: "adele", filePath: "./songs/3.mp3", coverPath: "./covers/3.jpg" },
+  { songName: "Different Heaven & EH!DE - My Heart [NCS Release]", singer: "adele", filePath: "./songs/4.mp3", coverPath: "./covers/4.jpg" },
 ];
+// export const commentData = [
+//   { commentName: "Đạt tiên sinh", commentTime: "Nov 28, 2021 at 3:14am", commentText: "Pellentesque gravida tristique ultrices.Sed blandit varius mauris, vel volutpat urna hendrerit id.Curabitur rutrum dolor gravida turpis tristique efficitur." },
+//   { commentName: "Đạt tiên sinh", commentTime: "Nov 28, 2021 at 3:14am", commentText: "Pellentesque gravida tristique ultrices.Sed blandit varius mauris, vel volutpat urna hendrerit id.Curabitur rutrum dolor gravida turpis tristique efficitur." },
+//   { commentName: "Đạt tiên sinh", commentTime: "Nov 28, 2021 at 3:14am", commentText: "Pellentesque gravida tristique ultrices.Sed blandit varius mauris, vel volutpat urna hendrerit id.Curabitur rutrum dolor gravida turpis tristique efficitur." },
+// ];
 export const tablesProjectData = [
   {
     logo: AdobexdLogo,
