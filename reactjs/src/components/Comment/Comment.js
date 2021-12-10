@@ -22,27 +22,12 @@ function UserComment(props) {
     }
     const handleSubmit = async (event) => {
         const data = {
-            userId: 1, //userInfo.userId
+            userId: userInfo.userId,
             songId: 1, //Xử lý sau
             userComment: commentText,
         }
-        
-        const res = await axios.post('/api/postSongComment', data);
-
-        console.log(res.data);
-
-        if (res.data.status === 200) {
-            try {
-                var input = {
-                    songId: 1, //Xử lý sau
-                }
-                const res = await axios.post('/api/getAllSongComment', input);
-                // dispatch(actionLogin(res.data.user));
-                console.log(res.data);
-            }
-            catch (err) {
-                swal("Error", err.message, "error");
-            }
+        const userData = {
+            userId: userInfo.userId
         }
 
         await axios.post('/api/postSongComment', data);
