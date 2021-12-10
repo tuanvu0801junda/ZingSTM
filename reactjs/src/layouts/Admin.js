@@ -132,7 +132,7 @@ export default function Dashboard(props) {
                 {getRoutes(routes)}
                 <Route path={`/zingstm/playlist`} component={Playlist} />
                 <Route path={`/zingstm/album`} component={Album} />
-                <Route path={`/zingstm/genres`} component={Genres} />
+                <Route path={`/zingstm/genres/:genreId`} component={Genres} />
                 {/* Add route here */}
                 <Redirect from="/zingstm" to="/zingstm/home" />
               </Switch>
@@ -140,13 +140,6 @@ export default function Dashboard(props) {
           </PanelContent>
         ) : null}
         <Footer />
-        <Portal>
-          <FixedPlugin
-            secondary={getActiveNavbar(routes)}
-            fixed={fixed}
-            onOpen={onOpen}
-          />
-        </Portal>
         <Configurator
           secondary={getActiveNavbar(routes)}
           isOpen={isOpen}
