@@ -36,7 +36,6 @@ function UserComment(props) {
         const userPic = res.data.userComment[0].profilePic;
         event.preventDefault();
         props.onSaveCommentData({ userName: userName, userPic: userPic, createdDate: new Date().toLocaleString(), userComment: data.userComment });
-        event.target.reset();
     }
 
     return (
@@ -68,12 +67,12 @@ function UserComment(props) {
                 )}
 
                 <hr style={{ margin: "50px 0px 0px 0px" }}></hr>
-                <form class="form-block" onSubmit={handleSubmit}>
+                <form class="form-block">
                     <div class="form-group">
                         <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" class="be-ava-comment" />
                         <textarea class="form-input" required="" placeholder="Your Comment" onChange={textChangeHandle}></textarea>
                     </div>
-                    <button class="comment-submit" type="submit">Submit</button>
+                    <button class="comment-submit" type="submit" onClick={handleSubmit}>Submit</button>
                 </form>
             </div>
         </div>
