@@ -1,7 +1,4 @@
 import React from "react";
-import swal from "sweetalert";
-import axios from 'axios';
-
 // Chakra imports
 import {
     Flex,
@@ -13,43 +10,53 @@ import {
     Tr,
     useColorModeValue,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from 'axios';
+
 // Custom components
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import SongPlayList from "components/SongTable/SongPlayList";
 import SongCurrentPlay from "components/SongTable/SongCurrentPlay";
-import { songs, songData } from "variables/general";
+import { songData } from "variables/general";
 import UserComment from "components/Comment/Comment";
 import SongBanner from "components/Banner/songBanner";
 
 function PlayList() {
-
     const textColor = useColorModeValue("gray.700", "white");
-
-
+    let songs = [
+        { songName: "Lỡ như anh yêu em", singer: "Chi dân", album: "30", genres: "VPop", filePath: "./songs/1.mp3", time: "04:13", coverPath: "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FSongImages%2F1.png?alt=media&token=6e85865e-73a6-44eb-bdba-d484113ed349" },
+        { songName: "Cielo - Huma-Huma", singer: "adele", filePath: "./songs/2.mp3", coverPath: "./covers/2.jpg" },
+        { songName: "DEAF KEV - Invincible [NCS Release]-320k", singer: "adele", filePath: "./songs/3.mp3", coverPath: "./covers/3.jpg" },
+        { songName: "Different Heaven & EH!DE - My Heart [NCS Release]", singer: "adele", filePath: "./songs/4.mp3", coverPath: "./covers/4.jpg" },
+    ]
     //Lấy dữ liệu trong songComment
     const SongCurrentComment = [];
-    async () => {
+    const [comment, setComment] = useState([]);
+
+    useEffect(() => {
+        getCommandBackend();
+    }, [])
+
+    const getCommandBackend = async () => {
         var input = {
             songId: 1, //Xử lý sau
         }
         const res = await axios.post('/api/getAllSongComment', input);
-        console.log(res.data);
 
-
-        // if (res.data.status === 200) {
-        //     try {
-
-        //     }
-        //     catch (err) {
-        //         swal("Error", err.message, "error");
-        //     }
-        // }
+        for (let i = 0; i < res.data.songs.length; i++) {
+            const userName = res.data.songs[i].fullname;
+            const userPic = res.data.songs[i].profilePic;
+            const userComment = res.data.songs[i].userComment;
+            const createdDate = res.data.songs[i].createdDate;
+            SongCurrentComment.push({ userName: userName, userPic: userPic, createdDate: createdDate, userComment: userComment });
+        }
+        // console.log(SongCurrentComment);
+        setComment(SongCurrentComment);
     }
+    //getCommandBackend();
 
-    const [comment, setComment] = useState(SongCurrentComment)
     //Update comment
     const commentUpdateHandle = (newCommentText) => {
         console.log(newCommentText);

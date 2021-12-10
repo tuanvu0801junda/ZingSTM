@@ -10,21 +10,22 @@ use Carbon\Carbon;
 use App\Models\PlaylistComment;
 
 class CommentController extends Controller{
-    public function getUserInfo(Request $request){
+    public function getUserComment(Request $request){
         $userId = $request->input('userId');
-        $userInfo = DB::table('User')->where('userId',$userId)->get();
-        if ($userInfo->isEmpty() == false){
+        $userComment = DB::table('User')->where('userId',$userId)->get();
+        if ($userComment->isEmpty() == false){
             return response()->json([
                 'status' => 200,
-                'userInfo' => $userInfo->all(),
+                'userComment' => $userComment->all(),
             ]); 
         } else {
             return response()->json([
                 'status' => 404,
-                'message' => 'UserInfo not found!',
+                'message' => 'UserComment not found!',
             ]);
         }
     }
+    
     public function postSongComment(Request $request){
         $songComment = new SongComment();
         $songComment->userId = $request->input('userId');
@@ -39,14 +40,19 @@ class CommentController extends Controller{
             'message' => 'Create Song Comment Successfully',
         ]);
     }
+
     public function getAllSongComment(Request $request){
         $songId = $request->input('songId');
-        $comments = DB::table('SongComment')->where('songId',$songId)->get();
+
+        $comments = DB::table('SongComment')
+            ->join('User','User.userId','=','SongComment.userId')
+            ->where('SongComment.songId',$songId)
+            ->select('fullname', 'profilePic', 'userComment','createdDate')->get();
 
         if ($comments->isEmpty() == false){
             return response()->json([
                 'status' => 200,
-                'comments' => $comments->all(),
+                'songs' => $comments->all(),
             ]); 
         } else {
             return response()->json([
@@ -72,8 +78,12 @@ class CommentController extends Controller{
     }
 
     public function getAllPlaylistComment(Request $request){
-        $playlistId = $request->input('songId');
-        $comments = DB::table('PlaylistComment')->where('playlistId',$playlistId)->get();
+        $playlistId = $request->input('playlistId');
+
+        $comments = DB::table('PlaylistComment')
+            ->join('User','User.userId','=','PlaylistComment.userId')
+            ->where('PlaylistComment.playlistId',$playlistId)
+            ->select('playlistCommentId', 'fullname', 'profilePic', 'userComment','createdDate')->get();
 
         if ($comments->isEmpty() == false){
             return response()->json([

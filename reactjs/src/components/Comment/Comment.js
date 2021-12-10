@@ -1,11 +1,14 @@
 import "./Comment.css"
 import React, { useRef } from "react";
 import { useSelector } from "react-redux";
-
+import swal from "sweetalert";
 import axios from 'axios';
+
+
 
 import { useState } from "react"
 function UserComment(props) {
+
     var userInfo;
     var loginStatus = (useSelector((state) => state.reducerLogin)).status
     if (loginStatus == "LOGIN") {
@@ -17,7 +20,6 @@ function UserComment(props) {
     const textChangeHandle = (event) => {
         setCommentText(event.target.value);
     }
-
     const handleSubmit = async (event) => {
         const data = {
             userId: userInfo.userId,
@@ -29,9 +31,9 @@ function UserComment(props) {
         }
 
         await axios.post('/api/postSongComment', data);
-        const res = await axios.post('/api/getUserInfo', userData);
-        const userName = res.data.userInfo[0].fullname;
-        const userPic = res.data.userInfo[0].profilePic;
+        const res = await axios.post('/api/getUserComment', userData);
+        const userName = res.data.userComment[0].fullname;
+        const userPic = res.data.userComment[0].profilePic;
         event.preventDefault();
         props.onSaveCommentData({ userName: userName, userPic: userPic, createdDate: new Date().toLocaleString(), userComment: data.userComment });
         event.target.reset();
@@ -40,8 +42,7 @@ function UserComment(props) {
     return (
         <div class="container">
             <div class="be-comment-block">
-                <h1 class="comments-title">Comments</h1>
-
+                <h1 class="comments-title">Comments </h1>
                 {props.commentData.map(data =>
                     <div className="be-comment">
                         <div class="be-img-comment">
