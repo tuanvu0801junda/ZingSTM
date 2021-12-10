@@ -160,7 +160,7 @@ function getAllArtistInfo(){
     
     }
 }
-getGenreInfoById(2);
-getAllArtistInfo();
+//getGenreInfoById(2);
+//getAllArtistInfo();
 ?>
 

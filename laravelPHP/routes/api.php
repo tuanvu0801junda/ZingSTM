@@ -44,5 +44,5 @@ Route::post('/getAllAlbumInfo',[AlbumController::class, 'getAllAlbumInfo']);
 
 Route::post('/getAllGenreInfo',[GenreController::class, 'getAllGenreInfo']);
 
-Route::post('/getAllArtistInfo',[ArtistController::class, 'getAllGenreInfo']);
+Route::post('/getAllArtistInfo',[ArtistController::class, 'getAllArtistInfo']);
 Route::post('/getGenreInfoById',[GenreController::class, 'getGenreInfoById']);
