@@ -15,4 +15,14 @@ class GenreController extends Controller{
             'genres' => $genres->all(),
         ]);
     }
+    public function getGenreInfoById(Request $request){
+        $inputGenreId = $request->input('genreId');
+        $genres = DB::table('Genre')
+                ->where('genreId',$inputGenreId)
+                ->get();
+        return response()->json([
+            'status' => 200,
+            'genres' => $genres->all(),
+        ]);
+    }
 }

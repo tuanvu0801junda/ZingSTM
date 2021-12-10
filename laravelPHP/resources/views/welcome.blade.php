@@ -4,6 +4,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\SongComment;
+use App\Models\Artist;
+use App\Models\Genre;
 use Carbon\Carbon;
 
 function getSongOfGenre(){
@@ -135,10 +137,30 @@ function getTopView(){
     
 }
 
+function getGenreInfoById($id){
 
-// updateViewSong(2);        
+    $genres = DB::table('Genre')
+            ->where('genreId',$id)
+            ->get();
+            foreach($genres as $genre){ 
 
-// getTopView();
+                echo "$genre->genreName<br/>";
+                echo "$genre->genreImage<br/>";
+    
+                echo "<br/><br/>";
+            }
+}
+function getAllArtistInfo(){
+    $artists = DB::table('Artist')->get();
+    foreach($artists as $artist){ 
 
+        echo "$artist->artistName<br/>";
+
+        echo "<br/><br/>";
+    
+    }
+}
+getGenreInfoById(2);
+getAllArtistInfo();
 ?>
 
