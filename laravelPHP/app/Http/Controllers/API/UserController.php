@@ -16,11 +16,11 @@ class UserController extends Controller{
 
         $user = DB::table('User')
                 ->where('username',$username)->first();
-
+        $userResult = array('userId' => $user->userId, 'email' => $user->email, 'fullname' => $user->fullname, 'profilePic' => $user->profilePic,'role' => $user->role);
         if (($user != NULL) && (Hash::check($password, $user->password))) {
             return response()->json([
                 'status' => 200,
-                'user' => $user,
+                'user' => $userResult,
                 'message' => 'Login Successfully',
             ]);
         } else {
@@ -41,9 +41,10 @@ class UserController extends Controller{
         $newUser->profilePic = "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FAvatarImages%2Fistockphoto-1223671392-612x612.jpg?alt=media&token=c746eb6a-3d27-478f-8309-d1fef46c8930";
 
         $newUser->save();
+        $userResult = array('userId' => $newUser->userId, 'email' => $newUser->email, 'fullname' => $newUser->fullname, 'profilePic' => $newUser->profilePic,'role' => $newUser->role);
         return response()->json([
             'status' => 200,
-            'newUser' => $newUser,
+            'newUser' => $userResult,
             'message' => 'Create Account Successfully',
         ]);
     }
@@ -55,10 +56,10 @@ class UserController extends Controller{
         //         ->where('userId',$userId)->first();
         $user->profilePic = $request->input('profilePic');
         $user->update();
-
+        $userResult = array('userId' => $user->userId, 'email' => $user->email, 'fullname' => $user->fullname, 'profilePic' => $user->profilePic,'role' => $user->role);
         return response()->json([
             'status' => 200,
-            'user' => $user,
+            'user' => $userResult,
         ]);
     }
 
