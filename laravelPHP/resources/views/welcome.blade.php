@@ -46,11 +46,7 @@ function getSongOfGenre(){
     }
 }
 
-function getUserInfo1(){
-    $userId = 1;
-    $user = DB::table('User')->where('userId',$userId)->first();
-    return $user->username;
-}
+
 
 function postSongComment(){
     $songComment = new SongComment();
@@ -162,5 +158,22 @@ function getAllArtistInfo(){
 }
 //getGenreInfoById(2);
 //getAllArtistInfo();
+
+function getUserInfo1(){
+    $userId = 1;
+    $user = DB::table('User')
+                ->where('userId',$userId)
+                ->select('userId','email', 'fullname', 'profilePic', 'role')
+                ->first();
+        echo "$user->userId<br/>";
+        echo "$user->email<br/>";
+        echo "$user->fullname<br/>";
+        //echo "$user->username<br/>";
+        echo "$user->profilePic<br/>";
+        //echo "$user->password<br/>";
+        echo "$user->role<br/>";
+}
+
+//getUserInfo1();
 ?>
 

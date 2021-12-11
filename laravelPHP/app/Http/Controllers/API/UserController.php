@@ -65,7 +65,9 @@ class UserController extends Controller{
     public function getUserInfo(Request $request){
         $userId = $request->input('userId');
         $user = DB::table('User')
-                ->where('userId',$userId)->first();
+                ->where('userId',$userId)
+                ->select('userId','email', 'fullname', 'profilePic', 'role')
+                ->first();
 
         if ($user != NULL){
             return response()->json([
