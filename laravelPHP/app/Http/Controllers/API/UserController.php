@@ -16,8 +16,15 @@ class UserController extends Controller{
 
         $user = DB::table('User')
                 ->where('username',$username)->first();
-        $userResult = array('userId' => $user->userId, 'email' => $user->email, 'fullname' => $user->fullname, 'profilePic' => $user->profilePic,'role' => $user->role);
+
         if (($user != NULL) && (Hash::check($password, $user->password))) {
+            $userResult = array(
+                'userId' => $user->userId, 
+                'email' => $user->email, 
+                'fullname' => $user->fullname, 
+                'profilePic' => $user->profilePic,
+                'role' => $user->role
+            );
             return response()->json([
                 'status' => 200,
                 'user' => $userResult,
@@ -32,21 +39,39 @@ class UserController extends Controller{
     }
 
     public function signup(Request $request){
-        $newUser = new User();
-        $newUser->username = $request->input('username');
-        $newUser->password = Hash::make($request->input('password'));
-        $newUser->email = $request->input('email');
-        $newUser->fullname = $request->input('fullname');
-        $newUser->role = $request->input('role');
-        $newUser->profilePic = "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FAvatarImages%2Fistockphoto-1223671392-612x612.jpg?alt=media&token=c746eb6a-3d27-478f-8309-d1fef46c8930";
+        $inputUsername = $request->input('username');
+        $searchResult = DB::table('User')
+                ->where('username',$inputUsername)->first();
 
-        $newUser->save();
-        $userResult = array('userId' => $newUser->userId, 'email' => $newUser->email, 'fullname' => $newUser->fullname, 'profilePic' => $newUser->profilePic,'role' => $newUser->role);
-        return response()->json([
-            'status' => 200,
-            'newUser' => $userResult,
-            'message' => 'Create Account Successfully',
-        ]);
+        if($searchResult != NULL){
+            //found same username!
+            return response()->json([
+                'status' => 1062,
+                'message' => 'Inputted username already existed!',
+            ]);
+        } else {
+            $newUser = new User();
+            $newUser->username = $request->input('username');
+            $newUser->password = Hash::make($request->input('password'));
+            $newUser->email = $request->input('email');
+            $newUser->fullname = $request->input('fullname');
+            $newUser->role = $request->input('role');
+            $newUser->profilePic = "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FAvatarImages%2Fistockphoto-1223671392-612x612.jpg?alt=media&token=c746eb6a-3d27-478f-8309-d1fef46c8930";
+
+            $newUser->save();
+            $userResult = array(
+                'userId' => $newUser->userId, 
+                'email' => $newUser->email, 
+                'fullname' => $newUser->fullname, 
+                'profilePic' => $newUser->profilePic,
+                'role' => $newUser->role
+            );
+            return response()->json([
+                'status' => 200,
+                'newUser' => $userResult,
+                'message' => 'Create Account Successfully',
+            ]);
+        }
     }
 
     public function updateAvatar(Request $request) {
@@ -56,7 +81,13 @@ class UserController extends Controller{
         //         ->where('userId',$userId)->first();
         $user->profilePic = $request->input('profilePic');
         $user->update();
-        $userResult = array('userId' => $user->userId, 'email' => $user->email, 'fullname' => $user->fullname, 'profilePic' => $user->profilePic,'role' => $user->role);
+        $userResult = array(
+            'userId' => $user->userId, 
+            'email' => $user->email, 
+            'fullname' => $user->fullname, 
+            'profilePic' => $user->profilePic,
+            'role' => $user->role
+        );
         return response()->json([
             'status' => 200,
             'user' => $userResult,
@@ -74,7 +105,7 @@ class UserController extends Controller{
             return response()->json([
                 'status' => 200,
                 'user' => $user,
-                'message' => 'abc',
+                'message' => 'Get UserInfo successfully!',
             ]);
         } else {
             return response()->json([
