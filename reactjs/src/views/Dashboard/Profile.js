@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import actionLogin from "redux/actions/actionLogin";
 import actionLogout from 'redux/actions/actionLogout';
 import actionUpdatePlaylist from "redux/actions/actionUpdatePlaylist";
+import actionUpdateSidebarUser from "redux/actions/actionUpdateSidebarUser";
 import AddSongToPlay from 'functions/AddSongToPlay'
 // Chakra imports
 import {
@@ -50,6 +50,11 @@ import axios from 'axios'
 
 function Profile() {
   const dispatch = useDispatch();
+  // Test
+  const hiddenRTL = () => {
+    dispatch(actionUpdateSidebarUser());
+  }
+  //
   var userInfo = {
     email: "Undefined",
     profilePic: "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FAvatarImages%2Fistockphoto-1223671392-612x612.jpg?alt=media&token=c746eb6a-3d27-478f-8309-d1fef46c8930",
@@ -218,7 +223,7 @@ function Profile() {
               direction={{ sm: "column", lg: "row" }}
               w={{ sm: "100%", md: "50%", lg: "auto" }}
             >
-              <Button onClick={updatePlaylist} p="0px" bg="transparent" _hover={{ bg: "none" }}>
+              <Button onClick={hiddenRTL} p="0px" bg="transparent" _hover={{ bg: "none" }}>
                 <Flex
                   align="center"
                   w={{ sm: "100%", lg: "135px" }}

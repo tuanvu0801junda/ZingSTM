@@ -49,6 +49,9 @@ var dashRoutes = [
     icon: <SupportIcon color="inherit" />,
     component: RTLPage,
     layout: "/rtl",
+    logout: "block",
+    user: "none",
+    admin: "block",
   },
   {
     name: "ACCOUNT PAGES",
