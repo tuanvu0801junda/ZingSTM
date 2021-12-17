@@ -9,7 +9,7 @@ export default function TopAlbums(props) {
     }
 
     return (
-        <Flex as="Button" direction="column" maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+        <Flex as="button" direction="column" maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
             <Image src={property.imageUrl} alt={property.imageAlt} w="280px"/>
             <Spacer />
             <Box p="6" w="100%">

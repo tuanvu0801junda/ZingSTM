@@ -7,6 +7,7 @@ use App\Http\Controllers\API\SongController;
 use App\Http\Controllers\API\CommentController;
 use App\Http\Controllers\API\AlbumController;
 use App\Http\Controllers\API\GenreController;
+use App\Http\Controllers\API\ArtistController;
 use App\Http\Controllers\API\PlaylistController;
 
 /*
@@ -45,11 +46,19 @@ Route::post('/getAllPlaylistComment',[CommentController::class,'getAllPlaylistCo
 Route::post('/getAllAlbumInfo',[AlbumController::class, 'getAllAlbumInfo']);
 
 Route::post('/getAllGenreInfo',[GenreController::class, 'getAllGenreInfo']);
-
-Route::post('/getAllArtistInfo',[ArtistController::class, 'getAllArtistInfo']);
 Route::post('/getGenreInfoById',[GenreController::class, 'getGenreInfoById']);
 
+Route::post('/getAllArtistInfo',[ArtistController::class, 'getAllArtistInfo']);
+Route::post('/getOneArtistInfo',[ArtistController::class, 'getOneArtistInfo']);
+
+Route::post('/getGenreInfoById',[GenreController::class, 'getGenreInfoById']);
+
+Route::post('/getPlaylistCreatedByUser',[PlaylistController::class, 'getPlaylistCreatedByUser']);
+Route::post('/getPlaylistSharedByOther',[PlaylistController::class, 'getPlaylistSharedByOther']);
+Route::post('/isAccessible',[PlaylistController::class, 'isAccessible']);
+Route::post('/createUserPlaylist',[PlaylistController::class, 'createUserPlaylist']);
 Route::post('/getVerifyCode',[PlaylistController::class, 'getVerifyCode']);
 Route::post('/checkVerifyCode',[PlaylistController::class, 'checkVerifyCode']);
 Route::post('/addSongToPlaylist',[PlaylistController::class, 'addSongToPlaylist']);
 Route::post('/checkPlaylistMaker',[PlaylistController::class, 'checkPlaylistMaker']);
+

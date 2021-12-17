@@ -15,4 +15,24 @@ class ArtistController extends Controller{
             'artists' => $artists->all(),
         ]);
     }
+
+    public function getOneArtistInfo(Request $request){
+        $artistId = $request->input('artistId');
+        $artist = DB::table('Artist')
+                ->where('artistId',$artistId)->first();
+
+        if ($artist != NULL){
+            // artistId, artistName, artistImage;
+            return response()->json([
+                'status' => 200,
+                'artist' => $artist,
+                'message' => 'Get 1 artist info successfully!',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Artist not found!',
+            ]);
+        }
+    }
 }

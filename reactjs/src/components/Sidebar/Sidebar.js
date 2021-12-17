@@ -22,10 +22,14 @@ import { Separator } from "components/Separator/Separator";
 import PropTypes from "prop-types";
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // FUNCTIONS
 
 function Sidebar(props) {
+  var sidebarState = (useSelector((state) => state.reducerUpdateSidebar)).sidebarState;
+  if (sidebarState == undefined) sidebarState == "logout";
+  console.log(sidebarState);
   // to check for active links and opened collapses
   let location = useLocation();
   // this is for the rest of the collapses
@@ -55,6 +59,7 @@ function Sidebar(props) {
     }
 
     return routes.map((prop, key) => {
+      console.log(prop);
       if (prop.redirect) {
         return null;
       }
@@ -88,7 +93,10 @@ function Sidebar(props) {
         <NavLink to={prop.layout + prop.path}>
           {activeRoute(prop.layout + prop.path) === "active" ? (
             <Button
-              display={prop.display}
+              display={
+                sidebarState == "user" ? prop.user :
+                (sidebarState == "admin" ? prop.admin : prop.logout)
+              }
               boxSize="initial"
               justifyContent="flex-start"
               alignItems="center"
@@ -142,7 +150,10 @@ function Sidebar(props) {
             </Button>
           ) : (
             <Button
-              display={prop.display}
+              display={
+                sidebarState == "user" ? prop.user :
+                (sidebarState == "admin" ? prop.admin : prop.logout)
+              }
               boxSize="initial"
               justifyContent="flex-start"
               alignItems="center"
@@ -267,6 +278,8 @@ function Sidebar(props) {
 // FUNCTIONS
 
 export function SidebarResponsive(props) {
+  var sidebarState = (useSelector((state) => state.reducerUpdateSidebar)).sidebarState;
+  if (sidebarState == undefined) sidebarState == "logout";
   // to check for active links and opened collapses
   let location = useLocation();
   // this is for the rest of the collapses
@@ -318,7 +331,10 @@ export function SidebarResponsive(props) {
         <NavLink to={prop.layout + prop.path}>
           {activeRoute(prop.layout + prop.path) === "active" ? (
             <Button
-              display={prop.display}
+              display={
+                sidebarState == "user" ? prop.user :
+                (sidebarState == "admin" ? prop.admin : prop.logout)
+              }
               boxSize="initial"
               justifyContent="flex-start"
               alignItems="center"
@@ -369,7 +385,10 @@ export function SidebarResponsive(props) {
             </Button>
           ) : (
             <Button
-              display={prop.display}
+              display={
+                sidebarState == "user" ? prop.user :
+                (sidebarState == "admin" ? prop.admin : prop.logout)
+              }
               boxSize="initial"
               justifyContent="flex-start"
               alignItems="center"
