@@ -10,7 +10,7 @@ export default function TopSong(props) {
     }
 
     return (
-        <Flex as="Button" direction="row" w="100%" borderWidth="1px" borderRadius="lg" overflow="hidden" align="center">
+        <Flex as="button" direction="row" w="100%" borderWidth="1px" borderRadius="lg" overflow="hidden" align="center">
             <Image ml="0" src={property.imageUrl} alt={property.imageAlt} boxSize="120px" alignSelf="flex-start"/>
             <Box p="6" ml="20px">
                 <Box d="flex" alignItems="center">

@@ -10,7 +10,6 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import routes from "routes.js";
 // Custom Chakra theme
 import theme from "theme/theme.js";
-import FixedPlugin from "../components/FixedPlugin/FixedPlugin";
 // Custom components
 import MainPanel from "../components/Layout/MainPanel";
 import PanelContainer from "../components/Layout/PanelContainer";
@@ -19,6 +18,7 @@ import PanelContent from "../components/Layout/PanelContent";
 import Playlist from 'views/Pages/PlayList';
 import Album from "views/Pages/Album";
 import Genres from "views/Pages/Genres";
+import Artist from "views/Pages/Artist";
 
 export default function Dashboard(props) {
   const { ...rest } = props;
@@ -133,6 +133,7 @@ export default function Dashboard(props) {
                 <Route path={`/zingstm/playlist`} component={Playlist} />
                 <Route path={`/zingstm/album`} component={Album} />
                 <Route path={`/zingstm/genres/:genreId`} component={Genres} />
+                <Route path={`/zingstm/artist/:artistId`} component={Artist} />
                 {/* Add route here */}
                 <Redirect from="/zingstm" to="/zingstm/home" />
               </Switch>

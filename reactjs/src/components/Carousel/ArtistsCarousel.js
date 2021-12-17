@@ -1,8 +1,8 @@
-import TopGenres from "components/Genres/TopGenres";
+import TopArtists from "components/Artists/TopArtists";
 import React from "react";
 import Slider from "react-slick";
 
-export default function GenresCarousel(props) {
+export default function ArtistsCarousel(props) {
     const settings = {
         centerMode: false,
         centerPadding: "50px",
@@ -15,18 +15,18 @@ export default function GenresCarousel(props) {
         pauseOnHover: true,
     };
 
-    const genres = props.genres;
+    const artists = props.artists;
 
     return (
       <div>
         <Slider {...settings}>
-            {genres.map((row) => {
+            {artists.map((row) => {
                 return (
-                  <TopGenres
+                  <TopArtists
                     key={0}
-                    imgURL={row.genreImage}
-                    title={row.genreName}
-                    genreId={row.genreId}
+                    imgURL={row.artistImage}
+                    artistName={row.artistName}
+                    artistId={row.artistId}
                   />
                 );
             })}
