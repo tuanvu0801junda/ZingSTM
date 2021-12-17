@@ -54,7 +54,7 @@ class SongController extends Controller{
     }
 
     public function getSongOfArtist(Request $request){
-        $inputArtistId = $request->input('inputArtistId');
+        $inputArtistId = $request->input('artistId');
 
         $songOfArtist = DB::table('Song')
             ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
