@@ -15,62 +15,58 @@ import {
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
-import GenresBanner from "components/Banner/GenresBanner";
-import SongGenres from "components/SongTable/SongGenres";
 import axios from 'axios';
 
-function Genres() {
-  const { genreId } = useParams();
-  const [genre, setGenre] = useState(null);
+import ArtistBanner from "components/Banner/ArtistBanner";
+import SongGenres from "components/SongTable/SongGenres";
+
+function Artist() {
+  const { artistId } = useParams();
+  const [artist, setArtist] = useState(null);
   const [songs, setSongs] = useState(null);
   const textColor = useColorModeValue("gray.700", "white");
 
-  // Get genre info
+  // Get artist info
   useEffect(() => {
-    if (!genre) {
-      getGenreInfo(genreId);
+    if (!artist) {
+      getArtistInfo(artistId);
     }
   }, []);
 
-  const getGenreInfo = async (genreId) => {
+  const getArtistInfo = async (artistId) => {
     const data = {
-      genreId: genreId,
+      artistId: artistId,
     }
 
-    const res = await axios.post('/api/getGenreInfo', data);
-    if (res.data.status === 200) setGenre(res.data.genre);
+    const res = await axios.post('/api/getArtistInfo', data);
+    if (res.data.status === 200) setArtist(res.data.artist);
   }
 
   // Get songs
   useEffect(() => {
     if (!songs) {
-        getGenreSong(genreId);
+        getArtistSong(artistId);
     }
   }, []);
 
-  const getGenreSong = async (genreId) => {
+  const getArtistSong = async (artistId) => {
     const data = {
-      genreId: genreId,
+      artistId: artistId,
     }
 
-    const res = await axios.post('/api/getGenresSong', data);
+    const res = await axios.post('/api/getArtistsSong', data);
     if (res.data.status === 200) setSongs(res.data.songs);
   }
   // ('songId', 'imagePath', 'songPath', 'duration','title','genreName')
 
   return (
-
     <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
-      <GenresBanner
-          genres="V-POP"
-          imgURL="https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FGenreImages%2Fvpop.jpg?alt=media&token=8b3b545e-1da3-4253-b73b-f1cd793a83d9"
-      />
-      {/* {genre == null ? "Loading..." :
-        <GenresBanner
-          genres="V-POP"
-          imgURL="https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FGenreImages%2Fvpop.jpg?alt=media&token=8b3b545e-1da3-4253-b73b-f1cd793a83d9"
+      {artist == null ? "Loading ..." :
+        <ArtistBanner
+            artistName={artist.artistName}
+            imgURL={artist.artistImage}
         />
-      } */}
+      }
       <Card overflowX={{ xl: "hidden" }}>
         <CardHeader p="6px 0px 22px 0px">
           <Text fontSize="xl" color={textColor} fontWeight="bold">
@@ -113,4 +109,4 @@ function Genres() {
   );
 }
 
-export default Genres;
+export default Artist;

@@ -7,7 +7,7 @@ export default function AlbumsCarousel(props) {
         centerMode: false,
         centerPadding: "50px",
         dots: false,
-        infinite: false,
+        infinite: true,
         speed: 500,
         slidesToShow: 5,
         slidesToScroll: 1,
@@ -17,15 +17,13 @@ export default function AlbumsCarousel(props) {
 
     const albums = props.albums;
 
-    console.log(albums);
-    albums.map((row) => console.log(row));
-
     return (
       <div>
         <Slider {...settings}>
             {albums.map((row) => {
                 return (
                     <TopAlbums
+                        key={0}
                         title={row.title}
                         imgURL={row.artworkPath}
                         category="New !"
