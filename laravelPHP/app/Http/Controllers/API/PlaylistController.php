@@ -15,22 +15,28 @@ class PlaylistController extends Controller{
     public function getVerifyCode(Request $request){
         $userId = $request->input('userId');
         $playlistId = $request->input('playlistId');
-        $checkUser  = DB::table('Playlist')
-                    ->where('playlistId',$playlistId)
-                    ->where('userId', $userId)
-                    ->first();
+        $checkUser = DB::table('Playlist')
+                ->where('playlistId',$playlistId)
+                ->where('userId', $userId)
+                ->first();
+
         if($checkUser != NULL){
             return response()->json([
                 'status' => 200,
                 'verifyCode' => $checkUser->verifyCode,
-                'message' => 'Get code Successfully',
+                'message' => 'Get verifyCode successfully',
+            ]);
+        } else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'Cannot get verifyCode',
             ]);
         }
     }
   
     public function checkVerifyCode(Request $request){
-        $userId = $request -> input('userId');
-        $verifyCode = $request -> input('verifyCode');
+        $userId = $request->input('userId');
+        $verifyCode = $request->input('verifyCode');
         $playlist = DB::table('Playlist')
                     ->where('verifyCode',$verifyCode)
                     ->first();
@@ -55,8 +61,8 @@ class PlaylistController extends Controller{
     }
   
     public function addSongToPlaylist(Request $request){
-        $playlistId = $request -> input('playlistId');
-        $songId = $request -> input('songId');
+        $playlistId = $request->input('playlistId');
+        $songId = $request->input('songId');
         $checkSong = DB::table('PlaylistSongRelation')
                     ->where('playlistId',$playlistId)
                     ->where('songId', $songId)
@@ -80,12 +86,12 @@ class PlaylistController extends Controller{
 
             return response()->json([
                 'status' => 200,
-                'message' => 'Add song Successfully',
+                'message' => 'Added song successfully',
             ]);
         }else{
             return response()->json([
-                'status' => 200,
-                'message' => 'Add song Already',
+                'status' => 1062,
+                'message' => 'Duplicate! Song added already!',
             ]);
         }
     }
@@ -197,7 +203,7 @@ class PlaylistController extends Controller{
                 . mt_rand(10, 99) . $str[rand(0, strlen($str) - 1)];
 
             // shuffle the result
-            $newPlaylist->verifyCode = $newPlaylist->playlistId . "-" . str_shuffle($pin);
+            $newPlaylist->verifyCode = $newPlaylist->playlistId . str_shuffle($pin);
             return response()->json([
                 'status' => 200,
                 'playlist' => $newPlaylist,
