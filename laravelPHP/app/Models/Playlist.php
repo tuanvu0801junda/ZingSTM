@@ -15,6 +15,7 @@ class Playlist extends Model
         'dateCreated',
         'playlistName',
         'userId',
+        'verifyCode',
     ];
     protected $primaryKey = 'playlistId';
 }
