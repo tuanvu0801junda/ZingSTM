@@ -25,6 +25,7 @@ import AlbumsCarousel from 'components/Carousel/AlbumsCarousel'
 // Axios
 import axios from 'axios';
 import GenresCarousel from "components/Carousel/GenresCarosel";
+import ArtistsCarousel from "components/Carousel/ArtistsCarousel";
 
 export default function Dashboard() {
   // Chakra Color Mode
@@ -76,19 +77,19 @@ export default function Dashboard() {
   }
 
   // Get Artists
-  // const [artists, setArtists] = useState(null);
+  const [artists, setArtists] = useState(null);
 
-  // useEffect(() => {
-  //   if (!artists) {
-  //     getGenres();
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!artists) {
+      getArtists();
+    }
+  }, []);
 
-  // const getArtists = async () => {
-  //   const data = {}
-  //   const res = await axios.post('/api/getAllGenreInfo', data);
-  //   setArtists(res.data.artists);
-  // }
+  const getArtists = async () => {
+    const data = {}
+    const res = await axios.post('/api/getAllArtistInfo', data);
+    setArtists(res.data.artists);
+  }
 
   return (
     <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }}>
@@ -178,9 +179,16 @@ export default function Dashboard() {
             </Flex>
           </CardBody>
         </Card>
-        <Card pl="20px">
-          <CardBody pl="20px">
-            Artist...
+        <Card>
+          <CardBody>
+            <Flex direction="column" w="100%">
+              <Text fontSize="2xl" color="green.400" fontWeight="bold" as="i" mb="6px">
+                Artists:
+              </Text>
+              {artists == null ? "Loading artists..." :
+                <ArtistsCarousel artists={artists}/>
+              }
+            </Flex>
           </CardBody>
         </Card>
       </Grid>

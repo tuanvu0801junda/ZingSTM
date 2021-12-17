@@ -7,6 +7,7 @@ use App\Http\Controllers\API\SongController;
 use App\Http\Controllers\API\CommentController;
 use App\Http\Controllers\API\AlbumController;
 use App\Http\Controllers\API\GenreController;
+use App\Http\Controllers\API\ArtistController;
 
 /*
 |--------------------------------------------------------------------------

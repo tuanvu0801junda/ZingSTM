@@ -44,7 +44,7 @@ function SignUp() {
 	});
 
 	const handleInput = (e) => {
-		e.persist();
+    e.persist();
 		setState({...state, [e.target.name]: e.target.value })
 	}
 
