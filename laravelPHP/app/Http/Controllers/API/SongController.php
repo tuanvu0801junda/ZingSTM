@@ -22,6 +22,19 @@ class SongController extends Controller{
     //         ]);
     //     }
     // }
+    public function getAllSongInfo(){
+        $songs = DB::table('Song')
+            ->join('Album','Album.albumId','=','Song.albumId')
+            ->join('SongGenreRelation','SongGenreRelation.songId','=','Song.songId')
+            ->join('Genre','SongGenreRelation.genreId','=','Genre.genreId')
+            ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
+            ->join('Artist','Artist.artistId','=','SongArtistRelation.artistId')
+            ->select('Song.songId','imagePath','songPath','duration','Song.title','Album.title','genreName','artistName')->get();
+        return response() ->json([
+            'status' => 200,
+            'songs' => $songs
+        ]);
+    }
 
     public function getSongOfGenre(Request $request){
         $inputGenreId = $request->input('genreId');

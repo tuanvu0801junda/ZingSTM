@@ -14,11 +14,17 @@ import theme from "theme/theme.js";
 import MainPanel from "../components/Layout/MainPanel";
 import PanelContainer from "../components/Layout/PanelContainer";
 import PanelContent from "../components/Layout/PanelContent";
-
 import Playlist from 'views/Pages/PlayList';
 import Album from "views/Pages/Album";
 import Genres from "views/Pages/Genres";
 import Artist from "views/Pages/Artist";
+//Admin components
+import AddSong from "views/RTL/AddSong";
+import UpdateSong from "views/RTL/UpdateSong"
+import SongManage from "views/RTL/SongManage";
+import AlbumManage from "views/RTL/AlbumManage";
+import ArtistManage from "views/RTL/AlbumManage";
+
 
 export default function Dashboard(props) {
   const { ...rest } = props;
@@ -133,7 +139,14 @@ export default function Dashboard(props) {
                 <Route path={`/zingstm/playlist`} component={Playlist} />
                 <Route path={`/zingstm/album`} component={Album} />
                 <Route path={`/zingstm/genres/:genreId`} component={Genres} />
+
                 <Route path={`/zingstm/artist/:artistId`} component={Artist} />
+                <Route path={`/zingstm/add-song`} component={AddSong} />
+                <Route path={`/zingstm/update-song`} component={UpdateSong} />
+                <Route path={`/zingstm/manage-song`} component={SongManage} />
+                <Route path={`/zingstm/manage-album`} component={AlbumManage} />
+                <Route path={`/zingstm/manage-artist`} component={ArtistManage} />
+
                 {/* Add route here */}
                 <Redirect from="/zingstm" to="/zingstm/home" />
               </Switch>
