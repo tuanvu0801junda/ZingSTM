@@ -81,8 +81,6 @@ function AddSong() {
     }
 
     //Handle upload song
-    console.log(mp3);
-    console.log(image);
     let handleUploadSong = async () => {
         const mp3Url = await uploadSongMp3(mp3);
         const imageUrl = await uploadSongImage(image);
