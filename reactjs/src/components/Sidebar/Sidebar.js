@@ -59,7 +59,6 @@ function Sidebar(props) {
     }
 
     return routes.map((prop, key) => {
-      console.log(prop);
       if (prop.redirect) {
         return null;
       }

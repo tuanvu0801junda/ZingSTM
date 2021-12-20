@@ -4,24 +4,39 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use App\Models\Song;
 use Illuminate\Http\Request;
 
 class SongController extends Controller{
-    // public function getCurrentSongInfo(Request $request){
-    //     $songId = $request->input('songId');
-    //     $songInfo = DB::table('Song')->where('songId',$songId)->first();
-    //     if ($songInfo->isEmpty() == false){
-    //         return response()->json([
-    //             'status' => 200,
-    //             'songInfo' => $songInfo,
-    //         ]); 
-    //     } else {
-    //         return response()->json([
-    //             'status' => 404,
-    //             'message' => 'UserInfo not found!',
-    //         ]);
-    //     }
-    // }
+    
+    public function getAllSongInfo(){
+        $songs = DB::table('Song')
+            ->join('Album','Album.albumId','=','Song.albumId')
+            ->join('SongGenreRelation','SongGenreRelation.songId','=','Song.songId')
+            ->join('Genre','SongGenreRelation.genreId','=','Genre.genreId')
+            ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
+            ->join('Artist','Artist.artistId','=','SongArtistRelation.artistId')
+            ->select('Song.songId','imagePath','songPath','duration','Song.title','Album.title','genreName','artistName')->get();
+        return response() ->json([
+            'status' => 200,
+            'songs' => $songs
+        ]);
+    }
+
+    public function postNewSong(Request $request){
+        $newSong = new Song();
+        $newSong->albumId = $request->input('albumId');
+        $newSong->imagePath = $request->input('imagePath');
+        $newSong->songPath = $request->input('songPath');
+        $newSong->title = $request->input('title');
+        $newSong->duration = $request->input('duration');
+
+        $newSong->save();
+        return response()->json([
+            'status' => 200,
+            'message' => 'Add New Song Successfully',
+        ]);
+    }
 
     public function getSongOfGenre(Request $request){
         $inputGenreId = $request->input('genreId');
@@ -54,7 +69,7 @@ class SongController extends Controller{
     }
 
     public function getSongOfArtist(Request $request){
-        $inputArtistId = $request->input('inputArtistId');
+        $inputArtistId = $request->input('artistId');
 
         $songOfArtist = DB::table('Song')
             ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')

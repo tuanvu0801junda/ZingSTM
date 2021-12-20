@@ -43,24 +43,17 @@ function SongPlayList(props) {
                     <Text fontSize="md" color={textColor} fontWeight="bold">
                         {domain}
                     </Text>
-                    <Text fontSize="sm" color="gray.400" fontWeight="normal">
-                        {subdomain}
+                </Flex>
+            </Td>
+            <Td>
+                <Flex direction="column">
+                    <Text fontSize="md" color={textColor} fontWeight="bold">
+                        {status}
                     </Text>
                 </Flex>
             </Td>
             <Td>
-                <Badge
-                    bg={status === "Online" ? "green.400" : bgStatus}
-                    color={status === "Online" ? "white" : colorStatus}
-                    fontSize="16px"
-                    p="3px 10px"
-                    borderRadius="8px"
-                >
-                    {status}
-                </Badge>
-            </Td>
-            <Td>
-                <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+                <Text fontSize="md" color={textColor} fontWeight="bold">
                     {date}
                 </Text>
             </Td>

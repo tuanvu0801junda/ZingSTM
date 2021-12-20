@@ -2,7 +2,9 @@
 import Dashboard from "views/Dashboard/Dashboard.js";
 import Tables from "views/Dashboard/Tables.js";
 import Billing from "views/Dashboard/Billing.js";
-import RTLPage from "views/RTL/RTLPage.js";
+import SongManage from "views/RTL/SongManage.js";
+import AlbumManage from "views/RTL/AlbumManage.js";
+import ArtistManage from "views/RTL/ArtistManage.js";
 import Profile from "views/Dashboard/Profile.js";
 import SignIn from "views/Pages/SignIn.js";
 import SignUp from "views/Pages/SignUp.js";
@@ -42,16 +44,48 @@ var dashRoutes = [
     component: Billing,
     layout: "/zingstm",
   },
+  // {
+  //   path: "/admin",
+  //   name: "Admin",
+  //   rtlName: "آرتيإل",
+  //   icon: <SupportIcon color="inherit" />,
+  //   component: SongManage,
+  //   layout: "/zingstm",
+  // },
   {
-    path: "/rtl-support-page",
-    name: "RTL",
-    rtlName: "آرتيإل",
-    icon: <SupportIcon color="inherit" />,
-    component: RTLPage,
-    layout: "/rtl",
-    logout: "block",
-    user: "none",
-    admin: "block",
+    name: "ADMIN",
+    category: "admin",
+    rtlName: "صفحات",
+    state: "pageCollapse",
+    views: [
+      {
+        path: "/manage-song",
+        name: "Manage Song",
+        rtlName: "لوحة القيادة",
+        icon: <SupportIcon color="inherit" />,
+        secondaryNavbar: true,
+        component: SongManage,
+        layout: "/zingstm",
+      },
+      {
+        path: "/manage-album",
+        name: "Manage Album",
+        rtlName: "لوحة القيادة",
+        icon: <SupportIcon color="inherit" />,
+        secondaryNavbar: true,
+        component: AlbumManage,
+        layout: "/zingstm",
+      },
+      {
+        path: "/manage-artist",
+        name: "Manage Artist",
+        rtlName: "لوحة القيادة",
+        icon: <SupportIcon color="inherit" />,
+        secondaryNavbar: true,
+        component: ArtistManage,
+        layout: "/zingstm",
+      },
+    ],
   },
   {
     name: "ACCOUNT PAGES",
