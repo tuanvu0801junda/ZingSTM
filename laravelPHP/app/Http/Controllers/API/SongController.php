@@ -34,6 +34,7 @@ class SongController extends Controller{
         $newSong->save();
         return response()->json([
             'status' => 200,
+            'songId' => $newSong->songId,
             'message' => 'Add New Song Successfully',
         ]);
     }
@@ -178,6 +179,64 @@ class SongController extends Controller{
             return response()->json([
                 'status' => 404,
                 'message' => 'Songs not found!',
+            ]);
+        }
+    }
+
+    public function deleteOneSong(Request $request){
+        $songId = $request->input('songId');
+        $song = Song::find($songId);
+        $song->delete();
+
+        // catch status 200 and render with SweetAlert
+        return response()->json([
+            'status' => 200,
+            'message' => 'Song Deleted Successfully',
+        ]);
+    }
+
+    public function updateOneSong(Request $request){
+        //
+    }
+
+    public function getSongNumberOfAnArtist(Request $request){
+        $artistId = $request->input('artistId');
+        $songNumber = DB::table('SongArtistRelation')
+                        ->where('artistId',$artistId)->count();
+        if($songNumber >= 0){
+            return response()->json([
+                'status' => 200,
+                'numberSong' => $songNumber,
+            ]);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'Cannot count!',
+            ]);
+        }
+    }
+
+    public function getAlbumStatistic(Request $request){
+        $albumId = $request->input('albumId');
+
+        //number of song in album
+        $songNumber = DB::table('Song')
+                        ->where('albumId',$albumId)->count();
+
+        //total playtimes of whole album
+        $totalPlay = DB::table('Song')
+                        ->where('albumId',$albumId)->sum('playTimes');
+
+        if($songNumber >= 0 && $totalPlay >= 0){
+            return response()->json([
+                'status' => 200,
+                'numberSong' => $songNumber,
+                'totalPlayTimes' => $totalPlay,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Cannot count!',
             ]);
         }
     }

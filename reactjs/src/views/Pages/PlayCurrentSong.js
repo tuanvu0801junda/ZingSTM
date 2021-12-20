@@ -9,6 +9,8 @@ import {
     Thead,
     Tr,
     useColorModeValue,
+    FormControl, FormLabel, 
+    Button, Input,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import swal from "sweetalert";
@@ -141,7 +143,49 @@ function PlayList() {
                     </Table>
                 </CardBody>
             </Card>
-            <UserComment commentData={comment} onSaveCommentData={commentUpdateHandle} />
+
+            <Card overflowX={{ xl: "hidden" }}>
+                <CardHeader p="6px 0px 22px 0px">
+                    <Text fontSize="xl" color={textColor} fontWeight="bold">
+                        Users' comments about this song
+                    </Text>
+                </CardHeader>
+                <CardBody>
+                    <Table variant="simple" color={textColor}>
+                        <Tbody>
+                            {comment.map((row) => {
+                                return (
+                                    <Flex direction="column">
+                                    <UserComment
+                                        name={row.userName}
+                                        userAvatar={row.userPic}
+                                        date={row.createdDate}
+                                        comment={row.userComment}
+                                        // onSaveCommentData={commentUpdateHandle}
+                                    />
+                                        <br/>
+                                    </Flex>
+                                );
+                            })}
+
+                            <FormControl isRequired>
+                                <FormLabel>Leave a comment </FormLabel>
+                                <Input placeholder="Enter your comment here " />
+                            </FormControl>
+                            <Button
+                                mt={4}
+                                colorScheme="teal"
+                                type="submit"
+                                onclicks={commentUpdateHandle}
+                            >
+                                Send
+                            </Button>
+                        </Tbody>
+                    </Table>
+                   
+                </CardBody>
+            </Card>
+            {/* <UserComment commentData={comment} onSaveCommentData={commentUpdateHandle} /> */}
         </Flex>
     );
 }
