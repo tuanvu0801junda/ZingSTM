@@ -12,7 +12,7 @@ class ArtistController extends Controller{
         $artists = DB::table('Artist')->get();
         return response()->json([
             'status' => 200,
-            'artists' => $artists->all(),
+            'artists' => $artists->all()
         ]);
     }
 

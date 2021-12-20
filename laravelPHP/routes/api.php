@@ -36,6 +36,9 @@ Route::post('/getSongInfo', [SongController::class, 'getOneSongDetail']);
 Route::post('/getSongOfAlbum', [SongController::class, 'getSongOfAlbum']);
 Route::post('/updateViewSong', [SongController::class, 'updateViewSong']);
 Route::post('/getTopView', [SongController::class, 'getTopView']);
+Route::post('/getAllSongInfo', [SongController::class, 'getAllSongInfo']);
+Route::post('/getOneSongDetail', [SongController::class, 'getOneSongDetail']);
+Route::post('/getOneSongDetail', [SongController::class, 'getOneSongDetail']);
 
 Route::post('/postSongComment',[CommentController::class, 'postSongComment']);
 Route::post('/getUserComment',[CommentController::class, 'getUserComment']);
@@ -44,8 +47,8 @@ Route::post('/postPlaylistComment',[CommentController::class,'postPlaylistCommen
 Route::post('/getAllPlaylistComment',[CommentController::class,'getAllPlaylistComment']);
 
 Route::post('/getAllAlbumInfo',[AlbumController::class, 'getAllAlbumInfo']);
-
 Route::post('/getAllGenreInfo',[GenreController::class, 'getAllGenreInfo']);
+
 Route::post('/getGenreInfoById',[GenreController::class, 'getGenreInfoById']);
 
 Route::post('/getAllArtistInfo',[ArtistController::class, 'getAllArtistInfo']);
@@ -61,4 +64,5 @@ Route::post('/getVerifyCode',[PlaylistController::class, 'getVerifyCode']);
 Route::post('/checkVerifyCode',[PlaylistController::class, 'checkVerifyCode']);
 Route::post('/addSongToPlaylist',[PlaylistController::class, 'addSongToPlaylist']);
 Route::post('/checkPlaylistMaker',[PlaylistController::class, 'checkPlaylistMaker']);
+
 
