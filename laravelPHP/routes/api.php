@@ -37,6 +37,8 @@ Route::post('/getSongOfAlbum', [SongController::class, 'getSongOfAlbum']);
 Route::post('/updateViewSong', [SongController::class, 'updateViewSong']);
 Route::post('/getTopView', [SongController::class, 'getTopView']);
 Route::post('/getAllSongInfo', [SongController::class, 'getAllSongInfo']);
+Route::post('/getOneSongDetail', [SongController::class, 'getOneSongDetail']);
+Route::post('/getOneSongDetail', [SongController::class, 'getOneSongDetail']);
 
 Route::post('/postSongComment',[CommentController::class, 'postSongComment']);
 Route::post('/getUserComment',[CommentController::class, 'getUserComment']);

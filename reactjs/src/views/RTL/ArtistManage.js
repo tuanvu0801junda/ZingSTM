@@ -52,9 +52,9 @@ export default function Dashboard() {
             <Card overflowX={{ xl: "hidden" }}>
                 <CardHeader p="6px 0px 22px 0px">
                     <Text fontSize="xl" color={textColor} fontWeight="bold">
-                        Song Data
+                        Artist Data
                     </Text>
-                    <Button style={{ margin: "0 0 0 75%", 'borderRadius': "5px" }} colorScheme="blue" onClick={goToAddSongPage}>Add song
+                    <Button style={{ margin: "0 0 0 75%", 'borderRadius': "5px" }} colorScheme="blue" onClick={goToAddSongPage}>Add artist
                     </Button>
                 </CardHeader>
                 <CardBody>

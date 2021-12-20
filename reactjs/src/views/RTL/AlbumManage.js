@@ -54,7 +54,7 @@ export default function Dashboard() {
                     <Text fontSize="xl" color={textColor} fontWeight="bold">
                         Album Data
                     </Text>
-                    <Button style={{ margin: "0 0 0 75%", 'borderRadius': "5px" }} colorScheme="blue" onClick={goToAddSongPage}>Add song
+                    <Button style={{ margin: "0 0 0 75%", 'borderRadius': "5px" }} colorScheme="blue" onClick={goToAddSongPage}>Add album
                     </Button>
                 </CardHeader>
                 <CardBody>

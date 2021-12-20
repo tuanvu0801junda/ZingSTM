@@ -142,7 +142,7 @@ export default function Dashboard(props) {
 
                 <Route path={`/zingstm/artist/:artistId`} component={Artist} />
                 <Route path={`/zingstm/add-song`} component={AddSong} />
-                <Route path={`/zingstm/update-song`} component={UpdateSong} />
+                <Route path={`/zingstm/update-song/:id`} component={UpdateSong} />
                 <Route path={`/zingstm/manage-song`} component={SongManage} />
                 <Route path={`/zingstm/manage-album`} component={AlbumManage} />
                 <Route path={`/zingstm/manage-artist`} component={ArtistManage} />

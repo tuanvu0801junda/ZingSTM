@@ -1,7 +1,7 @@
 import { storage } from "./config";
 
 
-async function uploadSongImage(image) {
+export async function uploadSongImage(image) {
     return new Promise(
         function (resolve, reject) {
             const storageRef = storage.ref();
@@ -26,7 +26,7 @@ async function uploadSongImage(image) {
     )
 }
 
-async function uploadSongMp3(mp3) {
+export async function uploadSongMp3(mp3) {
     return new Promise(
         function (resolve, reject) {
             const storageRef = storage.ref();
@@ -50,5 +50,3 @@ async function uploadSongMp3(mp3) {
         }
     )
 }
-
-export default { uploadSongImage, uploadSongMp3 };

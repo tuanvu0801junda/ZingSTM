@@ -1,14 +1,14 @@
 import "./Comment.css"
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import swal from "sweetalert";
 import axios from 'axios';
-
-
-
-import { useState } from "react"
+import {
+    Text,
+    useColorModeValue,
+} from "@chakra-ui/react"
 function UserComment(props) {
-
+    const textColor = useColorModeValue("gray.700", "white");
     var userInfo;
     var loginStatus = (useSelector((state) => state.reducerLogin)).status
     if (loginStatus == "LOGIN") {
@@ -39,42 +39,41 @@ function UserComment(props) {
     }
 
     return (
-        <div class="container">
-            <div class="be-comment-block">
-                <h1 class="comments-title">Comments </h1>
-                {props.commentData.map(data =>
-                    <div className="be-comment">
-                        <div class="be-img-comment">
-                            <a href="blog-detail-2.html">
-                                <img src={data.userPic} alt="" class="be-ava-comment" />
-                            </a>
-                        </div>
-                        <div class="be-comment-content">
-
-                            <span class="be-comment-name">
-                                <a href="blog-detail-2.html">{data.userName}</a>
-                            </span>
-                            <span class="be-comment-time">
-                                <i class="fa fa-clock-o"></i>
-                                {data.createdDate}
-                            </span>
-
-                            <p class="be-comment-text">
-                                {data.userComment}
-                            </p>
-                        </div>
+        <div class="be-comment-block">
+            <Text>Comments</Text>
+            {/* <h1 class="comments-title">Comments </h1> */}
+            {props.commentData.map(data =>
+                <div className="be-comment">
+                    <div class="be-img-comment">
+                        <a href="blog-detail-2.html">
+                            <img src={data.userPic} alt="" class="be-ava-comment" />
+                        </a>
                     </div>
-                )}
+                    <div class="be-comment-content">
 
-                <hr style={{ margin: "50px 0px 0px 0px" }}></hr>
-                <form class="form-block">
-                    <div class="form-group">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" class="be-ava-comment" />
-                        <textarea class="form-input" required="" placeholder="Your Comment" onChange={textChangeHandle}></textarea>
+                        <span class="be-comment-name">
+                            <a href="blog-detail-2.html">{data.userName}</a>
+                        </span>
+                        <span class="be-comment-time">
+                            <i class="fa fa-clock-o"></i>
+                            {data.createdDate}
+                        </span>
+
+                        <p class="be-comment-text">
+                            {data.userComment}
+                        </p>
                     </div>
-                    <button class="comment-submit" type="submit" onClick={handleSubmit}>Submit</button>
-                </form>
-            </div>
+                </div>
+            )}
+
+            <hr style={{ margin: "50px 0px 0px 0px" }}></hr>
+            <form class="form-block">
+                <div class="form-group">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" class="be-ava-comment" />
+                    <textarea class="form-input" required="" placeholder="Your Comment" onChange={textChangeHandle}></textarea>
+                </div>
+                <button class="comment-submit" type="submit" onClick={handleSubmit}>Submit</button>
+            </form>
         </div>
     );
 }
