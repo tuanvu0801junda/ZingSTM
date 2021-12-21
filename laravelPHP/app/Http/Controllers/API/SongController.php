@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\Song;
 use Illuminate\Http\Request;
+use App\Models\SongArtistRelation;
+use App\Models\SongGenreRelation;
 
 class SongController extends Controller{
     
@@ -196,7 +198,34 @@ class SongController extends Controller{
     }
 
     public function updateOneSong(Request $request){
-        //
+        //songId, imagePath, albumId, artistId
+        $songId = $request->input('songId');
+        $song = Song::find($songId);
+        $song->imagePath = $request->input('imagePath');
+        $albumId = $request->input('albumId');
+        if(strcmp($albumId,"null") == 0){
+            $song->albumId = null;   
+        } else {
+            $song->albumId = $albumId;
+        }
+        $song->update();
+
+        //$affected return number of rows affected by query
+        $affected = DB::table('SongArtistRelation')
+                    ->where('songId',$songId)
+                    ->update(['artistId' => $request->input('artistId')]);
+        
+        if($affected >= 0){
+            return response()->json([
+                'status' => 200,
+                'message' => 'Update Song successfully',
+            ]);
+        } else{
+            return response()->json([
+                'status' => 500,
+                'message' => 'Error happen when updating',
+            ]);
+        }
     }
 
     public function getSongNumberOfAnArtist(Request $request){
@@ -239,5 +268,44 @@ class SongController extends Controller{
                 'message' => 'Cannot count!',
             ]);
         }
+    }
+
+    public function getTotalSong(){
+        $totalSong = DB::table('Song')->count();
+        if($totalSong >= 0){
+            return response()->json([
+                'status' => 200,
+                'totalSong' => $totalSong,
+            ]);
+        } else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'Cannot get Total Song'
+            ]);
+        }
+    }
+
+    public function insertSongArtistRelation(Request $request){
+        $newRow = new SongArtistRelation();
+        $newRow->songId = $request->input('songId');
+        $newRow->artistId = $request->input('artistId');
+        $newRow->save();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Insert SongArtistRelation Successfully',
+        ]);
+    }
+
+    public function insertSongGenreRelation(Request $request){
+        $newRow = new SongGenreRelation();
+        $newRow->songId = $request->input('songId');
+        $newRow->genreId = $request->input('artistId');
+        $newRow->save();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Insert SongGenreRelation Successfully',
+        ]);
     }
 }
