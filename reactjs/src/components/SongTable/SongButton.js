@@ -1,19 +1,21 @@
-import "./SongButton.css"
-function SongButton() {
-    return (
-        <div className="song_table">
-            <button className="song_button" >
-                <i class="fas fa-play-circle"></i>
+import "./SongButton.css";
+import AddSongToPlay from "functions/AddSongToPlay";
+import AddSongToPlaylistButton from "components/Buttons/AddSongToPlaylistButton";
 
-            </button>
-            <button className="song_button">
-                <i class="fas fa-plus-circle"></i>
-
-            </button>
-            <button className="song_button">
-                <i class="fas fa-heart"></i>
-            </button>
-        </div>
-    );
+function SongButton(props) {
+	const play = () => {
+		AddSongToPlay(props.songId);
+	};
+	return (
+		<div className="song_table">
+			<button className="song_button" onClick={play}>
+				<i className="fas fa-play-circle"></i>
+			</button>
+			<AddSongToPlaylistButton songId={props.songId}/>
+			<button className="song_button">
+				<i className="fas fa-heart"></i>
+			</button>
+		</div>
+	);
 }
-export default SongButton
+export default SongButton;

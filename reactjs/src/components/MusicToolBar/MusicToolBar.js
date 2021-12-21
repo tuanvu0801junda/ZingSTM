@@ -45,7 +45,7 @@ function MusicToolBar() {
         loadAudioErrorPlayNext: true,
         autoHiddenCover: false,
         spaceBar: true,
-        responsive: true,
+        responsive: false,
 
         mobileMediaQuery: '(max-width: 1024px)',
 

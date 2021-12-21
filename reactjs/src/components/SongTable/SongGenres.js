@@ -18,7 +18,6 @@ function SongGenres(props) {
     const colorStatus = useColorModeValue("white", "gray.400");
 
     const playSong = () => {
-        console.log(props.songId);
         AddSongToPlay(props.songId);
     }
 
@@ -68,7 +67,7 @@ function SongGenres(props) {
                 </Text>
             </Td>
             <Td>
-                <SongButton />
+                <SongButton songId={props.songId}/>
             </Td>
         </Tr>
     );

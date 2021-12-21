@@ -21,3 +21,4 @@ build/
 
 # Ignore the .json file
 yarn.lock
+package-lock.json

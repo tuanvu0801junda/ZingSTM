@@ -17,12 +17,12 @@ class GenreController extends Controller{
     }
     public function getGenreInfoById(Request $request){
         $inputGenreId = $request->input('genreId');
-        $genres = DB::table('Genre')
+        $genre = DB::table('Genre')
                 ->where('genreId',$inputGenreId)
-                ->get();
+                ->first();
         return response()->json([
             'status' => 200,
-            'genres' => $genres->all(),
+            'genre' => $genre,
         ]);
     }
 }
