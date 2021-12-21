@@ -41,6 +41,13 @@ class PlaylistController extends Controller{
                     ->where('verifyCode',$verifyCode)
                     ->first();
         if($playlist != NULL){
+            if ((DB::table('SharePlaylist')->where('playlistId', $playlist->playlistId)->where('userId', $userId)->first()) != NULL)
+            return response()->json([
+                'status' => 201,
+                'check' => FALSE,
+                'message' => 'You are already joined this playlist!',
+            ]);
+
             $addUser = new SharePlaylist();
             $addUser->userId = $userId;
             $addUser->playlistId = $playlist->playlistId;
@@ -50,6 +57,8 @@ class PlaylistController extends Controller{
                 'status' => 200,
                 'check' => TRUE,
                 'message' => 'Access Allowed!',
+                'playlist' => $playlist,
+                'test' => DB::table('SharePlaylist')->where('playlistId', $playlist->playlistId)->where('userId', $userId)->first()
             ]);
         }else{
             return response()->json([
@@ -91,7 +100,7 @@ class PlaylistController extends Controller{
         }else{
             return response()->json([
                 'status' => 1062,
-                'message' => 'Duplicate! Song added already!',
+                'message' => 'Duplicate! This song is already on the playlist!',
             ]);
         }
     }
@@ -142,7 +151,7 @@ class PlaylistController extends Controller{
         $sharePlaylist = DB::table('Playlist')
             ->join('SharePlaylist','SharePlaylist.playlistId','=','Playlist.playlistId')
             ->where('SharePlaylist.userId',$userId)
-            ->select('playlistId', 'dateCreated', 'playlistName')
+            ->select('SharePlaylist.playlistId', 'dateCreated', 'playlistName')
             ->get();
 
         if ($sharePlaylist->isEmpty() == false){
@@ -181,7 +190,9 @@ class PlaylistController extends Controller{
     public function createUserPlaylist(Request $request){
         $playlistName = $request->input('playlistName');
         $searchResult = DB::table('Playlist')
-                ->where('playlistName',$playlistName)->first();
+                ->where('playlistName',$playlistName)
+                ->where('userId',$request->input('userId'))
+                ->first();
 
         if($searchResult != NULL){
             //found same playlistName!
@@ -204,6 +215,7 @@ class PlaylistController extends Controller{
 
             // shuffle the result
             $newPlaylist->verifyCode = $newPlaylist->playlistId . str_shuffle($pin);
+            $newPlaylist->save();
             return response()->json([
                 'status' => 200,
                 'playlist' => $newPlaylist,

@@ -29,7 +29,6 @@ import { useSelector } from "react-redux";
 function Sidebar(props) {
   var sidebarState = (useSelector((state) => state.reducerUpdateSidebar)).sidebarState;
   if (sidebarState == undefined) sidebarState == "logout";
-  console.log(sidebarState);
   // to check for active links and opened collapses
   let location = useLocation();
   // this is for the rest of the collapses

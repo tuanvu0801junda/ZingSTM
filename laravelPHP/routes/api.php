@@ -51,8 +51,6 @@ Route::post('/getGenreInfoById',[GenreController::class, 'getGenreInfoById']);
 Route::post('/getAllArtistInfo',[ArtistController::class, 'getAllArtistInfo']);
 Route::post('/getOneArtistInfo',[ArtistController::class, 'getOneArtistInfo']);
 
-Route::post('/getGenreInfoById',[GenreController::class, 'getGenreInfoById']);
-
 Route::post('/getPlaylistCreatedByUser',[PlaylistController::class, 'getPlaylistCreatedByUser']);
 Route::post('/getPlaylistSharedByOther',[PlaylistController::class, 'getPlaylistSharedByOther']);
 Route::post('/isAccessible',[PlaylistController::class, 'isAccessible']);
