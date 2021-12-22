@@ -1,6 +1,6 @@
 function reducerUpdateSidebar(state = 0, action) {
     switch (action.type) {
-        case "SIDEBAR_LOGIN":
+        case "UPDATE_SIDEBAR":
             state = action.data;
             return state;
         default:

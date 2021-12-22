@@ -43,6 +43,9 @@ var dashRoutes = [
     icon: <CreditIcon color="inherit" />,
     component: Billing,
     layout: "/zingstm",
+    logout: "block",
+    user: "none",
+    admin: "block",
   },
   // {
   //   path: "/admin",

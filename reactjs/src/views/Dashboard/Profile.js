@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import actionLogin from "redux/actions/actionLogin";
 import actionLogout from "redux/actions/actionLogout";
 import actionUpdatePlaylist from "redux/actions/actionUpdatePlaylist";
-import actionUpdateSidebarUser from "redux/actions/actionUpdateSidebarUser";
+import actionUpdateSidebar from "redux/actions/actionUpdateSidebar";
 // Chakra imports
 import {
 	Avatar,
@@ -33,7 +33,7 @@ function Profile() {
 	const dispatch = useDispatch();
 	// Test
 	const hiddenRTL = () => {
-		dispatch(actionUpdateSidebarUser());
+		dispatch(actionUpdateSidebar("user"));
 	};
 	//
 	var userInfo = {
@@ -187,6 +187,7 @@ function Profile() {
 	};
 
 	const logout = () => {
+		dispatch(actionUpdateSidebar("logout"));
 		dispatch(actionLogout());
 	};
 
