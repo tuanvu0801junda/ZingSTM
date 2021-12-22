@@ -178,5 +178,46 @@ function getUserInfo1(){
 
 //getUserInfo1();
 
+
+function getPlaylistInfo(){
+    $playlistId = 3;
+    $userId = 5;
+    $playlist = DB::table('Playlist')
+        ->where('playlistId',$playlistId)
+        ->first();
+    $songs = DB::table('Song')        
+        ->join('PlaylistSongRelation','PlaylistSongRelation.songId','=','Song.songId')
+        ->where('PlaylistSongRelation.playlistId',$playlistId)
+        ->get();
+    $check = DB::table('SharePlaylist') 
+        ->where('playlistId',$playlistId)
+        ->where('userId',$userId)
+        ->first();
+
+    if($playlist == NULL){
+        
+            echo 'NOT Found';
+    }
+    elseif($playlist->userId == $userId){   // playlist master
+        
+            echo  $playlist->playlistName;
+            foreach($songs as $songs){ 
+
+                echo "$songs->title<br/>";
+            }
+            echo'here your playlist';
+    }
+    elseif($check != NULL){                 // shared user
+        echo  $playlist->playlistName;
+            foreach($songs as $songs){ 
+
+                echo "$songs->title<br/>";
+            }
+            echo 'Access Acepted';
+    }else{
+        echo 'Access Denied';
+    }
+}
+getPlaylistInfo();
 ?>
 

@@ -104,7 +104,7 @@ class PlaylistController extends Controller{
             ]);
         }
     }
-  
+ 
     public function checkPlaylistMaker(Request $request){
         $checkPlaylist = DB::table('Playlist')
                     ->where('playlistId', $request->input('playlistId'))
@@ -222,5 +222,51 @@ class PlaylistController extends Controller{
                 'message' => 'Create Playlist Successfully',
             ]);
         }
+    }
+
+    public function getPlaylistInfo(Request $request){
+        $playlistId = $request->input('playlistId');
+        $userId = $request->input('userId');
+        $playlist = DB::table('Playlist')
+            ->where('playlistId',$playlistId)
+            ->first();
+        $songs = DB::table('Song')        
+            ->join('PlaylistSongRelation','PlaylistSongRelation.songId','=','Song.songId')
+            ->where('PlaylistSongRelation.playlistId',$playlistId)
+            ->get();
+        $check = DB::table('SharePlaylist') 
+            ->where('playlistId',$playlistId)
+            ->where('userId',$userId)
+            ->first();
+
+        if($playlist == NULL){
+            return response()->json([
+                'status' => 404,
+                'message' => 'NOT Found',
+            ]);
+        }
+        elseif($playlist->userId == $userId){   // playlist master
+            return response()->json([
+                'status' => 200,
+                'playlist' => $playlist,
+                'songs' => $songs,
+                'message' => 'here your playlist',
+            ]);
+        }
+        elseif($check != NULL){                 // shared user
+            return response()->json([
+                'status' => 200,
+                'playlist' => $playlist,
+                'songs' => $songs,
+                'message' => 'Access Acepted',
+            ]);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'Access Denied',
+            ]);
+        }
+
+
     }
 }
