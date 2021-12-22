@@ -57,4 +57,5 @@ class AlbumController extends Controller{
             'message' => 'Album Updated Successfully',
         ]);
     }
+
 }

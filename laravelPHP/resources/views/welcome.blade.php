@@ -9,6 +9,7 @@ use App\Models\Genre;
 use Carbon\Carbon;
 use App\Models\SharePlaylist;
 use App\Models\PlaylistSongRelation;
+use App\Models\SongArtistRelation;
 
 function getSongOfGenre(){
     $inputGenreId = 1;
@@ -178,5 +179,74 @@ function getUserInfo1(){
 
 //getUserInfo1();
 
+
+function getPlaylistInfo(){
+    $playlistId = 3;
+    $userId = 5;
+    $playlist = DB::table('Playlist')
+        ->where('playlistId',$playlistId)
+        ->first();
+    $songs = DB::table('Song')        
+        ->join('PlaylistSongRelation','PlaylistSongRelation.songId','=','Song.songId')
+        ->where('PlaylistSongRelation.playlistId',$playlistId)
+        ->get();
+    $check = DB::table('SharePlaylist') 
+        ->where('playlistId',$playlistId)
+        ->where('userId',$userId)
+        ->first();
+
+    if($playlist == NULL){
+        
+            echo 'NOT Found';
+    }
+    elseif($playlist->userId == $userId){   // playlist master
+        
+            echo  $playlist->playlistName;
+            foreach($songs as $songs){ 
+
+                echo "$songs->title<br/>";
+            }
+            echo'here your playlist';
+    }
+    elseif($check != NULL){                 // shared user
+        echo  $playlist->playlistName;
+            foreach($songs as $songs){ 
+
+                echo "$songs->title<br/>";
+            }
+            echo 'Access Acepted';
+    }else{
+        echo 'Access Denied';
+    }
+}
+//getPlaylistInfo();
+
+function getSongNumberOfAnArtist(){
+    $album = DB::table('Song')
+                        ->groupBy('albumId')
+                        ->get('albumId');
+        $i=0;
+        foreach($album as $album){ 
+            $song = DB::table('Song')
+                        ->where('albumId', $album->albumId)
+                        ->count();
+            $totalPlay = DB::table('Song')
+                            ->where('albumId',$album->albumId)->sum('playTimes');
+            $albumArr[$i] = array('albumId'=> $album->albumId,'songNumber'=>$song,'totalPlay'=>$totalPlay);
+            
+        
+        echo $i;
+        echo "    ";
+        echo $albumArr[$i]['albumId'];
+        echo "    ";
+        echo $albumArr[$i]['songNumber'];
+        echo "    ";
+        echo $albumArr[$i]['totalPlay'];
+        echo "</br>";
+        $i++;
+    }
+    
+}
+getSongNumberOfAnArtist()
 ?>
 
