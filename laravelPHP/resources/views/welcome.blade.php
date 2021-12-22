@@ -9,6 +9,7 @@ use App\Models\Genre;
 use Carbon\Carbon;
 use App\Models\SharePlaylist;
 use App\Models\PlaylistSongRelation;
+use App\Models\SongArtistRelation;
 
 function getSongOfGenre(){
     $inputGenreId = 1;
@@ -218,6 +219,34 @@ function getPlaylistInfo(){
         echo 'Access Denied';
     }
 }
-getPlaylistInfo();
+//getPlaylistInfo();
+
+function getSongNumberOfAnArtist(){
+    $album = DB::table('Song')
+                        ->groupBy('albumId')
+                        ->get('albumId');
+        $i=0;
+        foreach($album as $album){ 
+            $song = DB::table('Song')
+                        ->where('albumId', $album->albumId)
+                        ->count();
+            $totalPlay = DB::table('Song')
+                            ->where('albumId',$album->albumId)->sum('playTimes');
+            $albumArr[$i] = array('albumId'=> $album->albumId,'songNumber'=>$song,'totalPlay'=>$totalPlay);
+            
+        
+        echo $i;
+        echo "    ";
+        echo $albumArr[$i]['albumId'];
+        echo "    ";
+        echo $albumArr[$i]['songNumber'];
+        echo "    ";
+        echo $albumArr[$i]['totalPlay'];
+        echo "</br>";
+        $i++;
+    }
+    
+}
+getSongNumberOfAnArtist()
 ?>
 

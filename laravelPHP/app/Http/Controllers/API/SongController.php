@@ -228,39 +228,52 @@ class SongController extends Controller{
         }
     }
 
-    public function getSongNumberOfAnArtist(Request $request){
-        $artistId = $request->input('artistId');
-        $songNumber = DB::table('SongArtistRelation')
-                        ->where('artistId',$artistId)->count();
-        if($songNumber >= 0){
+    public function getSongNumberOfAnArtist(){
+        $artist = DB::table('SongArtistRelation')
+                        ->groupBy('artistId')
+                        ->get('artistId');
+        $i=0;
+        foreach($artist as $artist){ 
+            $song = DB::table('SongArtistRelation')
+                        ->where('artistId', $artist->artistId)
+                        ->count();
+            $artistArr[$i] = array('artistId'=> $artist->artistId,'songNumber'=>$song);
+            $i++;
+        }
+        $i--;
+        if($i > 0){
             return response()->json([
                 'status' => 200,
-                'numberSong' => $songNumber,
+                'artistSong' => $artistArr,
             ]);
         }else{
             return response()->json([
                 'status' => 404,
-                'message' => 'Cannot count!',
+                'message' => 'DB null!',
             ]);
         }
     }
 
-    public function getAlbumStatistic(Request $request){
-        $albumId = $request->input('albumId');
+    public function getAlbumStatistic(){
 
-        //number of song in album
-        $songNumber = DB::table('Song')
-                        ->where('albumId',$albumId)->count();
-
-        //total playtimes of whole album
-        $totalPlay = DB::table('Song')
-                        ->where('albumId',$albumId)->sum('playTimes');
-
-        if($songNumber >= 0 && $totalPlay >= 0){
+        $album = DB::table('Song')
+                        ->groupBy('albumId')
+                        ->get('albumId');
+        $i=0;
+        foreach($album as $album){ 
+            $song = DB::table('Song')
+                        ->where('albumId', $album->albumId)
+                        ->count();
+            $totalPlay = DB::table('Song')
+                            ->where('albumId',$album->albumId)->sum('playTimes');
+            $albumArr[$i] = array('albumId'=> $album->albumId,'songNumber'=>$song,'totalPlay'=>$totalPlay);
+            $i++;
+        }
+        $i--;
+        if($i >= 0){
             return response()->json([
                 'status' => 200,
-                'numberSong' => $songNumber,
-                'totalPlayTimes' => $totalPlay,
+                'albumSong' => $albumArr,
             ]);
         } else {
             return response()->json([
