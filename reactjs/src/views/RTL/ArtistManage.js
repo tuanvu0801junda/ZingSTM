@@ -49,11 +49,14 @@ export default function Dashboard() {
         }
     }
     for (let i = 0; i < artist.length; i++) {
-        for (let j = 0; j < artistSong.length; j++) {
-            if (artist[i].artistId === artistSong[j].artistId) {
-                artist[i]["totalSong"] = artistSong[j].songNumber;
+        if (artistSong !== undefined) {
+            for (let j = 0; j < artistSong.length; j++) {
+                if (artist[i].artistId === artistSong[j].artistId) {
+                    artist[i]["totalSong"] = artistSong[j].songNumber;
+                }
             }
         }
+
     }
     //Handle add new artist
     const goToAddArtistPage = () => {

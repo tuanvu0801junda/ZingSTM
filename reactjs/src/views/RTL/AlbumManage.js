@@ -50,12 +50,15 @@ export default function Dashboard() {
 
     }
     for (let i = 0; i < album.length; i++) {
-        for (let j = 0; j < albumStatistic.length; j++) {
-            if (album[i].albumId === albumStatistic[j].albumId) {
-                album[i]["totalSong"] = albumStatistic[j].songNumber;
-                album[i]["totalPlay"] = albumStatistic[j].totalPlay;
+        if (albumStatistic !== undefined) {
+            for (let j = 0; j < albumStatistic.length; j++) {
+                if (album[i].albumId === albumStatistic[j].albumId) {
+                    album[i]["totalSong"] = albumStatistic[j].songNumber;
+                    album[i]["totalPlay"] = albumStatistic[j].totalPlay;
+                }
             }
         }
+
     }
     //Handle add new album
     const goToAddAlbumPage = () => {
