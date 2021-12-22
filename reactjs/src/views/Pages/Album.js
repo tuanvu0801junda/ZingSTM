@@ -16,7 +16,7 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import AlbumBanner from "components/Banner/AlbumBanner";
-import SongAlbum from "components/SongTable/SongAlbum";
+import SongInRow from "components/Song/SongInRow";
 import axios from "axios";
 
 function Album() {
@@ -91,7 +91,7 @@ function Album() {
 								? "Loading..."
 								: songs.map((row) => {
 										return (
-											<SongAlbum
+											<SongInRow
 												songId={row.songId}
 												title={row.title}
 												logo={row.imagePath}

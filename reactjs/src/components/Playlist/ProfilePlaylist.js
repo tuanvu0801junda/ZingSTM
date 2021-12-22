@@ -1,9 +1,21 @@
-import { Flex, Button, Box, Image, Text, useColorModeValue } from "@chakra-ui/react";
+import {
+	Flex,
+	Button,
+	Box,
+	Image,
+	Text,
+	useColorModeValue,
+} from "@chakra-ui/react";
+import { useHistory } from "react-router-dom";
 
 export default function (props) {
+	const history = useHistory();
 	const textColor = useColorModeValue("gray.700", "white");
+
+	const goToPlaylistPage = () =>
+		history.push("/zingstm/playlist/" + props.playlistId);
 	return (
-		<Flex direction="column">
+		<Flex direction="column" as="button">
 			<Box mb="20px" position="relative" borderRadius="15px">
 				<Image
 					src="https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FAlbumImages%2FDefault.jpg?alt=media&token=6bf68b0f-af7c-429a-987b-6ff4fd74beaf"
@@ -35,6 +47,7 @@ export default function (props) {
 						h="36px"
 						fontSize="md"
 						px="1.5rem"
+						onClick={goToPlaylistPage}
 					>
 						View playlist
 					</Button>
