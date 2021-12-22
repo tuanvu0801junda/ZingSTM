@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { IoDocumentsSharp } from "react-icons/io5";
 import swal from "sweetalert";
+import { uploadSongImage } from '../../firebase/uploadMp3Image';
+const imgUrlUndefinded = "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FSongImages%2Fundefined?"
 
 // Chakra imports
 import {
@@ -36,12 +38,14 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 
 
-function AddSong(props) {
+function UpdateSong(props) {
     const history = useHistory();
     const textColor = useColorModeValue("gray.700", "white");
     const [songCurrentName, getSongCurrentName] = useState('');
     const [artist, getArtist] = useState([]);
     const [album, getAlbum] = useState([]);
+    const [artistNameSelected, getArtistNameSelected] = useState('');
+    const [albumNameSelected, getAlbumNameSelected] = useState('');
     const [image, setImage] = useState('');
     const { id } = useParams();
 
@@ -58,6 +62,7 @@ function AddSong(props) {
             getSongCurrentName(res.data.song.title);
         }
     }
+
     //Get artist
     useEffect(() => {
         getAllArtistInfo();
@@ -82,6 +87,59 @@ function AddSong(props) {
     const goToManageSongPage = () => {
         history.push('/zingstm/manage-song');
     }
+    const handleUpdateSong = async () => {
+        const imageUrl = await uploadSongImage(image); //Get url from firebase
+        updateSongToDataBase(imageUrl);
+    }
+
+    //Update new song to database
+    const updateSongToDataBase = async (imageUrl) => {
+
+        if (artistNameSelected != '' && albumNameSelected != '' && !imageUrl.includes(imgUrlUndefinded)) {
+            //Get artistId from artistName
+            const res2 = await axios.post('/api/getArtistId', { artistName: artistNameSelected })
+            const artistIdSelected = res2.data.artist.artistId;
+            //Get albumId from albumName
+            const res1 = await axios.post('/api/getAlbumId', { albumName: albumNameSelected })
+            const albumIdSelected = res1.data.album.albumId;
+
+            const data = {
+                songId: id,
+                imagePath: imageUrl,
+                artistId: artistIdSelected,
+                albumId: albumIdSelected
+            }
+            console.log(data);
+
+            const res = await axios.post('/api/updateOneSong', data);
+            if (res.data.status === 200) {
+                try {
+                    console.log(res.data.message);
+                    swal({
+                        title: "Update Success!",
+                        text: res.data.message,
+                        icon: "success",
+                        button: "OK!",
+                    })
+                        .then((value) => {
+                            window.location.reload();
+                        });
+
+                }
+                catch (err) {
+                    swal("Error", err.message, "error");
+                }
+            }
+        } else {
+            swal({
+                title: "Fail!",
+                text: "Empty blank",
+                icon: "warning",
+                button: "OK!",
+            });
+        }
+
+    }
 
     return (
         <div style={{ margin: '125px 0px 0px 0px' }} >
@@ -98,19 +156,19 @@ function AddSong(props) {
                         <FormLabel fontSize="xl" color="blue">Song name: {songCurrentName}</FormLabel>
                         <br />
                         <FormLabel>Artist:</FormLabel>
-                        <Select placeholder="Select artist" onChange={(e) => { getArtistIdSelected(e.target.selectedIndex) }}>
+                        <Select placeholder="Select artist" onChange={(e) => { getArtistNameSelected(e.target.value) }}>
                             {artist.map((data) => {
                                 return (
-                                    <option>{data.artistName}</option>
+                                    <option value={data.artistName}>{data.artistName}</option>
                                 );
                             })}
                         </Select>
                         <br />
                         <FormLabel>Album:</FormLabel>
-                        <Select placeholder="Select artist">
+                        <Select placeholder="Select album" onChange={(e) => { getAlbumNameSelected(e.target.value) }}>
                             {album.map((data) => {
                                 return (
-                                    <option>{data.title}</option>
+                                    <option value={data.title}>{data.title}</option>
                                 );
                             })}
                         </Select>
@@ -134,7 +192,7 @@ function AddSong(props) {
                             </Flex>
                         </Button>
                         <br /><br /><br />
-                        <Button style={{ 'borderRadius': "5px" }} colorScheme="blue">Upload
+                        <Button style={{ 'borderRadius': "5px" }} colorScheme="blue" onClick={handleUpdateSong}>Update
                         </Button>
                     </FormControl>
                 </CardBody>
@@ -143,4 +201,4 @@ function AddSong(props) {
     );
 }
 
-export default AddSong
+export default UpdateSong

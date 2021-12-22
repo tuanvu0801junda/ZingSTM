@@ -16,7 +16,17 @@ class ArtistController extends Controller{
             'artists' => $artists->all()
         ]);
     }
+    public function postNewArtist(Request $request){
+        $newArtist = new Artist();
+        $newArtist->artistName = $request->input('artistName');
+        $newArtist->artistImage = $request->input('artistImage');
 
+        $newArtist->save();
+        return response()->json([
+            'status' => 200,
+            'message' => 'Add New Artist Successfully',
+        ]);
+    }
     public function getOneArtistInfo(Request $request){
         $artistId = $request->input('artistId');
         $artist = DB::table('Artist')
@@ -28,6 +38,27 @@ class ArtistController extends Controller{
                 'status' => 200,
                 'artist' => $artist,
                 'message' => 'Get 1 artist info successfully!',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Artist not found!',
+            ]);
+        }
+    }
+
+    public function getArtistId(Request $request){
+        $artistName = $request->input('artistName');
+        $artist = DB::table('Artist')
+                ->where('artistName',$artistName)
+                ->select('artistId')
+                ->first();
+
+        if ($artist != NULL){
+            return response()->json([
+                'status' => 200,
+                'artist' => $artist,
+                'message' => 'Get artist id successfully!',
             ]);
         } else {
             return response()->json([

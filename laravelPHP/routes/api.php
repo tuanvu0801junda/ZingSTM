@@ -44,6 +44,8 @@ Route::post('/getSongNumberOfAnArtist', [SongController::class, 'getSongNumberOf
 Route::post('/getAlbumStatistic', [SongController::class, 'getAlbumStatistic']);
 Route::post('/getTotalSong', [SongController::class, 'getTotalSong']);
 Route::post('/insertSongArtistRelation', [SongController::class, 'insertSongArtistRelation']);
+Route::post('/insertSongGenreRelation', [SongController::class, 'insertSongGenreRelation']);
+Route::post('/postNewSong', [SongController::class, 'postNewSong']);
 
 Route::post('/postSongComment',[CommentController::class, 'postSongComment']);
 Route::post('/getUserComment',[CommentController::class, 'getUserComment']);
@@ -54,12 +56,17 @@ Route::post('/getAllPlaylistComment',[CommentController::class,'getAllPlaylistCo
 Route::post('/getAllAlbumInfo',[AlbumController::class, 'getAllAlbumInfo']);
 Route::post('/deleteOneAlbum',[AlbumController::class, 'deleteOneAlbum']);
 Route::post('/getOneAlbumInfo',[AlbumController::class, 'getOneAlbumInfo']);
+Route::post('/getAlbumId',[AlbumController::class, 'getAlbumId']);
 Route::post('/updateOneAlbum',[AlbumController::class, 'updateOneAlbum']);
+Route::post('/postNewAlbum', [AlbumController::class, 'postNewAlbum']);
+
 
 Route::post('/getAllArtistInfo',[ArtistController::class, 'getAllArtistInfo']);
 Route::post('/getOneArtistInfo',[ArtistController::class, 'getOneArtistInfo']);
+Route::post('/getArtistId',[ArtistController::class, 'getArtistId']);
 Route::post('/deleteOneArtist',[ArtistController::class, 'deleteOneArtist']);
 Route::post('/updateOneArtist',[ArtistController::class, 'updateOneArtist']);
+Route::post('/postNewArtist', [ArtistController::class, 'postNewArtist']);
 
 Route::post('/getGenreInfoById',[GenreController::class, 'getGenreInfoById']);
 Route::post('/getAllGenreInfo',[GenreController::class, 'getAllGenreInfo']);

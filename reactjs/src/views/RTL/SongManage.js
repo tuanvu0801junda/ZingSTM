@@ -40,18 +40,43 @@ export default function Dashboard() {
     if (res.data.status === 200) {
       setSong(res.data.songs);
       console.log(res.data.songs);
+      console.log(res.data.albumTitle);
     }
   }
-
+  //Handle add new song
   const goToAddSongPage = () => {
     history.push('/zingstm/add-song');
   }
+  //Handle update song
   const goToUpdateSongPage = (event) => {
     const songCurrentId = event.target.value;
     // console.log(songCurrentId);
     history.push('/zingstm/update-song/' + songCurrentId);
   }
-
+  // Handle delete song
+  const handleDeleteSong = (id) => {
+    swal("Are you sure you to delete this song?", {
+      buttons: {
+        cancel: "No",
+        catch: {
+          text: "Yes",
+          value: "catch",
+        },
+      },
+    })
+      .then((value) => {
+        switch (value) {
+          case "cancel":
+            break;
+          case "catch":
+            axios.post("/api/deleteOneSong", { songId: id });
+            window.location.reload();
+            break;
+          default:
+            break;
+        }
+      });
+  }
   return (
     <div style={{ margin: '125px 0px 0px 0px' }}>
       <Card overflowX={{ xl: "hidden" }}>
@@ -103,7 +128,7 @@ export default function Dashboard() {
                     <Td>
                       <Flex direction="column">
                         <Text fontSize="md" color={textColor} fontWeight="bold">
-                          {data.title}
+                          {data.albumTitle}
                         </Text>
                       </Flex>
                     </Td>
@@ -123,7 +148,7 @@ export default function Dashboard() {
                       <Button colorScheme="green" size="sm" onClick={goToUpdateSongPage} value={data.songId}>Update</Button>
                     </Td>
                     <Td>
-                      <Button colorScheme="red" size="sm">Delete</Button>
+                      <Button colorScheme="red" size="sm" onClick={() => { handleDeleteSong(data.songId) }}>Delete</Button>
                     </Td>
                   </Tr>
                 );
