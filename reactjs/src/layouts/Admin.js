@@ -141,7 +141,7 @@ export default function Dashboard(props) {
             <PanelContainer>
               <Switch>
                 {getRoutes(routes)}
-                <Route path={`/zingstm/playlist`} component={Playlist} />
+                <Route path={`/zingstm/playlist/:playlistId`} component={Playlist} />
                 <Route path={`/zingstm/album/:albumId`} component={Album} />
                 <Route path={`/zingstm/genres/:genreId`} component={Genres} />
 

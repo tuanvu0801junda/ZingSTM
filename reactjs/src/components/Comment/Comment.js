@@ -15,7 +15,7 @@ import {
     Box,
 } from "@chakra-ui/react";
 
-// import { useState } from "react"
+import { useState } from "react"
 
 function UserComment(props) {
     const { name, date, comment, userAvatar } = props;

@@ -18,7 +18,7 @@ import CardBody from "components/Card/CardBody.js";
 import axios from 'axios';
 
 import ArtistBanner from "components/Banner/ArtistBanner";
-import SongGenres from "components/SongTable/SongGenres";
+import SongInRow from "components/Song/SongInRow";
 
 function Artist() {
   const { artistId } = useParams();
@@ -89,7 +89,7 @@ function Artist() {
                 !songs ? "Loading..." :
                 songs.map((row) => {
                   return (
-                    <SongGenres
+                    <SongInRow
                       songId={row.songId}
                       title={row.title}
                       logo={row.imagePath}

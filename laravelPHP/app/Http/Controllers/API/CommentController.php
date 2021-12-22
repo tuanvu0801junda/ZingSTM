@@ -71,9 +71,16 @@ class CommentController extends Controller{
         // Be careful with this!
 
         $playlistComment->save();
+        $comment = DB::table('PlaylistComment')
+            ->join('User','User.userId','=','PlaylistComment.userId')
+            ->where('playlistCommentId',$playlistComment->playlistCommentId)
+            ->select('playlistCommentId', 'fullname', 'profilePic', 'userComment','createdDate')
+            ->first();
+
         return response()->json([
             'status' => 200,
             'message' => 'Create Playlist Comment Successfully',
+            'comment' => $comment,
         ]);
     }
 
@@ -88,12 +95,12 @@ class CommentController extends Controller{
         if ($comments->isEmpty() == false){
             return response()->json([
                 'status' => 200,
-                'songs' => $comments->all(),
-            ]); 
+                'comments' => $comments->all(),
+            ]);
         } else {
             return response()->json([
                 'status' => 404,
-                'message' => 'Comment(s) not found!',
+                'message' => 'No comment.',
             ]);
         }
     }
