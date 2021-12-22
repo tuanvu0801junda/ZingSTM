@@ -30,23 +30,67 @@ export default function Dashboard() {
     // Chakra Color Mode
     const textColor = useColorModeValue("gray.700", "white");
     const history = useHistory();
-    const [song, setSong] = useState([]);
+    const [album, setAlbum] = useState([]);
+    const [albumStatistic, getAlbumStatistic] = useState([]);
     useEffect(() => {
-        getAllSongData();
+        getAllAlbumData();
     }, [])
-    //Get song data from database
-    const getAllSongData = async () => {
-        const res = await axios.post("/api/getAllSongInfo");
+    //Get album data from database
+    const getAllAlbumData = async () => {
+        const res = await axios.post("/api/getAllAlbumInfo");
+        const res1 = await axios.post("api/getAlbumStatistic");
         if (res.data.status === 200) {
-            setSong(res.data.songs);
-            console.log(res.data.songs);
+            setAlbum(res.data.albums);
+            console.log(res.data.albums);
+        }
+        if (res1.data.status === 200) {
+            getAlbumStatistic(res1.data.albumSong);
+            console.log(res1.data.albumSong);
+        }
+
+    }
+    for (let i = 0; i < album.length; i++) {
+        for (let j = 0; j < albumStatistic.length; j++) {
+            if (album[i].albumId === albumStatistic[j].albumId) {
+                album[i]["totalSong"] = albumStatistic[j].songNumber;
+                album[i]["totalPlay"] = albumStatistic[j].totalPlay;
+            }
         }
     }
-
-    const goToAddSongPage = () => {
-        history.push('/zingstm/add-song');
+    //Handle add new album
+    const goToAddAlbumPage = () => {
+        history.push('/zingstm/add-album');
     }
-
+    //Handle update album
+    const goToUpdateAlbumPage = (event) => {
+        const albumCurrentId = event.target.value;
+        // console.log(albumCurrentId);
+        history.push('/zingstm/update-album/' + albumCurrentId);
+    }
+    //Handle delete album
+    const handleDeleteAlbum = (id) => {
+        swal("Are you sure you to delete this album?", {
+            buttons: {
+                cancel: "No",
+                catch: {
+                    text: "Yes",
+                    value: "catch",
+                },
+            },
+        })
+            .then((value) => {
+                switch (value) {
+                    case "cancel":
+                        break;
+                    case "catch":
+                        axios.post("/api/deleteOneAlbum", { albumId: id });
+                        window.location.reload();
+                        break;
+                    default:
+                        break;
+                }
+            });
+    }
     return (
         <div style={{ margin: '125px 0px 0px 0px' }}>
             <Card overflowX={{ xl: "hidden" }}>
@@ -54,7 +98,7 @@ export default function Dashboard() {
                     <Text fontSize="xl" color={textColor} fontWeight="bold">
                         Album Data
                     </Text>
-                    <Button style={{ margin: "0 0 0 75%", 'borderRadius': "5px" }} colorScheme="blue" onClick={goToAddSongPage}>Add album
+                    <Button style={{ margin: "0 0 0 75%", 'borderRadius': "5px" }} colorScheme="blue" onClick={goToAddAlbumPage}>Add album
                     </Button>
                 </CardHeader>
                 <CardBody>
@@ -62,23 +106,22 @@ export default function Dashboard() {
                         <Thead>
                             <Tr my=".8rem" pl="0px" color="gray.400">
                                 <Th color="gray.400">
-                                    Image
+                                    Album
                                 </Th>
-                                <Th color="gray.400">Name</Th>
-                                <Th color="gray.400">Geres</Th>
-                                <Th color="gray.400">Total Song</Th>
+                                <Th style={{ textAlign: 'center' }} color="gray.400">Total Song</Th>
+                                <Th style={{ textAlign: 'center' }} color="gray.400">Play Times</Th>
                                 <Th color="gray.400">Update</Th>
                                 <Th color="gray.400">Delete</Th>
 
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {song.map((data) => {
+                            {album.map((data) => {
                                 return (
                                     <Tr>
                                         <Td minWidth={{ sm: "250px" }} pl="0px">
                                             <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
-                                                <Avatar src={data.imagePath} w="50px" borderRadius="12px" me="18px" />
+                                                <Avatar src={data.artworkPath} w="50px" borderRadius="12px" me="18px" />
                                                 <Flex direction="column">
                                                     <Text
                                                         fontSize="md"
@@ -88,37 +131,28 @@ export default function Dashboard() {
                                                     >
                                                         {data.title}
                                                     </Text>
-                                                    <Text fontSize="sm" color="gray.400" fontWeight="normal">
-                                                        {data.artistName}
-                                                    </Text>
+
                                                 </Flex>
                                             </Flex>
                                         </Td>
 
-                                        <Td>
+                                        <Td style={{ textAlign: 'center' }}>
                                             <Flex direction="column">
                                                 <Text fontSize="md" color={textColor} fontWeight="bold">
-                                                    {data.title}
+                                                    {data.totalSong || "0"}
                                                 </Text>
                                             </Flex>
                                         </Td>
-                                        <Td>
-                                            <Flex direction="column">
-                                                <Text fontSize="md" color={textColor} fontWeight="bold">
-                                                    {data.genreName}
-                                                </Text>
-                                            </Flex>
-                                        </Td>
-                                        <Td>
+                                        <Td style={{ textAlign: 'center' }}>
                                             <Text fontSize="md" color={textColor} fontWeight="bold">
-                                                {data.duration}
+                                                {data.totalPlay || "0"}
                                             </Text>
                                         </Td>
                                         <Td>
-                                            <Button colorScheme="green" size="sm">Update</Button>
+                                            <Button colorScheme="green" size="sm" onClick={goToUpdateAlbumPage} value={data.albumId}>Update</Button>
                                         </Td>
                                         <Td>
-                                            <Button colorScheme="red" size="sm">Delete</Button>
+                                            <Button colorScheme="red" size="sm" onClick={() => { handleDeleteAlbum(data.albumId) }}>Delete</Button>
                                         </Td>
                                     </Tr>
                                 );

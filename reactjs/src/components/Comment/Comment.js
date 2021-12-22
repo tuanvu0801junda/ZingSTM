@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import swal from "sweetalert";
 import axios from 'axios';
 
-import {    
+import {
     useColorModeValue,
     Flex,
     Text,
@@ -15,7 +15,7 @@ import {
     Box,
 } from "@chakra-ui/react";
 
-import { useState } from "react"
+// import { useState } from "react"
 
 function UserComment(props) {
     const { name, date, comment, userAvatar } = props;
@@ -114,40 +114,40 @@ function UserComment(props) {
         <Flex my="1rem" justifyContent="space-between">
             <Flex alignItems="center">
                 <Box
-                me="12px"
-                borderRadius="50%"
-                border="1px solid"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                w="35px"
-                h="35px"
+                    me="12px"
+                    borderRadius="50%"
+                    border="1px solid"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    w="35px"
+                    h="35px"
                 >
                     {/* <Icon as={logo} /> */}
-                    <Avatar src={userAvatar}/>
+                    <Avatar src={userAvatar} />
                 </Box>
                 <Flex direction="column">
-                <Text
-                    fontSize={{ sm: "md", md: "lg", lg: "md" }}
-                    color={textColor}
-                    fontWeight="bold"
-                >
-                    {name}
-                </Text>
-                <Text
-                    fontSize={{ sm: "md", md: "sm", lg: "md" }}
-                    color="gray.400"
-                    fontWeight="semibold"
-                >
-                    {comment}
-                </Text>
+                    <Text
+                        fontSize={{ sm: "md", md: "lg", lg: "md" }}
+                        color={textColor}
+                        fontWeight="bold"
+                    >
+                        {name}
+                    </Text>
+                    <Text
+                        fontSize={{ sm: "md", md: "sm", lg: "md" }}
+                        color="gray.400"
+                        fontWeight="semibold"
+                    >
+                        {comment}
+                    </Text>
                 </Flex>
             </Flex>
             <Box
                 color={textColor}
             >
                 <Text fontSize={{ sm: "md", md: "lg", lg: "md" }} fontWeight="bold">
-                {date}
+                    {date}
                 </Text>
             </Box>
         </Flex>

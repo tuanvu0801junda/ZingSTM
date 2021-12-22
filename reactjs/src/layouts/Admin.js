@@ -20,10 +20,15 @@ import Genres from "views/Pages/Genres";
 import Artist from "views/Pages/Artist";
 //Admin components
 import AddSong from "views/RTL/AddSong";
-import UpdateSong from "views/RTL/UpdateSong"
+import AddAlbum from "views/RTL/AddAlbum";
+import AddArtist from "views/RTL/AddArtist";
+import UpdateSong from "views/RTL/UpdateSong";
+import UpdateArtist from "views/RTL/UpdateArtist";
+import UpdateAlbum from "views/RTL/UpdateAlbum";
+
 import SongManage from "views/RTL/SongManage";
 import AlbumManage from "views/RTL/AlbumManage";
-import ArtistManage from "views/RTL/AlbumManage";
+import ArtistManage from "views/RTL/ArtistManage";
 
 
 export default function Dashboard(props) {
@@ -142,7 +147,13 @@ export default function Dashboard(props) {
 
                 <Route path={`/zingstm/artist/:artistId`} component={Artist} />
                 <Route path={`/zingstm/add-song`} component={AddSong} />
+                <Route path={`/zingstm/add-album`} component={AddAlbum} />
+                <Route path={`/zingstm/add-artist`} component={AddArtist} />
+
                 <Route path={`/zingstm/update-song/:id`} component={UpdateSong} />
+                <Route path={`/zingstm/update-artist/:id`} component={UpdateArtist} />
+                <Route path={`/zingstm/update-album/:id`} component={UpdateAlbum} />
+
                 <Route path={`/zingstm/manage-song`} component={SongManage} />
                 <Route path={`/zingstm/manage-album`} component={AlbumManage} />
                 <Route path={`/zingstm/manage-artist`} component={ArtistManage} />
