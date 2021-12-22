@@ -39,8 +39,9 @@ class AlbumController extends Controller{
         } else {
             return response()->json([
                 'status' => 200,
-                'albumTitle' => $album->albumTitle,  
+                'title' => $album->title,  
                 'artworkPath' => $album->artworkPath,
+                'albumId' => $album->albumId,
             ]);
         }
     }

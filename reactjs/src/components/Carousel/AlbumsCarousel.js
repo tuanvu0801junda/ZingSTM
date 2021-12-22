@@ -23,10 +23,11 @@ export default function AlbumsCarousel(props) {
             {albums.map((row) => {
                 return (
                     <TopAlbums
-                        key={0}
+                        key={row.albumId}
                         title={row.title}
                         imgURL={row.artworkPath}
                         category="New !"
+                        albumId={row.albumId}
                     />
                 )
             })}
