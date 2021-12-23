@@ -6,11 +6,11 @@ function GenresBanner(props) {
                 {/* <img src={discover_weekly?.images[0].url} alt="" /> */}
                 <img src={props.imgURL} />
                 <div className="playlist__infoText">
-                    <strong>Genres</strong>
+                    <strong>Genre</strong>
                     <h2>{props.genres}</h2>
                     <button className="play__button">
                         <i class="fas fa-play"></i>
-                        <span style={{ margin: "0px 10px 0px 10px" }}>Phát ngẫu nhiên</span>
+                        <span style={{ margin: "0px 10px 0px 10px" }}>Phát lần lượt</span>
                     </button>
                     <button className="heart__button">
                         <i class="fas fa-heart"></i>

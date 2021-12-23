@@ -2,7 +2,7 @@ import React from "react";
 import { useColorModeValue, Flex, Text, Avatar, Box } from "@chakra-ui/react";
 import { Separator } from "components/Separator/Separator";
 
-export default function PlaylistComment(props) {
+export default function SongComment(props) {
 	const { name, date, comment, userAvatar } = props;
 	const textColor = useColorModeValue("gray.700", "white");
 	return (

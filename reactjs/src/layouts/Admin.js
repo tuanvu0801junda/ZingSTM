@@ -29,6 +29,7 @@ import UpdateAlbum from "views/RTL/UpdateAlbum";
 import SongManage from "views/RTL/SongManage";
 import AlbumManage from "views/RTL/AlbumManage";
 import ArtistManage from "views/RTL/ArtistManage";
+import Song from "views/Pages/Song";
 
 
 export default function Dashboard(props) {
@@ -144,6 +145,7 @@ export default function Dashboard(props) {
                 <Route path={`/zingstm/playlist/:playlistId`} component={Playlist} />
                 <Route path={`/zingstm/album/:albumId`} component={Album} />
                 <Route path={`/zingstm/genres/:genreId`} component={Genres} />
+                <Route path={`/zingstm/song/:songId`} component={Song} />
 
                 <Route path={`/zingstm/artist/:artistId`} component={Artist} />
                 <Route path={`/zingstm/add-song`} component={AddSong} />

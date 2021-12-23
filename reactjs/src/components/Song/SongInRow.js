@@ -7,17 +7,18 @@ import {
     Tr,
     useColorModeValue,
 } from "@chakra-ui/react";
-import AddSongToPlay from "functions/AddSongToPlay";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import SongButton from "./SongButton";
 
 export default function SongInRow(props) {
+    const history = useHistory();
     const textColor = useColorModeValue("gray.700", "white");
     const bgStatus = useColorModeValue("gray.400", "#1a202c");
     const colorStatus = useColorModeValue("white", "gray.400");
 
     const goToSongPage = () => {
-        AddSongToPlay(props.songId);
+        history.push("/zingstm/song/" + props.songId);
     }
 
     return (

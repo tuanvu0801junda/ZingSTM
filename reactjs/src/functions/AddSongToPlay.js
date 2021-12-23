@@ -18,8 +18,6 @@ function AddSongToPlay(songId) {
                 musicSrc: res.data.song.songPath,
             }
         }
-        console.log(res);
-        console.log(song);
         store.dispatch(actionAddSongToPlay(song));
     }
 
