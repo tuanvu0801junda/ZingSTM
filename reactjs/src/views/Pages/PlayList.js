@@ -81,6 +81,13 @@ export default function Playlist() {
       return (
         <PlaylistOther data={state} userInfo={userInfo}/>
       )
+
+    case 100:
+      history.push("/zingstm/enter-verifycode/" + playlistId);
+      return (
+        <></>
+      )
+
     default:
       break;
   }

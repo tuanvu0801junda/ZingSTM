@@ -57,6 +57,7 @@ function Genres() {
 
 		const res = await axios.post("/api/getGenresSong", data);
 		if (res.data.status === 200) setSongs(res.data.songs);
+		else setSongs([]);
 	};
 	// ('songId', 'imagePath', 'songPath', 'duration','title','genreName')
 
