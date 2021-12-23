@@ -36,35 +36,35 @@ import { uploadSongImage } from '../../firebase/uploadMp3Image';
 
 
 
-function AddAlbum() {
+function AddGenre() {
     const history = useHistory();
     const textColor = useColorModeValue("gray.700", "white");
     const [image, setImage] = useState('');
-    const [albumTitle, getAlbumTitle] = useState('');
+    const [genreTitle, getGenreTitle] = useState('');
     const imgUrlUndefinded = "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FSongImages%2Fundefined?"
 
     //Handle back button
-    const goToManageAlbumPage = () => {
-        history.push('/zingstm/manage-album');
+    const goToManageGenrePage = () => {
+        history.push('/zingstm/manage-genre');
     }
 
-    //Handle upload album
-    const handleUploadAlbum = async () => {
+    //Handle upload genre
+    const handleUploadGenre = async () => {
         const imageUrl = await uploadSongImage(image); //Get url from firebase
-        addNewAlbumToDataBase(imageUrl);
+        addNewGenreToDataBase(imageUrl);
     }
 
-    //Add new album to database
-    const addNewAlbumToDataBase = async (imageUrl) => {
+    //Add new genre to database
+    const addNewGenreToDataBase = async (imageUrl) => {
 
         const data = {
-            artworkPath: imageUrl,
-            title: albumTitle
+            genreImage: imageUrl,
+            genreName: genreTitle
         }
         console.log(data);
 
-        if (albumTitle != '' && !imageUrl.includes(imgUrlUndefinded)) {
-            const res = await axios.post('/api/postNewAlbum', data);
+        if (genreTitle != '' && !imageUrl.includes(imgUrlUndefinded)) {
+            const res = await axios.post('/api/postNewGenre', data);
             if (res.data.status === 200) {
                 try {
                     console.log(res.data.message);
@@ -75,7 +75,7 @@ function AddAlbum() {
                         button: "OK!",
                     })
                         .then((value) => {
-                            history.push('/zingstm/manage-album');
+                            history.push('/zingstm/manage-genre');
                         });
 
                 }
@@ -98,22 +98,22 @@ function AddAlbum() {
             <Card overflowX={{ xl: "hidden" }} >
                 <CardHeader p="6px 0px 22px 0px">
                     <Text fontSize="21px" color={textColor} fontWeight="bold">
-                        New Album
+                        New Genre
                     </Text>
-                    <Button style={{ margin: "0 0 0 82%", 'borderRadius': "5px" }} colorScheme="blue" onClick={goToManageAlbumPage}>Back
+                    <Button style={{ margin: "0 0 0 82%", 'borderRadius': "5px" }} colorScheme="blue" onClick={goToManageGenrePage}>Back
                     </Button>
                 </CardHeader>
                 <CardBody>
                     <FormControl>
                         <Text fontSize="md" mb="8px">Title:</Text>
                         <Input
-                            value={albumTitle}
-                            onChange={(e) => { getAlbumTitle(e.target.value) }}
-                            placeholder="Nhập tên album"
+                            value={genreTitle}
+                            onChange={(e) => { getGenreTitle(e.target.value) }}
+                            placeholder="Nhập tên genre"
                         />
                         <br /><br />
 
-                        <FormLabel>Image Album:</FormLabel>
+                        <FormLabel>Image Genre:</FormLabel>
                         <Button p="0px" bg="transparent" _hover={{ bg: "none" }}>
                             <Flex
                                 align="center"
@@ -132,7 +132,7 @@ function AddAlbum() {
                             </Flex>
                         </Button>
                         <br /><br /><br />
-                        <Button style={{ 'borderRadius': "5px" }} colorScheme="blue" onClick={handleUploadAlbum}>Upload
+                        <Button style={{ 'borderRadius': "5px" }} colorScheme="blue" onClick={handleUploadGenre}>Upload
                         </Button>
                     </FormControl>
                 </CardBody>
@@ -141,4 +141,4 @@ function AddAlbum() {
     );
 }
 
-export default AddAlbum
+export default AddGenre

@@ -59,9 +59,13 @@ function UpdateArtist() {
         const res = await axios.post("/api/getOneArtistInfo", data);
         if (res.data.status === 200) {
             getArtistCurrentName(res.data.artist.artistName);
+            setArtistNewName(res.data.artist.artistName);
+            setImage(res.data.artist.artistImage);
+
         }
     }
-
+    // console.log(artistNewName);
+    console.log(image);
 
     //Handle back button
     const goToManageArtistPage = () => {
@@ -70,11 +74,12 @@ function UpdateArtist() {
 
     //Handle update artist
     const handleUpdateArtist = async () => {
-        const imageUrl = await uploadSongImage(image); //Get url from firebase
-        updateArtistToDataBase(imageUrl);
+        if (document.getElementById("image_update").files.length != 0) {
+            const imageUrl = await uploadSongImage(image); //Get url from firebase
+            updateArtistToDataBase(imageUrl);
+        } else updateArtistToDataBase(image);
     }
 
-    console.log(artistNewName);
     //Update new artist to database
     const updateArtistToDataBase = async (imageUrl) => {
 
@@ -85,7 +90,7 @@ function UpdateArtist() {
         }
         console.log(data);
 
-        if (artistNewName != '' && !imageUrl.includes(imgUrlUndefinded)) {
+        if (artistNewName != '' || !imageUrl.includes(imgUrlUndefinded)) {
             const res = await axios.post('/api/updateOneArtist', data);
             if (res.data.status === 200) {
                 try {
@@ -97,7 +102,7 @@ function UpdateArtist() {
                         button: "OK!",
                     })
                         .then((value) => {
-                            window.location.reload();
+                            history.push('/zingstm/manage-artist');
                         });
 
                 }
@@ -150,6 +155,7 @@ function UpdateArtist() {
                             >
                                 <input
                                     type="file"
+                                    id="image_update"
                                     accept="image/*"
                                     onChange={(e) => { setImage(e.target.files[0]) }}
                                 />

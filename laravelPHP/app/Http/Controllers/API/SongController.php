@@ -104,8 +104,11 @@ class SongController extends Controller{
         $song = DB::table('Song')
             ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
             ->join('Artist','Artist.artistId','=','SongArtistRelation.artistId')
+            ->join('SongGenreRelation','SongGenreRelation.songId','=','Song.songId')
+            ->join('Genre','Genre.genreId','=','SongGenreRelation.genreId')
+            ->join('Album','Album.albumId','=','Song.albumId')
             ->where('Song.songId',$inputSongId)
-            ->select('imagePath', 'songPath', 'duration','title','artistName','Song.songId')
+            ->select('imagePath', 'songPath', 'duration','Song.title','Album.title AS albumName','artistName','genreName')
             ->first();
 
         if ($song != NULL){

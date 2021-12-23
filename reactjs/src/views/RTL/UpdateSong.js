@@ -59,6 +59,7 @@ function UpdateSong(props) {
         }
         const res = await axios.post("/api/getOneSongDetail", data);
         if (res.data.status === 200) {
+            console.log(res.data.song);
             getSongCurrentName(res.data.song.title);
         }
     }
@@ -88,57 +89,49 @@ function UpdateSong(props) {
         history.push('/zingstm/manage-song');
     }
     const handleUpdateSong = async () => {
-        const imageUrl = await uploadSongImage(image); //Get url from firebase
-        updateSongToDataBase(imageUrl);
+        if (document.getElementById("image_update").files.length != 0) {
+            const imageUrl = await uploadSongImage(image); //Get url from firebase
+            updateSongToDataBase(imageUrl);
+        } else updateSongToDataBase(image);
     }
 
     //Update new song to database
     const updateSongToDataBase = async (imageUrl) => {
 
-        if (artistNameSelected != '' && albumNameSelected != '' && !imageUrl.includes(imgUrlUndefinded)) {
-            //Get artistId from artistName
-            const res2 = await axios.post('/api/getArtistId', { artistName: artistNameSelected })
-            const artistIdSelected = res2.data.artist.artistId;
-            //Get albumId from albumName
-            const res1 = await axios.post('/api/getAlbumId', { albumName: albumNameSelected })
-            const albumIdSelected = res1.data.album.albumId;
+        //Get artistId from artistName
+        const res2 = await axios.post('/api/getArtistId', { artistName: artistNameSelected })
+        const artistIdSelected = res2.data.artist.artistId;
+        //Get albumId from albumName
+        const res1 = await axios.post('/api/getAlbumId', { albumName: albumNameSelected })
+        const albumIdSelected = res1.data.album.albumId;
 
-            const data = {
-                songId: id,
-                imagePath: imageUrl,
-                artistId: artistIdSelected,
-                albumId: albumIdSelected
-            }
-            console.log(data);
-
-            const res = await axios.post('/api/updateOneSong', data);
-            if (res.data.status === 200) {
-                try {
-                    console.log(res.data.message);
-                    swal({
-                        title: "Update Success!",
-                        text: res.data.message,
-                        icon: "success",
-                        button: "OK!",
-                    })
-                        .then((value) => {
-                            window.location.reload();
-                        });
-
-                }
-                catch (err) {
-                    swal("Error", err.message, "error");
-                }
-            }
-        } else {
-            swal({
-                title: "Fail!",
-                text: "Empty blank",
-                icon: "warning",
-                button: "OK!",
-            });
+        const data = {
+            songId: id,
+            imagePath: imageUrl,
+            artistId: artistIdSelected,
+            albumId: albumIdSelected
         }
+        console.log(data);
 
+        const res = await axios.post('/api/updateOneSong', data);
+        if (res.data.status === 200) {
+            try {
+                console.log(res.data.message);
+                swal({
+                    title: "Update Success!",
+                    text: res.data.message,
+                    icon: "success",
+                    button: "OK!",
+                })
+                    .then((value) => {
+                        history.push('/zingstm/manage-song');
+                    });
+
+            }
+            catch (err) {
+                swal("Error", err.message, "error");
+            }
+        }
     }
 
     return (
@@ -186,6 +179,7 @@ function UpdateSong(props) {
                             >
                                 <input
                                     type="file"
+                                    id="image_update"
                                     accept="image/*"
                                     onChange={(e) => { setImage(e.target.files[0]) }}
                                 />

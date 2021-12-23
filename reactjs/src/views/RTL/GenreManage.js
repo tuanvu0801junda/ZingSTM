@@ -30,49 +30,32 @@ export default function Dashboard() {
     // Chakra Color Mode
     const textColor = useColorModeValue("gray.700", "white");
     const history = useHistory();
-    const [artist, setArtist] = useState([]);
-    const [artistSong, getArtistSong] = useState([]);
+    const [genre, setGenre] = useState([]);
     useEffect(() => {
-        getAllArtistData();
+        getAllGenreData();
     }, [])
-    //Get artist data from database
-    const getAllArtistData = async () => {
-        const res = await axios.post("/api/getAllArtistInfo");
+    //Get genre data from database
+    const getAllGenreData = async () => {
+        const res = await axios.post("/api/getAllGenreInfo");
         if (res.data.status === 200) {
-            setArtist(res.data.artists);
-            console.log(res.data.artists);
-        }
-        const res1 = await axios.post("/api/getSongNumberOfAnArtist");
-        if (res.data.status === 200) {
-            getArtistSong(res1.data.artistSong);
-            console.log(res1.data.artistSong);
+            setGenre(res.data.genres);
         }
     }
-    for (let i = 0; i < artist.length; i++) {
-        if (artistSong !== undefined) {
-            for (let j = 0; j < artistSong.length; j++) {
-                if (artist[i].artistId === artistSong[j].artistId) {
-                    artist[i]["totalSong"] = artistSong[j].songNumber;
-                }
-            }
-        }
 
+    //Handle add new genre
+    const goToAddGenrePage = () => {
+        history.push('/zingstm/add-genre');
     }
-    //Handle add new artist
-    const goToAddArtistPage = () => {
-        history.push('/zingstm/add-artist');
+    //Handle update genre
+    const goToUpdateGenrePage = (event) => {
+        const genreCurrentId = event.target.value;
+        history.push('/zingstm/update-genre/' + genreCurrentId);
     }
-    //Handle update artist
-    const goToUpdateArtistPage = (event) => {
-        const artistCurrentId = event.target.value;
-        // console.log(artistCurrentId);
-        history.push('/zingstm/update-artist/' + artistCurrentId);
-    }
-    //Handle delete artist
-    const handleDeleteArtist = (e, id) => {
+    //Handle delete genre
+    const handleDeleteGenre = (e, id) => {
         e.preventDefault();
         const thisClicked = e.currentTarget;
-        swal("Are you sure you to delete this artist?", {
+        swal("Are you sure you to delete this genre?", {
             buttons: {
                 cancel: "No",
                 catch: {
@@ -86,11 +69,11 @@ export default function Dashboard() {
                     case "cancel":
                         break;
                     case "catch":
-                        axios.post("/api/deleteOneArtist", { artistId: id });
+                        axios.post("/api/deleteOneGenre", { genreId: id });
                         setTimeout(function () {
                             swal({
                                 title: "Success!",
-                                text: "Delete Artist Successfully",
+                                text: "Delete Genre Successfully",
                                 icon: "success",
                                 button: "OK!",
                             })
@@ -109,9 +92,9 @@ export default function Dashboard() {
             <Card overflowX={{ xl: "hidden" }}>
                 <CardHeader p="6px 0px 22px 0px">
                     <Text fontSize="xl" color={textColor} fontWeight="bold">
-                        Artist Data
+                        Genre Data
                     </Text>
-                    <Button style={{ margin: "0 0 0 75%", 'borderRadius': "5px" }} colorScheme="blue" onClick={goToAddArtistPage}>Add artist
+                    <Button style={{ margin: "0 0 0 75%", 'borderRadius': "5px" }} colorScheme="blue" onClick={goToAddGenrePage}>Add Genre
                     </Button>
                 </CardHeader>
                 <CardBody>
@@ -119,21 +102,20 @@ export default function Dashboard() {
                         <Thead>
                             <Tr my=".8rem" pl="0px" color="gray.400">
                                 <Th color="gray.400">
-                                    Artist
+                                    Genre
                                 </Th>
-                                <Th style={{ textAlign: 'center' }} color="gray.400">Total Song</Th>
                                 <Th color="gray.400">Update</Th>
                                 <Th color="gray.400">Delete</Th>
 
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {artist.map((data, index) => {
+                            {genre.map((data, index) => {
                                 return (
                                     <Tr key={index}>
                                         <Td minWidth={{ sm: "250px" }} pl="0px">
                                             <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
-                                                <Avatar src={data.artistImage} w="50px" borderRadius="12px" me="18px" />
+                                                <Avatar src={data.genreImage} w="50px" borderRadius="12px" me="18px" />
                                                 <Flex direction="column">
                                                     <Text
                                                         fontSize="lg"
@@ -141,26 +123,17 @@ export default function Dashboard() {
                                                         fontWeight="bold"
                                                         minWidth="100%"
                                                     >
-                                                        {data.artistName}
+                                                        {data.genreName}
                                                     </Text>
 
                                                 </Flex>
                                             </Flex>
                                         </Td>
-
-                                        <Td style={{ textAlign: 'center' }}>
-                                            <Flex direction="column">
-
-                                                <Text fontSize="lg" color={textColor} fontWeight="bold">
-                                                    {data.totalSong || "0"}
-                                                </Text>
-                                            </Flex>
+                                        <Td>
+                                            <Button colorScheme="green" size="sm" onClick={goToUpdateGenrePage} value={data.genreId}>Update</Button>
                                         </Td>
                                         <Td>
-                                            <Button colorScheme="green" size="sm" onClick={goToUpdateArtistPage} value={data.artistId}>Update</Button>
-                                        </Td>
-                                        <Td>
-                                            <Button colorScheme="red" size="sm" onClick={(e) => { handleDeleteArtist(e, data.artistId) }}>Delete</Button>
+                                            <Button colorScheme="red" size="sm" onClick={(e) => { handleDeleteGenre(e, data.genreId) }}>Delete</Button>
                                         </Td>
                                     </Tr>
                                 );
