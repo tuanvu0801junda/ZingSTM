@@ -71,7 +71,9 @@ export default function Dashboard() {
         history.push('/zingstm/update-album/' + albumCurrentId);
     }
     //Handle delete album
-    const handleDeleteAlbum = (id) => {
+    const handleDeleteAlbum = (e, id) => {
+        e.preventDefault();
+        const thisClicked = e.currentTarget;
         swal("Are you sure you to delete this album?", {
             buttons: {
                 cancel: "No",
@@ -87,7 +89,15 @@ export default function Dashboard() {
                         break;
                     case "catch":
                         axios.post("/api/deleteOneAlbum", { albumId: id });
-                        window.location.reload();
+                        setTimeout(function () {
+                            swal({
+                                title: "Success!",
+                                text: "Delete Album Successfully",
+                                icon: "success",
+                                button: "OK!",
+                            })
+                        }, 200);
+                        thisClicked.closest("tr").remove();
                         break;
                     default:
                         break;
@@ -119,15 +129,15 @@ export default function Dashboard() {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {album.map((data) => {
+                            {album.map((data, index) => {
                                 return (
-                                    <Tr>
+                                    <Tr key={index}>
                                         <Td minWidth={{ sm: "250px" }} pl="0px">
                                             <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
                                                 <Avatar src={data.artworkPath} w="50px" borderRadius="12px" me="18px" />
                                                 <Flex direction="column">
                                                     <Text
-                                                        fontSize="md"
+                                                        fontSize="lg"
                                                         color={textColor}
                                                         fontWeight="bold"
                                                         minWidth="100%"
@@ -141,13 +151,13 @@ export default function Dashboard() {
 
                                         <Td style={{ textAlign: 'center' }}>
                                             <Flex direction="column">
-                                                <Text fontSize="md" color={textColor} fontWeight="bold">
+                                                <Text fontSize="lg" color={textColor} fontWeight="bold">
                                                     {data.totalSong || "0"}
                                                 </Text>
                                             </Flex>
                                         </Td>
                                         <Td style={{ textAlign: 'center' }}>
-                                            <Text fontSize="md" color={textColor} fontWeight="bold">
+                                            <Text fontSize="lg" color={textColor} fontWeight="bold">
                                                 {data.totalPlay || "0"}
                                             </Text>
                                         </Td>
@@ -155,7 +165,7 @@ export default function Dashboard() {
                                             <Button colorScheme="green" size="sm" onClick={goToUpdateAlbumPage} value={data.albumId}>Update</Button>
                                         </Td>
                                         <Td>
-                                            <Button colorScheme="red" size="sm" onClick={() => { handleDeleteAlbum(data.albumId) }}>Delete</Button>
+                                            <Button colorScheme="red" size="sm" onClick={(e) => { handleDeleteAlbum(e, data.albumId) }}>Delete</Button>
                                         </Td>
                                     </Tr>
                                 );

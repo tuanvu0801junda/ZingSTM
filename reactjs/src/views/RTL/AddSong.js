@@ -158,7 +158,7 @@ function AddSong() {
                         button: "OK!",
                     })
                         .then((value) => {
-                            window.location.reload();
+                            history.push('/zingstm/manage-song');
                         });
 
                     //Reset blank
@@ -224,8 +224,8 @@ function AddSong() {
                             })}
                         </Select>
                         <br />
-                        <FormLabel>Genres:</FormLabel>
-                        <Select placeholder="Select genres" onChange={(e) => { getGenresIdSelected(e.target.selectedIndex) }}>
+                        <FormLabel>Genre:</FormLabel>
+                        <Select placeholder="Select genre" onChange={(e) => { getGenresIdSelected(e.target.selectedIndex) }}>
                             {genres.map((data) => {
                                 return (
                                     <option>{data.genreName}</option>

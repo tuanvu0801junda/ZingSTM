@@ -5,6 +5,8 @@ import Billing from "views/Dashboard/Billing.js";
 import SongManage from "views/RTL/SongManage.js";
 import AlbumManage from "views/RTL/AlbumManage.js";
 import ArtistManage from "views/RTL/ArtistManage.js";
+import GenreManage from "views/RTL/GenreManage.js";
+
 import Profile from "views/Dashboard/Profile.js";
 import SignIn from "views/Pages/SignIn.js";
 import SignUp from "views/Pages/SignUp.js";
@@ -77,6 +79,15 @@ var dashRoutes = [
         icon: <SupportIcon color="inherit" />,
         secondaryNavbar: true,
         component: ArtistManage,
+        layout: "/zingstm",
+      },
+      {
+        path: "/manage-genre",
+        name: "Manage Genre",
+        rtlName: "لوحة القيادة",
+        icon: <SupportIcon color="inherit" />,
+        secondaryNavbar: true,
+        component: GenreManage,
         layout: "/zingstm",
       },
     ],

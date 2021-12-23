@@ -1,23 +1,28 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { IoDocumentsSharp } from "react-icons/io5";
+import swal from "sweetalert";
+import { uploadSongImage } from '../../firebase/uploadMp3Image';
+
+
 // Chakra imports
 import {
     Box,
     Button,
     ButtonGroup,
     Flex,
-    Icon,
     Avatar,
     Table,
     Tbody,
+    Icon,
     Text,
     Th,
+    Input,
     Thead,
     Tr,
     Tfoot,
     Td,
-    Input,
     TableCaption,
     useColorMode,
     FormControl,
@@ -32,50 +37,73 @@ import {
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
-import { uploadSongImage } from '../../firebase/uploadMp3Image';
 
 
-
-function AddAlbum() {
+function UpdateGenre() {
     const history = useHistory();
     const textColor = useColorModeValue("gray.700", "white");
+    const [genreCurrentName, getGenreCurrentName] = useState('');
+    const [genreNewName, setGenreNewName] = useState('');
     const [image, setImage] = useState('');
-    const [albumTitle, getAlbumTitle] = useState('');
     const imgUrlUndefinded = "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FSongImages%2Fundefined?"
+    const { id } = useParams();
+
+    //Get current genre update
+    useEffect(() => {
+        getCurrentGenreUpdate();
+    }, [])
+    const getCurrentGenreUpdate = async () => {
+        const data = {
+            genreId: id
+        }
+        const res = await axios.post("/api/getGenreInfoById", data);
+        if (res.data.status === 200) {
+            getGenreCurrentName(res.data.genre.genreName);
+            setGenreNewName(res.data.genre.genreName);
+            setImage(res.data.genre.genreImage);
+
+        }
+    }
+    console.log(genreNewName);
+    console.log(image);
+
 
     //Handle back button
-    const goToManageAlbumPage = () => {
-        history.push('/zingstm/manage-album');
+    const goToManageGenrePage = () => {
+        history.push('/zingstm/manage-genre');
     }
 
-    //Handle upload album
-    const handleUploadAlbum = async () => {
-        const imageUrl = await uploadSongImage(image); //Get url from firebase
-        addNewAlbumToDataBase(imageUrl);
+    //Handle update genre
+    const handleUpdateGenre = async () => {
+        if (document.getElementById("image_update").files.length != 0) {
+            const imageUrl = await uploadSongImage(image); //Get url from firebase
+            updateGenreToDataBase(imageUrl);
+        } else updateGenreToDataBase(image);
     }
 
-    //Add new album to database
-    const addNewAlbumToDataBase = async (imageUrl) => {
+    //Update new genre to database
+    const updateGenreToDataBase = async (imageUrl) => {
 
         const data = {
-            artworkPath: imageUrl,
-            title: albumTitle
+            genreId: id,
+            genreImage: imageUrl,
+            genreName: genreNewName
         }
         console.log(data);
 
-        if (albumTitle != '' && !imageUrl.includes(imgUrlUndefinded)) {
-            const res = await axios.post('/api/postNewAlbum', data);
+        if (genreNewName != '' || !imageUrl.includes(imgUrlUndefinded)) {
+            const res = await axios.post('/api/updateOneGenre', data);
             if (res.data.status === 200) {
                 try {
                     console.log(res.data.message);
                     swal({
-                        title: "Success!",
+                        title: "Update Success!",
                         text: res.data.message,
                         icon: "success",
                         button: "OK!",
                     })
                         .then((value) => {
-                            history.push('/zingstm/manage-album');
+                            history.push('/zingstm/manage-genre');
                         });
 
                 }
@@ -93,27 +121,29 @@ function AddAlbum() {
         }
 
     }
+
     return (
         <div style={{ margin: '125px 0px 0px 0px' }} >
             <Card overflowX={{ xl: "hidden" }} >
                 <CardHeader p="6px 0px 22px 0px">
-                    <Text fontSize="21px" color={textColor} fontWeight="bold">
-                        New Album
+                    <Text fontSize="2xl" color={textColor} fontWeight="bold">
+                        Update
                     </Text>
-                    <Button style={{ margin: "0 0 0 82%", 'borderRadius': "5px" }} colorScheme="blue" onClick={goToManageAlbumPage}>Back
+                    <Button style={{ margin: "0 0 0 82%", 'borderRadius': "5px" }} colorScheme="blue" onClick={goToManageGenrePage}>Back
                     </Button>
                 </CardHeader>
                 <CardBody>
                     <FormControl>
-                        <Text fontSize="md" mb="8px">Title:</Text>
+                        <br />
+                        <FormLabel>Genre:</FormLabel>
                         <Input
-                            value={albumTitle}
-                            onChange={(e) => { getAlbumTitle(e.target.value) }}
-                            placeholder="Nhập tên album"
+                            value={genreNewName}
+                            onChange={(e) => { setGenreNewName(e.target.value) }}
+                            placeholder={genreCurrentName}
+                            size="md"
                         />
                         <br /><br />
-
-                        <FormLabel>Image Album:</FormLabel>
+                        <FormLabel>Image Genre:</FormLabel>
                         <Button p="0px" bg="transparent" _hover={{ bg: "none" }}>
                             <Flex
                                 align="center"
@@ -126,13 +156,14 @@ function AddAlbum() {
                             >
                                 <input
                                     type="file"
+                                    id="image_update"
                                     accept="image/*"
                                     onChange={(e) => { setImage(e.target.files[0]) }}
                                 />
                             </Flex>
                         </Button>
                         <br /><br /><br />
-                        <Button style={{ 'borderRadius': "5px" }} colorScheme="blue" onClick={handleUploadAlbum}>Upload
+                        <Button style={{ 'borderRadius': "5px" }} colorScheme="blue" onClick={handleUpdateGenre}>Update
                         </Button>
                     </FormControl>
                 </CardBody>
@@ -141,4 +172,4 @@ function AddAlbum() {
     );
 }
 
-export default AddAlbum
+export default UpdateGenre

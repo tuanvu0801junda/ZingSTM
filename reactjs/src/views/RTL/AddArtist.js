@@ -75,7 +75,7 @@ function AddArtist() {
                         button: "OK!",
                     })
                         .then((value) => {
-                            window.location.reload();
+                            history.push('/zingstm/manage-artist');
                         });
 
                 }
