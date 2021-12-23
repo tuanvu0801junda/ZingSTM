@@ -26,9 +26,7 @@ export default function PlaylistOwner(props) {
 
 	return (
 		<Flex direction="column" pt={{ base: "120px", md: "75px" }}>
-			<PlaylistBannerForOwner
-				playlist={props.data.playlist}
-			/>
+			<PlaylistBannerForOwner playlist={props.data.playlist} />
 			<Card overflowX={{ xl: "hidden" }}>
 				<CardHeader p="6px 0px 22px 0px">
 					<Text fontSize="xl" color={textColor} fontWeight="bold">
@@ -64,10 +62,15 @@ export default function PlaylistOwner(props) {
 						</Tbody>
 					</Table>
 				</CardBody>
-                <Separator h="3px"/>
-                <br/>
-                <Text fontWeight="bold" color="teal" fontSize="lg">Comments</Text>
-                <PlaylistCommentContainer playlistId={props.data.playlist.playlistId} userInfo={props.userInfo}/>
+				<Separator h="3px" />
+				<br />
+				<Text fontWeight="bold" color="teal" fontSize="lg">
+					Comments
+				</Text>
+				<PlaylistCommentContainer
+					playlistId={props.data.playlist.playlistId}
+					userInfo={props.userInfo}
+				/>
 			</Card>
 		</Flex>
 	);

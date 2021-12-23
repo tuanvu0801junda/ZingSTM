@@ -276,7 +276,7 @@ function Profile() {
 								w={{ sm: "100%", md: "50%", lg: "auto" }}
 							>
 								<Button
-									onClick={hiddenRTL}
+									onClick={updatePlaylist}
 									p="0px"
 									bg="transparent"
 									_hover={{ bg: "none" }}

@@ -105,7 +105,7 @@ class SongController extends Controller{
             ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
             ->join('Artist','Artist.artistId','=','SongArtistRelation.artistId')
             ->where('Song.songId',$inputSongId)
-            ->select('imagePath', 'songPath', 'duration','title','artistName')
+            ->select('imagePath', 'songPath', 'duration','title','artistName','Song.songId')
             ->first();
 
         if ($song != NULL){
@@ -117,7 +117,6 @@ class SongController extends Controller{
             return response()->json([
                 'status' => 404,
                 'message' => 'Song Detail not found!',
-                'songId' => $inputSongId,
             ]);
         }
     }

@@ -40,7 +40,6 @@ function Genres() {
 		const res = await axios.post("/api/getGenreInfoById", data);
 		if (res.data.status === 200) {
 			setGenre(res.data.genre);
-			console.log(genre);
 		}
 	};
 
