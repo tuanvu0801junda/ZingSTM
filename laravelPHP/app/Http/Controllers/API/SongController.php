@@ -203,6 +203,7 @@ class SongController extends Controller{
         //songId, imagePath, albumId, artistId
         $songId = $request->input('songId');
         $song = Song::find($songId);
+        $song->title = $request->input('songName');
         $song->imagePath = $request->input('imagePath');
         $albumId = $request->input('albumId');
         if(strcmp($albumId,"null") == 0){
@@ -216,8 +217,10 @@ class SongController extends Controller{
         $affected = DB::table('SongArtistRelation')
                     ->where('songId',$songId)
                     ->update(['artistId' => $request->input('artistId')]);
-        
-        if($affected >= 0){
+        $affected1 = DB::table('SongGenreRelation')
+        ->where('songId',$songId)
+        ->update(['genreId' => $request->input('genreId')]);
+        if($affected >= 0 && $affected1 >= 0){
             return response()->json([
                 'status' => 200,
                 'message' => 'Update Song successfully',

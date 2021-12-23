@@ -64,4 +64,25 @@ class GenreController extends Controller{
             'message' => 'Genre Updated Successfully',
         ]);
     }
+
+    public function getGenreId(Request $request){
+        $genreName = $request->input('genreName');
+        $genre = DB::table('Genre')
+                ->where('genreName',$genreName)
+                ->select('genreId')
+                ->first();
+
+        if ($genre != NULL){
+            return response()->json([
+                'status' => 200,
+                'genre' => $genre,
+                'message' => 'Get genre id successfully!',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Genre not found!',
+            ]);
+        }
+    }
 }

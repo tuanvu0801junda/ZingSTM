@@ -73,6 +73,7 @@ Route::post('/getAllGenreInfo',[GenreController::class, 'getAllGenreInfo']);
 Route::post('/postNewGenre', [GenreController::class, 'postNewGenre']);
 Route::post('/deleteOneGenre',[GenreController::class, 'deleteOneGenre']);
 Route::post('/updateOneGenre',[GenreController::class, 'updateOneGenre']);
+Route::post('/getGenreId',[GenreController::class, 'getGenreId']);
 
 Route::post('/getPlaylistCreatedByUser',[PlaylistController::class, 'getPlaylistCreatedByUser']);
 Route::post('/getPlaylistSharedByOther',[PlaylistController::class, 'getPlaylistSharedByOther']);

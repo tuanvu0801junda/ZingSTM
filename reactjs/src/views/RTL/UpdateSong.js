@@ -17,6 +17,7 @@ import {
     Tbody,
     Icon,
     Text,
+    Input,
     Th,
     Thead,
     Tr,
@@ -42,10 +43,18 @@ function UpdateSong(props) {
     const history = useHistory();
     const textColor = useColorModeValue("gray.700", "white");
     const [songCurrentName, getSongCurrentName] = useState('');
+    const [songCurrentArtist, getSongCurrentArtist] = useState('');
+    const [songNewName, setSongNewName] = useState('');
+    const [songCurrentAlbum, getSongCurrentAlbum] = useState('');
+    const [songCurrentGenre, getSongCurrentGenre] = useState('');
+
     const [artist, getArtist] = useState([]);
     const [album, getAlbum] = useState([]);
+    const [genre, getGenre] = useState([]);
     const [artistNameSelected, getArtistNameSelected] = useState('');
     const [albumNameSelected, getAlbumNameSelected] = useState('');
+    const [genreNameSelected, getGenreNameSelected] = useState('');
+
     const [image, setImage] = useState('');
     const { id } = useParams();
 
@@ -61,6 +70,11 @@ function UpdateSong(props) {
         if (res.data.status === 200) {
             console.log(res.data.song);
             getSongCurrentName(res.data.song.title);
+            getSongCurrentArtist(res.data.song.artistName);
+            getSongCurrentAlbum(res.data.song.albumName);
+            getSongCurrentGenre(res.data.song.genreName);
+            setSongNewName(res.data.song.title);
+            setImage(res.data.song.imagePath);
         }
     }
 
@@ -84,6 +98,16 @@ function UpdateSong(props) {
             getAlbum(res.data.albums);
         }
     }
+    //Get genres
+    useEffect(() => {
+        getAllGenreInfo();
+    }, [])
+    const getAllGenreInfo = async () => {
+        const res = await axios.post("/api/getAllGenreInfo");
+        if (res.data.status === 200) {
+            getGenre(res.data.genres);
+        }
+    }
     //Handle back button
     const goToManageSongPage = () => {
         history.push('/zingstm/manage-song');
@@ -99,17 +123,42 @@ function UpdateSong(props) {
     const updateSongToDataBase = async (imageUrl) => {
 
         //Get artistId from artistName
-        const res2 = await axios.post('/api/getArtistId', { artistName: artistNameSelected })
-        const artistIdSelected = res2.data.artist.artistId;
+        let artistIdSelected;
+        if (artistNameSelected != "") {
+            const res2 = await axios.post('/api/getArtistId', { artistName: artistNameSelected })
+            artistIdSelected = res2.data.artist.artistId;
+        } else {
+            const res2 = await axios.post('/api/getArtistId', { artistName: songCurrentArtist })
+            artistIdSelected = res2.data.artist.artistId;
+        }
+
         //Get albumId from albumName
-        const res1 = await axios.post('/api/getAlbumId', { albumName: albumNameSelected })
-        const albumIdSelected = res1.data.album.albumId;
+        let albumIdSelected;
+        if (albumNameSelected != "") {
+            const res1 = await axios.post('/api/getAlbumId', { albumName: albumNameSelected })
+            albumIdSelected = res1.data.album.albumId;
+        } else {
+            const res1 = await axios.post('/api/getAlbumId', { albumName: songCurrentAlbum })
+            albumIdSelected = res1.data.album.albumId;
+        }
+
+        //Get gnereId from genreName
+        let genreIdSelected;
+        if (genreNameSelected != "") {
+            const res3 = await axios.post('/api/getGenreId', { genreName: genreNameSelected })
+            genreIdSelected = res3.data.genre.genreId;
+        } else {
+            const res3 = await axios.post('/api/getGenreId', { genreName: songCurrentGenre })
+            genreIdSelected = res3.data.genre.genreId;
+        }
 
         const data = {
             songId: id,
+            songName: songNewName,
             imagePath: imageUrl,
             artistId: artistIdSelected,
-            albumId: albumIdSelected
+            albumId: albumIdSelected,
+            genreId: genreIdSelected
         }
         console.log(data);
 
@@ -146,10 +195,17 @@ function UpdateSong(props) {
                 </CardHeader>
                 <CardBody>
                     <FormControl>
-                        <FormLabel fontSize="xl" color="blue">Song name: {songCurrentName}</FormLabel>
                         <br />
+                        <FormLabel>Song name:</FormLabel>
+                        <Input
+                            value={songNewName}
+                            onChange={(e) => { setSongNewName(e.target.value) }}
+                            placeholder={songCurrentName}
+                            size="md"
+                        />
+                        <br /><br />
                         <FormLabel>Artist:</FormLabel>
-                        <Select placeholder="Select artist" onChange={(e) => { getArtistNameSelected(e.target.value) }}>
+                        <Select placeholder="Select Artist" onChange={(e) => { getArtistNameSelected(e.target.value) }}>
                             {artist.map((data) => {
                                 return (
                                     <option value={data.artistName}>{data.artistName}</option>
@@ -158,10 +214,19 @@ function UpdateSong(props) {
                         </Select>
                         <br />
                         <FormLabel>Album:</FormLabel>
-                        <Select placeholder="Select album" onChange={(e) => { getAlbumNameSelected(e.target.value) }}>
+                        <Select placeholder="Select Album" onChange={(e) => { getAlbumNameSelected(e.target.value) }}>
                             {album.map((data) => {
                                 return (
                                     <option value={data.title}>{data.title}</option>
+                                );
+                            })}
+                        </Select>
+                        <br />
+                        <FormLabel>Genre:</FormLabel>
+                        <Select placeholder="Select Genre" onChange={(e) => { getGenreNameSelected(e.target.value) }}>
+                            {genre.map((data) => {
+                                return (
+                                    <option value={data.genreName}>{data.genreName}</option>
                                 );
                             })}
                         </Select>
