@@ -59,6 +59,8 @@ function UpdateAlbum() {
         const res = await axios.post("/api/getOneAlbumInfo", data);
         if (res.data.status === 200) {
             getAlbumCurrentName(res.data.album.title);
+            setAlbumNewName(res.data.album.title);
+            setImage(res.data.album.artworkPath);
         }
     }
 
@@ -70,8 +72,10 @@ function UpdateAlbum() {
 
     //Handle update album
     const handleUpdateAlbum = async () => {
-        const imageUrl = await uploadSongImage(image); //Get url from firebase
-        updateAlbumToDataBase(imageUrl);
+        if (document.getElementById("image_update").files.length != 0) {
+            const imageUrl = await uploadSongImage(image); //Get url from firebase
+            updateAlbumToDataBase(imageUrl);
+        } else updateAlbumToDataBase(image);
     }
 
     console.log(albumNewName);
@@ -85,7 +89,7 @@ function UpdateAlbum() {
         }
         console.log(data);
 
-        if (albumNewName != '' && !imageUrl.includes(imgUrlUndefinded)) {
+        if (albumNewName != '' || !imageUrl.includes(imgUrlUndefinded)) {
             const res = await axios.post('/api/updateOneAlbum', data);
             if (res.data.status === 200) {
                 try {
@@ -97,7 +101,7 @@ function UpdateAlbum() {
                         button: "OK!",
                     })
                         .then((value) => {
-                            window.location.reload();
+                            history.push('/zingstm/manage-album');
                         });
 
                 }
@@ -150,6 +154,7 @@ function UpdateAlbum() {
                             >
                                 <input
                                     type="file"
+                                    id="image_update"
                                     accept="image/*"
                                     onChange={(e) => { setImage(e.target.files[0]) }}
                                 />

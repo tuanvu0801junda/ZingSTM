@@ -82,8 +82,10 @@ class ArtistController extends Controller{
     public function updateOneArtist(Request $request){
         $artistId = $request->input('artistId');
         $artist = Artist::find($artistId);
-        $artist->artistName = $request->input('artistName');
-        $artist->artistImage = $request->input('artistImage');
+        if($request->input('artistName') != null)
+            $artist->artistName = $request->input('artistName');
+        if($request->input('artistImage') != null)
+            $artist->artistImage = $request->input('artistImage');
         $artist->update();
         return response()->json([
             'status' => 200,
