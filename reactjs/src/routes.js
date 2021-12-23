@@ -13,7 +13,6 @@ import SignUp from "views/Pages/SignUp.js";
 
 import {
   HomeIcon,
-  StatsIcon,
   CreditIcon,
   PersonIcon,
   DocumentIcon,
@@ -28,14 +27,6 @@ var dashRoutes = [
     rtlName: "لوحة القيادة",
     icon: <HomeIcon color="inherit" />,
     component: Dashboard,
-    layout: "/zingstm",
-  },
-  {
-    path: "/tables",
-    name: "Tables",
-    rtlName: "لوحة القيادة",
-    icon: <StatsIcon color="inherit" />,
-    component: Tables,
     layout: "/zingstm",
   },
   {

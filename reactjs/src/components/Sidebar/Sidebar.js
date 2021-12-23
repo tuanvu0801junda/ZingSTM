@@ -21,12 +21,13 @@ import { CreativeTimLogo } from "components/Icons/Icons";
 import { Separator } from "components/Separator/Separator";
 import PropTypes from "prop-types";
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 // FUNCTIONS
 
 function Sidebar(props) {
+  const history = useHistory();
   var sidebarState = (useSelector((state) => state.reducerUpdateSidebar)).sidebarState;
   if (sidebarState == undefined) sidebarState == "logout";
   // to check for active links and opened collapses
@@ -223,7 +224,7 @@ function Sidebar(props) {
   var brand = (
     <Box pt={"25px"} mb="12px">
       <Link
-        href={`${process.env.PUBLIC_URL}/#/`}
+        onClick={() => history.push("/zingstm/home")}
         target="_blank"
         display="flex"
         lineHeight="100%"
@@ -276,6 +277,7 @@ function Sidebar(props) {
 // FUNCTIONS
 
 export function SidebarResponsive(props) {
+  const history = useHistory();
   var sidebarState = (useSelector((state) => state.reducerUpdateSidebar)).sidebarState;
   if (sidebarState == undefined) sidebarState == "logout";
   // to check for active links and opened collapses
@@ -453,7 +455,7 @@ export function SidebarResponsive(props) {
   var brand = (
     <Box pt={"35px"} mb="8px">
       <Link
-        href={`${process.env.PUBLIC_URL}/#/`}
+        onClick={() => history.push("/zingstm/home")}
         target="_blank"
         display="flex"
         lineHeight="100%"

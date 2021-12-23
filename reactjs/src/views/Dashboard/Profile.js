@@ -28,14 +28,13 @@ import swal from "sweetalert";
 import axios from "axios";
 import MyPlaylist from "components/Container/MyPlaylist";
 import PlaylistSharedWithMe from "components/Container/PlaylistSharedWithMe";
+import { useHistory } from "react-router-dom";
 
 function Profile() {
+	const history = useHistory();
 	const dispatch = useDispatch();
-	// Test
-	const hiddenRTL = () => {
-		dispatch(actionUpdateSidebar("user"));
-	};
-	//
+	const imageRef = useRef("");
+
 	var userInfo = {
 		email: "Undefined",
 		profilePic:
@@ -151,8 +150,6 @@ function Profile() {
 		dispatch(actionUpdatePlaylist(audioList));
 	};
 
-	const imageRef = useRef("");
-
 	const showChooseFileDialog = () => {
 		imageRef.current.click();
 	};
@@ -189,6 +186,7 @@ function Profile() {
 	const logout = () => {
 		dispatch(actionUpdateSidebar("logout"));
 		dispatch(actionLogout());
+		history.push("/zingstm/home");
 	};
 
 	return (
@@ -298,7 +296,7 @@ function Profile() {
 											color={textColor}
 											fontWeight="bold"
 										>
-											PLAY
+											TEST
 										</Text>
 									</Flex>
 								</Button>

@@ -6,7 +6,6 @@ import { Box, Flex, Grid, Text, useColorModeValue } from "@chakra-ui/react";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
-import LineChart from "components/Charts/LineChart";
 
 // React, Redux
 import React, { useState, useEffect } from "react";
@@ -20,6 +19,7 @@ import AlbumsCarousel from "components/Carousel/AlbumsCarousel";
 import axios from "axios";
 import GenresCarousel from "components/Carousel/GenresCarosel";
 import ArtistsCarousel from "components/Carousel/ArtistsCarousel";
+import TopSongLineChart from "components/Charts/TopSongLineChart";
 
 export default function Dashboard() {
 	// Chakra Color Mode
@@ -88,93 +88,98 @@ export default function Dashboard() {
 	return (
 		<Flex flexDirection="column" pt={{ base: "120px", md: "75px" }}>
 			<SlickCarousel />
-			<Grid //TODO
+			<Grid
 				templateColumns={{ sm: "1fr", lg: "1.3fr 1.7fr" }}
 				templateRows={{ sm: "repeat(2, 1fr)", lg: "1fr" }}
 				gap="24px"
 				mb={{ lg: "26px" }}
 			>
-				<Card p="16px">
-					<CardBody>
-						{topSong == null ? (
-							<Text
-								fontSize="2xl"
-								color="green.400"
-								fontWeight="bold"
-								as="i"
-								mb="6px"
-							>
-								Loading top songs...
-							</Text>
-						) : (
-							<Flex direction="column" w="100%">
-								<Text
-									fontSize="2xl"
-									color="green.400"
-									fontWeight="bold"
-									as="i"
-									mb="6px"
-								>
-									Top songs
-								</Text>
-								<Grid templateRows="repeat(3, 1fr)" gap={2}>
-									<TopSong
-										top={1}
-										title={topSong[0].title}
-										imgURL={topSong[0].imagePath}
-										views={topSong[0].playTimes}
-										songId={topSong[0].songId}
-									/>
-									<TopSong
-										top={2}
-										title={topSong[1].title}
-										imgURL={topSong[1].imagePath}
-										views={topSong[1].playTimes}
-										songId={topSong[1].songId}
-									/>
-									<TopSong
-										top={3}
-										title={topSong[2].title}
-										imgURL={topSong[2].imagePath}
-										views={topSong[2].playTimes}
-										songId={topSong[2].songId}
-									/>
-								</Grid>
-							</Flex>
-						)}
-					</CardBody>
-				</Card>
-				<Card p="28px 10px 16px 0px" mb={{ sm: "26px", lg: "0px" }}>
-					<CardHeader mb="20px" pl="22px">
-						<Flex direction="column" alignSelf="flex-start">
-							<Text
-								fontSize="lg"
-								color={textColor}
-								fontWeight="bold"
-								mb="6px"
-							>
-								Zing STM Realtime
-							</Text>
-							<Text
-								fontSize="md"
-								fontWeight="medium"
-								color="gray.400"
-							>
-								<Text
-									as="span"
-									color="green.400"
-									fontWeight="bold"
-								>
-									Views
-								</Text>{" "}
-								in 2021
-							</Text>
-						</Flex>
-					</CardHeader>
-					<Box w="100%" h={{ sm: "300px" }} ps="8px">
-						<LineChart />
-					</Box>
-				</Card>
+				{topSong == null ? (
+					<Text
+						fontSize="2xl"
+						color="green.400"
+						fontWeight="bold"
+						as="i"
+						mb="6px"
+					>
+						Loading top songs...
+					</Text>
+				) : (
+					<>
+						<Card p="16px">
+							<CardBody>
+								<Flex direction="column" w="100%">
+									<Text
+										fontSize="2xl"
+										color="green.400"
+										fontWeight="bold"
+										as="i"
+										mb="6px"
+									>
+										Top songs
+									</Text>
+									<Grid templateRows="repeat(3, 1fr)" gap={2}>
+										<TopSong
+											top={1}
+											title={topSong[0].title}
+											imgURL={topSong[0].imagePath}
+											views={topSong[0].playTimes}
+											songId={topSong[0].songId}
+										/>
+										<TopSong
+											top={2}
+											title={topSong[1].title}
+											imgURL={topSong[1].imagePath}
+											views={topSong[1].playTimes}
+											songId={topSong[1].songId}
+										/>
+										<TopSong
+											top={3}
+											title={topSong[2].title}
+											imgURL={topSong[2].imagePath}
+											views={topSong[2].playTimes}
+											songId={topSong[2].songId}
+										/>
+									</Grid>
+								</Flex>
+							</CardBody>
+						</Card>
+						<Card
+							p="28px 10px 16px 0px"
+							mb={{ sm: "26px", lg: "0px" }}
+						>
+							<CardHeader mb="20px" pl="22px">
+								<Flex direction="column" alignSelf="flex-start">
+									<Text
+										fontSize="lg"
+										color={textColor}
+										fontWeight="bold"
+										mb="6px"
+									>
+										Zing STM Realtime
+									</Text>
+									<Text
+										fontSize="md"
+										fontWeight="medium"
+										color="gray.400"
+									>
+										<Text
+											as="span"
+											color="green.400"
+											fontWeight="bold"
+										>
+											Views
+										</Text>{" "}
+										in 2021
+									</Text>
+								</Flex>
+							</CardHeader>
+							<Box w="100%" h={{ sm: "300px" }} ps="8px">
+								<TopSongLineChart songId1={topSong[0].songId} songId2={topSong[1].songId} songId3={topSong[2].songId}/>
+							</Box>
+						</Card>
+					</>
+				)}
 			</Grid>
 			<Card p="16px">
 				<CardBody>

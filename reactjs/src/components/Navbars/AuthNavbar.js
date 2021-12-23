@@ -18,9 +18,10 @@ import {
 import { SidebarResponsive } from "components/Sidebar/Sidebar";
 import PropTypes from "prop-types";
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import routes from "routes.js";
 export default function AuthNavbar(props) {
+  const history = useHistory();
   const [open, setOpen] = React.useState(false);
   const handleDrawerToggle = () => {
     setOpen(!open);
@@ -70,7 +71,7 @@ export default function AuthNavbar(props) {
   }
   var brand = (
     <Link
-      href={`${process.env.PUBLIC_URL}/#/`}
+      onClick={() => history.push("/zingstm/home")}
       target="_blank"
       display="flex"
       lineHeight="100%"
