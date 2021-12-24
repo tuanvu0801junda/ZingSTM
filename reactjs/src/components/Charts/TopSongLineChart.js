@@ -1,8 +1,10 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
 import { lineChartData, lineChartOptions } from "variables/charts";
 
 export default function TopSongLineChart(props) {
+	// props.songId1, props.songId2, props.songId3
 	const [state, setState] = useState({
 		chartData: [],
 		chartOptions: {},
@@ -16,7 +18,12 @@ export default function TopSongLineChart(props) {
 	}, []);
 
 	const getChartData = async () => {
-		
+		var data = {
+			songId: props.songId1,
+		}
+		var res;
+
+		res = await axios.post("");
 	}
 
 	return (

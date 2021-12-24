@@ -83,7 +83,6 @@ export default function AddSongToPlaylistButton(props) {
 		};
 
 		const res = await axios.post("api/getPlaylistCreatedByUser", data);
-		console.log(res.data);
 		if (res.data.status === 200) {
 			setPlaylists(res.data.playlists);
 		} else if (res.data.status === 404) {
@@ -98,9 +97,9 @@ export default function AddSongToPlaylistButton(props) {
 				setPopupOpen(true);
 			}}
 			trigger={
-				<button className="add-playlist-button">
-					<i className="fas fa-plus-circle"></i>
-				</button>
+				<Button size="sm" colorScheme="blue" variant="outline" width="10px">
+					<i class="fas fa-plus"></i>
+				</Button>
 			}
 			position="left center"
 			nested

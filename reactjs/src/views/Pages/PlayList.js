@@ -52,7 +52,6 @@ export default function Playlist() {
 		};
 
 		const res = await axios.post("/api/getPlaylistInfo", data);
-    console.log(res.data);
 		setstate(res.data);
 	};
 

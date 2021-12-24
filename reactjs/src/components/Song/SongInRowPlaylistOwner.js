@@ -1,18 +1,18 @@
 import {
     Avatar,
     Badge,
+    Box,
     Flex,
     Td,
     Text,
     Tr,
-    Box,
     useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
 import { useHistory } from "react-router-dom";
-import SongButton from "./SongButton";
+import SongButtonPlaylistOwner from "./SongButtonPlaylistOwner";
 
-export default function SongInRow(props) {
+export default function SongInRowPlaylistOwner(props) {
     const history = useHistory();
     const textColor = useColorModeValue("gray.700", "white");
     const bgStatus = useColorModeValue("gray.400", "#1a202c");
@@ -69,7 +69,7 @@ export default function SongInRow(props) {
             </Td>
             <Td>
                 <Box w="100%" align="right">
-                    <SongButton songId={props.songId}/>
+                    <SongButtonPlaylistOwner songId={props.songId} playlistId={props.playlistId} />
                 </Box>
             </Td>
         </Tr>
