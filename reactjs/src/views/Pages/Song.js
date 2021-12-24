@@ -79,7 +79,7 @@ export default function Song() {
 					>
 						<Flex direction="column">
 							<Text fontWeight="bold" color="teal" fontSize="2xl">
-								Song Infomations
+								Song Information
 							</Text>
 							<br />
 							<Flex alignItems="center" mb="18px">
@@ -130,7 +130,7 @@ export default function Song() {
 									color="gray.500"
 									fontWeight="400"
 								>
-									{state.song.genre}
+									{state.song.genreName}
 								</Text>
 							</Flex>
 						</Flex>
@@ -144,7 +144,7 @@ export default function Song() {
 									Comments
 								</Text>
 								<SongCommentContainer
-									songId={state.song.songId}
+									songId={songId}
 									userInfo={userInfo}
 								/>
 							</Flex>
