@@ -32,7 +32,7 @@ Route::post('/getUserInfo', [UserController::class, 'getUserInfo']);
 
 Route::post('/getGenresSong', [SongController::class, 'getSongOfGenre']);
 Route::post('/getArtistsSong', [SongController::class, 'getSongOfArtist']);
-Route::post('/getSongInfo', [SongController::class, 'getOneSongDetail']);
+Route::post('/getSongInfo', [SongController::class, 'getSongInfo']);
 Route::post('/getSongOfAlbum', [SongController::class, 'getSongOfAlbum']);
 Route::post('/updateViewSong', [SongController::class, 'updateViewSong']);
 Route::post('/getTopView', [SongController::class, 'getTopView']);

@@ -99,6 +99,30 @@ class SongController extends Controller{
         }
     }
 
+    public function getSongInfo(Request $request){
+        $inputSongId = $request->input('songId');
+        $song = DB::table('Song')
+            ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
+            ->join('Artist','Artist.artistId','=','SongArtistRelation.artistId')
+            ->join('SongGenreRelation','SongGenreRelation.songId','=','Song.songId')
+            ->join('Genre','Genre.genreId','=','SongGenreRelation.genreId')
+            ->where('Song.songId',$inputSongId)
+            ->select('imagePath', 'songPath', 'duration','Song.title','artistName','genreName')
+            ->first();
+
+        if ($song != NULL){
+            return response()->json([
+                'status' => 200,
+                'song' => $song,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Song Detail not found!',
+            ]);
+        }
+    }
+
     public function getOneSongDetail(Request $request){
         $inputSongId = $request->input('songId');
         $song = DB::table('Song')
