@@ -12,6 +12,7 @@ use App\Models\PlaylistSongRelation;
 use App\Models\SongArtistRelation;
 use App\Models\SongGenreRelation;
 use App\Models\ListenHistory;
+use App\Models\Playlist;
 
 function getSongOfGenre(){
     $inputGenreId = 1;
@@ -267,7 +268,7 @@ function getSongOfAlbum($inputAlbumId){
 
     
 }
-getSongOfAlbum(4);
+
 
 function getListenHistory($songId){
     $view = DB::table('ListenHistory')->where('songId',$songId)->get();
@@ -276,13 +277,15 @@ function getListenHistory($songId){
 
 function deleteSongFromPlaylist(){
     $playlistId = 1;
-    $songId = 1;
+    $songId = 2;
     $song = PlaylistSongRelation::where('playlistId',$playlistId)
                 ->where('songId',$songId)
-                ->get();
+                ->first();
 
     if($song != NULL){
-        $song->delete();
+        echo $song;
+        PlaylistSongRelation::where('playlistId',$playlistId)
+        ->where('songId',$songId)->delete();
 
 
             echo "delete song successfully";
@@ -294,14 +297,14 @@ function deleteSongFromPlaylist(){
 
 function renamePlaylist(){
     $playlistId = 1;
-    $playlist = PlaylistSongRelation::where('playlistId',$playlistId)
-                ->get();
+    $playlist = Playlist::where('playlistId',$playlistId)
+                ->first();
 
     if($playlist != NULL){
-        $playlist->playlistName = "abc";
-        $playlist->update();
+        
+        Playlist::where('playlistId',$playlistId)->update(['playlistName' => "abcxyz"]);
 
-        echo "delete song successfully";
+        echo "rename successfully";
     }else{
 
             echo 'not found';

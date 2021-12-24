@@ -275,10 +275,11 @@ class PlaylistController extends Controller{
         $songId = $request->input('songId');
         $song = PlaylistSongRelation::where('playlistId',$playlistId)
                     ->where('songId',$songId)
-                    ->get();
+                    ->first();
 
         if($song != NULL){
-            $song->delete();
+            PlaylistSongRelation::where('playlistId',$playlistId)
+                                ->where('songId',$songId)->delete();
 
             return response()->json([
                 'status' => 200,
@@ -294,12 +295,11 @@ class PlaylistController extends Controller{
 
     public function renamePlaylist(Request $request){
         $playlistId = $request->input('playlistId');
-        $playlist = PlaylistSongRelation::where('playlistId',$playlistId)
-                    ->get();
+        $playlist = Playlist::where('playlistId',$playlistId)
+                    ->first();
 
         if($playlist != NULL){
-            $playlist->playlistName = $request->input('playlistName');
-            $playlist->update();
+            Playlist::where('playlistId',$playlistId)->update(['playlistName' => $request->input('playlistName')]);
 
             return response()->json([
                 'status' => 200,
