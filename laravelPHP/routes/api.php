@@ -46,6 +46,7 @@ Route::post('/getTotalSong', [SongController::class, 'getTotalSong']);
 Route::post('/insertSongArtistRelation', [SongController::class, 'insertSongArtistRelation']);
 Route::post('/insertSongGenreRelation', [SongController::class, 'insertSongGenreRelation']);
 Route::post('/postNewSong', [SongController::class, 'postNewSong']);
+Route::post('/getListenHistory', [SongController::class, 'getListenHistory']);
 
 
 
