@@ -10,6 +10,9 @@ use Carbon\Carbon;
 use App\Models\SharePlaylist;
 use App\Models\PlaylistSongRelation;
 use App\Models\SongArtistRelation;
+use App\Models\SongGenreRelation;
+use App\Models\ListenHistory;
+use App\Models\Playlist;
 
 function getSongOfGenre(){
     $inputGenreId = 1;
@@ -247,6 +250,69 @@ function getSongNumberOfAnArtist(){
     }
     
 }
-getSongNumberOfAnArtist()
+function getSongOfAlbum($inputAlbumId){
+
+
+    $songOfAlbum = DB::table('Song')
+    ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
+    ->join('Artist','Artist.artistId','=','SongArtistRelation.artistId')
+    ->join('SongGenreRelation','SongGenreRelation.songId','=','Song.songId')
+    ->join('Genre','Genre.genreId','=','SongGenreRelation.genreId') 
+    ->where('Song.albumId',$inputAlbumId)
+    ->select('Song.songId', 'imagePath', 'songPath', 'duration','title','artistName','artistImage','genreName')
+    ->distinct()->get();
+    
+
+    
+           var_dump( $songOfAlbum);
+
+    
+}
+
+
+function getListenHistory($songId){
+    $view = DB::table('ListenHistory')->where('songId',$songId)->get();
+    
+}
+
+function deleteSongFromPlaylist(){
+    $playlistId = 1;
+    $songId = 2;
+    $song = PlaylistSongRelation::where('playlistId',$playlistId)
+                ->where('songId',$songId)
+                ->first();
+
+    if($song != NULL){
+        echo $song;
+        PlaylistSongRelation::where('playlistId',$playlistId)
+        ->where('songId',$songId)->delete();
+
+
+            echo "delete song successfully";
+    }else{
+
+            echo 'not found';
+    }
+}
+
+function renamePlaylist(){
+    $playlistId = 1;
+    $playlist = Playlist::where('playlistId',$playlistId)
+                ->first();
+
+    if($playlist != NULL){
+        
+        Playlist::where('playlistId',$playlistId)->update(['playlistName' => "abcxyz"]);
+
+        echo "rename successfully";
+    }else{
+
+            echo 'not found';
+    }
+
+
+}
+deleteSongFromPlaylist();
+renamePlaylist();
 ?>
 

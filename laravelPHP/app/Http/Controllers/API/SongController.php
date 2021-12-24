@@ -8,6 +8,9 @@ use App\Models\Song;
 use Illuminate\Http\Request;
 use App\Models\SongArtistRelation;
 use App\Models\SongGenreRelation;
+use App\Models\ListenHistory;
+
+
 
 class SongController extends Controller{
     
@@ -130,8 +133,10 @@ class SongController extends Controller{
         $songOfAlbum = DB::table('Song')
             ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
             ->join('Artist','Artist.artistId','=','SongArtistRelation.artistId')
+            ->join('SongGenreRelation','SongGenreRelation.songId','=','Song.songId')
+            ->join('Genre','Genre.genreId','=','SongGenreRelation.genreId')
             ->where('Song.albumId',$inputAlbumId)
-            ->select('Song.songId', 'imagePath', 'songPath', 'duration','title','artistName','artistImage')
+            ->select('Song.songId', 'imagePath', 'songPath', 'duration','title','artistName','artistImage','genreName')
             ->distinct()->get();
         
         if ($songOfAlbum->isEmpty() == false){
@@ -158,6 +163,10 @@ class SongController extends Controller{
             ->where('songId',$songId)
             ->increment('playTimes',1);
         
+        $view = new ListenHistory();
+        $view->songId = $songId;
+        $view->listenDate = date("Y-m-d");
+        $view->save();
         if ($song != NULL){
             return response()->json([
                 'status' => 200,
@@ -170,6 +179,7 @@ class SongController extends Controller{
             ]);
         }
     }
+
     public function getTopView(){
         $song = DB::table('Song')
             ->orderBy('playTimes', 'desc')->take(3)->get();
@@ -368,4 +378,5 @@ class SongController extends Controller{
             'message' => 'Insert SongGenreRelation Successfully',
         ]);
     }
+
 }
