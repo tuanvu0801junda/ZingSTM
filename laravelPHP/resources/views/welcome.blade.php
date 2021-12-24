@@ -273,5 +273,43 @@ function getListenHistory($songId){
     $view = DB::table('ListenHistory')->where('songId',$songId)->get();
     
 }
+
+function deleteSongFromPlaylist(){
+    $playlistId = 1;
+    $songId = 1;
+    $song = PlaylistSongRelation::where('playlistId',$playlistId)
+                ->where('songId',$songId)
+                ->get();
+
+    if($song != NULL){
+        $song->delete();
+
+
+            echo "delete song successfully";
+    }else{
+
+            echo 'not found';
+    }
+}
+
+function renamePlaylist(){
+    $playlistId = 1;
+    $playlist = PlaylistSongRelation::where('playlistId',$playlistId)
+                ->get();
+
+    if($playlist != NULL){
+        $playlist->playlistName = "abc";
+        $playlist->update();
+
+        echo "delete song successfully";
+    }else{
+
+            echo 'not found';
+    }
+
+
+}
+deleteSongFromPlaylist();
+renamePlaylist();
 ?>
 

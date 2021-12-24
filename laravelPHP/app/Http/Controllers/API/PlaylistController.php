@@ -277,7 +277,7 @@ class PlaylistController extends Controller{
                     ->where('songId',$songId)
                     ->get();
 
-        if($Song != NULL){
+        if($song != NULL){
             $song->delete();
 
             return response()->json([
