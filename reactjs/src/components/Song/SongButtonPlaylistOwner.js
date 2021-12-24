@@ -26,10 +26,7 @@ export default function SongButtonPlaylistOwner(props) {
 		AddSongToPlay(props.songId);
 	};
 
-	const removeSong = async (e) => {
-		e.preventDefault();
-		const thisClicked = e.currentTarget;
-		console.log(thisClicked);
+	const removeSong = async () => {
 		console.log("Remove Song");
 		const data = {
 			playlistId: props.playlistId,
