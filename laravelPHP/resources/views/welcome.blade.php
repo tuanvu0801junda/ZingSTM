@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use App\Models\SharePlaylist;
 use App\Models\PlaylistSongRelation;
 use App\Models\SongArtistRelation;
+use App\Models\SongGenreRelation;
+use App\Models\ListenHistory;
 
 function getSongOfGenre(){
     $inputGenreId = 1;
@@ -247,6 +249,29 @@ function getSongNumberOfAnArtist(){
     }
     
 }
-getSongNumberOfAnArtist()
+function getSongOfAlbum($inputAlbumId){
+
+
+    $songOfAlbum = DB::table('Song')
+    ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
+    ->join('Artist','Artist.artistId','=','SongArtistRelation.artistId')
+    ->join('SongGenreRelation','SongGenreRelation.songId','=','Song.songId')
+    ->join('Genre','Genre.genreId','=','SongGenreRelation.genreId') 
+    ->where('Song.albumId',$inputAlbumId)
+    ->select('Song.songId', 'imagePath', 'songPath', 'duration','title','artistName','artistImage','genreName')
+    ->distinct()->get();
+    
+
+    
+           var_dump( $songOfAlbum);
+
+    
+}
+getSongOfAlbum(4);
+
+function getListenHistory($songId){
+    $view = DB::table('ListenHistory')->where('songId',$songId)->get();
+    
+}
 ?>
 

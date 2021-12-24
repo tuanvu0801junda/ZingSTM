@@ -269,4 +269,48 @@ class PlaylistController extends Controller{
 
 
     }
+
+    public function deleteSongFromPlaylist(Request $request){
+        $playlistId = $request->input('playlistId');
+        $songId = $request->input('songId');
+        $song = PlaylistSongRelation::where('playlistId',$playlistId)
+                    ->where('songId',$songId)
+                    ->get();
+
+        if($Song != NULL){
+            $song->delete();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'delete song successfully',
+            ]);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'not found',
+            ]);
+        }
+    }
+
+    public function renamePlaylist(Request $request){
+        $playlistId = $request->input('playlistId');
+        $playlist = PlaylistSongRelation::where('playlistId',$playlistId)
+                    ->get();
+
+        if($playlist != NULL){
+            $playlist->playlistName = $request->input('playlistName');
+            $playlist->update();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'rename song successfully',
+            ]);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'not found',
+            ]);
+        }
+    }
+
 }
