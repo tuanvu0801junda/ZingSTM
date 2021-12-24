@@ -105,11 +105,10 @@ reactjs/
     │   ├── Dashboard
     │   │   ├── Billing.js
     │   │   ├── Dashboard.js
-    │   │   ├── Profile.js
-    │   │   └── Tables.js
+    │   │   └── Profile.js
     │   ├── Pages
-    │       ├── SignIn.js
-    │       └── SignUp.js
+    │   │   ├── SignIn.js
+    │   │   └── SignUp.js
     │   └── RTL
     │       └── RTLPage.js
     ├── index.js
