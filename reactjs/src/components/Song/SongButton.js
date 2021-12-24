@@ -1,21 +1,18 @@
-import "assets/css/buttons.css";
 import AddSongToPlay from "functions/AddSongToPlay";
 import AddSongToPlaylistButton from "components/Buttons/AddSongToPlaylistButton";
+import { Grid, Button } from "@chakra-ui/react";
 
 function SongButton(props) {
 	const play = () => {
 		AddSongToPlay(props.songId);
 	};
 	return (
-		<div className="song_table">
-			<button className="song_button" onClick={play}>
-				<i className="fas fa-play-circle"></i>
-			</button>
+		<Grid templateColumns="1fr 1fr 1fr" w="150px">
+			<Button size="sm" colorScheme="blue" variant="outline" width="10px" onClick={play}>
+				<i class="fas fa-play"></i>
+			</Button>
 			<AddSongToPlaylistButton songId={props.songId}/>
-			<button className="song_button">
-				<i className="fas fa-heart"></i>
-			</button>
-		</div>
+		</Grid>
 	);
 }
 export default SongButton;

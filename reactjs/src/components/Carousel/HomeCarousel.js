@@ -19,9 +19,10 @@ export default function HomeCarousel() {
     return (
       <div className="home_carousel">
         <Slider {...settings}>
-            <img src="https://avatar-ex-swe.nixcdn.com/slideshow-web/2021/11/22/8/9/5/8/1637572742253.jpg"></img>
-            <img src="https://avatar-ex-swe.nixcdn.com/slideshow-web/2021/12/07/f/b/e/8/1638894546279.jpg"></img>
-            <img src="https://avatar-ex-swe.nixcdn.com/slideshow-web/2021/11/24/d/4/1/9/1637745949088.jpg"></img>
+            <img src="https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FCarouselImages%2F1638894546279.jpg?alt=media&token=b9bf7822-e088-4b54-a7b0-a3a7f2759183"></img>
+            <img src="https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FCarouselImages%2F1638762973682.jpg?alt=media&token=35aedf12-0a47-4706-a799-fb7089adb515"></img>
+            <img src="https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FCarouselImages%2F1638246839633.jpg?alt=media&token=c4f7f7c3-767e-411b-827c-6df0bd8eddce"></img>
+            <img src="https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FCarouselImages%2F1637745949088.jpg?alt=media&token=40993f1a-f828-4bc6-b0f9-4f2be1947c9e"></img>
         </Slider>
       </div>
     );

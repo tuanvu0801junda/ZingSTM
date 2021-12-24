@@ -55,7 +55,6 @@ function Artist() {
     }
 
     const res = await axios.post('/api/getArtistsSong', data);
-    console.log(res);
     if (res.data.status === 200) setSongs(res.data.songs);
     else setSongs([]);
   }

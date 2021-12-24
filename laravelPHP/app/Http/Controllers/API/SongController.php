@@ -110,7 +110,7 @@ class SongController extends Controller{
             ->join('SongGenreRelation','SongGenreRelation.songId','=','Song.songId')
             ->join('Genre','Genre.genreId','=','SongGenreRelation.genreId')
             ->where('Song.songId',$inputSongId)
-            ->select('imagePath', 'songPath', 'duration','Song.title','artistName','genreName')
+            ->select('imagePath', 'songPath', 'duration','Song.title','artistName','genreName','Song.songId')
             ->first();
 
         if ($song != NULL){

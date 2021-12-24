@@ -42,7 +42,7 @@ export default function PlaylistOther(props) {
 								<Th color="gray.400"></Th>
 								<Th color="gray.400"></Th>
 								<Th color="gray.400">Genre</Th>
-								<Th></Th>
+								<Th color="gray.400">Duration</Th>
 							</Tr>
 						</Thead>
 						<Tbody>
