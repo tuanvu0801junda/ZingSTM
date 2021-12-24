@@ -73,5 +73,8 @@ Route::post('/checkVerifyCode',[PlaylistController::class, 'checkVerifyCode']);
 Route::post('/addSongToPlaylist',[PlaylistController::class, 'addSongToPlaylist']);
 Route::post('/checkPlaylistMaker',[PlaylistController::class, 'checkPlaylistMaker']);
 Route::post('/getPlaylistInfo',[PlaylistController::class, 'getPlaylistInfo']);
+Route::post('/deleteSongFromPlaylist',[PlaylistController::class, 'deleteSongFromPlaylist']);
+Route::post('/renamePlaylist',[PlaylistController::class, 'renamePlaylist']);
+
 
 
