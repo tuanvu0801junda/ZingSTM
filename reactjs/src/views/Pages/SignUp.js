@@ -61,9 +61,9 @@ function SignUp() {
 
     if (res.data.status === 200) {
       try {
-        console.log(res.data);
+        if (res.data.newUser.role === 0) dispatch(actionUpdateSidebar("user"));
+        else if (res.data.newUser.role === 1) dispatch(actionUpdateSidebar("admin"));
         dispatch(actionLogin(res.data.newUser));
-        console.log(res.data.newUser)
         swal(res.data.message, "Welcome to Zing STM, " + res.data.newUser.fullname + "!", "success").then(() => history.push("/zingstm"));
       }
       catch(err) {

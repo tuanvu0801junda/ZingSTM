@@ -25,6 +25,7 @@ import signInImage from "assets/img/signInImage.png";
 //Redux
 import { useDispatch } from "react-redux";
 import actionLogin from "redux/actions/actionLogin"
+import actionUpdateSidebar from "redux/actions/actionUpdateSidebar";
 
 function SignIn() {
   const dispatch = useDispatch();
@@ -53,7 +54,8 @@ function SignIn() {
 
     if (res.data.status === 200) {
       try {
-          console.log(res.data.user);
+          if (res.data.user.role === 0) dispatch(actionUpdateSidebar("user"));
+          else if (res.data.user.role === 1) dispatch(actionUpdateSidebar("admin"));
           dispatch(actionLogin(res.data.user));
           history.push("/zingstm");
       }

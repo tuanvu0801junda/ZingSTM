@@ -21,7 +21,7 @@ class SongController extends Controller{
             ->join('Genre','SongGenreRelation.genreId','=','Genre.genreId')
             ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
             ->join('Artist','Artist.artistId','=','SongArtistRelation.artistId')
-            ->select('Song.songId','imagePath','songPath','duration','Song.title','Album.title','genreName','artistName')->get();
+            ->select('Song.songId','imagePath','songPath','duration','Song.title','Album.title AS albumTitle','genreName','artistName')->get();
         return response() ->json([
             'status' => 200,
             'songs' => $songs
@@ -102,13 +102,15 @@ class SongController extends Controller{
         }
     }
 
-    public function getOneSongDetail(Request $request){
+    public function getSongInfo(Request $request){
         $inputSongId = $request->input('songId');
         $song = DB::table('Song')
             ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
             ->join('Artist','Artist.artistId','=','SongArtistRelation.artistId')
+            ->join('SongGenreRelation','SongGenreRelation.songId','=','Song.songId')
+            ->join('Genre','Genre.genreId','=','SongGenreRelation.genreId')
             ->where('Song.songId',$inputSongId)
-            ->select('imagePath', 'songPath', 'duration','title','artistName')
+            ->select('imagePath', 'songPath', 'duration','Song.title','artistName','genreName')
             ->first();
 
         if ($song != NULL){
@@ -120,7 +122,31 @@ class SongController extends Controller{
             return response()->json([
                 'status' => 404,
                 'message' => 'Song Detail not found!',
-                'songId' => $inputSongId,
+            ]);
+        }
+    }
+
+    public function getOneSongDetail(Request $request){
+        $inputSongId = $request->input('songId');
+        $song = DB::table('Song')
+            ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
+            ->join('Artist','Artist.artistId','=','SongArtistRelation.artistId')
+            ->join('SongGenreRelation','SongGenreRelation.songId','=','Song.songId')
+            ->join('Genre','Genre.genreId','=','SongGenreRelation.genreId')
+            ->join('Album','Album.albumId','=','Song.albumId')
+            ->where('Song.songId',$inputSongId)
+            ->select('imagePath', 'songPath', 'duration','Song.title','Album.title AS albumName','artistName','genreName')
+            ->first();
+
+        if ($song != NULL){
+            return response()->json([
+                'status' => 200,
+                'song' => $song,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Song Detail not found!',
             ]);
         }
     }
@@ -211,6 +237,7 @@ class SongController extends Controller{
         //songId, imagePath, albumId, artistId
         $songId = $request->input('songId');
         $song = Song::find($songId);
+        $song->title = $request->input('songName');
         $song->imagePath = $request->input('imagePath');
         $albumId = $request->input('albumId');
         if(strcmp($albumId,"null") == 0){
@@ -224,8 +251,10 @@ class SongController extends Controller{
         $affected = DB::table('SongArtistRelation')
                     ->where('songId',$songId)
                     ->update(['artistId' => $request->input('artistId')]);
-        
-        if($affected >= 0){
+        $affected1 = DB::table('SongGenreRelation')
+        ->where('songId',$songId)
+        ->update(['genreId' => $request->input('genreId')]);
+        if($affected >= 0 && $affected1 >= 0){
             return response()->json([
                 'status' => 200,
                 'message' => 'Update Song successfully',
@@ -238,6 +267,47 @@ class SongController extends Controller{
         }
     }
 
+    // public function getSongNumberOfAnArtist(Request $request){
+    //     $artistId = $request->input('artistId');
+    //     $songNumber = DB::table('SongArtistRelation')
+    //                     ->where('artistId',$artistId)->count();
+    //     if($songNumber >= 0){
+    //         return response()->json([
+    //             'status' => 200,
+    //             'numberSong' => $songNumber,
+    //         ]);
+    //     }else{
+    //         return response()->json([
+    //             'status' => 404,
+    //             'message' => 'Cannot count!',
+    //         ]);
+    //     }
+    // }
+
+    // public function getAlbumStatistic(Request $request){
+    //     $albumId = $request->input('albumId');
+
+    //     //number of song in album
+    //     $songNumber = DB::table('Song')
+    //                     ->where('albumId',$albumId)->count();
+
+    //     //total playtimes of whole album
+    //     $totalPlay = DB::table('Song')
+    //                     ->where('albumId',$albumId)->sum('playTimes');
+
+    //     if($songNumber >= 0 && $totalPlay >= 0){
+    //         return response()->json([
+    //             'status' => 200,
+    //             'numberSong' => $songNumber,
+    //             'totalPlayTimes' => $totalPlay,
+    //         ]);
+    //     } else {
+    //         return response()->json([
+    //             'status' => 404,
+    //             'message' => 'Cannot count!',
+    //         ]);
+    //     }
+    // }
     public function getSongNumberOfAnArtist(){
         $artist = DB::table('SongArtistRelation')
                         ->groupBy('artistId')
@@ -251,7 +321,7 @@ class SongController extends Controller{
             $i++;
         }
         $i--;
-        if($i > 0){
+        if($i >= 0){
             return response()->json([
                 'status' => 200,
                 'artistSong' => $artistArr,
@@ -293,6 +363,7 @@ class SongController extends Controller{
         }
     }
 
+
     public function getTotalSong(){
         $totalSong = DB::table('Song')->count();
         if($totalSong >= 0){
@@ -323,7 +394,7 @@ class SongController extends Controller{
     public function insertSongGenreRelation(Request $request){
         $newRow = new SongGenreRelation();
         $newRow->songId = $request->input('songId');
-        $newRow->genreId = $request->input('artistId');
+        $newRow->genreId = $request->input('genreId');
         $newRow->save();
 
         return response()->json([

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import actionLogin from "redux/actions/actionLogin";
 import actionLogout from "redux/actions/actionLogout";
 import actionUpdatePlaylist from "redux/actions/actionUpdatePlaylist";
-import actionUpdateSidebarUser from "redux/actions/actionUpdateSidebarUser";
+import actionUpdateSidebar from "redux/actions/actionUpdateSidebar";
 // Chakra imports
 import {
 	Avatar,
@@ -28,14 +28,13 @@ import swal from "sweetalert";
 import axios from "axios";
 import MyPlaylist from "components/Container/MyPlaylist";
 import PlaylistSharedWithMe from "components/Container/PlaylistSharedWithMe";
+import { useHistory } from "react-router-dom";
 
 function Profile() {
+	const history = useHistory();
 	const dispatch = useDispatch();
-	// Test
-	const hiddenRTL = () => {
-		dispatch(actionUpdateSidebarUser());
-	};
-	//
+	const imageRef = useRef("");
+
 	var userInfo = {
 		email: "Undefined",
 		profilePic:
@@ -151,8 +150,6 @@ function Profile() {
 		dispatch(actionUpdatePlaylist(audioList));
 	};
 
-	const imageRef = useRef("");
-
 	const showChooseFileDialog = () => {
 		imageRef.current.click();
 	};
@@ -187,7 +184,9 @@ function Profile() {
 	};
 
 	const logout = () => {
+		dispatch(actionUpdateSidebar("logout"));
 		dispatch(actionLogout());
+		history.push("/zingstm/home");
 	};
 
 	return (
@@ -275,7 +274,7 @@ function Profile() {
 								w={{ sm: "100%", md: "50%", lg: "auto" }}
 							>
 								<Button
-									onClick={hiddenRTL}
+									onClick={updatePlaylist}
 									p="0px"
 									bg="transparent"
 									_hover={{ bg: "none" }}
@@ -297,7 +296,7 @@ function Profile() {
 											color={textColor}
 											fontWeight="bold"
 										>
-											PLAY
+											TEST
 										</Text>
 									</Flex>
 								</Button>

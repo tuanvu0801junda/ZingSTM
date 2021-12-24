@@ -34,7 +34,6 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import { uploadSongImage, uploadSongMp3 } from '../../firebase/uploadMp3Image';
 import { getDurationSong } from './GetDurationSong'
-// import  from 'firebase/uploadMp3Image';
 
 
 
@@ -47,12 +46,11 @@ function AddSong() {
     const [image, setImage] = useState('');
     const [mp3, setMp3] = useState('');
     const [songTitle, getSongTitle] = useState('');
-    const [artistIdSelected, getArtistIdSelected] = useState('');
-    const [albumIdSelected, getAlbumIdSelected] = useState('');
+    const [artistNameSelected, getArtistNameSelected] = useState('');
+    const [albumNameSelected, getAlbumNameSelected] = useState('');
     const [genresIdSelected, getGenresIdSelected] = useState('');
-    const [durationSong, getDurationSong] = useState('');
-
-
+    const songUrlUndefinded = "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Songs%2Fundefined?";
+    const imgUrlUndefinded = "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FSongImages%2Fundefined?"
     //Get artist
     useEffect(() => {
         getAllArtistInfo();
@@ -94,12 +92,15 @@ function AddSong() {
     const handleUploadSong = async () => {
         const mp3Url = await uploadSongMp3(mp3); //Get url from firebase
         const imageUrl = await uploadSongImage(image); //Get url from firebase
-        addNewSongToDataBase(mp3Url, imageUrl);
+        let durationConvert = '';
+        //Hanle empty mp3Url
+        if (!mp3Url.includes(songUrlUndefinded))
+            durationConvert = await getDurationSong(mp3Url);
+        addNewSongToDataBase(mp3Url, imageUrl, durationConvert);
     }
 
-    //Add new song to database
     // let durationConvert = "";
-    const addNewSongToDataBase = async (mp3Url, imageUrl) => {
+    const addNewSongToDataBase = async (mp3Url, imageUrl, durationConvert) => {
         //Get duration of song
         // const au = document.createElement('audio');
         // au.src = mp3Url;
@@ -112,18 +113,79 @@ function AddSong() {
         //     console.log("The duration of the song : " + duration_Convert);
         //     return duration_Convert;
         // }, false);
-        const durationConvert = await getDurationSong(mp3Url);
 
-        const data = {
-            albumId: albumIdSelected,
-            imagePath: imageUrl,
-            songPath: mp3Url,
-            title: songTitle,
-            duration: durationConvert
+        if (songTitle != '' && albumNameSelected != '' && artistNameSelected != '' && genresIdSelected != '' && !mp3Url.includes(songUrlUndefinded) && !imageUrl.includes(imgUrlUndefinded)) {
+            //Get artistId from artistName
+            const res2 = await axios.post('/api/getArtistId', { artistName: artistNameSelected })
+            const artistIdSelected = res2.data.artist.artistId;
+            //Get albumId from albumName
+            const res1 = await axios.post('/api/getAlbumId', { albumName: albumNameSelected })
+            const albumIdSelected = res1.data.album.albumId;
+            console.log(albumIdSelected);
+
+            const data = {
+                albumId: albumIdSelected,
+                imagePath: imageUrl,
+                songPath: mp3Url,
+                title: songTitle,
+                duration: durationConvert
+            }
+            console.log(data);
+            //Add new song to database
+
+            const res = await axios.post('/api/postNewSong', data);
+            if (res.data.status === 200) {
+                try {
+                    console.log(res.data.message);
+                    const songId = res.data.songId;
+                    //Add new data to songArtistRelation table
+                    const data1 = {
+                        songId: songId,
+                        artistId: artistIdSelected
+                    }
+                    await axios.post('/api/insertSongArtistRelation', data1);
+
+                    //Add new data to songGenreRelation table
+                    const data2 = {
+                        songId: songId,
+                        genreId: genresIdSelected
+                    }
+                    await axios.post('/api/insertSongGenreRelation', data2);
+                    swal({
+                        title: "Success!",
+                        text: res.data.message,
+                        icon: "success",
+                        button: "OK!",
+                    })
+                        .then((value) => {
+                            history.push('/zingstm/manage-song');
+                        });
+
+                    //Reset blank
+                    // getSongTitle('');
+                    // getGenresIdSelected({ selected: null });
+                    // getArtistIdSelected({ selected: null });
+                    // getAlbumIdSelected({ selected: null });
+                    // setImage('No file chosen');
+                    // setMp3('No file chosen');
+                    // setTimeout(function () {
+                    //     
+                    // }, 2000)
+
+                }
+                catch (err) {
+                    swal("Error", err.message, "error");
+                }
+            }
+        } else {
+            swal({
+                title: "Fail!",
+                text: "Empty blank",
+                icon: "warning",
+                button: "OK!",
+            });
         }
-        console.log(data);
 
-        // const res = await post('/api/postNewSong', data);
     }
     return (
         <div style={{ margin: '125px 0px 0px 0px' }} >
@@ -145,26 +207,25 @@ function AddSong() {
                         />
                         <br /><br />
                         <FormLabel>Artist:</FormLabel>
-                        <Select placeholder="Select artist" onChange={(e) => { getArtistIdSelected(e.target.selectedIndex) }}>
+                        <Select placeholder="Select artist" onChange={(e) => { getArtistNameSelected(e.target.value) }}>
                             {artist.map((data) => {
                                 return (
-                                    <option>{data.artistName}</option>
+                                    <option value={data.artistName} >{data.artistName}</option>
                                 );
                             })}
                         </Select>
                         <br />
                         <FormLabel>Album:</FormLabel>
-                        <Select placeholder="Select album" onChange={(e) => { getAlbumIdSelected(e.target.selectedIndex) }}>
+                        <Select placeholder="Select album" onChange={(e) => { getAlbumNameSelected(e.target.value) }}>
                             {album.map((data) => {
                                 return (
-                                    <option>{data.title}</option>
+                                    <option value={data.title}>{data.title}</option>
                                 );
                             })}
-                            <option>Single</option>
                         </Select>
                         <br />
-                        <FormLabel>Genres:</FormLabel>
-                        <Select placeholder="Select genres" onChange={(e) => { getGenresIdSelected(e.target.selectedIndex) }}>
+                        <FormLabel>Genre:</FormLabel>
+                        <Select placeholder="Select genre" onChange={(e) => { getGenresIdSelected(e.target.selectedIndex) }}>
                             {genres.map((data) => {
                                 return (
                                     <option>{data.genreName}</option>

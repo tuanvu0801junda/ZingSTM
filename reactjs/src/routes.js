@@ -5,13 +5,14 @@ import Billing from "views/Dashboard/Billing.js";
 import SongManage from "views/RTL/SongManage.js";
 import AlbumManage from "views/RTL/AlbumManage.js";
 import ArtistManage from "views/RTL/ArtistManage.js";
+import GenreManage from "views/RTL/GenreManage.js";
+
 import Profile from "views/Dashboard/Profile.js";
 import SignIn from "views/Pages/SignIn.js";
 import SignUp from "views/Pages/SignUp.js";
 
 import {
   HomeIcon,
-  StatsIcon,
   CreditIcon,
   PersonIcon,
   DocumentIcon,
@@ -29,20 +30,15 @@ var dashRoutes = [
     layout: "/zingstm",
   },
   {
-    path: "/tables",
-    name: "Tables",
-    rtlName: "لوحة القيادة",
-    icon: <StatsIcon color="inherit" />,
-    component: Tables,
-    layout: "/zingstm",
-  },
-  {
     path: "/billing",
     name: "Billing",
     rtlName: "لوحة القيادة",
     icon: <CreditIcon color="inherit" />,
     component: Billing,
     layout: "/zingstm",
+    logout: "block",
+    user: "none",
+    admin: "block",
   },
   // {
   //   path: "/admin",
@@ -83,6 +79,15 @@ var dashRoutes = [
         icon: <SupportIcon color="inherit" />,
         secondaryNavbar: true,
         component: ArtistManage,
+        layout: "/zingstm",
+      },
+      {
+        path: "/manage-genre",
+        name: "Manage Genre",
+        rtlName: "لوحة القيادة",
+        icon: <SupportIcon color="inherit" />,
+        secondaryNavbar: true,
+        component: GenreManage,
         layout: "/zingstm",
       },
     ],

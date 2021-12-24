@@ -54,7 +54,7 @@ export default function Configurator(props) {
           <DrawerHeader pt="24px" px="24px">
             <DrawerCloseButton />
             <Text fontSize="xl" fontWeight="bold" mt="16px">
-              Purity UI Configurator
+              ZingSTM UI Configurator
             </Text>
             <Text fontSize="md" mb="16px">
               See your dashboard options.
@@ -136,46 +136,26 @@ export default function Configurator(props) {
 
               <Separator />
               <Box mt="24px">
-                <Text fontSize="md" fontWeight="600">
-                  Sidenav Type
-                </Text>
-                <Text fontSize="sm" mb="16px">
-                  Choose between 2 different sidenav types.
+                <Text fontSize="lg" fontWeight="600">
+                Template used
                 </Text>
                 <Box>
-                  <Link
-                    href="https://www.creative-tim.com/product/purity-ui-dashboard"
-                    w="100%"
-                    mb="16px"
-                  >
-                    <Button
-                      w="100%"
-                      mb="16px"
-                      bg={bgButton}
-                      color={colorButton}
-                      fontSize="xs"
-                      variant="no-hover"
-                      px="30px"
-                    >
-                      Free Download
-                    </Button>
-                  </Link>
                   <Link
                     href="https://demos.creative-tim.com/docs-purity-ui-dashboard/"
                     w="100%"
                   >
+                    <br/>
                     <Button
                       w="100%"
-                      bg={secondaryButtonBg}
                       border="1px solid"
                       borderColor={secondaryButtonBorder}
-                      color={secondaryButtonColor}
+                      colorScheme="teal"
                       fontSize="xs"
-                      variant="no-hover"
+                      variant="ghost"
                       px="20px"
                       mb="16px"
                     >
-                      <Text textDecorationColor="none">Documentation</Text>
+                      Purity UI Dashboard
                     </Button>
                   </Link>
                 </Box>

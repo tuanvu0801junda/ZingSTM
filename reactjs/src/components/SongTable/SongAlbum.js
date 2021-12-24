@@ -12,7 +12,7 @@ import AddSongToPlay from "functions/AddSongToPlay";
 import React from "react";
 import SongButton from "./SongButton";
 
-function SongGenres(props) {
+function SongAlbum(props) {
     const textColor = useColorModeValue("gray.700", "white");
     const bgStatus = useColorModeValue("gray.400", "#1a202c");
     const colorStatus = useColorModeValue("white", "gray.400");
@@ -73,4 +73,4 @@ function SongGenres(props) {
     );
 }
 
-export default SongGenres;
+export default SongAlbum;

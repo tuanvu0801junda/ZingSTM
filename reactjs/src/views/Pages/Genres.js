@@ -16,7 +16,7 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import GenresBanner from "components/Banner/GenresBanner";
-import SongGenres from "components/SongTable/SongGenres";
+import SongInRow from "components/Song/SongInRow";
 import axios from "axios";
 
 function Genres() {
@@ -40,7 +40,6 @@ function Genres() {
 		const res = await axios.post("/api/getGenreInfoById", data);
 		if (res.data.status === 200) {
 			setGenre(res.data.genre);
-			console.log(genre);
 		}
 	};
 
@@ -58,6 +57,7 @@ function Genres() {
 
 		const res = await axios.post("/api/getGenresSong", data);
 		if (res.data.status === 200) setSongs(res.data.songs);
+		else setSongs([]);
 	};
 	// ('songId', 'imagePath', 'songPath', 'duration','title','genreName')
 
@@ -92,7 +92,7 @@ function Genres() {
 								? "Loading..."
 								: songs.map((row) => {
 										return (
-											<SongGenres
+											<SongInRow
 												songId={row.songId}
 												title={row.title}
 												logo={row.imagePath}

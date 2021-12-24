@@ -17,6 +17,18 @@ class AlbumController extends Controller{
         ]);
     }
 
+    public function postNewAlbum(Request $request){
+        $newAlbum = new Album();
+        $newAlbum->title = $request->input('title');
+        $newAlbum->artworkPath = $request->input('artworkPath');
+
+        $newAlbum->save();
+        return response()->json([
+            'status' => 200,
+            'message' => 'Add New Album Successfully',
+        ]);
+    }
+
     public function deleteOneAlbum(Request $request){
         $albumId = $request->input('albumId');
         $album = Album::find($albumId);
@@ -39,8 +51,31 @@ class AlbumController extends Controller{
         } else {
             return response()->json([
                 'status' => 200,
-                'albumTitle' => $album->albumTitle,  
+                'title' => $album->title,  
                 'artworkPath' => $album->artworkPath,
+                'albumId' => $album->albumId,
+                'album' => $album  
+            ]);
+        }
+    }
+
+    public function getAlbumId(Request $request){
+        $albumName = $request->input('albumName');
+        $album = DB::table('Album')
+                ->where('title',$albumName)
+                ->select('albumId')
+                ->first();
+
+        if ($album != NULL){
+            return response()->json([
+                'status' => 200,
+                'album' => $album,
+                'message' => 'Get album id successfully!',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Album not found!',
             ]);
         }
     }
@@ -48,7 +83,7 @@ class AlbumController extends Controller{
     public function updateOneAlbum(Request $request){
         $albumId = $request->input('albumId');
         $album = Album::find($albumId);
-        $album->albumTitle = $request->input('albumTitle');
+        $album->title = $request->input('albumTitle');
         $album->artworkPath = $request->input('artworkPath');
         $album->update();
 

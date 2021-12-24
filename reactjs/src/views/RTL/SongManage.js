@@ -40,18 +40,53 @@ export default function Dashboard() {
     if (res.data.status === 200) {
       setSong(res.data.songs);
       console.log(res.data.songs);
+      console.log(res.data.albumTitle);
     }
   }
-
+  //Handle add new song
   const goToAddSongPage = () => {
     history.push('/zingstm/add-song');
   }
+  //Handle update song
   const goToUpdateSongPage = (event) => {
     const songCurrentId = event.target.value;
     // console.log(songCurrentId);
     history.push('/zingstm/update-song/' + songCurrentId);
   }
-
+  // Handle delete song
+  const handleDeleteSong = (e, id) => {
+    e.preventDefault();
+    const thisClicked = e.currentTarget;
+    swal("Are you sure you to delete this song?", {
+      buttons: {
+        cancel: "No",
+        catch: {
+          text: "Yes",
+          value: "catch",
+        },
+      },
+    })
+      .then((value) => {
+        switch (value) {
+          case "cancel":
+            break;
+          case "catch":
+            axios.post("/api/deleteOneSong", { songId: id });
+            setTimeout(function () {
+              swal({
+                title: "Success!",
+                text: "Delete Song Successfully",
+                icon: "success",
+                button: "OK!",
+              })
+            }, 200);
+            thisClicked.closest("tr").remove();
+            break;
+          default:
+            break;
+        }
+      });
+  }
   return (
     <div style={{ margin: '125px 0px 0px 0px' }}>
       <Card overflowX={{ xl: "hidden" }}>
@@ -70,7 +105,7 @@ export default function Dashboard() {
                   Song
                 </Th>
                 <Th color="gray.400">Album</Th>
-                <Th color="gray.400">Geres</Th>
+                <Th color="gray.400">Genre</Th>
                 <Th color="gray.400">Time</Th>
                 <Th color="gray.400">Update</Th>
                 <Th color="gray.400">Delete</Th>
@@ -78,15 +113,15 @@ export default function Dashboard() {
               </Tr>
             </Thead>
             <Tbody>
-              {song.map((data) => {
+              {song.map((data, index) => {
                 return (
-                  <Tr>
+                  <Tr key={index}>
                     <Td minWidth={{ sm: "250px" }} pl="0px">
                       <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
                         <Avatar src={data.imagePath} w="50px" borderRadius="12px" me="18px" />
                         <Flex direction="column">
                           <Text
-                            fontSize="md"
+                            fontSize="lg"
                             color={textColor}
                             fontWeight="bold"
                             minWidth="100%"
@@ -102,20 +137,20 @@ export default function Dashboard() {
 
                     <Td>
                       <Flex direction="column">
-                        <Text fontSize="md" color={textColor} fontWeight="bold">
-                          {data.title}
+                        <Text fontSize="lg" color={textColor} fontWeight="bold">
+                          {data.albumTitle}
                         </Text>
                       </Flex>
                     </Td>
                     <Td>
                       <Flex direction="column">
-                        <Text fontSize="md" color={textColor} fontWeight="bold">
+                        <Text fontSize="lg" color={textColor} fontWeight="bold">
                           {data.genreName}
                         </Text>
                       </Flex>
                     </Td>
                     <Td>
-                      <Text fontSize="md" color={textColor} fontWeight="bold">
+                      <Text fontSize="lg" color={textColor} fontWeight="bold">
                         {data.duration}
                       </Text>
                     </Td>
@@ -123,7 +158,7 @@ export default function Dashboard() {
                       <Button colorScheme="green" size="sm" onClick={goToUpdateSongPage} value={data.songId}>Update</Button>
                     </Td>
                     <Td>
-                      <Button colorScheme="red" size="sm">Delete</Button>
+                      <Button colorScheme="red" size="sm" onClick={(e) => { handleDeleteSong(e, data.songId) }}>Delete</Button>
                     </Td>
                   </Tr>
                 );

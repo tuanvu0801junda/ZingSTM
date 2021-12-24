@@ -18,7 +18,7 @@ import CardBody from "components/Card/CardBody.js";
 import axios from 'axios';
 
 import ArtistBanner from "components/Banner/ArtistBanner";
-import SongGenres from "components/SongTable/SongGenres";
+import SongInRow from "components/Song/SongInRow";
 
 function Artist() {
   const { artistId } = useParams();
@@ -57,6 +57,7 @@ function Artist() {
     const res = await axios.post('/api/getArtistsSong', data);
     console.log(res);
     if (res.data.status === 200) setSongs(res.data.songs);
+    else setSongs([]);
   }
   // ('songId', 'imagePath', 'songPath', 'duration','title','genreName')
 
@@ -89,7 +90,7 @@ function Artist() {
                 !songs ? "Loading..." :
                 songs.map((row) => {
                   return (
-                    <SongGenres
+                    <SongInRow
                       songId={row.songId}
                       title={row.title}
                       logo={row.imagePath}

@@ -17,9 +17,9 @@ function AddSongToPlay(songId) {
                 cover: res.data.song.imagePath,
                 musicSrc: res.data.song.songPath,
             }
+            const x = await axios.post('api/updateViewSong', data);
+            console.log("Song views updated");
         }
-        console.log(res);
-        console.log(song);
         store.dispatch(actionAddSongToPlay(song));
     }
 

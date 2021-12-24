@@ -250,19 +250,19 @@ class PlaylistController extends Controller{
                 'status' => 200,
                 'playlist' => $playlist,
                 'songs' => $songs,
-                'message' => 'here your playlist',
+                'message' => 'Playlist owner',
             ]);
         }
         elseif($check != NULL){                 // shared user
             return response()->json([
-                'status' => 200,
+                'status' => 201,
                 'playlist' => $playlist,
                 'songs' => $songs,
-                'message' => 'Access Acepted',
+                'message' => 'Accessible user',
             ]);
         }else{
             return response()->json([
-                'status' => 404,
+                'status' => 100,
                 'message' => 'Access Denied',
             ]);
         }
