@@ -44,6 +44,8 @@ Route::post('/getSongNumberOfAnArtist', [SongController::class, 'getSongNumberOf
 Route::post('/getAlbumStatistic', [SongController::class, 'getAlbumStatistic']);
 Route::post('/getTotalSong', [SongController::class, 'getTotalSong']);
 Route::post('/insertSongArtistRelation', [SongController::class, 'insertSongArtistRelation']);
+Route::post('/getListenHistory', [SongController::class, 'getListenHistory']);
+
 
 Route::post('/postSongComment',[CommentController::class, 'postSongComment']);
 Route::post('/getUserComment',[CommentController::class, 'getUserComment']);
@@ -75,6 +77,7 @@ Route::post('/checkPlaylistMaker',[PlaylistController::class, 'checkPlaylistMake
 Route::post('/getPlaylistInfo',[PlaylistController::class, 'getPlaylistInfo']);
 Route::post('/deleteSongFromPlaylist',[PlaylistController::class, 'deleteSongFromPlaylist']);
 Route::post('/renamePlaylist',[PlaylistController::class, 'renamePlaylist']);
+
 
 
 
