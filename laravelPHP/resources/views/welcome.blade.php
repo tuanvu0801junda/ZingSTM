@@ -101,25 +101,7 @@ function getAllSongComment(){
 //postSongComment();  
 //getAllSongComment();    
 
-function updateViewSong(int $songId){
-    DB::table('Song')
-        ->where('songId',$songId)
-        ->increment('playTimes',1);
-    $song = DB::table('Song')
-        ->where('songId',$songId)
-        ->get();
-        $songResult = array();
-        foreach($song as $song1){ 
 
-            echo "$song1->title<br/>";
-            echo "$song1->playTimes<br/>";
-
-            echo "<br/><br/>";
-            array_push($songResult, $song);
-        }
-
-    
-}
 function getTopView(){
     $song = DB::table('Song')
         ->orderBy('playTimes', 'desc')
@@ -269,10 +251,32 @@ function getSongOfAlbum($inputAlbumId){
     
 }
 
-
+function updateViewSong(){
+    $songId = 1;
+    $song = DB::table('Song')
+        ->where('songId',$songId)
+        ->increment('playTimes',1);
+    
+    $view = new ListenHistory();
+    $view->songId = $songId;
+    $view->listenDate = date("Y-m-d");
+    $view->save();
+}
 function getListenHistory($songId){
     $view = DB::table('ListenHistory')->where('songId',$songId)->get();
+    //echo $view;
     
+    for($i =0;$i<7;$i++){
+        $time = date_sub(date_create(date("Y-m-d")),date_interval_create_from_date_string("$i days"));
+        $viewTime = DB::table('ListenHistory')
+        ->where('songId',$songId)
+        ->where('listenDate',$time)
+        ->count();
+        $viewArr[$i] = array('time'=> $time,'view'=>$viewTime);
+        echo "$viewTime</br>";
+    }
+    
+    var_dump($viewArr);
 }
 
 function deleteSongFromPlaylist(){
@@ -312,7 +316,7 @@ function renamePlaylist(){
 
 
 }
-deleteSongFromPlaylist();
-renamePlaylist();
+
+getListenHistory(1);
 ?>
 

@@ -332,4 +332,29 @@ class SongController extends Controller{
         ]);
     }
 
+    public function getListenHistory(Request $request){
+        $songId = $request->input('songId');
+        $check = 0;
+        for($i =0;$i<7;$i++){
+            $time = date_sub(date_create(date("Y-m-d")),date_interval_create_from_date_string("$i days"));
+            $viewTime = DB::table('ListenHistory')
+            ->where('songId',$songId)
+            ->where('listenDate',$time)
+            ->count();
+            if($viewTime >0) $check =1;
+            $viewArr[$i] = array('time'=> $time,'view'=>$viewTime);
+        }
+        if($check = 1){
+            return response()->json([
+                'status' => 200,
+                'view' => $viewArr,
+                'message' => 'Successfully',
+            ]);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'What a bad song, no one hear you.',
+            ]);
+        }
+    }
 }
