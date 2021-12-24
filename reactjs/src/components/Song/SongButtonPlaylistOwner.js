@@ -39,7 +39,7 @@ export default function SongButtonPlaylistOwner(props) {
 				if (songs[i].songId === data.songId) {
 					let tmpSongs = songs;
 					tmpSongs.splice(i, 1);
-					setSongs(tmpSongs);
+					setSongs([...tmpSongs]);
 					console.log(songs);
 					swal("Done", "Remove song successfully!", "success");
 					onClose();
