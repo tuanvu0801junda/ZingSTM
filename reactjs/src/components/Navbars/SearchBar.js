@@ -24,6 +24,7 @@ function SearchBar(props) {
     const [song, getSong] = useState([]);
     const [artist, getArtist] = useState([]);
     const [album, getAlbum] = useState([]);
+    const [genre, getGenre] = useState([]);
 
     useEffect(() => {
         getAllSongData();
@@ -61,7 +62,19 @@ function SearchBar(props) {
         }
     }
 
-    const data = [...song, ...artist, ...album];
+    //Get genre
+    useEffect(() => {
+        getAllGenreInfo();
+    }, [])
+    const getAllGenreInfo = async () => {
+        const res = await axios.post("/api/getAllGenreInfo");
+        if (res.data.status === 200) {
+            getGenre(res.data.genreInfo);
+            // console.log(res.data.albumInfo);
+        }
+    }
+
+    const data = [...song, ...artist, ...album, ...genre];
     console.log(data);
 
     const handleOnSearch = (string, results) => {
@@ -84,6 +97,8 @@ function SearchBar(props) {
             goToArtistPage(item.id);
         else if (item.type == "album")
             goToAlbumPage(item.id);
+        else if (item.type == "genre")
+            goToGenrePage(item.id);
 
     }
     //Go page
@@ -95,6 +110,9 @@ function SearchBar(props) {
     }
     const goToAlbumPage = (k) => {
         history.push("/zingstm/album/" + k);
+    }
+    const goToGenrePage = (k) => {
+        history.push("/zingstm/genre/" + k);
     }
 
     const handleOnFocus = () => {
