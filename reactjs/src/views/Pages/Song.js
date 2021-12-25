@@ -7,7 +7,7 @@ import { Box, Flex, Text, Grid, useColorModeValue } from "@chakra-ui/react";
 // Custom components
 import Card from "components/Card/Card.js";
 import { Separator } from "components/Separator/Separator";
-import SongPageBanner from "components/Banner/SongPageBanner";
+import SongBanner from "components/Banner/SongBanner";
 import SongCommentContainer from "components/Container/SongCommentContainer";
 import CardBody from "components/Card/CardBody";
 
@@ -67,7 +67,7 @@ export default function Song() {
 	} else if (state.status === 200) {
 		return (
 			<Flex direction="column" pt={{ base: "120px", md: "75px" }}>
-				<SongPageBanner song={state.song} />
+				<SongBanner song={state.song} />
 				<Card overflowX={{ xl: "hidden" }}>
 					<Separator h="3px" />
 					<br />

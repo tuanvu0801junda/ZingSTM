@@ -59,7 +59,7 @@ export default function SongButtonPlaylistOwner(props) {
 					width="10px"
 					onClick={play}
 				>
-					<i class="fas fa-play"></i>
+					<i className="fas fa-play"></i>
 				</Button>
 				<AddSongToPlaylistButton songId={props.songId} />
 				<Button

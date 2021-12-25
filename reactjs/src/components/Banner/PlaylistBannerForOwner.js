@@ -17,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 
 import VerifyCode from "components/Container/VerifyCode";
-import "./playlistBanner.css";
+import "assets/css/banner.css";
 import axios from "axios";
 import swal from "sweetalert";
 

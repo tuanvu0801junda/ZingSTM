@@ -1,4 +1,4 @@
-import "./playlistBanner.css"
+import "assets/css/banner.css"
 function ArtistBanner(props) {
     return (
         <div className="playlist">
