@@ -1,5 +1,6 @@
 import { Box, Badge, Image, Flex, Spacer, Text } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
+import defaultThumbnail from "assets/img/default_thumbnail.png";
 
 export default function TopSong(props) {
     const history = useHistory();
@@ -32,6 +33,8 @@ export default function TopSong(props) {
 				alt={property.imageAlt}
 				boxSize="120px"
 				alignSelf="flex-start"
+				fallbackSrc={defaultThumbnail}
+				fallback={true}
 			/>
 			<Box p="6" ml="20px">
 				<Box d="flex" alignItems="center">

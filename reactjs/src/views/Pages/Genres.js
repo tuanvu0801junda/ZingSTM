@@ -67,6 +67,7 @@ function Genres() {
 				"Loading..."
 			) : (
 				<GenresBanner
+					genreId={genreId}
 					genres={genre.genreName}
 					imgURL={genre.genreImage}
 				/>

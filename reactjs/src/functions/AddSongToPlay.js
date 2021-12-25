@@ -2,7 +2,7 @@ import axios from 'axios';
 import store from "index";
 import actionAddSongToPlay from 'redux/actions/actionAddSongToPlay';
 
-function AddSongToPlay(songId) {
+export default function AddSongToPlay(songId) {
     const getSongInfo = async (id) => {
         var song;
         const data = {
@@ -25,5 +25,3 @@ function AddSongToPlay(songId) {
 
     getSongInfo(songId);
 }
-
-export default AddSongToPlay
