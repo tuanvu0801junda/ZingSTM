@@ -21,7 +21,6 @@ import { Separator } from "components/Separator/Separator";
 import PlaylistBannerForOther from "components/Banner/PlaylistBannerForOther";
 
 export default function PlaylistOther(props) {
-	console.log(props);
 	const textColor = useColorModeValue("gray.700", "white");
 
 	return (

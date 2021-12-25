@@ -89,8 +89,10 @@ class SongController extends Controller{
         $songOfArtist = DB::table('Song')
             ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
             ->join('Artist','Artist.artistId','=','SongArtistRelation.artistId')
+            ->join('SongGenreRelation','SongGenreRelation.songId','=','Song.songId')
+            ->join('Genre','Genre.genreId','=','SongGenreRelation.genreId')
             ->where('Artist.artistId',$inputArtistId)
-            ->select('Song.songId', 'imagePath', 'songPath', 'duration','title','artistName','artistImage')
+            ->select('Song.songId', 'imagePath', 'songPath', 'duration','title','artistName','artistImage', 'genreName')
             ->distinct()->get();
         
         if ($songOfArtist->isEmpty() == false){

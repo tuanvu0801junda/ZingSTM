@@ -138,7 +138,7 @@ class UserController extends Controller{
             return response()->json([
                 'status' => 200,
                 'user' => $userResult,
-                'message' => 'Change Successfully',
+                'message' => 'Your password has been changed',
             ]);
         } else {
             return response()->json([
