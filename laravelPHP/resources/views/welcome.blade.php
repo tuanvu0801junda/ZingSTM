@@ -317,6 +317,5 @@ function renamePlaylist(){
 
 }
 
-getListenHistory(1);
 ?>
 
