@@ -13,6 +13,8 @@ use App\Models\SongArtistRelation;
 use App\Models\SongGenreRelation;
 use App\Models\ListenHistory;
 use App\Models\Playlist;
+use Illuminate\Support\Facades\Hash;
+
 
 function getSongOfGenre(){
     $inputGenreId = 1;
@@ -315,6 +317,30 @@ function renamePlaylist(){
     }
 
 
+}
+
+function changePass($userId, $password, $newPassword){
+    $user = DB::table('User')
+            ->where('userId',$userId)->first();
+
+    if (Hash::check($password, $user->password)) {
+        $user = User::where('userId', $userId)->first();
+
+        $user->password = Hash::make($newPassword);
+        $user->update();
+
+        $userResult = array(
+            'userId' => $user->userId, 
+            'email' => $user->email, 
+            'fullname' => $user->fullname, 
+            'profilePic' => $user->profilePic,
+            'role' => $user->role
+        );
+        echo 'Change Successfully';
+    } else {
+        
+            echo 'Wrong password';
+    }
 }
 
 ?>
