@@ -47,8 +47,8 @@ export default function TopSongLineChart(props) {
 		}
 
 		const res = await axios.post("api/getListenHistory", data);
-		if (res.data.status !== 200) return(null)
-		else return(res.data);
+		if (res.data.status !== 200) return (null)
+		else return (res.data);
 	}
 
 	return (

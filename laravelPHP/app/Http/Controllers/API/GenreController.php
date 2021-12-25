@@ -12,8 +12,16 @@ class GenreController extends Controller{
     //
     public function getAllGenreInfo(){
         $genres = DB::table('Genre')->get();
+        $genreInfo = $genres->map(function($genre){
+            return [
+                'id' => $genre->genreId,
+                'name' => $genre->genreName,
+                'type' => 'genre'
+            ];
+        });
         return response()->json([
             'status' => 200,
+            'genreInfo' => $genreInfo,
             'genres' => $genres->all(),
         ]);
     }
