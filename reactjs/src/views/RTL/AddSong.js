@@ -101,18 +101,6 @@ function AddSong() {
 
     // let durationConvert = "";
     const addNewSongToDataBase = async (mp3Url, imageUrl, durationConvert) => {
-        //Get duration of song
-        // const au = document.createElement('audio');
-        // au.src = mp3Url;
-        // const durationConvert = await au.addEventListener('loadedmetadata', function () {
-        //     //Handle duration
-        //     const duration = Math.ceil(au.duration);
-        //     const duration_minute = Math.floor(duration / 60);
-        //     const duration_second = duration - duration_minute * 60;
-        //     const duration_Convert = duration_minute + ":" + duration_second;
-        //     console.log("The duration of the song : " + duration_Convert);
-        //     return duration_Convert;
-        // }, false);
 
         if (songTitle != '' && albumNameSelected != '' && artistNameSelected != '' && genresIdSelected != '' && !mp3Url.includes(songUrlUndefinded) && !imageUrl.includes(imgUrlUndefinded)) {
             //Get artistId from artistName
@@ -121,7 +109,6 @@ function AddSong() {
             //Get albumId from albumName
             const res1 = await axios.post('/api/getAlbumId', { albumName: albumNameSelected })
             const albumIdSelected = res1.data.album.albumId;
-            console.log(albumIdSelected);
 
             const data = {
                 albumId: albumIdSelected,
@@ -130,13 +117,11 @@ function AddSong() {
                 title: songTitle,
                 duration: durationConvert
             }
-            console.log(data);
             //Add new song to database
 
             const res = await axios.post('/api/postNewSong', data);
             if (res.data.status === 200) {
                 try {
-                    console.log(res.data.message);
                     const songId = res.data.songId;
                     //Add new data to songArtistRelation table
                     const data1 = {

@@ -69,7 +69,6 @@ function SignIn() {
 			});
 		} else if (res.data.status === 404) {
 			swal(res.data.message, "Invalid username or password!", "error");
-			console.log(res.data);
 			setState({
 				username: "",
 				password: "",

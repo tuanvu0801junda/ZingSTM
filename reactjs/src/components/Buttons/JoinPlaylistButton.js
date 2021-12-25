@@ -11,7 +11,7 @@ import {
 	Input,
 	FormControl,
 	FormLabel,
-	FormHelperText
+	FormHelperText,
 } from "@chakra-ui/react";
 import { FaPlus } from "react-icons/fa";
 import Card from "components/Card/Card";
@@ -22,31 +22,35 @@ import { PlaylistContext } from "components/Container/PlaylistSharedWithMe";
 
 export default function JoinPlaylistButton(props) {
 	const [popupOpen, setPopupOpen] = useState(false);
-	const {playlists, setPlaylists} = useContext(PlaylistContext);
+	const { playlists, setPlaylists } = useContext(PlaylistContext);
 	var verifyCode = "";
 	const handleChange = (e) => {
 		verifyCode = e.target.value;
-	}
+	};
 
 	const submit = async () => {
 		const data = {
 			userId: props.userId,
-			verifyCode: verifyCode,	
-		}
-		const res = await axios.post('api/checkVerifyCode', data);
-		if (res.data.status === 404) swal("Failed", res.data.message, "warning");
-        else if (res.data.status === 201) swal("Oh~!", res.data.message, "warning");
-		else if (res.data.status === 200) swal("Success!", res.data.message, "success").then(() => {
-            console.log(res.data.test);
-			setPopupOpen(false);
-			setPlaylists(playlists.concat(res.data.playlist));
-		});
-	}
+			verifyCode: verifyCode,
+		};
+		const res = await axios.post("api/checkVerifyCode", data);
+		if (res.data.status === 404)
+			swal("Failed", res.data.message, "warning");
+		else if (res.data.status === 201)
+			swal("Oh~!", res.data.message, "warning");
+		else if (res.data.status === 200)
+			swal("Success!", res.data.message, "success").then(() => {
+				setPopupOpen(false);
+				setPlaylists(playlists.concat(res.data.playlist));
+			});
+	};
 
 	return (
 		<Popup
 			open={popupOpen}
-			onOpen={() => {setPopupOpen(true)}}
+			onOpen={() => {
+				setPopupOpen(true);
+			}}
 			trigger={
 				<Button
 					p="0px"
@@ -80,9 +84,15 @@ export default function JoinPlaylistButton(props) {
 					<Text as="b" color="gray.500" isTruncated>
 						<FormControl>
 							<FormLabel>Verify Code</FormLabel>
-							<Input type="text" placeholder="Enter the verify code" onChange={handleChange} name="verifyCode"/>
+							<Input
+								type="text"
+								placeholder="Enter the verify code"
+								onChange={handleChange}
+								name="verifyCode"
+							/>
 							<FormHelperText>
-								Each playlist has a verify code, get the verify code from playlist owner to join.
+								Each playlist has a verify code, get the verify
+								code from playlist owner to join.
 							</FormHelperText>
 						</FormControl>
 					</Text>

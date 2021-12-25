@@ -40,12 +40,10 @@ export default function Dashboard() {
         const res = await axios.post("/api/getAllArtistInfo");
         if (res.data.status === 200) {
             setArtist(res.data.artists);
-            console.log(res.data.artists);
         }
         const res1 = await axios.post("/api/getSongNumberOfAnArtist");
         if (res.data.status === 200) {
             getArtistSong(res1.data.artistSong);
-            console.log(res1.data.artistSong);
         }
     }
     for (let i = 0; i < artist.length; i++) {
@@ -65,7 +63,6 @@ export default function Dashboard() {
     //Handle update artist
     const goToUpdateArtistPage = (event) => {
         const artistCurrentId = event.target.value;
-        // console.log(artistCurrentId);
         history.push('/zingstm/update-artist/' + artistCurrentId);
     }
     //Handle delete artist

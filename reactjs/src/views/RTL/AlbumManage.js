@@ -41,11 +41,9 @@ export default function Dashboard() {
         const res1 = await axios.post("api/getAlbumStatistic");
         if (res.data.status === 200) {
             setAlbum(res.data.albums);
-            console.log(res.data.albums);
         }
         if (res1.data.status === 200) {
             getAlbumStatistic(res1.data.albumSong);
-            console.log(res1.data.albumSong);
         }
 
     }
@@ -67,7 +65,6 @@ export default function Dashboard() {
     //Handle update album
     const goToUpdateAlbumPage = (event) => {
         const albumCurrentId = event.target.value;
-        // console.log(albumCurrentId);
         history.push('/zingstm/update-album/' + albumCurrentId);
     }
     //Handle delete album

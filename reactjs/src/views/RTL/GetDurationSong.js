@@ -12,7 +12,6 @@ export async function getDurationSong(mp3Url) {
                     if ((parseInt(duration_second, 10) + 1) >= 0 && (parseInt(duration_second, 10) + 1) < 10) {
                         duration_Convert = duration_minute + ":0" + duration_second
                     } else duration_Convert = duration_minute + ":" + duration_second
-                    console.log("The duration of the song : " + duration_Convert)
                     resolve(duration_Convert)
                 },
                 function error(err) {

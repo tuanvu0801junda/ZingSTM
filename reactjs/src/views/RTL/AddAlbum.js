@@ -61,13 +61,11 @@ function AddAlbum() {
             artworkPath: imageUrl,
             title: albumTitle
         }
-        console.log(data);
 
         if (albumTitle != '' && !imageUrl.includes(imgUrlUndefinded)) {
             const res = await axios.post('/api/postNewAlbum', data);
             if (res.data.status === 200) {
                 try {
-                    console.log(res.data.message);
                     swal({
                         title: "Success!",
                         text: res.data.message,

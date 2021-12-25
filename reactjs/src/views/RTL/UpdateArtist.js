@@ -64,8 +64,6 @@ function UpdateArtist() {
 
         }
     }
-    // console.log(artistNewName);
-    console.log(image);
 
     //Handle back button
     const goToManageArtistPage = () => {
@@ -88,13 +86,11 @@ function UpdateArtist() {
             artistImage: imageUrl,
             artistName: artistNewName
         }
-        console.log(data);
 
         if (artistNewName != '' || !imageUrl.includes(imgUrlUndefinded)) {
             const res = await axios.post('/api/updateOneArtist', data);
             if (res.data.status === 200) {
                 try {
-                    console.log(res.data.message);
                     swal({
                         title: "Update Success!",
                         text: res.data.message,

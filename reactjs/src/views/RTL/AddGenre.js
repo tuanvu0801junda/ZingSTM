@@ -61,13 +61,11 @@ function AddGenre() {
             genreImage: imageUrl,
             genreName: genreTitle
         }
-        console.log(data);
 
         if (genreTitle != '' && !imageUrl.includes(imgUrlUndefinded)) {
             const res = await axios.post('/api/postNewGenre', data);
             if (res.data.status === 200) {
                 try {
-                    console.log(res.data.message);
                     swal({
                         title: "Success!",
                         text: res.data.message,

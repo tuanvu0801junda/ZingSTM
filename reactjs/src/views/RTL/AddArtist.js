@@ -61,13 +61,11 @@ function AddArtist() {
             artistImage: imageUrl,
             artistName: artistTitle
         }
-        console.log(data);
 
         if (artistTitle != '' && !imageUrl.includes(imgUrlUndefinded)) {
             const res = await axios.post('/api/postNewArtist', data);
             if (res.data.status === 200) {
                 try {
-                    console.log(res.data.message);
                     swal({
                         title: "Success!",
                         text: res.data.message,
