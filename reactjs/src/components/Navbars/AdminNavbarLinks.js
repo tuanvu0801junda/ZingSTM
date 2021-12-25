@@ -30,6 +30,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import routes from "routes.js";
+import SearchBar from "components/Navbars/SearchBar.js";
 
 export default function HeaderLinks(props) {
 	const { variant, children, fixed, secondary, onOpen, ...rest } = props;
@@ -54,54 +55,7 @@ export default function HeaderLinks(props) {
 			alignItems="center"
 			flexDirection="row"
 		>
-			<InputGroup
-				cursor="pointer"
-				bg={inputBg}
-				borderRadius="15px"
-				w={{
-					sm: "128px",
-					md: "200px",
-				}}
-				me={{ sm: "auto", md: "20px" }}
-				_focus={{
-					borderColor: { mainTeal },
-				}}
-				_active={{
-					borderColor: { mainTeal },
-				}}
-			>
-				<InputLeftElement
-					children={
-						<IconButton
-							bg="inherit"
-							borderRadius="inherit"
-							_hover="none"
-							_active={{
-								bg: "inherit",
-								transform: "none",
-								borderColor: "transparent",
-							}}
-							_focus={{
-								boxShadow: "none",
-							}}
-							icon={
-								<SearchIcon
-									color={searchIcon}
-									w="15px"
-									h="15px"
-								/>
-							}
-						></IconButton>
-					}
-				/>
-				<Input
-					fontSize="xs"
-					py="11px"
-					color={mainText}
-					placeholder="Type here..."
-					borderRadius="inherit"
-				/>
-			</InputGroup>
+			<SearchBar />
 			{userInfo === undefined ? (
 				<NavLink to="/auth/signin">
 					<Button
@@ -148,7 +102,7 @@ export default function HeaderLinks(props) {
 						me={{ sm: "2px", md: "16px" }}
 						color={navbarIcon}
 						variant="transparent-with-icon"
-						leftIcon={<Avatar src={userInfo.profilePic} size="sm"/>}
+						leftIcon={<Avatar src={userInfo.profilePic} size="sm" />}
 					>
 						<Text display={{ sm: "none", md: "flex" }}>
 							{userInfo.fullname}

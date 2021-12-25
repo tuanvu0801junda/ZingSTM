@@ -40,7 +40,7 @@ export default function Dashboard() {
     if (res.data.status === 200) {
       setSong(res.data.songs);
       console.log(res.data.songs);
-      console.log(res.data.albumTitle);
+      console.log(res.data.songInfo);
     }
   }
   //Handle add new song

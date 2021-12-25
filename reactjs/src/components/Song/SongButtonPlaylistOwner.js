@@ -27,6 +27,7 @@ export default function SongButtonPlaylistOwner(props) {
 	};
 
 	const removeSong = async () => {
+
 		console.log("Remove Song");
 		const data = {
 			playlistId: props.playlistId,
@@ -46,6 +47,7 @@ export default function SongButtonPlaylistOwner(props) {
 					break;
 				}
 			}
+
 		} else swal("Opps!", "Some error occured.", "error");
 	};
 
@@ -89,7 +91,7 @@ export default function SongButtonPlaylistOwner(props) {
 						</Text>
 					</ModalBody>
 					<ModalFooter>
-						<Button colorScheme="red" mr={3} onClick={removeSong}>
+						<Button colorScheme="red" mr={3} onClick={i => removeSong(i)}>
 							Remove
 						</Button>
 						<Button

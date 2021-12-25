@@ -47,7 +47,7 @@ export default function SongInRowPlaylistOwner(props) {
             <Td>
                 <Flex direction="column">
                     <Text fontSize="md" color={textColor} fontWeight="bold">
-                        
+
                     </Text>
                 </Flex>
             </Td>
