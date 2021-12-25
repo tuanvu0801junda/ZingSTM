@@ -112,7 +112,7 @@ function SearchBar(props) {
         history.push("/zingstm/album/" + k);
     }
     const goToGenrePage = (k) => {
-        history.push("/zingstm/genre/" + k);
+        history.push("/zingstm/genres/" + k);
     }
 
     const handleOnFocus = () => {

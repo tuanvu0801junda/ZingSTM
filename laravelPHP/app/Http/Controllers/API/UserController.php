@@ -116,10 +116,12 @@ class UserController extends Controller{
     }
 
     public function getAllUserInfo(){
-        $user = DB::table('User')->get();
+        $user = DB::table('User')->where('role',0)->get();
+        $admin = DB::table('User')->where('role',1)->get();
         return response()->json([
             'status' => 200,
-            'users' => $user->all()
+            'users' => $user->all(),
+            'admin' => $admin->all()
         ]);
     }
 
@@ -134,8 +136,12 @@ class UserController extends Controller{
             }
             $user->update();
         }
+        $userUpdate = DB::table('User')->where('role',0)->get();
+        $adminUpdate = DB::table('User')->where('role',1)->get();
         return response()->json([
             'status' => 200,
+            'userUpdate' => $userUpdate,
+            'adminUpdate' => $adminUpdate,
             'message' => "Update User Successfully"
         ]);
     }

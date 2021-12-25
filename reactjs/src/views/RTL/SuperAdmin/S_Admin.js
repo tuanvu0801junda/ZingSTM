@@ -29,8 +29,8 @@ import CardHeader from "components/Card/CardHeader.js";
 export default function SuperAdmin() {
     // Chakra Color Mode
     const textColor = useColorModeValue("gray.700", "white");
-    const history = useHistory();
     const [user, getUser] = useState([]);
+    const [admin, getAdmin] = useState([]);
     useEffect(() => {
         getUserData();
     }, [])
@@ -39,49 +39,86 @@ export default function SuperAdmin() {
         const res = await axios.post("/api/getAllUserInfo");
         if (res.data.status === 200) {
             getUser(res.data.users);
-            console.log(res.data.users);
+            getAdmin(res.data.admin);
         }
     }
 
     //Handle update user
+    console.log(user);
+    console.log(admin);
     const goToUpdateUser = (event) => {
         const userId = event.target.value;
         console.log(userId);
+        swal("Are you sure to update this user?", {
+            buttons: {
+                cancel: "No",
+                catch: {
+                    text: "Yes",
+                    value: "catch",
+                },
+            },
+        })
+            .then(async (value) => {
+                switch (value) {
+                    case "cancel":
+                        break;
+                    case "catch":
+                        const res = await axios.post("/api/updateUser", { userId: userId });
+                        if (res.data.status === 200) {
+                            getAdmin(res.data.adminUpdate);
+                            getUser(res.data.userUpdate);
+                        }
+                        console.log(user);
+                        console.log(admin);
+                        setTimeout(function () {
+                            swal({
+                                title: "Success!",
+                                text: "Update Successfully",
+                                icon: "success",
+                                button: "OK!",
+                            })
+                        }, 200);
+                        break;
+                    default:
+                        break;
+                }
+            });
     }
-    // // Handle delete user
-    // const handleDeleteSong = (e, id) => {
-    //     e.preventDefault();
-    //     const thisClicked = e.currentTarget;
-    //     swal("Are you sure you to delete this song?", {
-    //         buttons: {
-    //             cancel: "No",
-    //             catch: {
-    //                 text: "Yes",
-    //                 value: "catch",
-    //             },
-    //         },
-    //     })
-    //         .then((value) => {
-    //             switch (value) {
-    //                 case "cancel":
-    //                     break;
-    //                 case "catch":
-    //                     axios.post("/api/deleteOneSong", { songId: id });
-    //                     setTimeout(function () {
-    //                         swal({
-    //                             title: "Success!",
-    //                             text: "Delete Song Successfully",
-    //                             icon: "success",
-    //                             button: "OK!",
-    //                         })
-    //                     }, 200);
-    //                     thisClicked.closest("tr").remove();
-    //                     break;
-    //                 default:
-    //                     break;
-    //             }
-    //         });
-    // }
+
+    // Handle delete user
+    const handleDeleteUser = (e, userId) => {
+        e.preventDefault();
+        const thisClicked = e.currentTarget;
+        swal("Are you sure to delete this user?", {
+            buttons: {
+                cancel: "No",
+                catch: {
+                    text: "Yes",
+                    value: "catch",
+                },
+            },
+        })
+            .then((value) => {
+                switch (value) {
+                    case "cancel":
+                        break;
+                    case "catch":
+                        axios.post("/api/deleteUser", { userId: userId });
+                        setTimeout(function () {
+                            swal({
+                                title: "Success!",
+                                text: "Delete User Successfully",
+                                icon: "success",
+                                button: "OK!",
+                            })
+                        }, 200);
+                        thisClicked.closest("tr").remove();
+                        break;
+                    default:
+                        break;
+                }
+            });
+    }
     return (
         <div style={{ margin: '125px 0px 0px 0px' }}>
             <Card overflowX={{ xl: "hidden" }}>
@@ -106,50 +143,51 @@ export default function SuperAdmin() {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {user.map((data, index) => {
-                                if (data.userId == 1)
-                                    return (
-                                        <Tr key={index}>
-                                            <Td minWidth={{ sm: "250px" }} pl="0px">
-                                                <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
-                                                    <Avatar src={data.profilePic} w="50px" borderRadius="12px" me="18px" />
-                                                    <Flex direction="column">
-                                                        <Text
-                                                            fontSize="lg"
-                                                            color={textColor}
-                                                            fontWeight="bold"
-                                                            minWidth="100%"
-                                                        >
-                                                            {data.fullname}
-                                                        </Text>
-                                                        <Text fontSize="sm" color="gray.400" fontWeight="normal">
-                                                            {data.username}
-                                                        </Text>
-                                                    </Flex>
-                                                </Flex>
-                                            </Td>
-
-                                            <Td>
+                            {admin.map((data, index) => {
+                                return (
+                                    <Tr key={index}>
+                                        <Td minWidth={{ sm: "250px" }} pl="0px">
+                                            <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
+                                                <Avatar src={data.profilePic} w="50px" borderRadius="12px" me="18px" />
                                                 <Flex direction="column">
-                                                    <Text fontSize="lg" color={textColor} fontWeight="bold">
-                                                        {data.email}
+                                                    <Text
+                                                        fontSize="lg"
+                                                        color={textColor}
+                                                        fontWeight="bold"
+                                                        minWidth="100%"
+                                                    >
+                                                        {data.fullname}
+                                                    </Text>
+                                                    <Text fontSize="sm" color="gray.400" fontWeight="normal">
+                                                        {data.username}
                                                     </Text>
                                                 </Flex>
-                                            </Td>
-                                            <Td>
-                                                <Text fontSize="lg" color={textColor} fontWeight="bold">
-                                                    {data.role}
-                                                </Text>
-                                            </Td>
-                                            <Td>
+                                            </Flex>
+                                        </Td>
 
-                                                <Button colorScheme="green" size="sm" onClick={goToUpdateUser} value={data.userId}>Set As User</Button>
-                                            </Td>
-                                            <Td>
-                                                {/* <Button colorScheme="red" size="sm" onClick={(e) => { handleDeleteSong(e, data.songId) }}>Delete</Button> */}
-                                            </Td>
-                                        </Tr>
-                                    );
+                                        <Td>
+                                            <Flex direction="column">
+                                                <Text fontSize="lg" color={textColor} fontWeight="bold">
+                                                    {data.email}
+                                                </Text>
+                                            </Flex>
+                                        </Td>
+                                        <Td>
+                                            <Text fontSize="lg" color={textColor} fontWeight="bold">
+                                                {data.role}
+                                            </Text>
+                                        </Td>
+                                        <Td>
+                                            <Button colorScheme="green" size="sm" onClick={goToUpdateUser} value={data.userId}>Set As User</Button>
+                                        </Td>
+                                        <Td>
+                                            <Button colorScheme="red" size="sm" onClick={(e) => { handleDeleteUser(e, data.userId) }}>Delete</Button>
+                                        </Td>
+                                    </Tr>
+                                );
+                            })}
+
+                            {user.map((data, index) => {
                                 return (
                                     <Tr key={index}>
                                         <Td minWidth={{ sm: "250px" }} pl="0px">
@@ -187,7 +225,7 @@ export default function SuperAdmin() {
                                             <Button colorScheme="green" size="sm" onClick={goToUpdateUser} value={data.userId}>Set As Admin</Button>
                                         </Td>
                                         <Td>
-                                            {/* <Button colorScheme="red" size="sm" onClick={(e) => { handleDeleteSong(e, data.songId) }}>Delete</Button> */}
+                                            <Button colorScheme="red" size="sm" onClick={(e) => { handleDeleteUser(e, data.userId) }}>Delete</Button>
                                         </Td>
                                     </Tr>
                                 );
