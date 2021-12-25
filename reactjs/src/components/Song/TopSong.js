@@ -1,4 +1,4 @@
-import { Box, Badge, Image, Flex, Spacer } from "@chakra-ui/react";
+import { Box, Badge, Image, Flex, Spacer, Text } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 
 export default function TopSong(props) {
@@ -60,7 +60,10 @@ export default function TopSong(props) {
 			</Box>
 			<Spacer />
 			<Box mr="20px" as="i">
-				<Box color="red.300">{property.views} views</Box>
+				<Text color="cyan" fontSize="md">
+					<i class="fas fa-headphones-alt"></i>
+					{" "}{property.views}
+				</Text>
 			</Box>
 		</Flex>
 	);

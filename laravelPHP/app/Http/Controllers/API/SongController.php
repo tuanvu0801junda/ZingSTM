@@ -413,12 +413,17 @@ class SongController extends Controller{
             ->where('listenDate',$time)
             ->count();
             if($viewTime >0) $check =1;
-            $viewArr[$i] = array('time'=> $time,'view'=>$viewTime);
+            $viewArr[$i] = $viewTime;
         }
-        if($check = 1){
+        if($check == 1){
+            $title = DB::table('Song')
+            ->where('songId',$songId)
+            ->select('title')
+            ->first();
             return response()->json([
                 'status' => 200,
-                'view' => $viewArr,
+                'viewArr' => $viewArr,
+                'title' => $title->title,
                 'message' => 'Successfully',
             ]);
         }else{

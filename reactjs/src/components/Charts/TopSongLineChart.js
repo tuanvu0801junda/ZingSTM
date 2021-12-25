@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
-import { lineChartData, lineChartOptions } from "variables/charts";
+import { lineChartOptions } from "variables/charts";
 
 export default function TopSongLineChart(props) {
 	// props.songId1, props.songId2, props.songId3
@@ -11,19 +11,48 @@ export default function TopSongLineChart(props) {
 	});
 
 	useEffect(() => {
-		setState({
-			chartData: lineChartData,
-			chartOptions: lineChartOptions,
-		});
+		getChartData();
 	}, []);
 
 	const getChartData = async () => {
-		var data = {
-			songId: props.songId1,
-		}
-		var res;
+		const song1 = await getSongViewInfo(props.songId1);
+		const song2 = await getSongViewInfo(props.songId2);
+		const song3 = await getSongViewInfo(props.songId3);
 
-		res = await axios.post("");
+		const chartData = [
+			{
+				name: song1.title,
+				data: song1.viewArr.reverse(),
+			},
+			{
+				name: song2.title,
+				data: song2.viewArr.reverse(),
+			},
+			{
+				name: song3.title,
+				data: song3.viewArr.reverse(),
+			},
+		]
+
+		console.log(song1);
+		console.log(song2);
+		console.log(song3);
+		console.log(chartData);
+
+		setState({
+			chartData: [...chartData],
+			chartOptions: lineChartOptions,
+		});
+	}
+
+	const getSongViewInfo = async (songId) => {
+		const data = {
+			songId: songId,
+		}
+
+		const res = await axios.post("api/getListenHistory", data);
+		if (res.data.status !== 200) return(null)
+		else return(res.data);
 	}
 
 	return (
