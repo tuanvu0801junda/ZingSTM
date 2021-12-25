@@ -89,6 +89,8 @@ Route::post('/checkPlaylistMaker',[PlaylistController::class, 'checkPlaylistMake
 Route::post('/getPlaylistInfo',[PlaylistController::class, 'getPlaylistInfo']);
 Route::post('/deleteSongFromPlaylist',[PlaylistController::class, 'deleteSongFromPlaylist']);
 Route::post('/renamePlaylist',[PlaylistController::class, 'renamePlaylist']);
+Route::post('/deletePlaylist',[PlaylistController::class, 'deletePlaylist']);
+
 
 
 

@@ -313,4 +313,24 @@ class PlaylistController extends Controller{
         }
     }
 
+    public function deletePlaylist(Request $request){
+        $playlistId = $request->input('playlistId');
+        $playlist = Playlist::where('playlistId',$playlistId)
+                    ->first();
+
+        if($playlist != NULL){
+            Playlist::where('playlistId',$playlistId)
+                                ->delete();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'delete song successfully',
+            ]);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'not found',
+            ]);
+        }
+    }
 }
