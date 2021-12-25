@@ -18,26 +18,44 @@ export default function TopSongLineChart(props) {
 		const song1 = await getSongViewInfo(props.songId1);
 		const song2 = await getSongViewInfo(props.songId2);
 		const song3 = await getSongViewInfo(props.songId3);
+		var chartData;
 
-		const chartData = [
-			{
-				name: song1.title,
-				data: song1.viewArr.reverse(),
-			},
-			{
-				name: song2.title,
-				data: song2.viewArr.reverse(),
-			},
-			{
-				name: song3.title,
-				data: song3.viewArr.reverse(),
-			},
-		]
-
-		console.log(song1);
-		console.log(song2);
-		console.log(song3);
-		console.log(chartData);
+		if (song3 === null) {
+			chartData = [
+				{
+					name: song1.title,
+					data: song1.viewArr.reverse(),
+				},
+				{
+					name: song2.title,
+					data: song2.viewArr.reverse(),
+				},
+			]
+		} else if (song2 === null) {
+			chartData = [
+				{
+					name: song1.title,
+					data: song1.viewArr.reverse(),
+				},
+			]
+		} else if (song1 === null) {
+			chartData = []
+		} else {
+			chartData = [
+				{
+					name: song1.title,
+					data: song1.viewArr.reverse(),
+				},
+				{
+					name: song2.title,
+					data: song2.viewArr.reverse(),
+				},
+				{
+					name: song3.title,
+					data: song3.viewArr.reverse(),
+				},
+			]
+		}
 
 		setState({
 			chartData: [...chartData],
