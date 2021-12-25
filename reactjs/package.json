@@ -35,6 +35,7 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "5.2.0",
     "react-scripts": "4.0.3",
+    "react-search-autocomplete": "^5.4.4",
     "react-slick": "^0.28.1",
     "react-swipeable-views": "0.13.9",
     "react-table": "7.7.0",

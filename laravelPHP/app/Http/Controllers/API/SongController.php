@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 use App\Models\Song;
 use Illuminate\Http\Request;
 use App\Models\SongArtistRelation;
@@ -22,8 +23,16 @@ class SongController extends Controller{
             ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
             ->join('Artist','Artist.artistId','=','SongArtistRelation.artistId')
             ->select('Song.songId','imagePath','songPath','duration','Song.title','Album.title AS albumTitle','genreName','artistName')->get();
+        $songInfo = $songs->map(function($song){
+            return [
+                'id' => $song->songId,
+                'name' => $song->title,
+                'type' => 'song'
+            ];
+        });
         return response() ->json([
             'status' => 200,
+            'songInfo' => $songInfo,
             'songs' => $songs
         ]);
     }
