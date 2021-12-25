@@ -12,7 +12,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import PopupPlaylistButton from "./PopupPlaylistButton";
 
-export default function AddSongToPlaylistButton(props) {
+export default function AddSongToPlaylistButtonBanner(props) {
 	const history = useHistory();
 	const [playlists, setPlaylists] = useState(null);
 	const [popupOpen, setPopupOpen] = useState(false);
@@ -26,11 +26,11 @@ export default function AddSongToPlaylistButton(props) {
 					setPopupOpen(true);
 				}}
 				trigger={
-					<Button size="sm" colorScheme="blue" variant="outline" width="10px">
+					<Button size="lg" colorScheme="blue" variant="outline" width="10px" borderRadius="50%">
 						<i className="fas fa-plus"></i>
 					</Button>
 				}
-				position="left center"
+				position="right center"
 				nested
 			>
 				{(close) => (
@@ -97,11 +97,11 @@ export default function AddSongToPlaylistButton(props) {
 				setPopupOpen(true);
 			}}
 			trigger={
-				<Button size="sm" colorScheme="blue" variant="outline" width="10px">
+				<Button size="lg" colorScheme="blue" variant="outline" width="10px" borderRadius="50%">
 					<i className="fas fa-plus"></i>
 				</Button>
 			}
-			position="left center"
+			position="right center"
 			nested
 		>
 			{(close) => (

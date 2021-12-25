@@ -1,6 +1,6 @@
 import { Button, Text, Grid } from "@chakra-ui/react";
 
-import "./playlistBanner.css";
+import "assets/css/banner.css";
 export default function PlaylistBannerForOther(props) {
 	return (
 		<div className="playlist">

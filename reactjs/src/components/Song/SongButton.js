@@ -1,6 +1,6 @@
 import AddSongToPlay from "functions/AddSongToPlay";
-import AddSongToPlaylistButton from "components/Buttons/AddSongToPlaylistButton";
 import { Grid, Button } from "@chakra-ui/react";
+import AddSongToPlaylistButton from "components/Buttons/AddSongToPlaylistButton";
 
 function SongButton(props) {
 	const play = () => {
@@ -9,9 +9,9 @@ function SongButton(props) {
 	return (
 		<Grid templateColumns="1fr 1fr 1fr" w="150px">
 			<Button size="sm" colorScheme="blue" variant="outline" width="10px" onClick={play}>
-				<i class="fas fa-play"></i>
+				<i className="fas fa-play"></i>
 			</Button>
-			<AddSongToPlaylistButton songId={props.songId}/>
+			<AddSongToPlaylistButton songId={props.songId} />
 		</Grid>
 	);
 }
