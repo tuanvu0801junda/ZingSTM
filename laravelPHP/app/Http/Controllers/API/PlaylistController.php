@@ -226,10 +226,16 @@ class PlaylistController extends Controller{
 
     public function getPlaylistSong(Request $request){
         $playlistId = $request->input('playlistId');
-        $songs = DB::table('Song')        
+
+        $songs = DB::table('Song')
             ->join('PlaylistSongRelation','PlaylistSongRelation.songId','=','Song.songId')
+            ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
+            ->join('Artist','Artist.artistId','=','SongArtistRelation.artistId')
+            ->join('SongGenreRelation','SongGenreRelation.songId','=','Song.songId')
+            ->join('Genre','Genre.genreId','=','SongGenreRelation.genreId')
             ->where('PlaylistSongRelation.playlistId',$playlistId)
-            ->get();
+            ->select('Song.songId', 'imagePath', 'songPath', 'duration','title','artistName','artistImage','genreName')
+            ->distinct()->get();
 
         if($songs->isEmpty() == false){
             return response()->json([
@@ -251,10 +257,16 @@ class PlaylistController extends Controller{
         $playlist = DB::table('Playlist')
             ->where('playlistId',$playlistId)
             ->first();
-        $songs = DB::table('Song')        
+        $songs = DB::table('Song')
             ->join('PlaylistSongRelation','PlaylistSongRelation.songId','=','Song.songId')
+            ->join('SongArtistRelation','SongArtistRelation.songId','=','Song.songId')
+            ->join('Artist','Artist.artistId','=','SongArtistRelation.artistId')
+            ->join('SongGenreRelation','SongGenreRelation.songId','=','Song.songId')
+            ->join('Genre','Genre.genreId','=','SongGenreRelation.genreId')
             ->where('PlaylistSongRelation.playlistId',$playlistId)
-            ->get();
+            ->select('Song.songId', 'imagePath', 'songPath', 'duration','title','artistName','artistImage','genreName')
+            ->distinct()->get();
+
         $check = DB::table('SharePlaylist') 
             ->where('playlistId',$playlistId)
             ->where('userId',$userId)
@@ -343,12 +355,12 @@ class PlaylistController extends Controller{
 
             return response()->json([
                 'status' => 200,
-                'message' => 'delete song successfully',
+                'message' => 'Delete playlist successfully',
             ]);
         }else{
             return response()->json([
                 'status' => 404,
-                'message' => 'not found',
+                'message' => 'Playlist not found',
             ]);
         }
     }

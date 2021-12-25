@@ -21,11 +21,14 @@ import "assets/css/banner.css";
 import axios from "axios";
 import swal from "sweetalert";
 import AddPlaylistToPlay from "functions/AddPlaylistToPlay";
+import DeletePlaylistButton from "components/Buttons/DeletePlaylistButton";
 
 export default function PlaylistBannerForOwner(props) {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [value, setValue] = useState("");
-	const [playlistName, setPlaylistName] = useState(props.playlist.playlistName)
+	const [playlistName, setPlaylistName] = useState(
+		props.playlist.playlistName
+	);
 	const initialRef = useRef();
 	const finalRef = useRef();
 
@@ -37,7 +40,7 @@ export default function PlaylistBannerForOwner(props) {
 		const data = {
 			playlistId: props.playlist.playlistId,
 			playlistName: value,
-		}
+		};
 
 		const res = await axios.post("api/renamePlaylist", data);
 		if (res.data.status === 200) {
@@ -46,7 +49,7 @@ export default function PlaylistBannerForOwner(props) {
 			onClose();
 			swal("Done", "Playlist name updated!", "success");
 		} else swal("Opps!", "Some error occured!", "error");
-	}
+	};
 
 	return (
 		<>
@@ -66,22 +69,16 @@ export default function PlaylistBannerForOwner(props) {
 								colorScheme="blue"
 								size="lg"
 								minWidth="200px"
-								onClick={() => AddPlaylistToPlay(props.playlist.playlistId)}
+								onClick={() =>
+									AddPlaylistToPlay(props.playlist.playlistId)
+								}
 							>
 								<i className="fas fa-play"></i>
 								<span style={{ margin: "0px 10px 0px 10px" }}>
 									Phát lần lượt
 								</span>
 							</Button>
-							<Button
-								variant="outline"
-								colorScheme="blue"
-								size="lg"
-								width="20px"
-								borderRadius="50%"
-							>
-								<i className="fas fa-trash"></i>
-							</Button>
+							<DeletePlaylistButton playlistId={props.playlist.playlistId}/>
 							<Button
 								variant="outline"
 								colorScheme="blue"
@@ -121,7 +118,11 @@ export default function PlaylistBannerForOwner(props) {
 							</FormControl>
 						</ModalBody>
 						<ModalFooter>
-							<Button colorScheme="blue" mr={3} onClick={renamePlaylist}>
+							<Button
+								colorScheme="blue"
+								mr={3}
+								onClick={renamePlaylist}
+							>
 								Save
 							</Button>
 							<Button onClick={onClose}>Cancel</Button>

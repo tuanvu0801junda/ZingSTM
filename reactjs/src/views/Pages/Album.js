@@ -84,7 +84,7 @@ function Album() {
 								<Th color="gray.400"></Th>
 								<Th color="gray.400"></Th>
 								<Th color="gray.400">Genre</Th>
-								<Th></Th>
+								<Th color="gray.400">Duration</Th>
 							</Tr>
 						</Thead>
 						<Tbody>
@@ -93,6 +93,7 @@ function Album() {
 								: songs.map((row) => {
 										return (
 											<SongInRow
+												genreName={row.genreName}
 												songId={row.songId}
 												title={row.title}
 												logo={row.imagePath}
