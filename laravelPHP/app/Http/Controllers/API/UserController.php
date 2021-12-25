@@ -114,4 +114,37 @@ class UserController extends Controller{
             ]);
         }
     }
+
+    public function changePass(Request $request){
+        $userId = $request->input('userId');
+        $password = $request->input('password');
+
+        $user = DB::table('User')
+                ->where('userId',$userId)->first();
+
+        if (Hash::check($password, $user->password)) {
+            $user = User::where('userId', $userId)->first();
+
+            $user->password = Hash::make($request->input('newPassword'));
+            $user->update();
+
+            $userResult = array(
+                'userId' => $user->userId, 
+                'email' => $user->email, 
+                'fullname' => $user->fullname, 
+                'profilePic' => $user->profilePic,
+                'role' => $user->role
+            );
+            return response()->json([
+                'status' => 200,
+                'user' => $userResult,
+                'message' => 'Change Successfully',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 100,
+                'message' => 'Wrong password',
+            ]);
+        }
+    }
 }
