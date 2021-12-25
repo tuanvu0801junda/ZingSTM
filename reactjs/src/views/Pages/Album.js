@@ -68,6 +68,7 @@ function Album() {
 					<AlbumBanner
 						title={album.title}
 						imgURL={album.artworkPath}
+						albumId={albumId}
 					/>
 			)}
 			<Card overflowX={{ xl: "hidden" }}>

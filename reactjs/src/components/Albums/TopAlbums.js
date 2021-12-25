@@ -1,5 +1,6 @@
 import { Box, Badge, Image, Spacer, Flex } from "@chakra-ui/react"
 import { useHistory } from "react-router-dom"
+import defaultThumbnail from "assets/img/default_thumbnail.png"
 
 export default function TopAlbums(props) {
     const history = useHistory();
@@ -16,7 +17,7 @@ export default function TopAlbums(props) {
 
     return (
         <Flex as="button" direction="column" maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden" onClick={goToAlbumPage}>
-            <Image src={property.imageUrl} alt={property.imageAlt} w="280px"/>
+            <Image src={property.imageUrl} alt={property.imageAlt} boxSize="280px" fallbackSrc={defaultThumbnail} fallback={true}/>
             <Spacer />
             <Box p="6" w="100%">
                 <Box d="flex" alignItems="baseline">
@@ -36,14 +37,11 @@ export default function TopAlbums(props) {
                     fontWeight="semibold"
                     as="h4"
                     lineHeight="tight"
-                    fontSize="sm"
+                    fontSize="md"
                     height="30px"
                 >
                     {property.title}
                 </Box>
-                <Badge borderRadius="full" px="2" colorScheme="teal">
-                        {property.category}
-                </Badge>
             </Box>
         </Flex>
     )

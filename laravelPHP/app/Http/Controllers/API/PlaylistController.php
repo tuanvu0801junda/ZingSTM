@@ -224,6 +224,27 @@ class PlaylistController extends Controller{
         }
     }
 
+    public function getPlaylistSong(Request $request){
+        $playlistId = $request->input('playlistId');
+        $songs = DB::table('Song')        
+            ->join('PlaylistSongRelation','PlaylistSongRelation.songId','=','Song.songId')
+            ->where('PlaylistSongRelation.playlistId',$playlistId)
+            ->get();
+
+        if($songs->isEmpty() == false){
+            return response()->json([
+                'status' => 200,
+                'songs' => $songs,
+                'message' => 'Success'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'No song found!'
+            ]);
+        }
+    }
+
     public function getPlaylistInfo(Request $request){
         $playlistId = $request->input('playlistId');
         $userId = $request->input('userId');
@@ -266,8 +287,6 @@ class PlaylistController extends Controller{
                 'message' => 'Access Denied',
             ]);
         }
-
-
     }
 
     public function deleteSongFromPlaylist(Request $request){

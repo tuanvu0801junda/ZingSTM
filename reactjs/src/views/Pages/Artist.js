@@ -64,6 +64,7 @@ function Artist() {
     <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
       {artist == null ? "Loading ..." :
         <ArtistBanner
+            artistId={artistId}
             artistName={artist.artistName}
             imgURL={artist.artistImage}
         />
