@@ -30,6 +30,7 @@ import UpdateAlbum from "views/RTL/UpdateAlbum";
 import UpdateGenre from "views/RTL/UpdateGenre";
 
 import SongManage from "views/RTL/SongManage";
+import SuperAdmin from "views/RTL/SuperAdmin/S_Admin.js";
 import AlbumManage from "views/RTL/AlbumManage";
 import ArtistManage from "views/RTL/ArtistManage";
 import Song from "views/Pages/Song";
@@ -168,6 +169,7 @@ export default function Dashboard(props) {
                 <Route path={`/zingstm/manage-artist`} component={ArtistManage} />
                 <Route path={`/zingstm/manage-genre`} component={GenreManage} />
 
+                <Route path={`/zingstm/Manage-admin&user`} component={SuperAdmin} />
 
                 {/* Add route here */}
                 <Redirect from="/zingstm" to="/zingstm/home" />

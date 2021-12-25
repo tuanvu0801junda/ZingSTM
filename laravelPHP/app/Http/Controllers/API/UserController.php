@@ -115,6 +115,40 @@ class UserController extends Controller{
         }
     }
 
+    public function getAllUserInfo(){
+        $user = DB::table('User')->get();
+        return response()->json([
+            'status' => 200,
+            'users' => $user->all()
+        ]);
+    }
+
+    public function updateUser(Request $request){
+        $userId = $request->input('userId');
+        if($userId != null){
+            $user = User::find($userId);
+            if($user->role == 0){
+                $user->role = 1;
+            }else if($user->role == 1){
+                $user->role = 0;
+            }
+            $user->update();
+        }
+        return response()->json([
+            'status' => 200,
+            'message' => "Update User Successfully"
+        ]);
+    }
+
+    public function deleteUser(Request $request){
+        $userId = $request->input('userId');
+        $user = User::find($userId);
+        $user->delete();
+        return response()->json([
+            'status' => 200,
+            'message' => "Delete User Successfully"
+        ]);
+    }
     public function changePass(Request $request){
         $userId = $request->input('userId');
         $password = $request->input('password');

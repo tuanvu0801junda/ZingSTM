@@ -4,6 +4,7 @@ import SongManage from "views/RTL/SongManage.js";
 import AlbumManage from "views/RTL/AlbumManage.js";
 import ArtistManage from "views/RTL/ArtistManage.js";
 import GenreManage from "views/RTL/GenreManage.js";
+import SuperAdmin from "views/RTL/SuperAdmin/S_Admin.js";
 
 import Profile from "views/Dashboard/Profile.js";
 import SignIn from "views/Pages/SignIn.js";
@@ -75,6 +76,18 @@ var dashRoutes = [
 				superAdmin: "none",
 			},
 			{
+				path: "/manage-user_admin",
+				name: "Manage Admin&User",
+				rtlName: "لوحة القيادة",
+				icon: <SupportIcon color="inherit" />,
+				secondaryNavbar: true,
+				component: SuperAdmin,
+				layout: "/zingstm",
+				logout: "block",
+				user: "block",
+				admin: "block",
+			},
+			{
 				path: "/manage-song",
 				name: "Manage Song",
 				rtlName: "لوحة القيادة",
@@ -82,8 +95,8 @@ var dashRoutes = [
 				secondaryNavbar: true,
 				component: SongManage,
 				layout: "/zingstm",
-				logout: "none",
-				user: "none",
+				logout: "block",
+				user: "block",
 				admin: "block",
 				superAdmin: "none",
 			},
