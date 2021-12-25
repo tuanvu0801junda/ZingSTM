@@ -114,6 +114,11 @@ function SearchBar(props) {
                 autoFocus
                 formatResult={formatResult}
                 placeholder="Type here to search..."
+                styling={{
+                    height: "38px",
+                    fontFamily: 'Trocchi',
+                    fontSize: "18px",
+                }}
             />
         </div>
     );
