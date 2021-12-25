@@ -1,0 +1,53 @@
+version: '3.3'
+
+services:
+  backend:
+    build: 
+      context: ./laravelPHP
+      dockerfile: Dockerfile
+
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: 'ZingSTM'
+      DB_USERNAME: 'root'
+      DB_PASSWORD: '123456'
+
+    ports:
+      - 8000:8000
+    volumes:
+      - ./laravelPHP:/app/backend
+    depends_on:
+      - db
+    networks:
+      - app
+
+  db:
+    image: mysql:5.7.22
+    environment:
+      MYSQL_DATABASE: 'ZingSTM'
+      MYSQL_USERNAME: 'root'
+      MYSQL_PASSWORD: '123456'
+      MYSQL_ROOT_PASSWORD: web_programming_20211
+    volumes:
+      - .dbdata:/var/lib/mysql/
+    networks:
+      - app
+
+  frontend:
+    build: 
+      context: ./reactjs
+      dockerfile: Dockerfile
+    tty: true
+    ports:
+      - 3000:3000
+    volumes:
+      - ./reactjs:/app/frontend
+    depends_on:
+      - backend
+    networks:
+      - app
+
+networks:
+  app:
+    driver: bridge
