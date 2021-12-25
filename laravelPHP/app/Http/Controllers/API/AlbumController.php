@@ -11,8 +11,16 @@ class AlbumController extends Controller{
 
     public function getAllAlbumInfo(){
         $albums = DB::table('Album')->get();
+        $albumInfo = $albums->map(function($album){
+            return [
+                'id' => $album->albumId,
+                'name' => $album->title,
+                'type' => 'album'
+            ];
+        });
         return response()->json([
             'status' => 200,
+            'albumInfo' => $albumInfo,
             'albums' => $albums->all(),
         ]);
     }

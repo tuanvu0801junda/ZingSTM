@@ -27,6 +27,7 @@ class SongController extends Controller{
             return [
                 'id' => $song->songId,
                 'name' => $song->title,
+                'type' => 'song'
             ];
         });
         return response() ->json([

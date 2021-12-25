@@ -12,6 +12,7 @@ import {
     useColorModeValue,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
+import { countDecimalPlaces } from "@chakra-ui/utils";
 function SearchBar(props) {
     // Pass the computed styles into the `__css` prop
     const { variant, children, ...rest } = props;
@@ -20,32 +21,10 @@ function SearchBar(props) {
     const mainTeal = useColorModeValue("teal.300", "teal.300");
     const searchIconColor = useColorModeValue("gray.700", "gray.200");
     const inputBg = useColorModeValue("white", "gray.800");
-    const [search, getSearch] = useState("");
-    const [song, setSong] = useState([]);
+    const [song, getSong] = useState([]);
+    const [artist, getArtist] = useState([]);
+    const [album, getAlbum] = useState([]);
 
-
-    const items = [
-        {
-            id: 0,
-            name: 'Cobol'
-        },
-        {
-            id: 58,
-            name: '58'
-        },
-        {
-            id: 2,
-            name: 'Basic'
-        },
-        {
-            id: 3,
-            name: 'PHP'
-        },
-        {
-            id: 4,
-            name: 'Java'
-        }
-    ]
     useEffect(() => {
         getAllSongData();
     }, [])
@@ -53,11 +32,37 @@ function SearchBar(props) {
     const getAllSongData = async () => {
         const res = await axios.post("/api/getAllSongInfo");
         if (res.data.status === 200) {
-            setSong(res.data.songInfo);
-            console.log(res.data.songInfo);
+            getSong(res.data.songInfo);
+            // console.log(res.data.songInfo);
         }
     }
 
+    //Get artist
+    useEffect(() => {
+        getAllArtistInfo();
+    }, [])
+    const getAllArtistInfo = async () => {
+        const res = await axios.post("/api/getAllArtistInfo");
+        if (res.data.status === 200) {
+            getArtist(res.data.artistInfo);
+            // console.log(res.data.artistInfo);
+        }
+    }
+
+    //Get album
+    useEffect(() => {
+        getAllAlbumInfo();
+    }, [])
+    const getAllAlbumInfo = async () => {
+        const res = await axios.post("/api/getAllAlbumInfo");
+        if (res.data.status === 200) {
+            getAlbum(res.data.albumInfo);
+            // console.log(res.data.albumInfo);
+        }
+    }
+
+    const data = [...song, ...artist, ...album];
+    console.log(data);
 
     const handleOnSearch = (string, results) => {
         // onSearch will have as the first callback parameter
@@ -73,14 +78,24 @@ function SearchBar(props) {
     const handleOnSelect = (item) => {
         // the item selected
         console.log(item)
-        getSearch(item.id);
-        console.log(item.id);
-        goToAddSongPage(item.id);
+        if (item.type == "song")
+            goToSongPage(item.id);
+        else if (item.type == "artist")
+            goToArtistPage(item.id);
+        else if (item.type == "album")
+            goToAlbumPage(item.id);
+
     }
-    const goToAddSongPage = (k) => {
+    //Go page
+    const goToSongPage = (k) => {
         history.push("/zingstm/song/" + k);
     }
-
+    const goToArtistPage = (k) => {
+        history.push("/zingstm/artist/" + k);
+    }
+    const goToAlbumPage = (k) => {
+        history.push("/zingstm/album/" + k);
+    }
 
     const handleOnFocus = () => {
         console.log('Focused')
@@ -89,9 +104,9 @@ function SearchBar(props) {
         return item
     }
     return (
-        <div style={{ width: 200 }}>
+        <div style={{ width: 200, margin: "0 15px 0 0" }}>
             <ReactSearchAutocomplete
-                items={song}
+                items={data}
                 onSearch={handleOnSearch}
                 onHover={handleOnHover}
                 onSelect={handleOnSelect}

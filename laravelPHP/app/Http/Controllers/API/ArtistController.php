@@ -11,8 +11,16 @@ class ArtistController extends Controller{
     //
     public function getAllArtistInfo(){
         $artists = DB::table('Artist')->get();
+        $artistInfo = $artists->map(function($artist){
+            return [
+                'id' => $artist->artistId,
+                'name' => $artist->artistName,
+                'type' => 'artist'
+            ];
+        });
         return response()->json([
             'status' => 200,
+            'artistInfo' => $artistInfo,
             'artists' => $artists->all()
         ]);
     }
