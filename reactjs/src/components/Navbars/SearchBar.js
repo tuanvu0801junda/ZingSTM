@@ -104,7 +104,7 @@ function SearchBar(props) {
         return item
     }
     return (
-        <div style={{ width: 200, margin: "0 15px 0 0" }}>
+        <div style={{ width: 300, margin: "0 15px 0 0" }}>
             <ReactSearchAutocomplete
                 items={data}
                 onSearch={handleOnSearch}
@@ -113,6 +113,7 @@ function SearchBar(props) {
                 onFocus={handleOnFocus}
                 autoFocus
                 formatResult={formatResult}
+                placeholder="Type here to search..."
             />
         </div>
     );
