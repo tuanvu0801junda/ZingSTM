@@ -28,6 +28,7 @@ var dashRoutes = [
 		logout: "block",
 		user: "block",
 		admin: "block",
+		superAdmin: "none",
 	},
 	{
 		name: "PERSONAL PAGES",
@@ -46,6 +47,7 @@ var dashRoutes = [
 				logout: "none",
 				user: "block",
 				admin: "block",
+				superAdmin: "none",
 			},
 			{
 				path: "/signin",
@@ -57,6 +59,7 @@ var dashRoutes = [
 				logout: "block",
 				user: "none",
 				admin: "none",
+				superAdmin: "none",
 			},
 			{
 				path: "/signup",
@@ -69,6 +72,7 @@ var dashRoutes = [
 				logout: "block",
 				user: "none",
 				admin: "none",
+				superAdmin: "none",
 			},
 			{
 				path: "/manage-song",
@@ -81,6 +85,7 @@ var dashRoutes = [
 				logout: "none",
 				user: "none",
 				admin: "block",
+				superAdmin: "none",
 			},
 			{
 				path: "/manage-album",
@@ -93,6 +98,7 @@ var dashRoutes = [
 				logout: "none",
 				user: "none",
 				admin: "block",
+				superAdmin: "none",
 			},
 			{
 				path: "/manage-artist",
@@ -105,6 +111,7 @@ var dashRoutes = [
 				logout: "none",
 				user: "none",
 				admin: "block",
+				superAdmin: "none",
 			},
 			{
 				path: "/manage-genre",
@@ -117,6 +124,7 @@ var dashRoutes = [
 				logout: "none",
 				user: "none",
 				admin: "block",
+				superAdmin: "none",
 			},
 		],
 	},

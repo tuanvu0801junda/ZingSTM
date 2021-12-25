@@ -28,8 +28,7 @@ import { useSelector } from "react-redux";
 
 function Sidebar(props) {
 	const history = useHistory();
-	var sidebarState = useSelector((state) => state.reducerUpdateSidebar)
-		.sidebarState;
+	var sidebarState = useSelector((state) => state.reducerUpdateSidebar).sidebarState;
 	if (sidebarState == undefined) sidebarState == "logout";
 	// to check for active links and opened collapses
 	let location = useLocation();
@@ -98,6 +97,8 @@ function Sidebar(props) {
 									? prop.user
 									: sidebarState == "admin"
 									? prop.admin
+									: sidebarState == "superAdmin"
+									? prop.superAdmin
 									: prop.logout
 							}
 							boxSize="initial"
@@ -162,6 +163,8 @@ function Sidebar(props) {
 									? prop.user
 									: sidebarState == "admin"
 									? prop.admin
+									: sidebarState == "superAdmin"
+									? prop.superAdmin
 									: prop.logout
 							}
 							boxSize="initial"
@@ -352,6 +355,8 @@ export function SidebarResponsive(props) {
 									? prop.user
 									: sidebarState == "admin"
 									? prop.admin
+									: sidebarState == "superAdmin"
+									? prop.superAdmin
 									: prop.logout
 							}
 							boxSize="initial"
@@ -413,6 +418,8 @@ export function SidebarResponsive(props) {
 									? prop.user
 									: sidebarState == "admin"
 									? prop.admin
+									: sidebarState == "superAdmin"
+									? prop.superAdmin
 									: prop.logout
 							}
 							boxSize="initial"

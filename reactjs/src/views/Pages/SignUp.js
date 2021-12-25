@@ -74,6 +74,8 @@ function SignUp() {
 					dispatch(actionUpdateSidebar("user"));
 				else if (res.data.newUser.role === 1)
 					dispatch(actionUpdateSidebar("admin"));
+				else if (res.data.newUser.role === 2)
+					dispatch(actionUpdateSidebar("superAdmin"));
 				dispatch(actionLogin(res.data.newUser));
 				swal(
 					res.data.message,

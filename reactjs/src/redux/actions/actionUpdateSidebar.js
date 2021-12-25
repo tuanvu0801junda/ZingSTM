@@ -1,4 +1,4 @@
-function actionUpdateSidebar(sidebarState) {
+export default function actionUpdateSidebar(sidebarState) {
     const data = {
         sidebarState: sidebarState,
     }
@@ -8,5 +8,3 @@ function actionUpdateSidebar(sidebarState) {
         data: data,
     }
 }
-
-export default actionUpdateSidebar
