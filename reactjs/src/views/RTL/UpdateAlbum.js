@@ -78,7 +78,6 @@ function UpdateAlbum() {
         } else updateAlbumToDataBase(image);
     }
 
-    console.log(albumNewName);
     //Update new album to database
     const updateAlbumToDataBase = async (imageUrl) => {
 
@@ -87,13 +86,11 @@ function UpdateAlbum() {
             artworkPath: imageUrl,
             albumTitle: albumNewName
         }
-        console.log(data);
 
         if (albumNewName != '' || !imageUrl.includes(imgUrlUndefinded)) {
             const res = await axios.post('/api/updateOneAlbum', data);
             if (res.data.status === 200) {
                 try {
-                    console.log(res.data.message);
                     swal({
                         title: "Update Success!",
                         text: res.data.message,

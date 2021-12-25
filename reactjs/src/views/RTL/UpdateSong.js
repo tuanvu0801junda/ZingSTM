@@ -68,7 +68,6 @@ function UpdateSong(props) {
         }
         const res = await axios.post("/api/getOneSongDetail", data);
         if (res.data.status === 200) {
-            console.log(res.data.song);
             getSongCurrentName(res.data.song.title);
             getSongCurrentArtist(res.data.song.artistName);
             getSongCurrentAlbum(res.data.song.albumName);
@@ -160,12 +159,10 @@ function UpdateSong(props) {
             albumId: albumIdSelected,
             genreId: genreIdSelected
         }
-        console.log(data);
 
         const res = await axios.post('/api/updateOneSong', data);
         if (res.data.status === 200) {
             try {
-                console.log(res.data.message);
                 swal({
                     title: "Update Success!",
                     text: res.data.message,

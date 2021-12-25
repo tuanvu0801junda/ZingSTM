@@ -18,7 +18,6 @@ export default function AddSongToPlay(songId) {
                 musicSrc: res.data.song.songPath,
             }
             const x = await axios.post('api/updateViewSong', data);
-            console.log("Song views updated");
         }
         store.dispatch(actionAddSongToPlay(song));
     }

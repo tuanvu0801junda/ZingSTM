@@ -26,7 +26,6 @@ export default function PlaylistOwner(props) {
 	const [songs, setSongs] = useState(props.data.songs);
 	const textColor = useColorModeValue("gray.700", "white");
 
-	console.log("Re-render");
 	return (
 		<SongContext.Provider value={{ songs, setSongs }}>
 			<Flex direction="column" pt={{ base: "120px", md: "75px" }}>

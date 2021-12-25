@@ -28,7 +28,6 @@ export default function SongButtonPlaylistOwner(props) {
 
 	const removeSong = async () => {
 
-		console.log("Remove Song");
 		const data = {
 			playlistId: props.playlistId,
 			songId: props.songId,
@@ -41,7 +40,6 @@ export default function SongButtonPlaylistOwner(props) {
 					let tmpSongs = songs;
 					tmpSongs.splice(i, 1);
 					setSongs([...tmpSongs]);
-					console.log(songs);
 					swal("Done", "Remove song successfully!", "success");
 					onClose();
 					break;

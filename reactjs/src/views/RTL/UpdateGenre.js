@@ -64,8 +64,6 @@ function UpdateGenre() {
 
         }
     }
-    console.log(genreNewName);
-    console.log(image);
 
 
     //Handle back button
@@ -89,13 +87,11 @@ function UpdateGenre() {
             genreImage: imageUrl,
             genreName: genreNewName
         }
-        console.log(data);
 
         if (genreNewName != '' || !imageUrl.includes(imgUrlUndefinded)) {
             const res = await axios.post('/api/updateOneGenre', data);
             if (res.data.status === 200) {
                 try {
-                    console.log(res.data.message);
                     swal({
                         title: "Update Success!",
                         text: res.data.message,

@@ -75,22 +75,22 @@ function SearchBar(props) {
     }
 
     const data = [...song, ...artist, ...album, ...genre];
-    console.log(data);
+    //console.log(data);
 
     const handleOnSearch = (string, results) => {
         // onSearch will have as the first callback parameter
         // the string searched and for the second the results.
-        console.log(string, results)
+        // console.log(string, results)
     }
 
     const handleOnHover = (result) => {
         // the item hovered
-        console.log(result)
+        // console.log(result)
     }
 
     const handleOnSelect = (item) => {
         // the item selected
-        console.log(item)
+        // console.log(item)
         if (item.type == "song")
             goToSongPage(item.id);
         else if (item.type == "artist")
@@ -116,7 +116,7 @@ function SearchBar(props) {
     }
 
     const handleOnFocus = () => {
-        console.log('Focused')
+        //console.log('Focused')
     }
     const formatResult = (item) => {
         return item

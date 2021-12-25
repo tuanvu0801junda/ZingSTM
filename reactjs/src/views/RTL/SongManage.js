@@ -39,8 +39,6 @@ export default function Dashboard() {
     const res = await axios.post("/api/getAllSongInfo");
     if (res.data.status === 200) {
       setSong(res.data.songs);
-      console.log(res.data.songs);
-      console.log(res.data.songInfo);
     }
   }
   //Handle add new song
@@ -50,7 +48,6 @@ export default function Dashboard() {
   //Handle update song
   const goToUpdateSongPage = (event) => {
     const songCurrentId = event.target.value;
-    // console.log(songCurrentId);
     history.push('/zingstm/update-song/' + songCurrentId);
   }
   // Handle delete song

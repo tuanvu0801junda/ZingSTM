@@ -154,8 +154,6 @@ function Profile() {
 
 		const res = await axios.post("/api/updateAvatar", data);
 
-		console.log(res.data);
-
 		if (res.data.status === 200) {
 			try {
 				var input = {
