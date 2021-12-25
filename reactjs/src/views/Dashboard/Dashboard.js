@@ -170,7 +170,7 @@ export default function Dashboard() {
 										>
 											Views
 										</Text>{" "}
-										in 2021
+										in last 7 days
 									</Text>
 								</Flex>
 							</CardHeader>
