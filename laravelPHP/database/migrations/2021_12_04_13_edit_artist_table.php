@@ -15,15 +15,4 @@ class EditArtistTable extends Migration{
             $table->string('artistImage');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down(){
-        Schema::table('Artist', function(Blueprint $table){
-            $table->dropColumn('artistImage');
-        });
-    }
 }

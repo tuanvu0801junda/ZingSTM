@@ -58,6 +58,8 @@ function SignIn() {
 					dispatch(actionUpdateSidebar("user"));
 				else if (res.data.user.role === 1)
 					dispatch(actionUpdateSidebar("admin"));
+				else if (res.data.user.role === 2)
+					dispatch(actionUpdateSidebar("superAdmin"));
 				dispatch(actionLogin(res.data.user));
 				history.push("/zingstm");
 			} catch (err) {
