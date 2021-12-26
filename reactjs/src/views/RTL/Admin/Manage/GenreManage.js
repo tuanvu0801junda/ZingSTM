@@ -1,5 +1,7 @@
 import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import axios from "axios";
 // Chakra imports
 import {
@@ -31,6 +33,10 @@ export default function Dashboard() {
     const textColor = useColorModeValue("gray.700", "white");
     const history = useHistory();
     const [genre, setGenre] = useState([]);
+    const userInfo = useSelector((state) => state.reducerLogin).userInfo;
+    if (userInfo === undefined) {
+        history.push('/auth/signin/');
+    }
     useEffect(() => {
         getAllGenreData();
     }, [])

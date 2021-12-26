@@ -1,5 +1,7 @@
 import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import axios from "axios";
 // Chakra imports
 import {
@@ -42,7 +44,10 @@ function AddArtist() {
     const [image, setImage] = useState('');
     const [artistTitle, getArtistTitle] = useState('');
     const imgUrlUndefinded = "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FSongImages%2Fundefined?"
-
+    const userInfo = useSelector((state) => state.reducerLogin).userInfo;
+    if (userInfo === undefined) {
+        history.push('/auth/signin/');
+    }
     //Handle back button
     const goToManageArtistPage = () => {
         history.push('/zingstm/manage-artist');

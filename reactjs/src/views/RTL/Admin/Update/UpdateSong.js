@@ -1,5 +1,7 @@
 import { Link, useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import axios from "axios";
 import { IoDocumentsSharp } from "react-icons/io5";
 import swal from "sweetalert";
@@ -54,6 +56,10 @@ function UpdateSong(props) {
     const [artistNameSelected, getArtistNameSelected] = useState('');
     const [albumNameSelected, getAlbumNameSelected] = useState('');
     const [genreNameSelected, getGenreNameSelected] = useState('');
+    const userInfo = useSelector((state) => state.reducerLogin).userInfo;
+    if (userInfo === undefined) {
+        history.push('/auth/signin/');
+    }
 
     const [image, setImage] = useState('');
     const { id } = useParams();

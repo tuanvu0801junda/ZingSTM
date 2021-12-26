@@ -33,6 +33,7 @@ Route::post('/getAllUserInfo', [UserController::class, 'getAllUserInfo']);
 Route::post('/changePass', [UserController::class, 'changePass']);
 Route::post('/updateUser', [UserController::class, 'updateUser']);
 Route::post('/deleteUser', [UserController::class, 'deleteUser']);
+Route::post('/checkSuperAdminPassword', [UserController::class, 'checkSuperAdminPassword']);
 
 Route::post('/getGenresSong', [SongController::class, 'getSongOfGenre']);
 Route::post('/getArtistsSong', [SongController::class, 'getSongOfArtist']);

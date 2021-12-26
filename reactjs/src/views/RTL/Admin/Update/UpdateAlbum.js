@@ -1,5 +1,7 @@
 import { Link, useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import axios from "axios";
 import swal from "sweetalert";
 import { uploadSongImage } from '../../../../firebase/uploadMp3Image';
@@ -46,6 +48,10 @@ function UpdateAlbum() {
     const [image, setImage] = useState('');
     const imgUrlUndefinded = "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FSongImages%2Fundefined?"
     const { id } = useParams();
+    const userInfo = useSelector((state) => state.reducerLogin).userInfo;
+    if (userInfo === undefined) {
+        history.push('/auth/signin/');
+    }
 
     //Get current album update
     useEffect(() => {

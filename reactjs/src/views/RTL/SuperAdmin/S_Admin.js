@@ -1,5 +1,6 @@
 import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from "axios";
@@ -45,10 +46,18 @@ export default function SuperAdmin() {
     const [user, getUser] = useState([]);
     const [admin, getAdmin] = useState([]);
     const [pass, getPass] = useState("");
-    const [userId, getUserId] = useState(0);
+    const history = useHistory();
+    const [userUpdateId, getUserUpdateId] = useState(0);
+    const [buttonName, getButtonName] = useState("");
+    const userInfo = useSelector((state) => state.reducerLogin).userInfo;
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     const initialRef = React.useRef();
+
+    if (userInfo === undefined) {
+        history.push('/auth/signin/');
+    }
+
     useEffect(() => {
         getUserData();
     }, [])
@@ -60,6 +69,9 @@ export default function SuperAdmin() {
             getAdmin(res.data.admin);
         }
     }
+
+    //Get superAdmin from database
+
 
     //Handle update user
 
@@ -102,68 +114,60 @@ export default function SuperAdmin() {
     //     //     });
     // }
 
-    // Handle delete user
-    const handleDeleteUser = (e, userId) => {
-        e.preventDefault();
-        const thisClicked = e.currentTarget;
-        swal("Are you sure to delete this user?", {
-            buttons: {
-                cancel: "No",
-                catch: {
-                    text: "Yes",
-                    value: "catch",
-                },
-            },
-        })
-            .then((value) => {
-                switch (value) {
-                    case "cancel":
-                        break;
-                    case "catch":
-                        axios.post("/api/deleteUser", { userId: userId });
-                        setTimeout(function () {
-                            swal({
-                                title: "Success!",
-                                text: "Delete User Successfully",
-                                icon: "success",
-                                button: "OK!",
-                            })
-                        }, 200);
-                        thisClicked.closest("tr").remove();
-                        break;
-                    default:
-                        break;
-                }
-            });
-    }
 
-    // Handle update user
+
+    // Handle check password
     const verifyPass = async () => {
-        console.log(userId);
-        console.log(pass);
-        if (pass == "DatHocBong") {
-            const res = await axios.post("/api/updateUser", { userId: userId });
-            //Update state
-            if (res.data.status === 200) {
-                getAdmin(res.data.adminUpdate);
-                getUser(res.data.userUpdate);
+        //Get superAdminInfo
+        const data = {
+            id: userInfo.userId,
+            password: pass
+        };
+        console.log(data);
+        const res = await axios.post("/api/checkSuperAdminPassword", data);
+        if (res.data.status === 200) {
+            if (res.data.check) {
+                if (buttonName != "Delete") {
+                    const res = await axios.post("/api/updateUser", { userId: userUpdateId });
+                    //Update state
+                    if (res.data.status === 200) {
+                        getAdmin(res.data.adminUpdate);
+                        getUser(res.data.userUpdate);
+                    }
+                    swal({
+                        title: "Success!",
+                        text: "Update Successfully",
+                        icon: "success",
+                        button: "OK!",
+                    });
+                } else if (buttonName == "Delete") {
+                    const res = await axios.post("/api/deleteUser", { userId: userUpdateId });
+                    //Update state
+                    if (res.data.status === 200) {
+                        getAdmin(res.data.adminUpdate);
+                        getUser(res.data.userUpdate);
+                    }
+                    swal({
+                        title: "Success!",
+                        text: "Delete User Successfully",
+                        icon: "success",
+                        button: "OK!",
+                    });
+                }
+                onClose();
+                getPass("");
             }
-            swal({
-                title: "Success!",
-                text: "Update Successfully",
-                icon: "success",
-                button: "OK!",
-            });
-        } else {
+
+        } else if (res.data.status === 100) {
             swal({
                 title: "Error!",
                 text: "Password Not Correct",
                 icon: "error",
                 button: "OK!",
             });
+            onClose();
+            getPass("");
         }
-        onClose();
-        getPass("");
     }
     return (
         <div style={{ margin: '125px 0px 0px 0px' }}>
@@ -220,14 +224,14 @@ export default function SuperAdmin() {
                                         </Td>
                                         <Td>
                                             <Text fontSize="lg" color={textColor} fontWeight="bold">
-                                                {data.role}
+                                                Admin
                                             </Text>
                                         </Td>
                                         <Td>
-                                            <Button colorScheme="green" size="sm" onClick={(e) => { onOpen(); getUserId(e.target.value); }} value={data.userId}>Set As User</Button>
+                                            <Button colorScheme="green" size="sm" onClick={(e) => { onOpen(); getUserUpdateId(e.target.value); getButtonName(e.target.innerHTML) }} value={data.userId}>Set As User</Button>
                                         </Td>
                                         <Td>
-                                            <Button colorScheme="red" size="sm" onClick={(e) => { handleDeleteUser(e, data.userId) }}>Delete</Button>
+                                            <Button colorScheme="red" size="sm" onClick={(e) => { onOpen(); getUserUpdateId(e.target.value); getButtonName(e.target.innerHTML) }} value={data.userId}>Delete</Button>
                                         </Td>
                                     </Tr>
                                 );
@@ -264,14 +268,14 @@ export default function SuperAdmin() {
                                         </Td>
                                         <Td>
                                             <Text fontSize="lg" color={textColor} fontWeight="bold">
-                                                {data.role}
+                                                User
                                             </Text>
                                         </Td>
                                         <Td>
-                                            <Button colorScheme="green" size="sm" onClick={(e) => { onOpen(); getUserId(e.target.value); }} value={data.userId}>Set As Admin</Button>
+                                            <Button colorScheme="green" size="sm" onClick={(e) => { onOpen(); getUserUpdateId(e.target.value); getButtonName(e.target.innerHTML) }} value={data.userId}>Set As Admin</Button>
                                         </Td>
                                         <Td>
-                                            <Button colorScheme="red" size="sm" onClick={(e) => { handleDeleteUser(e, data.userId) }}>Delete</Button>
+                                            <Button colorScheme="red" size="sm" onClick={(e) => { onOpen(); getUserUpdateId(e.target.value); getButtonName(e.target.innerHTML) }} value={data.userId}>Delete</Button>
                                         </Td>
                                     </Tr>
                                 );

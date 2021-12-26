@@ -1,6 +1,8 @@
 import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+
 // Chakra imports
 import {
   Box,
@@ -31,6 +33,10 @@ export default function Dashboard() {
   const textColor = useColorModeValue("gray.700", "white");
   const history = useHistory();
   const [song, setSong] = useState([]);
+  const userInfo = useSelector((state) => state.reducerLogin).userInfo;
+  if (userInfo === undefined) {
+    history.push('/auth/signin/');
+  }
   useEffect(() => {
     getAllSongData();
   }, [])
