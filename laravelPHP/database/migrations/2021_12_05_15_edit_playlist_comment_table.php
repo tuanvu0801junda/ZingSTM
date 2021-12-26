@@ -15,15 +15,4 @@ class EditPlaylistCommentTable extends Migration{
             $table->bigIncrements('playlistCommentId');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down(){
-        Schema::table('PlaylistComment', function(Blueprint $table){
-            $table->bigIncrements('playlistCommentId');
-        });
-    }
 }

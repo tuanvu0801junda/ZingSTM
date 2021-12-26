@@ -15,15 +15,4 @@ class EditSongCommentTable extends Migration{
             $table->bigIncrements('songCommentId');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down(){
-        Schema::table('SongComment', function(Blueprint $table){
-            $table->dropColumn('songCommentId');
-        });
-    }
 }

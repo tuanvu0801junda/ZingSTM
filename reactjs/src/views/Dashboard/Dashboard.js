@@ -119,27 +119,33 @@ export default function Dashboard() {
 										Top songs
 									</Text>
 									<Grid templateRows="repeat(3, 1fr)" gap={2}>
-										<TopSong
-											top={1}
-											title={topSong[0].title}
-											imgURL={topSong[0].imagePath}
-											views={topSong[0].playTimes}
-											songId={topSong[0].songId}
-										/>
-										<TopSong
-											top={2}
-											title={topSong[1].title}
-											imgURL={topSong[1].imagePath}
-											views={topSong[1].playTimes}
-											songId={topSong[1].songId}
-										/>
-										<TopSong
-											top={3}
-											title={topSong[2].title}
-											imgURL={topSong[2].imagePath}
-											views={topSong[2].playTimes}
-											songId={topSong[2].songId}
-										/>
+										{topSong[0] === undefined ? null : (
+											<TopSong
+												top={1}
+												title={topSong[0].title}
+												imgURL={topSong[0].imagePath}
+												views={topSong[0].playTimes}
+												songId={topSong[0].songId}
+											/>
+										)}
+										{topSong[1] === undefined ? null : (
+											<TopSong
+												top={2}
+												title={topSong[1].title}
+												imgURL={topSong[1].imagePath}
+												views={topSong[1].playTimes}
+												songId={topSong[1].songId}
+											/>
+										)}
+										{topSong[2] === undefined ? null : (
+											<TopSong
+												top={3}
+												title={topSong[2].title}
+												imgURL={topSong[2].imagePath}
+												views={topSong[2].playTimes}
+												songId={topSong[2].songId}
+											/>
+										)}
 									</Grid>
 								</Flex>
 							</CardBody>
@@ -175,7 +181,23 @@ export default function Dashboard() {
 								</Flex>
 							</CardHeader>
 							<Box w="100%" h={{ sm: "300px" }} ps="8px">
-								<TopSongLineChart songId1={topSong[0].songId} songId2={topSong[1].songId} songId3={topSong[2].songId}/>
+								<TopSongLineChart
+									songId1={
+										topSong[0] === undefined
+											? undefined
+											: topSong[0].songId
+									}
+									songId2={
+										topSong[1] === undefined
+											? undefined
+											: topSong[1].songId
+									}
+									songId1={
+										topSong[2] === undefined
+											? undefined
+											: topSong[2].songId
+									}
+								/>
 							</Box>
 						</Card>
 					</>

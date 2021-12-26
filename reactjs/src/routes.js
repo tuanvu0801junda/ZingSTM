@@ -28,7 +28,7 @@ var dashRoutes = [
 		logout: "block",
 		user: "block",
 		admin: "block",
-		superAdmin: "none",
+		superAdmin: "block",
 	},
 	{
 		name: "PERSONAL PAGES",
@@ -47,7 +47,7 @@ var dashRoutes = [
 				logout: "none",
 				user: "block",
 				admin: "block",
-				superAdmin: "none",
+				superAdmin: "block",
 			},
 			{
 				path: "/signin",
@@ -85,7 +85,7 @@ var dashRoutes = [
 				logout: "none",
 				user: "none",
 				admin: "block",
-				superAdmin: "none",
+				superAdmin: "block",
 			},
 			{
 				path: "/manage-album",
@@ -98,7 +98,7 @@ var dashRoutes = [
 				logout: "none",
 				user: "none",
 				admin: "block",
-				superAdmin: "none",
+				superAdmin: "block",
 			},
 			{
 				path: "/manage-artist",
@@ -111,7 +111,7 @@ var dashRoutes = [
 				logout: "none",
 				user: "none",
 				admin: "block",
-				superAdmin: "none",
+				superAdmin: "block",
 			},
 			{
 				path: "/manage-genre",
@@ -124,7 +124,7 @@ var dashRoutes = [
 				logout: "none",
 				user: "none",
 				admin: "block",
-				superAdmin: "none",
+				superAdmin: "block",
 			},
 		],
 	},
