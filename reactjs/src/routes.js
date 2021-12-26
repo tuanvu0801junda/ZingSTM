@@ -86,6 +86,7 @@ var dashRoutes = [
 				logout: "block",
 				user: "block",
 				admin: "block",
+				superAdmin: "block",
 			},
 			{
 				path: "/manage-song",
