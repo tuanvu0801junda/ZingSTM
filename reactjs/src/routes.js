@@ -83,9 +83,9 @@ var dashRoutes = [
 				secondaryNavbar: true,
 				component: SuperAdmin,
 				layout: "/zingstm",
-				logout: "block",
-				user: "block",
-				admin: "block",
+				logout: "none",
+				user: "none",
+				admin: "none",
 				superAdmin: "block",
 			},
 			{

@@ -1,5 +1,6 @@
 import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 // Chakra imports
 import {
@@ -32,6 +33,10 @@ export default function Dashboard() {
     const history = useHistory();
     const [album, setAlbum] = useState([]);
     const [albumStatistic, getAlbumStatistic] = useState([]);
+    const userInfo = useSelector((state) => state.reducerLogin).userInfo;
+    if (userInfo === undefined) {
+        history.push('/auth/signin/');
+    }
     useEffect(() => {
         getAllAlbumData();
     }, [])

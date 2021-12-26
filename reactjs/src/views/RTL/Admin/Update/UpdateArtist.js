@@ -1,5 +1,7 @@
 import { Link, useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import axios from "axios";
 import { IoDocumentsSharp } from "react-icons/io5";
 import swal from "sweetalert";
@@ -47,6 +49,10 @@ function UpdateArtist() {
     const [image, setImage] = useState('');
     const imgUrlUndefinded = "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FSongImages%2Fundefined?"
     const { id } = useParams();
+    const userInfo = useSelector((state) => state.reducerLogin).userInfo;
+    if (userInfo === undefined) {
+        history.push('/auth/signin/');
+    }
 
     //Get current artist update
     useEffect(() => {

@@ -118,15 +118,57 @@ class UserController extends Controller{
     public function getAllUserInfo(){
         $user = DB::table('User')->where('role',0)->get();
         $admin = DB::table('User')->where('role',1)->get();
-        return response()->json([
-            'status' => 200,
-            'users' => $user->all(),
-            'admin' => $admin->all()
-        ]);
+        $superAdmin = DB::table('User')->where('role',2)->select('password','username')->get();
+        if($user != null && $admin != null){
+            return response()->json([
+                'status' => 200,
+                'users' => $user->all(),
+                'superAdmin' => $superAdmin->all(),
+                'admin' => $admin->all()
+            ]);
+        }else if($user != null){
+            return response()->json([
+                'status' => 200,
+                'users' => $user->all(),
+                'superAdmin' => $superAdmin->all()
+            ]);
+        }else if($admin != null){
+            return response()->json([
+                'status' => 200,
+                'admin' => $admin->all(),
+                'superAdmin' => $superAdmin->all()
+            ]);
+        }else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Not found!',
+            ]);
+        }
+        
+    }
+
+    public function checkSuperAdminPassword (Request $request){
+        $superAdminId = $request->input('id');
+        $superAdminPassword = $request->input('password');
+        $superAdmin = DB::table('User')
+                ->where('userId',$superAdminId)->first();
+                
+        if (Hash::check($superAdminPassword, $superAdmin->password)) {
+            return response()->json([
+                'status' => 200,
+                'check' => true,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 100,
+                'check' => false,
+            ]);
+        }
     }
 
     public function updateUser(Request $request){
         $userId = $request->input('userId');
+    
         if($userId != null){
             $user = User::find($userId);
             if($user->role == 0){
@@ -148,10 +190,16 @@ class UserController extends Controller{
 
     public function deleteUser(Request $request){
         $userId = $request->input('userId');
-        $user = User::find($userId);
-        $user->delete();
+        if($userId != null){
+            $user = User::find($userId);
+            $user->delete();
+        }
+        $userUpdate = DB::table('User')->where('role',0)->get();
+        $adminUpdate = DB::table('User')->where('role',1)->get();
         return response()->json([
             'status' => 200,
+            'userUpdate' => $userUpdate,
+            'adminUpdate' => $adminUpdate,
             'message' => "Delete User Successfully"
         ]);
     }

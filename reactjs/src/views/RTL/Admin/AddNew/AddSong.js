@@ -1,5 +1,7 @@
 import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import axios from "axios";
 // Chakra imports
 import {
@@ -51,6 +53,10 @@ function AddSong() {
     const [genresIdSelected, getGenresIdSelected] = useState('');
     const songUrlUndefinded = "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Songs%2Fundefined?";
     const imgUrlUndefinded = "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FSongImages%2Fundefined?"
+    const userInfo = useSelector((state) => state.reducerLogin).userInfo;
+    if (userInfo === undefined) {
+        history.push('/auth/signin/');
+    }
     //Get artist
     useEffect(() => {
         getAllArtistInfo();
