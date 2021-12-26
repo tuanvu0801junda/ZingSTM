@@ -51,6 +51,7 @@ function AddSong() {
     const [artistNameSelected, getArtistNameSelected] = useState('');
     const [albumNameSelected, getAlbumNameSelected] = useState('');
     const [genresIdSelected, getGenresIdSelected] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const songUrlUndefinded = "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Songs%2Fundefined?";
     const imgUrlUndefinded = "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FSongImages%2Fundefined?"
     const userInfo = useSelector((state) => state.reducerLogin).userInfo;
@@ -96,13 +97,15 @@ function AddSong() {
 
     //Handle upload song
     const handleUploadSong = async () => {
+        setIsLoading(true);
         const mp3Url = await uploadSongMp3(mp3); //Get url from firebase
         const imageUrl = await uploadSongImage(image); //Get url from firebase
         let durationConvert = '';
         //Hanle empty mp3Url
         if (!mp3Url.includes(songUrlUndefinded))
             durationConvert = await getDurationSong(mp3Url);
-        addNewSongToDataBase(mp3Url, imageUrl, durationConvert);
+        await addNewSongToDataBase(mp3Url, imageUrl, durationConvert);
+        setIsLoading(false);
     }
 
     // let durationConvert = "";
@@ -262,7 +265,7 @@ function AddSong() {
                             </Flex>
                         </Button>
                         <br /><br /><br />
-                        <Button style={{ 'borderRadius': "5px" }} colorScheme="blue" onClick={handleUploadSong}>Upload
+                        <Button style={{ 'borderRadius': "5px" }} colorScheme="blue" onClick={handleUploadSong} isLoading={isLoading}>Upload
                         </Button>
                     </FormControl>
                 </CardBody>
