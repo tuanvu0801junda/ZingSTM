@@ -1,9 +1,10 @@
 // import
 import Dashboard from "views/Dashboard/Dashboard.js";
-import SongManage from "views/RTL/SongManage.js";
-import AlbumManage from "views/RTL/AlbumManage.js";
-import ArtistManage from "views/RTL/ArtistManage.js";
-import GenreManage from "views/RTL/GenreManage.js";
+import SongManage from "views/RTL/Admin/Manage/SongManage.js";
+import AlbumManage from "views/RTL/Admin/Manage/AlbumManage.js";
+import ArtistManage from "views/RTL/Admin/Manage/ArtistManage.js";
+import GenreManage from "views/RTL/Admin/Manage/GenreManage.js";
+import SuperAdmin from "views/RTL/SuperAdmin/S_Admin.js";
 
 import Profile from "views/Dashboard/Profile.js";
 import SignIn from "views/Pages/SignIn.js";
@@ -73,6 +74,19 @@ var dashRoutes = [
 				user: "none",
 				admin: "none",
 				superAdmin: "none",
+			},
+			{
+				path: "/manage-user_admin",
+				name: "Manage Admin&User",
+				rtlName: "لوحة القيادة",
+				icon: <SupportIcon color="inherit" />,
+				secondaryNavbar: true,
+				component: SuperAdmin,
+				layout: "/zingstm",
+				logout: "block",
+				user: "block",
+				admin: "block",
+				superAdmin: "block",
 			},
 			{
 				path: "/manage-song",
