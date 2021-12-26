@@ -192,7 +192,7 @@ export default function Dashboard() {
 											? undefined
 											: topSong[1].songId
 									}
-									songId1={
+									songId3={
 										topSong[2] === undefined
 											? undefined
 											: topSong[2].songId
