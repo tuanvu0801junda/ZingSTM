@@ -32,7 +32,7 @@ import {
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
-import { uploadSongImage, uploadSongMp3 } from '../../firebase/uploadMp3Image';
+import { uploadSongImage, uploadSongMp3 } from '../../../../firebase/uploadMp3Image';
 import { getDurationSong } from './GetDurationSong'
 
 

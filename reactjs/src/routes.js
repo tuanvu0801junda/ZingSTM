@@ -1,9 +1,9 @@
 // import
 import Dashboard from "views/Dashboard/Dashboard.js";
-import SongManage from "views/RTL/SongManage.js";
-import AlbumManage from "views/RTL/AlbumManage.js";
-import ArtistManage from "views/RTL/ArtistManage.js";
-import GenreManage from "views/RTL/GenreManage.js";
+import SongManage from "views/RTL/Admin/Manage/SongManage.js";
+import AlbumManage from "views/RTL/Admin/Manage/AlbumManage.js";
+import ArtistManage from "views/RTL/Admin/Manage/ArtistManage.js";
+import GenreManage from "views/RTL/Admin/Manage/GenreManage.js";
 import SuperAdmin from "views/RTL/SuperAdmin/S_Admin.js";
 
 import Profile from "views/Dashboard/Profile.js";

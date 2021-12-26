@@ -96,10 +96,15 @@ function Sidebar(props) {
 								sidebarState == "user"
 									? prop.user
 									: sidebarState == "admin"
+<<<<<<< HEAD
 									? prop.admin
 									: sidebarState == "superAdmin"
 									? prop.superAdmin
 									: prop.logout
+=======
+										? prop.admin
+										: prop.logout
+>>>>>>> 6f29edf (add verify pass & organize admin code)
 							}
 							boxSize="initial"
 							justifyContent="flex-start"
@@ -162,10 +167,15 @@ function Sidebar(props) {
 								sidebarState == "user"
 									? prop.user
 									: sidebarState == "admin"
+<<<<<<< HEAD
 									? prop.admin
 									: sidebarState == "superAdmin"
 									? prop.superAdmin
 									: prop.logout
+=======
+										? prop.admin
+										: prop.logout
+>>>>>>> 6f29edf (add verify pass & organize admin code)
 							}
 							boxSize="initial"
 							justifyContent="flex-start"
@@ -354,10 +364,15 @@ export function SidebarResponsive(props) {
 								sidebarState == "user"
 									? prop.user
 									: sidebarState == "admin"
+<<<<<<< HEAD
 									? prop.admin
 									: sidebarState == "superAdmin"
 									? prop.superAdmin
 									: prop.logout
+=======
+										? prop.admin
+										: prop.logout
+>>>>>>> 6f29edf (add verify pass & organize admin code)
 							}
 							boxSize="initial"
 							justifyContent="flex-start"
@@ -417,10 +432,15 @@ export function SidebarResponsive(props) {
 								sidebarState == "user"
 									? prop.user
 									: sidebarState == "admin"
+<<<<<<< HEAD
 									? prop.admin
 									: sidebarState == "superAdmin"
 									? prop.superAdmin
 									: prop.logout
+=======
+										? prop.admin
+										: prop.logout
+>>>>>>> 6f29edf (add verify pass & organize admin code)
 							}
 							boxSize="initial"
 							justifyContent="flex-start"

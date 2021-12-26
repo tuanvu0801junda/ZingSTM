@@ -1,5 +1,7 @@
 import { Link, useHistory } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import React from 'react';
+import ReactDOM from 'react-dom';
 import axios from "axios";
 // Chakra imports
 import {
@@ -19,6 +21,17 @@ import {
     TableCaption,
     useColorMode,
     useColorModeValue,
+    useDisclosure,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+    FormControl,
+    FormLabel,
+    Input
 } from "@chakra-ui/react";
 
 // Custom components
@@ -31,6 +44,11 @@ export default function SuperAdmin() {
     const textColor = useColorModeValue("gray.700", "white");
     const [user, getUser] = useState([]);
     const [admin, getAdmin] = useState([]);
+    const [pass, getPass] = useState("");
+    const [userId, getUserId] = useState(0);
+
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const initialRef = React.useRef();
     useEffect(() => {
         getUserData();
     }, [])
@@ -44,46 +62,45 @@ export default function SuperAdmin() {
     }
 
     //Handle update user
-    console.log(user);
-    console.log(admin);
-    const goToUpdateUser = (event) => {
-        const userId = event.target.value;
-        console.log(userId);
-        swal("Are you sure to update this user?", {
-            buttons: {
-                cancel: "No",
-                catch: {
-                    text: "Yes",
-                    value: "catch",
-                },
-            },
-        })
-            .then(async (value) => {
-                switch (value) {
-                    case "cancel":
-                        break;
-                    case "catch":
-                        const res = await axios.post("/api/updateUser", { userId: userId });
-                        if (res.data.status === 200) {
-                            getAdmin(res.data.adminUpdate);
-                            getUser(res.data.userUpdate);
-                        }
-                        console.log(user);
-                        console.log(admin);
-                        setTimeout(function () {
-                            swal({
-                                title: "Success!",
-                                text: "Update Successfully",
-                                icon: "success",
-                                button: "OK!",
-                            })
-                        }, 200);
-                        break;
-                    default:
-                        break;
-                }
-            });
-    }
+
+    // const goToUpdateUser = (event) => {
+    //     getUserId(event.target.value);
+
+    //     // swal("Are you sure to update this user?", {
+    //     //     buttons: {
+    //     //         cancel: "No",
+    //     //         catch: {
+    //     //             text: "Yes",
+    //     //             value: "catch",
+    //     //         },
+    //     //     },
+    //     // })
+    //     //     .then(async (value) => {
+    //     //         switch (value) {
+    //     //             case "cancel":
+    //     //                 break;
+    //     //             case "catch":
+    //     //                 const res = await axios.post("/api/updateUser", { userId: userId });
+    //     //                 if (res.data.status === 200) {
+    //     //                     getAdmin(res.data.adminUpdate);
+    //     //                     getUser(res.data.userUpdate);
+    //     //                 }
+    //     //                 console.log(user);
+    //     //                 console.log(admin);
+    //     //                 setTimeout(function () {
+    //     //                     swal({
+    //     //                         title: "Success!",
+    //     //                         text: "Update Successfully",
+    //     //                         icon: "success",
+    //     //                         button: "OK!",
+    //     //                     })
+    //     //                 }, 200);
+    //     //                 break;
+    //     //             default:
+    //     //                 break;
+    //     //         }
+    //     //     });
+    // }
 
     // Handle delete user
     const handleDeleteUser = (e, userId) => {
@@ -118,6 +135,35 @@ export default function SuperAdmin() {
                         break;
                 }
             });
+    }
+
+    // Handle update user
+    const verifyPass = async () => {
+        console.log(userId);
+        console.log(pass);
+        if (pass == "DatHocBong") {
+            const res = await axios.post("/api/updateUser", { userId: userId });
+            //Update state
+            if (res.data.status === 200) {
+                getAdmin(res.data.adminUpdate);
+                getUser(res.data.userUpdate);
+            }
+            swal({
+                title: "Success!",
+                text: "Update Successfully",
+                icon: "success",
+                button: "OK!",
+            });
+        } else {
+            swal({
+                title: "Error!",
+                text: "Password Not Correct",
+                icon: "error",
+                button: "OK!",
+            });
+        }
+        onClose();
+        getPass("");
     }
     return (
         <div style={{ margin: '125px 0px 0px 0px' }}>
@@ -178,7 +224,7 @@ export default function SuperAdmin() {
                                             </Text>
                                         </Td>
                                         <Td>
-                                            <Button colorScheme="green" size="sm" onClick={goToUpdateUser} value={data.userId}>Set As User</Button>
+                                            <Button colorScheme="green" size="sm" onClick={(e) => { onOpen(); getUserId(e.target.value); }} value={data.userId}>Set As User</Button>
                                         </Td>
                                         <Td>
                                             <Button colorScheme="red" size="sm" onClick={(e) => { handleDeleteUser(e, data.userId) }}>Delete</Button>
@@ -222,7 +268,7 @@ export default function SuperAdmin() {
                                             </Text>
                                         </Td>
                                         <Td>
-                                            <Button colorScheme="green" size="sm" onClick={goToUpdateUser} value={data.userId}>Set As Admin</Button>
+                                            <Button colorScheme="green" size="sm" onClick={(e) => { onOpen(); getUserId(e.target.value); }} value={data.userId}>Set As Admin</Button>
                                         </Td>
                                         <Td>
                                             <Button colorScheme="red" size="sm" onClick={(e) => { handleDeleteUser(e, data.userId) }}>Delete</Button>
@@ -230,6 +276,27 @@ export default function SuperAdmin() {
                                     </Tr>
                                 );
                             })}
+
+                            <Modal
+                                initialFocusRef={initialRef}
+                                isOpen={isOpen}
+                                onClose={onClose}
+                            >
+                                <ModalOverlay />
+                                <ModalContent>
+                                    <ModalHeader>Enter your password</ModalHeader>
+                                    <ModalCloseButton />
+                                    <ModalBody pb={6}>
+                                        <Input type="password" value={pass} onChange={(e) => { getPass(e.target.value) }} />
+                                    </ModalBody>
+                                    <ModalFooter>
+                                        <Button onClick={verifyPass} colorScheme="blue" mr={3}>
+                                            Confirm
+                                        </Button>
+                                        <Button onClick={onClose}>Cancel</Button>
+                                    </ModalFooter>
+                                </ModalContent>
+                            </Modal>
 
                         </Tbody>
                     </Table>
