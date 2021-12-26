@@ -42,28 +42,6 @@ INSERT INTO `genre` (`genreId`, `genreImage`, `genreName`, `created_at`, `update
 (6, 'https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FGenreImages%2FJazz.png?alt=media&token=0d6bcccc-36f5-4377-949a-2d88e5d5978f', 'Jazz', NULL, NULL),
 (7, 'https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FGenreImages%2FRock.png?alt=media&token=218a6950-4332-4e1d-8d16-7ed8ff63e0c8', 'Rock', NULL, NULL);
 
--- --------------------------------------------------------
-
--- --------------------------------------------------------
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(18, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(19, '2021_11_14_01_create_users_table', 1),
-(20, '2021_11_14_02_create_playlist', 1),
-(21, '2021_11_14_03_create_playlist_comment', 1),
-(22, '2021_11_14_04_create_album_table', 1),
-(23, '2021_11_14_05_create_song_table', 1),
-(24, '2021_11_14_06_create_songcomment_table', 1),
-(25, '2021_11_14_07_create_playlist_song_relation', 1),
-(26, '2021_11_14_08_create_artist_table', 1),
-(27, '2021_11_14_09_create_song_artist_relation_table', 1),
-(28, '2021_11_14_10_create_genre_table', 1),
-(29, '2021_11_14_11_create_song_genre_relation_table', 1),
-(30, '2021_11_14_12_create_share_playlist_table', 1),
-(31, '2021_12_04_13_edit_artist_table', 1),
-(32, '2021_12_05_14_edit_song_comment_table', 1),
-(33, '2021_12_05_15_edit_playlist_comment_table', 1),
-(34, '2021_12_12_16_create_listen_history', 1);
 
 -- --------------------------------------------------------
 
