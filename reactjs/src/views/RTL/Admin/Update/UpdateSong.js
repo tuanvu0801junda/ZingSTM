@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { IoDocumentsSharp } from "react-icons/io5";
 import swal from "sweetalert";
-import { uploadSongImage } from '../../firebase/uploadMp3Image';
+import { uploadSongImage } from '../../../../firebase/uploadMp3Image';
 const imgUrlUndefinded = "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FSongImages%2Fundefined?"
 
 // Chakra imports

@@ -96,10 +96,10 @@ function Sidebar(props) {
 								sidebarState == "user"
 									? prop.user
 									: sidebarState == "admin"
-									? prop.admin
-									: sidebarState == "superAdmin"
-									? prop.superAdmin
-									: prop.logout
+										? prop.admin
+										: sidebarState == "superAdmin"
+											? prop.superAdmin
+											: prop.logout
 							}
 							boxSize="initial"
 							justifyContent="flex-start"
@@ -162,10 +162,10 @@ function Sidebar(props) {
 								sidebarState == "user"
 									? prop.user
 									: sidebarState == "admin"
-									? prop.admin
-									: sidebarState == "superAdmin"
-									? prop.superAdmin
-									: prop.logout
+										? prop.admin
+										: sidebarState == "superAdmin"
+											? prop.superAdmin
+											: prop.logout
 							}
 							boxSize="initial"
 							justifyContent="flex-start"
@@ -354,10 +354,10 @@ export function SidebarResponsive(props) {
 								sidebarState == "user"
 									? prop.user
 									: sidebarState == "admin"
-									? prop.admin
-									: sidebarState == "superAdmin"
-									? prop.superAdmin
-									: prop.logout
+										? prop.admin
+										: sidebarState == "superAdmin"
+											? prop.superAdmin
+											: prop.logout
 							}
 							boxSize="initial"
 							justifyContent="flex-start"
@@ -417,10 +417,10 @@ export function SidebarResponsive(props) {
 								sidebarState == "user"
 									? prop.user
 									: sidebarState == "admin"
-									? prop.admin
-									: sidebarState == "superAdmin"
-									? prop.superAdmin
-									: prop.logout
+										? prop.admin
+										: sidebarState == "superAdmin"
+											? prop.superAdmin
+											: prop.logout
 							}
 							boxSize="initial"
 							justifyContent="flex-start"

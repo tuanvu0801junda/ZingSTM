@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { IoDocumentsSharp } from "react-icons/io5";
 import swal from "sweetalert";
-import { uploadSongImage } from '../../firebase/uploadMp3Image';
+import { uploadSongImage } from '../../../../firebase/uploadMp3Image';
 
 
 // Chakra imports
@@ -39,56 +39,57 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 
 
-function UpdateAlbum() {
+function UpdateGenre() {
     const history = useHistory();
     const textColor = useColorModeValue("gray.700", "white");
-    const [albumCurrentName, getAlbumCurrentName] = useState('');
-    const [albumNewName, setAlbumNewName] = useState('');
+    const [genreCurrentName, getGenreCurrentName] = useState('');
+    const [genreNewName, setGenreNewName] = useState('');
     const [image, setImage] = useState('');
     const imgUrlUndefinded = "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FSongImages%2Fundefined?"
     const { id } = useParams();
 
-    //Get current album update
+    //Get current genre update
     useEffect(() => {
-        getCurrentAlbumUpdate();
+        getCurrentGenreUpdate();
     }, [])
-    const getCurrentAlbumUpdate = async () => {
+    const getCurrentGenreUpdate = async () => {
         const data = {
-            albumId: id
+            genreId: id
         }
-        const res = await axios.post("/api/getOneAlbumInfo", data);
+        const res = await axios.post("/api/getGenreInfoById", data);
         if (res.data.status === 200) {
-            getAlbumCurrentName(res.data.album.title);
-            setAlbumNewName(res.data.album.title);
-            setImage(res.data.album.artworkPath);
+            getGenreCurrentName(res.data.genre.genreName);
+            setGenreNewName(res.data.genre.genreName);
+            setImage(res.data.genre.genreImage);
+
         }
     }
 
 
     //Handle back button
-    const goToManageAlbumPage = () => {
-        history.push('/zingstm/manage-album');
+    const goToManageGenrePage = () => {
+        history.push('/zingstm/manage-genre');
     }
 
-    //Handle update album
-    const handleUpdateAlbum = async () => {
+    //Handle update genre
+    const handleUpdateGenre = async () => {
         if (document.getElementById("image_update").files.length != 0) {
             const imageUrl = await uploadSongImage(image); //Get url from firebase
-            updateAlbumToDataBase(imageUrl);
-        } else updateAlbumToDataBase(image);
+            updateGenreToDataBase(imageUrl);
+        } else updateGenreToDataBase(image);
     }
 
-    //Update new album to database
-    const updateAlbumToDataBase = async (imageUrl) => {
+    //Update new genre to database
+    const updateGenreToDataBase = async (imageUrl) => {
 
         const data = {
-            albumId: id,
-            artworkPath: imageUrl,
-            albumTitle: albumNewName
+            genreId: id,
+            genreImage: imageUrl,
+            genreName: genreNewName
         }
 
-        if (albumNewName != '' || !imageUrl.includes(imgUrlUndefinded)) {
-            const res = await axios.post('/api/updateOneAlbum', data);
+        if (genreNewName != '' || !imageUrl.includes(imgUrlUndefinded)) {
+            const res = await axios.post('/api/updateOneGenre', data);
             if (res.data.status === 200) {
                 try {
                     swal({
@@ -98,7 +99,7 @@ function UpdateAlbum() {
                         button: "OK!",
                     })
                         .then((value) => {
-                            history.push('/zingstm/manage-album');
+                            history.push('/zingstm/manage-genre');
                         });
 
                 }
@@ -124,21 +125,21 @@ function UpdateAlbum() {
                     <Text fontSize="2xl" color={textColor} fontWeight="bold">
                         Update
                     </Text>
-                    <Button style={{ margin: "0 0 0 82%", 'borderRadius': "5px" }} colorScheme="blue" onClick={goToManageAlbumPage}>Back
+                    <Button style={{ margin: "0 0 0 82%", 'borderRadius': "5px" }} colorScheme="blue" onClick={goToManageGenrePage}>Back
                     </Button>
                 </CardHeader>
                 <CardBody>
                     <FormControl>
                         <br />
-                        <FormLabel>Album:</FormLabel>
+                        <FormLabel>Genre:</FormLabel>
                         <Input
-                            value={albumNewName}
-                            onChange={(e) => { setAlbumNewName(e.target.value) }}
-                            placeholder={albumCurrentName}
+                            value={genreNewName}
+                            onChange={(e) => { setGenreNewName(e.target.value) }}
+                            placeholder={genreCurrentName}
                             size="md"
                         />
                         <br /><br />
-                        <FormLabel>Image Album:</FormLabel>
+                        <FormLabel>Image Genre:</FormLabel>
                         <Button p="0px" bg="transparent" _hover={{ bg: "none" }}>
                             <Flex
                                 align="center"
@@ -158,7 +159,7 @@ function UpdateAlbum() {
                             </Flex>
                         </Button>
                         <br /><br /><br />
-                        <Button style={{ 'borderRadius': "5px" }} colorScheme="blue" onClick={handleUpdateAlbum}>Update
+                        <Button style={{ 'borderRadius': "5px" }} colorScheme="blue" onClick={handleUpdateGenre}>Update
                         </Button>
                     </FormControl>
                 </CardBody>
@@ -167,4 +168,4 @@ function UpdateAlbum() {
     );
 }
 
-export default UpdateAlbum
+export default UpdateGenre

@@ -1,28 +1,23 @@
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { IoDocumentsSharp } from "react-icons/io5";
-import swal from "sweetalert";
-import { uploadSongImage } from '../../firebase/uploadMp3Image';
-
-
 // Chakra imports
 import {
     Box,
     Button,
     ButtonGroup,
     Flex,
+    Icon,
     Avatar,
     Table,
     Tbody,
-    Icon,
     Text,
     Th,
-    Input,
     Thead,
     Tr,
     Tfoot,
     Td,
+    Input,
     TableCaption,
     useColorMode,
     FormControl,
@@ -37,68 +32,48 @@ import {
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
+import { uploadSongImage } from '../../../../firebase/uploadMp3Image';
 
 
-function UpdateArtist() {
+
+function AddAlbum() {
     const history = useHistory();
     const textColor = useColorModeValue("gray.700", "white");
-    const [artistCurrentName, getArtistCurrentName] = useState('');
-    const [artistNewName, setArtistNewName] = useState('');
     const [image, setImage] = useState('');
+    const [albumTitle, getAlbumTitle] = useState('');
     const imgUrlUndefinded = "https://firebasestorage.googleapis.com/v0/b/zingstm-645aa.appspot.com/o/Images%2FSongImages%2Fundefined?"
-    const { id } = useParams();
-
-    //Get current artist update
-    useEffect(() => {
-        getCurrentArtistUpdate();
-    }, [])
-    const getCurrentArtistUpdate = async () => {
-        const data = {
-            artistId: id
-        }
-        const res = await axios.post("/api/getOneArtistInfo", data);
-        if (res.data.status === 200) {
-            getArtistCurrentName(res.data.artist.artistName);
-            setArtistNewName(res.data.artist.artistName);
-            setImage(res.data.artist.artistImage);
-
-        }
-    }
 
     //Handle back button
-    const goToManageArtistPage = () => {
-        history.push('/zingstm/manage-artist');
+    const goToManageAlbumPage = () => {
+        history.push('/zingstm/manage-album');
     }
 
-    //Handle update artist
-    const handleUpdateArtist = async () => {
-        if (document.getElementById("image_update").files.length != 0) {
-            const imageUrl = await uploadSongImage(image); //Get url from firebase
-            updateArtistToDataBase(imageUrl);
-        } else updateArtistToDataBase(image);
+    //Handle upload album
+    const handleUploadAlbum = async () => {
+        const imageUrl = await uploadSongImage(image); //Get url from firebase
+        addNewAlbumToDataBase(imageUrl);
     }
 
-    //Update new artist to database
-    const updateArtistToDataBase = async (imageUrl) => {
+    //Add new album to database
+    const addNewAlbumToDataBase = async (imageUrl) => {
 
         const data = {
-            artistId: id,
-            artistImage: imageUrl,
-            artistName: artistNewName
+            artworkPath: imageUrl,
+            title: albumTitle
         }
 
-        if (artistNewName != '' || !imageUrl.includes(imgUrlUndefinded)) {
-            const res = await axios.post('/api/updateOneArtist', data);
+        if (albumTitle != '' && !imageUrl.includes(imgUrlUndefinded)) {
+            const res = await axios.post('/api/postNewAlbum', data);
             if (res.data.status === 200) {
                 try {
                     swal({
-                        title: "Update Success!",
+                        title: "Success!",
                         text: res.data.message,
                         icon: "success",
                         button: "OK!",
                     })
                         .then((value) => {
-                            history.push('/zingstm/manage-artist');
+                            history.push('/zingstm/manage-album');
                         });
 
                 }
@@ -116,29 +91,27 @@ function UpdateArtist() {
         }
 
     }
-
     return (
         <div style={{ margin: '125px 0px 0px 0px' }} >
             <Card overflowX={{ xl: "hidden" }} >
                 <CardHeader p="6px 0px 22px 0px">
-                    <Text fontSize="2xl" color={textColor} fontWeight="bold">
-                        Update
+                    <Text fontSize="21px" color={textColor} fontWeight="bold">
+                        New Album
                     </Text>
-                    <Button style={{ margin: "0 0 0 82%", 'borderRadius': "5px" }} colorScheme="blue" onClick={goToManageArtistPage}>Back
+                    <Button style={{ margin: "0 0 0 82%", 'borderRadius': "5px" }} colorScheme="blue" onClick={goToManageAlbumPage}>Back
                     </Button>
                 </CardHeader>
                 <CardBody>
                     <FormControl>
-                        <br />
-                        <FormLabel>Artist:</FormLabel>
+                        <Text fontSize="md" mb="8px">Title:</Text>
                         <Input
-                            value={artistNewName}
-                            onChange={(e) => { setArtistNewName(e.target.value) }}
-                            placeholder={artistCurrentName}
-                            size="md"
+                            value={albumTitle}
+                            onChange={(e) => { getAlbumTitle(e.target.value) }}
+                            placeholder="Nhập tên album"
                         />
                         <br /><br />
-                        <FormLabel>Image Artist:</FormLabel>
+
+                        <FormLabel>Image Album:</FormLabel>
                         <Button p="0px" bg="transparent" _hover={{ bg: "none" }}>
                             <Flex
                                 align="center"
@@ -151,14 +124,13 @@ function UpdateArtist() {
                             >
                                 <input
                                     type="file"
-                                    id="image_update"
                                     accept="image/*"
                                     onChange={(e) => { setImage(e.target.files[0]) }}
                                 />
                             </Flex>
                         </Button>
                         <br /><br /><br />
-                        <Button style={{ 'borderRadius': "5px" }} colorScheme="blue" onClick={handleUpdateArtist}>Update
+                        <Button style={{ 'borderRadius': "5px" }} colorScheme="blue" onClick={handleUploadAlbum}>Upload
                         </Button>
                     </FormControl>
                 </CardBody>
@@ -167,4 +139,4 @@ function UpdateArtist() {
     );
 }
 
-export default UpdateArtist
+export default AddAlbum

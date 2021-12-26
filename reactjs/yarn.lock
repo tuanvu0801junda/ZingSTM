@@ -1896,9 +1896,9 @@
     "minimatch" "^3.0.4"
     "strip-json-comments" "^3.1.1"
 
-"@ffprobe-installer/win32-x64@4.1.0":
-  "integrity" "sha512-gPW2FZxexzCAOhGch0JFkeSSln+wcL5d1JDlJwfSJVEAShHf9MmxiWq0NpHoCSzFvK5qwl0C58KG180eKvd3mA=="
-  "resolved" "https://registry.npmjs.org/@ffprobe-installer/win32-x64/-/win32-x64-4.1.0.tgz"
+"@ffprobe-installer/linux-x64@4.1.0":
+  "integrity" "sha512-Id+irHoI+Arq6tb3sHNQyzRrgUVVDgbmwpREDqQ+GDydiCw5ca7VnvRGXE/tBM2mVQ3/6m9wWHR7+xaW3gKJlA=="
+  "resolved" "https://registry.npmjs.org/@ffprobe-installer/linux-x64/-/linux-x64-4.1.0.tgz"
   "version" "4.1.0"
 
 "@firebase/analytics-types@0.4.0":

@@ -19,22 +19,23 @@ import Album from "views/Pages/Album";
 import Genres from "views/Pages/Genres";
 import Artist from "views/Pages/Artist";
 //Admin components
-import AddSong from "views/RTL/AddSong";
-import AddAlbum from "views/RTL/AddAlbum";
-import AddArtist from "views/RTL/AddArtist";
-import AddGenre from "views/RTL/AddGenre";
+import AddSong from "views/RTL/Admin/AddNew/AddSong";
+import AddAlbum from "views/RTL/Admin/AddNew/AddAlbum";
+import AddArtist from "views/RTL/Admin/AddNew/AddArtist";
+import AddGenre from "views/RTL/Admin/AddNew/AddGenre";
 
-import UpdateSong from "views/RTL/UpdateSong";
-import UpdateArtist from "views/RTL/UpdateArtist";
-import UpdateAlbum from "views/RTL/UpdateAlbum";
-import UpdateGenre from "views/RTL/UpdateGenre";
+import UpdateSong from "views/RTL/Admin/Update/UpdateSong";
+import UpdateArtist from "views/RTL/Admin/Update/UpdateArtist";
+import UpdateAlbum from "views/RTL/Admin/Update/UpdateAlbum";
+import UpdateGenre from "views/RTL/Admin/Update/UpdateGenre";
 
-import SongManage from "views/RTL/SongManage";
-import AlbumManage from "views/RTL/AlbumManage";
-import ArtistManage from "views/RTL/ArtistManage";
+import SongManage from "views/RTL/Admin/Manage/SongManage";
+import SuperAdmin from "views/RTL/SuperAdmin/S_Admin.js";
+import AlbumManage from "views/RTL/Admin/Manage/AlbumManage.js";
+import ArtistManage from "views/RTL/Admin/Manage/ArtistManage";
 import Song from "views/Pages/Song";
 import EnterVerifyCode from "views/Pages/EnterVerifyCode";
-import GenreManage from "views/RTL/GenreManage";
+import GenreManage from "views/RTL/Admin/Manage/GenreManage";
 
 export default function Dashboard(props) {
   const { ...rest } = props;
@@ -168,6 +169,7 @@ export default function Dashboard(props) {
                 <Route path={`/zingstm/manage-artist`} component={ArtistManage} />
                 <Route path={`/zingstm/manage-genre`} component={GenreManage} />
 
+                <Route path={`/zingstm/Manage-admin&user`} component={SuperAdmin} />
 
                 {/* Add route here */}
                 <Redirect from="/zingstm" to="/zingstm/home" />
