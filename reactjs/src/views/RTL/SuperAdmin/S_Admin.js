@@ -285,6 +285,7 @@ export default function SuperAdmin() {
                                 initialFocusRef={initialRef}
                                 isOpen={isOpen}
                                 onClose={onClose}
+                                isCentered
                             >
                                 <ModalOverlay />
                                 <ModalContent>
