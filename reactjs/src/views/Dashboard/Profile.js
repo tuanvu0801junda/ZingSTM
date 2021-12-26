@@ -398,6 +398,7 @@ function Profile() {
 								name="currentPass"
 								value={inputPass.currentPass}
 								onChange={handleInputChangePass}
+								type="password"
 							/>
 						</FormControl>
 						<FormControl mt={4}>
@@ -407,6 +408,7 @@ function Profile() {
 								name="newPass"
 								value={inputPass.newPass}
 								onChange={handleInputChangePass}
+								type="password"
 							/>
 						</FormControl>
 					</ModalBody>
