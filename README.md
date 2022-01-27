@@ -63,5 +63,9 @@
 * (Sun: December 26th 2021): **Backend(port: 8000) & Frontend(port: 3000)** connected and communicating successfully. Problem in db ...
 
 ### III. Some images about this project
-<p align="center>
+<p align="center">
+  <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/main1.png" width="650" />
+  <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/main2.png" width="650" />
+  <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/comment.png" width="650" />
+  <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/playlist.png" width="650" />
 </p>
