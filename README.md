@@ -62,3 +62,6 @@
 * **Docker** will pull image from **Dockerhub** and set up everything automatically
 * (Sun: December 26th 2021): **Backend(port: 8000) & Frontend(port: 3000)** connected and communicating successfully. Problem in db ...
 
+### III. Some images about this project
+<p align="center>
+</p>
