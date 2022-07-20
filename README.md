@@ -104,5 +104,5 @@
   Responsive  
   </p>
 
-  <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/responsive.png" width="650" />
+  <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/responsive1.png" width="100%" />
 </p>
