@@ -74,31 +74,31 @@
   Home Page 1  
   </p>
 
-  <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/main1.png" width="650" />
+  <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/main1.png" width="100%" />
   <br />
   <p align="center">
   Home Page 2  
   </p>
 
-  <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/main2.png" width="650" />
+  <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/main2.png" width="100%" />
   <br />
   <p align="center">
   Comments  
   </p>
 
-  <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/comment.png" width="650" />
+  <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/comment.png" width="100%" />
   <br />
   <p align="center">
   Playlist  
   </p>
 
-  <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/playlist.png" width="650" />
+  <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/playlist.png" width="100%" />
   <br />
   <p align="center">
   Management  
   </p>
 
-  <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/management.png" width="650" />
+  <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/management.png" width="100%" />
   <br />
   <p align="center">
   Responsive  
