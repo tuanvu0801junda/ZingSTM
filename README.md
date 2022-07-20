@@ -7,12 +7,13 @@
 
 ### General Description: 
 * A website simulating ZingMp3, used to listening to music
-* Made by Tuan Vu The stupid, Lord Design (EMT krazezt), Thuan-Thien Nguyen & fullstacker Hieu Tran
+* Made by Tuan Vu The stupid, Lord Design (Krazezt), Thuan-Thien Nguyen & fullstacker Hieu Tran
 
 ### Technologies 
 * ReactJS 
 * Laravel (PHP)
 * PHPMyadmin (MySQL) | Docker-image (mysql:5.7.22) 
+* ChakraUI (ReactJS Framework)
 * Firebase (used for uploading images and .mp3 files)
 * Docker (in-completed)
 
@@ -45,7 +46,12 @@
 ```
 * Then, change DB_DATABASE corresponding to your database name in Xampp
 
-##### 5. Then create a APP_KEY. Finally, try "php artisan serve" 
+##### 5. Migrate DB 
+```
+ .../ZingSTM/laravelPHP $ php artisan migrate
+```
+
+##### 6. Then create a APP_KEY. Finally, try "php artisan serve" 
 ```
  .../ZingSTM/laravelPHP $ php artisan key:generate
  .../ZingSTM/laravelPHP $ php artisan serve
@@ -68,4 +74,6 @@
   <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/main2.png" width="650" />
   <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/comment.png" width="650" />
   <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/playlist.png" width="650" />
+  <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/management.png" width="650" />
+  <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/responsive.png" width="650" />
 </p>
