@@ -70,21 +70,39 @@
 
 ### III. Some images about this project
 <p align="center">
-  Home Page 1
+  <p align="center">
+  Home Page 1  
+  </p>
+
   <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/main1.png" width="650" />
   <br />
-  Home Page 2
+  <p align="center">
+  Home Page 2  
+  </p>
+
   <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/main2.png" width="650" />
   <br />
-  Comments
+  <p align="center">
+  Comments  
+  </p>
+
   <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/comment.png" width="650" />
   <br />
-  Playlist
+  <p align="center">
+  Playlist  
+  </p>
+
   <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/playlist.png" width="650" />
   <br />
-  Management
+  <p align="center">
+  Management  
+  </p>
+
   <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/management.png" width="650" />
   <br />
-  Responsive
+  <p align="center">
+  Responsive  
+  </p>
+
   <img src="https://github.com/tuanvu0801junda/ZingSTM/blob/master/image/responsive.png" width="650" />
 </p>
